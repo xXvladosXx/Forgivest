@@ -4,12 +4,13 @@ using Characters.Player.StateMachines.Movement.States.Grounded;
 using Enemy;
 using Interaction.Core;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
 {
-    public class PlayerAttackState : PlayerGroundedState
+    public class PlayerAggroState : PlayerGroundedState
     {
-        public PlayerAttackState(PlayerStateMachine playerPlayerStateMachine) : base(playerPlayerStateMachine)
+        public PlayerAggroState(PlayerStateMachine playerPlayerStateMachine) : base(playerPlayerStateMachine)
         {
         }
 
@@ -18,7 +19,6 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
             PlayerStateMachine.ReusableData.StoppingDistance = GroundedData.AttackData.StoppingDistance;
 
             base.Enter();
-            
         }
 
         public override void Update()
@@ -30,11 +30,12 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
                 PlayerStateMachine.ReusableData.AttackRate);
         }
 
-        protected override void OnMove()
+        protected override void OnClickPerformed(InputAction.CallbackContext obj)
         {
+            base.OnClickPerformed(obj);
             
-                
-            base.OnMove();
+            if(ShouldStop())
+                PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerCombatState);   
         }
 
         protected override void OnStop()

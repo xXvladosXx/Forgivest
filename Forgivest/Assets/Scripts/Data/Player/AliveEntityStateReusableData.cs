@@ -15,7 +15,6 @@ namespace Data.Player
         public float SmoothModifier { get; set; }
         public float MaxSmoothModifier { get; set; }
 
-        public Vector3 LastClickedPoint { get; set; }
-        public IInteractable LastInteractableObject { get; set; }
+        public Vector3 ClickedPoint { get; set; }
     }
 }

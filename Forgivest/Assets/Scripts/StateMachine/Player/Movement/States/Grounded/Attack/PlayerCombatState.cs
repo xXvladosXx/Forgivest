@@ -30,24 +30,20 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
 
         public override void OnAnimationExitEvent()
         {
-            PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerAttackState);
+            PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerAggroState);
         }
 
-        protected override void OnMove()
+        protected override void OnPressedMouseButton()
         {
-            RaycastHit raycastHit;
-            var ray = PlayerStateMachine.Player.Camera.ScreenPointToRay(ReadMousePosition());
-            bool hasHit = Physics.Raycast(ray, out raycastHit, Mathf.Infinity,
-                ~PlayerStateMachine.Player.LayerData.UninteractableLayer);
-            if (!hasHit) return;
+            TryToGetHitRaycast(out var raycastHit);
 
-            PlayerStateMachine.ReusableData.LastClickedPoint = raycastHit.point;
+            PlayerStateMachine.ReusableData.ClickedPoint = raycastHit.point;
             raycastHit.collider.TryGetComponent(out IInteractable interactable);
             
             if(interactable == PlayerStateMachine.ReusableData.InteractableObject)
                 return;
             
-            base.OnMove();
+            base.OnPressedMouseButton();
         }
 
         public override void Exit()

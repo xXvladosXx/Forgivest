@@ -42,11 +42,10 @@ namespace Characters.Player.StateMachines.Movement.States
         {
             if (PlayerStateMachine.Player.PlayerInputProvider.PlayerMainActions.Action.IsPressed())
             {
-                OnMove();
+                OnPressedMouseButton();
             }
 
             UpdateMovementAnimation();
-
             MovementInput();
         }
 
@@ -68,11 +67,7 @@ namespace Characters.Player.StateMachines.Movement.States
 
         private void MovementInput()
         {
-            RaycastHit raycastHit;
-            var ray = PlayerStateMachine.Player.Camera.ScreenPointToRay(ReadMousePosition());
-            bool hasHit = Physics.Raycast(ray, out raycastHit, Mathf.Infinity,
-                ~PlayerStateMachine.Player.LayerData.UninteractableLayer);
-            if (!hasHit) return;
+            if (TryToGetHitRaycast(out var raycastHit)) return;
 
             //if mouse button is not pressed dont move
             if (!PlayerStateMachine.ReusableData.ShouldMove)
@@ -83,14 +78,11 @@ namespace Characters.Player.StateMachines.Movement.States
                 return;
             }
 
-            PlayerStateMachine.ReusableData.LastClickedPoint = raycastHit.point;
+            PlayerStateMachine.ReusableData.ClickedPoint = raycastHit.point;
             raycastHit.collider.TryGetComponent(out IInteractable interactable);
             PlayerStateMachine.ReusableData.InteractableObject = interactable;
             
-
             if (ShouldStop()) return;
-            Debug.Log(PlayerStateMachine.ReusableData.LastInteractableObject + "LAst");
-            Debug.Log(PlayerStateMachine.ReusableData.InteractableObject + "Cur");
             StartMoveTo(raycastHit.point);
         }
 
@@ -123,14 +115,12 @@ namespace Characters.Player.StateMachines.Movement.States
 
         protected virtual void OnClickCanceled(InputAction.CallbackContext obj)
         {
-            OnMove();
             PlayerStateMachine.ReusableData.ShouldMove = false;
         }
 
         protected virtual void OnClickPerformed(InputAction.CallbackContext obj)
         {
             PlayerStateMachine.ReusableData.ShouldMove = true;
-            OnMove();
         }
 
         protected void ResetVelocity()
@@ -141,14 +131,32 @@ namespace Characters.Player.StateMachines.Movement.States
         protected float GetMovementSpeed() =>
             GroundedData.BaseSpeed * PlayerStateMachine.ReusableData.MovementSpeedModifier;
 
-        protected virtual void OnMove()
+        protected virtual void OnPressedMouseButton()
         {
         }
 
         protected virtual void OnStop()
         {
         }
+        
+        protected bool TryToGetHitRaycast(out RaycastHit raycastHit)
+        {
+            var ray = PlayerStateMachine.Player.Camera.ScreenPointToRay(ReadMousePosition());
+            bool hasHit = Physics.Raycast(ray, out raycastHit, Mathf.Infinity,
+                ~PlayerStateMachine.Player.LayerData.UninteractableLayer);
+            if (!hasHit) return true;
+            return false;
+        }
+        
+        private Vector2 ReadMousePosition() =>
+            PlayerStateMachine.Player.PlayerInputProvider.PlayerMainActions.Mouse.ReadValue<Vector2>();
 
+        private void StartMoveTo(Vector3 destination)
+        {
+            PlayerStateMachine.Player.NavMeshAgent.speed = GetMovementSpeed();
+            PlayerStateMachine.Player.NavMeshAgent.destination = destination;
+            PlayerStateMachine.Player.NavMeshAgent.isStopped = false;
+        }
         private void UpdateMovementAnimation()
         {
             Vector3 velocity = PlayerStateMachine.Player.NavMeshAgent.velocity;
@@ -160,20 +168,10 @@ namespace Characters.Player.StateMachines.Movement.States
                 speed, .1f, Time.deltaTime);
         }
 
-        protected Vector2 ReadMousePosition() =>
-            PlayerStateMachine.Player.PlayerInputProvider.PlayerMainActions.Mouse.ReadValue<Vector2>();
-
-        private void StartMoveTo(Vector3 destination)
-        {
-            PlayerStateMachine.Player.NavMeshAgent.speed = GetMovementSpeed();
-            PlayerStateMachine.Player.NavMeshAgent.destination = destination;
-            PlayerStateMachine.Player.NavMeshAgent.isStopped = false;
-        }
-
-        private bool ShouldStop()
+        protected bool ShouldStop()
         {
             if (Vector3.Distance(PlayerStateMachine.Player.transform.position,
-                    PlayerStateMachine.ReusableData.LastClickedPoint) <
+                    PlayerStateMachine.ReusableData.ClickedPoint) <
                 PlayerStateMachine.ReusableData.StoppingDistance)
             {
                 Stop();

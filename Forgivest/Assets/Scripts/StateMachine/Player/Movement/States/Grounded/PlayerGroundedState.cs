@@ -11,21 +11,19 @@ namespace Characters.Player.StateMachines.Movement.States.Grounded
         {
         }
         
-      
-
         protected override void OnDashStarted(InputAction.CallbackContext context)
         {
             PlayerStateMachine.ChangeState(PlayerStateMachine.DashingState);
         }
 
-        protected override void OnMove()
+        protected override void OnPressedMouseButton()
         {
             if (PlayerStateMachine.ReusableData.InteractableObject != null)
             {
                 switch (PlayerStateMachine.ReusableData.InteractableObject)
                 {
                     case EnemyEntity enemyEntity:
-                        PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerAttackState);
+                        PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerAggroState);
                         return;
                 }
             }
