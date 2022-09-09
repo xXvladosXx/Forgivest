@@ -1,5 +1,8 @@
+using System;
 using AnimatorStateMachine.StateMachine;
 using Data.Player;
+using Enemy;
+using Interaction.Core;
 using StateMachine.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -81,7 +84,9 @@ namespace Characters.Player.StateMachines.Movement.States
             }
             
             PlayerStateMachine.ReusableData.LastClickedPoint = raycastHit.point;
-            
+            raycastHit.collider.TryGetComponent(out IInteractable interactable);
+            PlayerStateMachine.ReusableData.InteractableObject = interactable;
+
             if(ShouldStop()) return;
             
             StartMoveTo(raycastHit.point);

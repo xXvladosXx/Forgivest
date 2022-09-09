@@ -14,8 +14,6 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Moving
             PlayerStateMachine.ReusableData.StoppingDistance = GroundedData.RunData.StoppingDistance;
 
             base.Enter();
-
-            PlayerStateMachine.ReusableData.MaxSmoothModifier = GroundedData.RunData.SmoothInputSpeed;
         }
 
         public override void Update()

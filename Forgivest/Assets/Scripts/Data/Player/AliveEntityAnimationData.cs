@@ -42,6 +42,7 @@ namespace Data.Player
         [SerializeField] private string _airAttackDashParameterName = "AirAttackDash";
         [SerializeField] private string _dashAttackParameterName = "DashAttack";
         [SerializeField] private string _sprintAttackParameterName = "SprintAttack";
+        [SerializeField] private string _attackParameterName = "Attack";
 
         [SerializeField] private string _speedParameterName = "Speed";
 
@@ -77,6 +78,7 @@ namespace Data.Player
         public int ReloadParameterHash { get; private set; }
         public int EquippingParameterHash { get; private set; }
         public int AirAttackParameterHash { get; private set; }
+        public int AttackParameterHash { get; private set; }
         public int AirAttackDashParameterHash { get; private set; }
         public int AirAttackLandedParameterHash { get; private set; }
 
@@ -116,6 +118,8 @@ namespace Data.Player
 
             HorizontalParameterHash = Animator.StringToHash(HorizontalParameterName);
             VerticalParameterHash = Animator.StringToHash(VerticalParameterName);
+
+            AttackParameterHash = Animator.StringToHash(_attackParameterName);
         }
     }
 }

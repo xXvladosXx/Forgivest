@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Interaction.Core;
+using UnityEngine;
 
 namespace Data.Player
 {
@@ -12,6 +13,7 @@ namespace Data.Player
         public bool ShouldWalk { get; set; }
         public bool ShouldSprint { get; set; }
         public bool ShouldMove { get; set; }
+        public IInteractable InteractableObject { get; set; }
         public float StoppingDistance { get; set; }
 
         public Vector3 PositionToMoveTo { get; set; }

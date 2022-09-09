@@ -1,6 +1,7 @@
 ﻿using Data.Player;
 using Player;
 using StateMachine.Player.StateMachines.Movement.States.Grounded;
+using StateMachine.Player.StateMachines.Movement.States.Grounded.Attack;
 using StateMachine.Player.StateMachines.Movement.States.Grounded.Moving;
 
 namespace StateMachine.Player
@@ -12,6 +13,7 @@ namespace StateMachine.Player
 
         public PlayerIdlingState IdlingState { get; }
         public PlayerDashingState DashingState { get; }
+        public PlayerAttackState PlayerAttackState { get; }
 
         public PlayerRunningState RunningState { get; }
         
@@ -25,6 +27,7 @@ namespace StateMachine.Player
             DashingState = new PlayerDashingState(this);
 
             RunningState = new PlayerRunningState(this);
+            PlayerAttackState = new PlayerAttackState(this);
         }
         
     }

@@ -1,3 +1,4 @@
+using Enemy;
 using StateMachine.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,7 +19,23 @@ namespace Characters.Player.StateMachines.Movement.States.Grounded
             
         }
 
-        
+        public override void Update()
+        {
+            base.Update();
+
+            if (PlayerStateMachine.ReusableData.InteractableObject != null)
+            {
+                switch (PlayerStateMachine.ReusableData.InteractableObject)
+                {
+                    case EnemyEntity enemyEntity:
+                        PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerAttackState);
+                        break;
+                }
+            }
+            
+        }
+
+
         protected override void RemoveInputActionsCallbacks()
         {
             base.RemoveInputActionsCallbacks();
