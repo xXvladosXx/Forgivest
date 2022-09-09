@@ -19,13 +19,9 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
             base.Enter();
         }
 
-        public override void Update()
+        protected override void OnStop()
         {
-            base.Update();
-
-            Debug.Log(PlayerStateMachine.ReusableData.InteractableObject);
-            
-            
+            PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerCombatState);
         }
     }
 }

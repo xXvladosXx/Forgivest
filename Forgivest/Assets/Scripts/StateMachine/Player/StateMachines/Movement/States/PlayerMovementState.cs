@@ -144,6 +144,11 @@ namespace Characters.Player.StateMachines.Movement.States
         {
            
         }
+
+        protected virtual void OnStop()
+        {
+            
+        }
         
         private void UpdateMovementAnimation()
         {
@@ -152,7 +157,7 @@ namespace Characters.Player.StateMachines.Movement.States
 
             float speed = localVelocity.z;
         
-            PlayerStateMachine.Player.Animator.SetFloat("Speed",
+            PlayerStateMachine.Player.Animator.SetFloat(PlayerStateMachine.Player.AnimationData.SpeedParameterHash,
                 speed, .1f, Time.deltaTime);
         }
         
@@ -181,6 +186,7 @@ namespace Characters.Player.StateMachines.Movement.States
         private void Stop()
         {
             PlayerStateMachine.Player.NavMeshAgent.isStopped = true;
+            OnStop();
         }
     }
 }

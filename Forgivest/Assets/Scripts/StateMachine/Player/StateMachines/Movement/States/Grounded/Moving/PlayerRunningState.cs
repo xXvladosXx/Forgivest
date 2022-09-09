@@ -16,13 +16,12 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Moving
             base.Enter();
         }
 
-        public override void Update()
+
+        protected override void OnStop()
         {
-            base.Update();
-            
-            if(PlayerStateMachine.Player.NavMeshAgent.isStopped)
-                PlayerStateMachine.ChangeState(PlayerStateMachine.IdlingState);
+            PlayerStateMachine.ChangeState(PlayerStateMachine.IdlingState);
         }
+
 
         public PlayerRunningState(PlayerStateMachine playerPlayerStateMachine) : base(playerPlayerStateMachine)
         {

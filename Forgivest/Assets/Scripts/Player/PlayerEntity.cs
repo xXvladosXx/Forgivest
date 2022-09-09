@@ -5,10 +5,11 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using Utilities;
+using Utilities.Animation;
 
 namespace Player
 {
-    public class PlayerEntity : MonoBehaviour
+    public class PlayerEntity : MonoBehaviour, IAnimationEventUser
     {
         [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
         [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
@@ -25,6 +26,7 @@ namespace Player
         private void Awake()
         {
             Camera = Camera.main;
+            AnimationData.Init();
 
             _playerStateMachine = new PlayerStateMachine(this);
         }
@@ -39,6 +41,20 @@ namespace Player
             _playerStateMachine.Update();
             _playerStateMachine.HandleInput();
         }
-        
+
+        public void OnAnimationStarted()
+        {
+            _playerStateMachine.OnAnimationEnterEvent();
+        }
+
+        public void OnAnimationTransitioned()
+        {
+            _playerStateMachine.OnAnimationTransitionEvent();
+        }
+
+        public void OnAnimationEnded()
+        {
+            _playerStateMachine.OnAnimationExitEvent();
+        }
     }
 }

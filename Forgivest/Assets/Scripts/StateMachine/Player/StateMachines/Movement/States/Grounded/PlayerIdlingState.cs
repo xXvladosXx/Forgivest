@@ -15,15 +15,6 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded
             ResetVelocity();
         }
 
-        public override void Update()
-        {
-            base.Update();
-            if (!PlayerStateMachine.ReusableData.ShouldMove) 
-                 return;
-
-            OnMove();
-        }
-
         public PlayerIdlingState(PlayerStateMachine playerPlayerStateMachine) : base(playerPlayerStateMachine)
         {
         }
