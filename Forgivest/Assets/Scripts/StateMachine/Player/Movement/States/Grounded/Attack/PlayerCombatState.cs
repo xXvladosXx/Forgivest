@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
 {
-    public class PlayerCombatState : PlayerGroundedState
+    public class PlayerCombatState : PlayerAttackState
     {
         public PlayerCombatState(PlayerStateMachine playerPlayerStateMachine) : base(playerPlayerStateMachine)
         {
@@ -17,15 +17,6 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
             base.Enter();
             
             StartAnimation(PlayerStateMachine.Player.AnimationData.AttackParameterHash);
-        }
-
-        public override void Update()
-        {
-            base.Update();
-            
-            PlayerStateMachine.ReusableData.AttackRate = Mathf.Clamp(
-                PlayerStateMachine.ReusableData.AttackRate - Time.deltaTime, 0,
-                PlayerStateMachine.ReusableData.AttackRate);
         }
 
         public override void OnAnimationExitEvent()

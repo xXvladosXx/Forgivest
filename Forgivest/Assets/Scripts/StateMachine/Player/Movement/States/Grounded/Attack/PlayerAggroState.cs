@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
 {
-    public class PlayerAggroState : PlayerGroundedState
+    public class PlayerAggroState : PlayerAttackState
     {
         public PlayerAggroState(PlayerStateMachine playerPlayerStateMachine) : base(playerPlayerStateMachine)
         {
@@ -19,15 +19,6 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
             PlayerStateMachine.ReusableData.StoppingDistance = GroundedData.AttackData.StoppingDistance;
 
             base.Enter();
-        }
-
-        public override void Update()
-        {
-            base.Update();
-
-            PlayerStateMachine.ReusableData.AttackRate = Mathf.Clamp(
-                PlayerStateMachine.ReusableData.AttackRate - Time.deltaTime, 0,
-                PlayerStateMachine.ReusableData.AttackRate);
         }
 
         protected override void OnClickPerformed(InputAction.CallbackContext obj)
