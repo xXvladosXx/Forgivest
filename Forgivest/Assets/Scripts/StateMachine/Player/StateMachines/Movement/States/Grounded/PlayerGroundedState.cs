@@ -11,26 +11,7 @@ namespace Characters.Player.StateMachines.Movement.States.Grounded
         {
         }
         
-        protected override void AddInputActionsCallbacks()
-        {
-            base.AddInputActionsCallbacks();
-
-           // PlayerStateMachine.Player.Input.PlayerActions.Dash.started += OnDashStarted;
-            
-        }
-
-        public override void Update()
-        {
-            base.Update();
-        }
-
-
-        protected override void RemoveInputActionsCallbacks()
-        {
-            base.RemoveInputActionsCallbacks();
-
-           // PlayerStateMachine.Player.Input.PlayerActions.Dash.started -= OnDashStarted;
-        }
+      
 
         protected override void OnDashStarted(InputAction.CallbackContext context)
         {

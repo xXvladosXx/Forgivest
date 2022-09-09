@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Utilities.Animation
 {
-    public class AnimationEventHandler : MonoBehaviour
+    public class AnimationEventHandler : SerializedMonoBehaviour
     {
         [field: SerializeField] public IAnimationEventUser AnimationEventUser { get; private set; }
         
