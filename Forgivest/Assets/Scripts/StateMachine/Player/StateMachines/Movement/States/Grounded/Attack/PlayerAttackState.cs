@@ -22,15 +22,10 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
         public override void Update()
         {
             base.Update();
-            
-            Debug.Log(PlayerStateMachine.ReusableData.InteractableObject);
 
-            switch (PlayerStateMachine.ReusableData.InteractableObject)
-            {
-                case null:
-                    PlayerStateMachine.ChangeState(PlayerStateMachine.IdlingState);
-                    break;
-            }
+            Debug.Log(PlayerStateMachine.ReusableData.InteractableObject);
+            
+            
         }
     }
 }

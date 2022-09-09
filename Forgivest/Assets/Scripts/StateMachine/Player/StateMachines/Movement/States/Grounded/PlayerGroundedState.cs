@@ -22,17 +22,6 @@ namespace Characters.Player.StateMachines.Movement.States.Grounded
         public override void Update()
         {
             base.Update();
-
-            if (PlayerStateMachine.ReusableData.InteractableObject != null)
-            {
-                switch (PlayerStateMachine.ReusableData.InteractableObject)
-                {
-                    case EnemyEntity enemyEntity:
-                        PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerAttackState);
-                        break;
-                }
-            }
-            
         }
 
 
@@ -48,8 +37,18 @@ namespace Characters.Player.StateMachines.Movement.States.Grounded
             PlayerStateMachine.ChangeState(PlayerStateMachine.DashingState);
         }
 
-        protected virtual void OnMove()
+        protected override void OnMove()
         {
+            if (PlayerStateMachine.ReusableData.InteractableObject != null)
+            {
+                switch (PlayerStateMachine.ReusableData.InteractableObject)
+                {
+                    case EnemyEntity enemyEntity:
+                        PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerAttackState);
+                        return;
+                }
+            }
+            
             PlayerStateMachine.ChangeState(PlayerStateMachine.RunningState);
         }
     }

@@ -83,12 +83,14 @@ namespace Characters.Player.StateMachines.Movement.States
                 return;
             }
             
+            
             PlayerStateMachine.ReusableData.LastClickedPoint = raycastHit.point;
             raycastHit.collider.TryGetComponent(out IInteractable interactable);
             PlayerStateMachine.ReusableData.InteractableObject = interactable;
 
             if(ShouldStop()) return;
-            
+            Debug.Log("moving");
+
             StartMoveTo(raycastHit.point);
         }
 
@@ -121,12 +123,14 @@ namespace Characters.Player.StateMachines.Movement.States
        
         protected virtual void OnClickCanceled(InputAction.CallbackContext obj)
         {
+            OnMove();
             PlayerStateMachine.ReusableData.ShouldMove = false;
         }
 
         protected virtual void OnClickPerformed(InputAction.CallbackContext obj)
         {
             PlayerStateMachine.ReusableData.ShouldMove = true;
+            OnMove();
         }
         
         protected void ResetVelocity()
@@ -136,6 +140,11 @@ namespace Characters.Player.StateMachines.Movement.States
         
         protected float GetMovementSpeed() => GroundedData.BaseSpeed * PlayerStateMachine.ReusableData.MovementSpeedModifier;
    
+        protected virtual void OnMove()
+        {
+           
+        }
+        
         private void UpdateMovementAnimation()
         {
             Vector3 velocity = PlayerStateMachine.Player.NavMeshAgent.velocity;

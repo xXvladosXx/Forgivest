@@ -14,6 +14,7 @@ namespace StateMachine.Player
         public PlayerIdlingState IdlingState { get; }
         public PlayerDashingState DashingState { get; }
         public PlayerAttackState PlayerAttackState { get; }
+        public PlayerCombatState PlayerCombatState { get; }
 
         public PlayerRunningState RunningState { get; }
         
@@ -28,6 +29,7 @@ namespace StateMachine.Player
 
             RunningState = new PlayerRunningState(this);
             PlayerAttackState = new PlayerAttackState(this);
+            PlayerCombatState = new PlayerCombatState(this);
         }
         
     }
