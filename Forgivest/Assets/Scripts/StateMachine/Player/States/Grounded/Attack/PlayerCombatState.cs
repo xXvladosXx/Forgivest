@@ -16,7 +16,7 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
 
             base.Enter();
             
-            StartAnimation(PlayerStateMachine.Player.AnimationData.AttackParameterHash);
+            PlayerStateMachine.AnimationChanger.StartAnimation(PlayerStateMachine.AnimationData.AttackParameterHash); 
         }
 
         public override void OnAnimationExitEvent()
@@ -28,8 +28,8 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
         {
             TryToGetHitRaycast(out var raycastHit);
 
-            PlayerStateMachine.ReusableData.ClickedPoint = raycastHit.point;
-            raycastHit.collider.TryGetComponent(out IInteractable interactable);
+            PlayerStateMachine.ReusableData.ClickedPoint = raycastHit.Value.point;
+            raycastHit.Value.collider.TryGetComponent(out IInteractable interactable);
             
             if(interactable == PlayerStateMachine.ReusableData.InteractableObject)
                 return;
@@ -41,7 +41,7 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
         {
             base.Exit();
             
-            StopAnimation(PlayerStateMachine.Player.AnimationData.AttackParameterHash);
+            PlayerStateMachine.AnimationChanger.StopAnimation(PlayerStateMachine.AnimationData.AttackParameterHash); 
         }
     }
 }

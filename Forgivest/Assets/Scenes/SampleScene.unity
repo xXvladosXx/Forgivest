@@ -550,7 +550,7 @@ NavMeshAgent:
   m_Height: 1
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -3303,7 +3303,7 @@ GameObject:
   - component: {fileID: 6702610202858371057}
   - component: {fileID: 6702610202858371062}
   m_Layer: 3
-  m_Name: HumanMale_Character
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3325,7 +3325,7 @@ MonoBehaviour:
   <Rigidbody>k__BackingField: {fileID: 6702610202858371059}
   <Collider>k__BackingField: {fileID: 6702610202858371058}
   <PlayerInputProvider>k__BackingField: {fileID: 6702610202858371061}
-  <AnimationData>k__BackingField: {fileID: 11400000, guid: 68818d475a5b8a442864428d6d46d101,
+  <AliveEntityAnimationData>k__BackingField: {fileID: 11400000, guid: 68818d475a5b8a442864428d6d46d101,
     type: 2}
   <StateData>k__BackingField: {fileID: 11400000, guid: fb80194aae0bfab4f846f4637a1aeff1,
     type: 2}

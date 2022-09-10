@@ -8,7 +8,7 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded
         public override void Enter()
         {
             PlayerStateMachine.ReusableData.MovementSpeedModifier = 0f;
-            PlayerStateMachine.Player.NavMeshAgent.stoppingDistance = 0f;
+            PlayerStateMachine.Movement.SetStoppingDistance(0);
 
             base.Enter();
 

@@ -1,11 +1,14 @@
 using System;
+using AnimationSystem;
 using Data.Player;
+using MovementSystem;
+using RaycastSystem;
+using RaycastSystem.Core;
 using StateMachine.Player;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using Utilities;
-using Utilities.Animation;
 
 namespace Player
 {
@@ -15,20 +18,32 @@ namespace Player
         [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
         [field: SerializeField] public Collider Collider { get; private set; }
         [field: SerializeField] public PlayerInputProvider PlayerInputProvider { get; private set; }
-        [field: SerializeField] public AliveEntityAnimationData AnimationData { get; private set; }
+        [field: SerializeField] public AliveEntityAnimationData AliveEntityAnimationData { get; private set; }
         [field: SerializeField] public AliveEntityStateData StateData { get; set; }
         [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
         [field: SerializeField] public Animator Animator { get; private set; }
 
         public Camera Camera { get; private set; }
-
+        
+        public AnimationChanger AnimationChanger { get; private set; }
+        public Movement Movement { get; private set; }
+        public Rotator Rotator { get; private set; }
+        public RaycastUser RaycastUser { get; private set; }
+        
         private PlayerStateMachine _playerStateMachine;
         private void Awake()
         {
             Camera = Camera.main;
-            AnimationData.Init();
+            AliveEntityAnimationData.Init();
 
-            _playerStateMachine = new PlayerStateMachine(this);
+            AnimationChanger = new AnimationChanger(Animator);
+            Movement = new Movement(NavMeshAgent, Rigidbody, transform);
+            Rotator = new Rotator(Rigidbody);
+            RaycastUser = new PlayerRaycastUser(Camera);
+            
+            _playerStateMachine = new PlayerStateMachine(AnimationChanger,
+                Movement, Rotator, PlayerInputProvider, StateData,
+                RaycastUser, AliveEntityAnimationData);
         }
 
         private void Start()
@@ -39,7 +54,6 @@ namespace Player
         private void Update()
         {
             _playerStateMachine.Update();
-            _playerStateMachine.HandleInput();
         }
 
         public void OnAnimationStarted()

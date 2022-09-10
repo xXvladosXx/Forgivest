@@ -11,10 +11,6 @@ namespace Characters.Player.StateMachines.Movement.States.Grounded
         {
         }
         
-        protected override void OnDashStarted(InputAction.CallbackContext context)
-        {
-            PlayerStateMachine.ChangeState(PlayerStateMachine.DashingState);
-        }
 
         protected override void OnPressedMouseButton()
         {

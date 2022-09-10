@@ -13,12 +13,7 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
         {
             base.Update();
 
-            var lookRotation = Quaternion.LookRotation(PlayerStateMachine.ReusableData.ClickedPoint -
-                                                       PlayerStateMachine.Player.transform.position);
-            
-            PlayerStateMachine.Player.Rigidbody.MoveRotation(
-                Quaternion.Slerp(PlayerStateMachine.Player.transform.rotation,
-                    lookRotation, Time.deltaTime*100));
+            PlayerStateMachine.Rotator.RotateRigidbody(PlayerStateMachine.ReusableData.ClickedPoint, 100);
             
             PlayerStateMachine.ReusableData.AttackRate = Mathf.Clamp(
                 PlayerStateMachine.ReusableData.AttackRate - Time.deltaTime, 0,

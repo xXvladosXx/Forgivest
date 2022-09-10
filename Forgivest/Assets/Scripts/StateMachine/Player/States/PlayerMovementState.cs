@@ -19,9 +19,8 @@ namespace Characters.Player.StateMachines.Movement.States
         public PlayerMovementState(PlayerStateMachine playerPlayerStateMachine)
         {
             PlayerStateMachine = playerPlayerStateMachine;
-            PlayerStateMachine = playerPlayerStateMachine;
 
-            GroundedData = PlayerStateMachine.Player.StateData.GroundedData;
+            GroundedData = PlayerStateMachine.AliveEntityStateData.GroundedData;
         }
 
         public virtual void Enter()
@@ -34,13 +33,9 @@ namespace Characters.Player.StateMachines.Movement.States
             RemoveInputActionsCallbacks();
         }
 
-        public virtual void HandleInput()
-        {
-        }
-
         public virtual void Update()
         {
-            if (PlayerStateMachine.Player.PlayerInputProvider.PlayerMainActions.Action.IsPressed())
+            if (PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.IsPressed())
             {
                 OnPressedMouseButton();
             }
@@ -55,19 +50,19 @@ namespace Characters.Player.StateMachines.Movement.States
 
         protected virtual void AddInputActionsCallbacks()
         {
-            PlayerStateMachine.Player.PlayerInputProvider.PlayerMainActions.Action.performed += OnClickPerformed;
-            PlayerStateMachine.Player.PlayerInputProvider.PlayerMainActions.Action.canceled += OnClickCanceled;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.performed += OnClickPerformed;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.canceled += OnClickCanceled;
         }
 
         protected virtual void RemoveInputActionsCallbacks()
         {
-            PlayerStateMachine.Player.PlayerInputProvider.PlayerMainActions.Action.performed -= OnClickPerformed;
-            PlayerStateMachine.Player.PlayerInputProvider.PlayerMainActions.Action.canceled -= OnClickCanceled;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.performed -= OnClickPerformed;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.canceled -= OnClickCanceled;
         }
 
         private void MovementInput()
         {
-            if (TryToGetHitRaycast(out var raycastHit)) return;
+            if (!TryToGetHitRaycast(out var raycastHit)) return;
 
             //if mouse button is not pressed dont move
             if (!PlayerStateMachine.ReusableData.ShouldMove)
@@ -78,12 +73,12 @@ namespace Characters.Player.StateMachines.Movement.States
                 return;
             }
 
-            PlayerStateMachine.ReusableData.ClickedPoint = raycastHit.point;
-            raycastHit.collider.TryGetComponent(out IInteractable interactable);
+            PlayerStateMachine.ReusableData.ClickedPoint = raycastHit.Value.point;
+            raycastHit.Value.collider.TryGetComponent(out IInteractable interactable);
             PlayerStateMachine.ReusableData.InteractableObject = interactable;
-            
+
             if (ShouldStop()) return;
-            StartMoveTo(raycastHit.point);
+            PlayerStateMachine.Movement.MoveTo(raycastHit.Value.point, GetMovementSpeed());
         }
 
         public virtual void OnAnimationEnterEvent()
@@ -95,21 +90,6 @@ namespace Characters.Player.StateMachines.Movement.States
         }
 
         public virtual void OnAnimationTransitionEvent()
-        {
-        }
-
-        protected void StartAnimation(int animationHash)
-        {
-            PlayerStateMachine.Player.Animator.SetBool(animationHash, true);
-        }
-
-        protected void StopAnimation(int animationHash)
-        {
-            PlayerStateMachine.Player.Animator.SetBool(animationHash, false);
-        }
-
-
-        protected virtual void OnDashStarted(InputAction.CallbackContext context)
         {
         }
 
@@ -125,10 +105,10 @@ namespace Characters.Player.StateMachines.Movement.States
 
         protected void ResetVelocity()
         {
-            PlayerStateMachine.Player.Rigidbody.velocity = Vector3.zero;
+            PlayerStateMachine.Movement.ResetVelocity();
         }
 
-        protected float GetMovementSpeed() =>
+        private float GetMovementSpeed() =>
             GroundedData.BaseSpeed * PlayerStateMachine.ReusableData.MovementSpeedModifier;
 
         protected virtual void OnPressedMouseButton()
@@ -138,39 +118,31 @@ namespace Characters.Player.StateMachines.Movement.States
         protected virtual void OnStop()
         {
         }
-        
-        protected bool TryToGetHitRaycast(out RaycastHit raycastHit)
-        {
-            var ray = PlayerStateMachine.Player.Camera.ScreenPointToRay(ReadMousePosition());
-            bool hasHit = Physics.Raycast(ray, out raycastHit, Mathf.Infinity,
-                ~PlayerStateMachine.Player.LayerData.UninteractableLayer);
-            if (!hasHit) return true;
-            return false;
-        }
-        
-        private Vector2 ReadMousePosition() =>
-            PlayerStateMachine.Player.PlayerInputProvider.PlayerMainActions.Mouse.ReadValue<Vector2>();
 
-        private void StartMoveTo(Vector3 destination)
+        protected bool TryToGetHitRaycast(out RaycastHit? raycastHit)
         {
-            PlayerStateMachine.Player.NavMeshAgent.speed = GetMovementSpeed();
-            PlayerStateMachine.Player.NavMeshAgent.destination = destination;
-            PlayerStateMachine.Player.NavMeshAgent.isStopped = false;
+            raycastHit = PlayerStateMachine.RaycastUser.RaycastExcept(
+                PlayerStateMachine.PlayerInputProvider.ReadMousePosition(),
+                LayerUtils.Player);
+
+            return raycastHit != null;
         }
+
         private void UpdateMovementAnimation()
         {
-            Vector3 velocity = PlayerStateMachine.Player.NavMeshAgent.velocity;
-            Vector3 localVelocity = PlayerStateMachine.Player.transform.InverseTransformDirection(velocity);
+            Vector3 velocity = PlayerStateMachine.Movement.GetNavMeshVelocity();
+            Vector3 localVelocity = PlayerStateMachine.Movement.Transform.InverseTransformDirection(velocity);
 
             float speed = localVelocity.z;
 
-            PlayerStateMachine.Player.Animator.SetFloat(PlayerStateMachine.Player.AnimationData.SpeedParameterHash,
-                speed, .1f, Time.deltaTime);
+            PlayerStateMachine.AnimationChanger.UpdateBlendAnimation(
+                PlayerStateMachine.AnimationData.SpeedParameterHash,
+                speed, .1f);
         }
 
         protected bool ShouldStop()
         {
-            if (Vector3.Distance(PlayerStateMachine.Player.transform.position,
+            if (PlayerStateMachine.Movement.GetDistanceToPoint(
                     PlayerStateMachine.ReusableData.ClickedPoint) <
                 PlayerStateMachine.ReusableData.StoppingDistance)
             {
@@ -183,7 +155,7 @@ namespace Characters.Player.StateMachines.Movement.States
 
         private void Stop()
         {
-            PlayerStateMachine.Player.NavMeshAgent.isStopped = true;
+            PlayerStateMachine.Movement.Stop();
             OnStop();
         }
     }

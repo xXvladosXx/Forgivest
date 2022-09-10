@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace StateMachine
 {
-    public abstract class StateMachine
+    public abstract class StateMachine 
     {
         private IState _currentState;
 
@@ -15,11 +15,6 @@ namespace StateMachine
             _currentState = newState;
 
             _currentState.Enter();
-        }
-
-        public void HandleInput()
-        {
-            _currentState?.HandleInput();
         }
 
         public void Update()
