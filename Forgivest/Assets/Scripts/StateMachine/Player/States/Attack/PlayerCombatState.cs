@@ -1,8 +1,4 @@
-﻿using Characters.Player.StateMachines.Movement.States.Grounded;
-using Interaction.Core;
-using UnityEngine;
-
-namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
+﻿namespace StateMachine.Player.States.Attack
 {
     public class PlayerCombatState : PlayerAttackState
     {
@@ -24,17 +20,8 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded.Attack
             PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerAggroState);
         }
 
-        protected override void OnPressedMouseButton()
+        protected override void OnInteractableCheck()
         {
-            TryToGetHitRaycast(out var raycastHit);
-
-            PlayerStateMachine.ReusableData.ClickedPoint = raycastHit.Value.point;
-            raycastHit.Value.collider.TryGetComponent(out IInteractable interactable);
-            
-            if(interactable == PlayerStateMachine.ReusableData.InteractableObject)
-                return;
-            
-            base.OnPressedMouseButton();
         }
 
         public override void Exit()

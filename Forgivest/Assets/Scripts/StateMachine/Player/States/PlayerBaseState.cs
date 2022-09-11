@@ -1,22 +1,20 @@
-using System;
-using AnimatorStateMachine.StateMachine;
+﻿using AnimatorStateMachine.StateMachine;
 using Data.Player;
 using Enemy;
 using Interaction.Core;
-using StateMachine.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utilities;
 
-namespace Characters.Player.StateMachines.Movement.States
+namespace StateMachine.Player.States
 {
-    public class PlayerMovementState : IState
+    public class PlayerBaseState : IState
     {
         protected PlayerStateMachine PlayerStateMachine { get; private set; }
 
         protected AliveEntityGroundedData GroundedData { get; private set; }
 
-        public PlayerMovementState(PlayerStateMachine playerPlayerStateMachine)
+        public PlayerBaseState(PlayerStateMachine playerPlayerStateMachine)
         {
             PlayerStateMachine = playerPlayerStateMachine;
 
@@ -37,11 +35,12 @@ namespace Characters.Player.StateMachines.Movement.States
         {
             if (PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.IsPressed())
             {
-                OnPressedMouseButton();
+                CheckRaycast();
+                OnInteractableCheck();
+                OnClickPressed();
             }
 
             UpdateMovementAnimation();
-            MovementInput();
         }
 
         public void FixedUpdate()
@@ -60,25 +59,13 @@ namespace Characters.Player.StateMachines.Movement.States
             PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.canceled -= OnClickCanceled;
         }
 
-        private void MovementInput()
+        private void CheckRaycast()
         {
             if (!TryToGetHitRaycast(out var raycastHit)) return;
 
-            //if mouse button is not pressed dont move
-            if (!PlayerStateMachine.ReusableData.ShouldMove)
-            {
-                //when mouse was canceled stop movement
-                if (ShouldStop()) return;
-
-                return;
-            }
-
-            PlayerStateMachine.ReusableData.ClickedPoint = raycastHit.Value.point;
+            PlayerStateMachine.ReusableData.RaycastClickedPoint = raycastHit.Value.point;
             raycastHit.Value.collider.TryGetComponent(out IInteractable interactable);
             PlayerStateMachine.ReusableData.InteractableObject = interactable;
-
-            if (ShouldStop()) return;
-            PlayerStateMachine.Movement.MoveTo(raycastHit.Value.point, GetMovementSpeed());
         }
 
         public virtual void OnAnimationEnterEvent()
@@ -95,25 +82,19 @@ namespace Characters.Player.StateMachines.Movement.States
 
         protected virtual void OnClickCanceled(InputAction.CallbackContext obj)
         {
-            PlayerStateMachine.ReusableData.ShouldMove = false;
         }
 
         protected virtual void OnClickPerformed(InputAction.CallbackContext obj)
         {
-            PlayerStateMachine.ReusableData.ShouldMove = true;
         }
-
-        protected void ResetVelocity()
+        
+        protected virtual void OnClickPressed()
         {
-            PlayerStateMachine.Movement.ResetVelocity();
+            
         }
 
-        private float GetMovementSpeed() =>
+        protected float GetMovementSpeed() =>
             GroundedData.BaseSpeed * PlayerStateMachine.ReusableData.MovementSpeedModifier;
-
-        protected virtual void OnPressedMouseButton()
-        {
-        }
 
         protected virtual void OnStop()
         {
@@ -128,6 +109,16 @@ namespace Characters.Player.StateMachines.Movement.States
             return raycastHit != null;
         }
 
+        protected virtual void OnInteractableCheck()
+        {
+            switch (PlayerStateMachine.ReusableData.InteractableObject)
+            {
+                case EnemyEntity enemyEntity:
+                    PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerAggroState);
+                    return;
+            }
+        }
+        
         private void UpdateMovementAnimation()
         {
             Vector3 velocity = PlayerStateMachine.Movement.GetNavMeshVelocity();
@@ -143,7 +134,7 @@ namespace Characters.Player.StateMachines.Movement.States
         protected bool ShouldStop()
         {
             if (PlayerStateMachine.Movement.GetDistanceToPoint(
-                    PlayerStateMachine.ReusableData.ClickedPoint) <
+                    PlayerStateMachine.ReusableData.RaycastClickedPoint) <
                 PlayerStateMachine.ReusableData.StoppingDistance)
             {
                 Stop();
@@ -156,7 +147,6 @@ namespace Characters.Player.StateMachines.Movement.States
         private void Stop()
         {
             PlayerStateMachine.Movement.Stop();
-            OnStop();
         }
     }
 }

@@ -1,12 +1,10 @@
 ﻿using AnimationSystem;
-using AnimatorStateMachine.StateMachine;
 using Data.Player;
 using MovementSystem;
 using RaycastSystem.Core;
-using StateMachine.Player.Movement;
-using StateMachine.Player.StateMachines.Movement.States.Grounded;
-using StateMachine.Player.StateMachines.Movement.States.Grounded.Attack;
-using StateMachine.Player.StateMachines.Movement.States.Grounded.Moving;
+using StateMachine.Player.States;
+using StateMachine.Player.States.Attack;
+using StateMachine.Player.States.Moving;
 using Utilities;
 
 namespace StateMachine.Player
@@ -15,7 +13,7 @@ namespace StateMachine.Player
     {
         public Rotator Rotator { get; }
         public AnimationChanger AnimationChanger { get; }
-        public MovementSystem.Movement Movement { get; }
+        public Movement Movement { get; }
         public PlayerInputProvider PlayerInputProvider { get; }
         public AliveEntityStateData AliveEntityStateData { get; }
         public RaycastUser RaycastUser { get; }
@@ -26,11 +24,10 @@ namespace StateMachine.Player
         public PlayerIdlingState IdlingState { get; }
         public PlayerAggroState PlayerAggroState { get; }
         public PlayerCombatState PlayerCombatState { get; }
-
         public PlayerRunningState RunningState { get; }
 
         public PlayerStateMachine(AnimationChanger animationChanger,
-            MovementSystem.Movement movement, Rotator rotator,
+            Movement movement, Rotator rotator,
             PlayerInputProvider playerInputProvider,
             AliveEntityStateData aliveEntityStateData,
             RaycastUser raycastUser, 

@@ -1,9 +1,6 @@
-using Characters.Player.StateMachines.Movement.States.Grounded;
-using UnityEngine;
-
-namespace StateMachine.Player.StateMachines.Movement.States.Grounded
+namespace StateMachine.Player.States
 {
-    public class PlayerIdlingState : PlayerGroundedState
+    public class PlayerIdlingState : PlayerBaseState
     {
         public override void Enter()
         {
@@ -11,8 +8,11 @@ namespace StateMachine.Player.StateMachines.Movement.States.Grounded
             PlayerStateMachine.Movement.SetStoppingDistance(0);
 
             base.Enter();
+        }
 
-            ResetVelocity();
+        protected override void OnClickPressed()
+        {
+            PlayerStateMachine.ChangeState(PlayerStateMachine.RunningState);
         }
 
         public PlayerIdlingState(PlayerStateMachine playerPlayerStateMachine) : base(playerPlayerStateMachine)
