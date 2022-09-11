@@ -8,7 +8,6 @@ namespace AnimatorStateMachine.StateMachine
     {
         public void Enter();
         public void Exit();
-        public void HandleInput();
         public void Update();
         public void FixedUpdate();
         public void OnAnimationEnterEvent();

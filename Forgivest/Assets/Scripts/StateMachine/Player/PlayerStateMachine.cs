@@ -1,36 +1,53 @@
-﻿using Data.Player;
-using Player;
-using StateMachine.Player.StateMachines.Movement.States.Grounded;
-using StateMachine.Player.StateMachines.Movement.States.Grounded.Attack;
-using StateMachine.Player.StateMachines.Movement.States.Grounded.Moving;
+﻿using AnimationSystem;
+using Data.Player;
+using MovementSystem;
+using RaycastSystem.Core;
+using StateMachine.Player.States;
+using StateMachine.Player.States.Attack;
+using StateMachine.Player.States.Moving;
+using Utilities;
 
 namespace StateMachine.Player
 {
     public class PlayerStateMachine : StateMachine
     {
-        public PlayerEntity Player { get; }
+        public Rotator Rotator { get; }
+        public AnimationChanger AnimationChanger { get; }
+        public Movement Movement { get; }
+        public PlayerInputProvider PlayerInputProvider { get; }
+        public AliveEntityStateData AliveEntityStateData { get; }
+        public RaycastUser RaycastUser { get; }
+        public AliveEntityAnimationData AnimationData { get; }
+
         public AliveEntityStateReusableData ReusableData { get; }
 
         public PlayerIdlingState IdlingState { get; }
-        public PlayerDashingState DashingState { get; }
-        public PlayerAttackState PlayerAttackState { get; }
+        public PlayerAggroState PlayerAggroState { get; }
         public PlayerCombatState PlayerCombatState { get; }
-
         public PlayerRunningState RunningState { get; }
-        
 
-        public PlayerStateMachine(PlayerEntity player)
+        public PlayerStateMachine(AnimationChanger animationChanger,
+            Movement movement, Rotator rotator,
+            PlayerInputProvider playerInputProvider,
+            AliveEntityStateData aliveEntityStateData,
+            RaycastUser raycastUser, 
+            AliveEntityAnimationData animationData)
         {
-            Player = player;
+            Rotator = rotator;
+            AnimationChanger = animationChanger;
+            Movement = movement;
+            PlayerInputProvider = playerInputProvider;
+            AliveEntityStateData = aliveEntityStateData;
+            RaycastUser = raycastUser;
+            AnimationData = animationData;
+
             ReusableData = new AliveEntityStateReusableData();
 
             IdlingState = new PlayerIdlingState(this);
-            DashingState = new PlayerDashingState(this);
 
             RunningState = new PlayerRunningState(this);
-            PlayerAttackState = new PlayerAttackState(this);
+            PlayerAggroState = new PlayerAggroState(this);
             PlayerCombatState = new PlayerCombatState(this);
         }
-        
     }
 }
