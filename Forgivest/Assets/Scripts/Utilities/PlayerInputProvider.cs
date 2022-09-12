@@ -29,6 +29,9 @@ namespace Utilities
             PlayerInput.Disable();
         }
 
+        public Vector2 ReadMousePosition() =>
+            PlayerMainActions.Mouse.ReadValue<Vector2>();
+        
         private IEnumerator DisableAction(InputAction action, float seconds)
         {
             action.Disable();
