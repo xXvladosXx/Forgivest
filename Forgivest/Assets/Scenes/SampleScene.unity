@@ -432,6 +432,7 @@ GameObject:
   - component: {fileID: 800830064}
   - component: {fileID: 800830068}
   - component: {fileID: 800830069}
+  - component: {fileID: 800830070}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -541,8 +542,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27fba32baad3458687d7d0fe44638475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 800830070}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: <Modifiers>k__BackingField
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[StatsSystem.Core.IModifier, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   <StatsContainer>k__BackingField: {fileID: 11400000, guid: 6cba0b19cfc037244982ac7f072af1ba,
     type: 2}
+--- !u!114 &800830070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800830063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7be8ef87fb194c188b389b61e68aa403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weapon:
+  - <StatBonus>k__BackingField:
+    - <Stat>k__BackingField: 0
+      <Value>k__BackingField: 12
+    <CharacteristicBonus>k__BackingField:
+    - <Characteristic>k__BackingField: 0
+      <Value>k__BackingField: 100
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

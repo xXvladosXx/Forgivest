@@ -1,4 +1,4 @@
-﻿namespace StatsSystem
+﻿namespace StatsSystem.Core
 {
     public enum StatsEnum
     {

@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
+using StatsSystem.Core.Bonuses.Core;
 using UnityEngine;
 
-namespace StatsSystem.Core
+namespace StatsSystem.Core.Bonuses
 {
     [Serializable]
-    public class StatModifier
+    public class CharacteristicBonus : IBonus
     {
-        [field: SerializeField] public StatsEnum Stat { get; private set; }
+        [field: SerializeField] public CharacteristicEnum Characteristic { get; private set; }
         [field: SerializeField] public float Value { get; private set; }
-        [field: SerializeField] public StatDepender StatDepender { get; private set; }
-
-        public StatModifier(StatsEnum stat, StatDepender statDepender, float value)
+        
+        public CharacteristicBonus(CharacteristicEnum characteristic, float value)
         {
-            Stat = stat;
-            StatDepender = statDepender;
+            Characteristic = characteristic;
             Value = value;
         }
     }

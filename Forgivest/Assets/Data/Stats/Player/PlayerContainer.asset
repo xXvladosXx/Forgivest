@@ -20,12 +20,78 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: <StatDependers>k__BackingField
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[StatsSystem.StatsEnum, Assembly-CSharp],[StatsSystem.Core.StatDepender,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[StatsSystem.StatsEnum,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 7
+      Data: 2|StatsSystem.Core.StatDepender, Assembly-CSharp
+    - Name: <Characteristic>k__BackingField
+      Entry: 3
+      Data: 1
+    - Name: <ModifierValue>k__BackingField
+      Entry: 4
+      Data: 11
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 7
+      Data: 3|StatsSystem.Core.StatDepender, Assembly-CSharp
+    - Name: <Characteristic>k__BackingField
+      Entry: 3
+      Data: 0
+    - Name: <ModifierValue>k__BackingField
+      Entry: 4
+      Data: 12
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   <StatModifiers>k__BackingField:
   - <Stat>k__BackingField: 0
-    <StatDepender>k__BackingField:
-      <Characteristic>k__BackingField: 0
-      <ModifierValue>k__BackingField: 12
+    <Value>k__BackingField: 0
   <CharacteristicModifiers>k__BackingField:
   - <Characteristic>k__BackingField: 0
     <Value>k__BackingField: 10
