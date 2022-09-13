@@ -1,15 +1,13 @@
-﻿using InventorySystem.Items;
+﻿using System;
+using InventorySystem.Items;
 using UnityEngine;
 
 namespace InventorySystem.Interaction
 {
+    [Serializable]
     public class PickableItem : IPickable
     {
         [field: SerializeField] public Item Item { get; private set; }
-        
-        public void Pick()
-        {
-            
-        }
+        [field: SerializeField] public int Amount { get; private set; }
     }
 }

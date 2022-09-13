@@ -1,4 +1,5 @@
 using System;
+using InventorySystem.Items;
 
 namespace InventorySystem.Core
 {
@@ -13,7 +14,7 @@ namespace InventorySystem.Core
         IItemContainer[] GetEquippedItems();
 
         int GetItemAmount(Type itemType);
-        bool TryToAdd(object sender, IItemContainer item);
+        bool TryToAdd(object sender, IItemContainer item, int amount = 1);
         void Remove(object sender, Type itemType, int amount = 1);
         bool HasItem(Type type);
     }

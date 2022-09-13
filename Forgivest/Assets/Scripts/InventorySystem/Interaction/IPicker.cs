@@ -2,6 +2,6 @@
 {
     public interface IPicker
     {
-        InventoryContainer InventoryContainer { get; }
+        ItemContainer ItemContainer { get; }
     }
 }

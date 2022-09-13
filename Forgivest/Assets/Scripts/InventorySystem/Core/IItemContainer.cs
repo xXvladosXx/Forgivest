@@ -1,13 +1,15 @@
 using System;
+using InventorySystem.Items;
+using InventorySystem.Items.ItemTypes;
 
 namespace InventorySystem.Core
 {
     public interface IItemContainer
     {
         string Name { get; }
-        bool IsEquipped { get; set; }
         Type Type { get; }
+        IItemType ItemType { get; }
         int MaxItemsInStack { get; }
-        int Amount { get; set; }
+        ItemID ItemID { get; }
     }
 }

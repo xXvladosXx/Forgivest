@@ -1,4 +1,5 @@
 using System;
+using InventorySystem.Items;
 
 namespace InventorySystem.Core
 {
@@ -6,12 +7,12 @@ namespace InventorySystem.Core
     {
         bool IsFull { get; }
         bool IsEmpty { get; }
-        
-        IItemContainer Item { get; }
+        Item Item { get; }
         Type ItemType { get; }
-        int Amount { get; }
+        int Amount { get; set; }
         int Capacity { get; }
-
+        bool IsEquipped { get; set; }
         void Clear();
+        void SetItem(IItemContainer itemContainer, int amount);
     }
 }
