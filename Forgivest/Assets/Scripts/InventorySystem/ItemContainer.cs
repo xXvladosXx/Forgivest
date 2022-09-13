@@ -16,7 +16,7 @@ namespace InventorySystem
 
         public event Action<object, IItemContainer, int> OnItemAdded;
         public event Action<object, Type, int> OnItemRemoved;
-        
+
         public ItemContainer(int capacity)
         {
             Capacity = capacity;
@@ -29,7 +29,8 @@ namespace InventorySystem
 
         public IItemContainer GetItem(Type itemType) => Slots.Find(slot => slot.ItemType == itemType).Item;
 
-        public IItemContainer[] GetAllItems() => (Slots.Where(slot => !slot.IsEmpty).Select(slot => slot.Item)).ToArray();
+        public IItemContainer[] GetAllItems() =>
+            (Slots.Where(slot => !slot.IsEmpty).Select(slot => slot.Item)).ToArray();
 
         public IItemContainer[] GetAllItems(Type itemType) => (Slots
             .Where(slot => !slot.IsEmpty && slot.ItemType == itemType)
@@ -50,11 +51,11 @@ namespace InventorySystem
             var slotWithSameItemButNotEmpty = Slots
                 .Find(slot => !slot.IsEmpty && slot.Item.ItemID.Id == item.ItemID.Id && !slot.IsFull);
 
-            if (slotWithSameItemButNotEmpty != null)
+            if (slotWithSameItemButNotEmpty is {IsFull: false})
             {
                 return TryToAddToSlot(sender, slotWithSameItemButNotEmpty, item, amount);
             }
-            
+
             var emptySlot = Slots.Find(slot => slot.IsEmpty);
             if (emptySlot != null)
             {
@@ -72,7 +73,7 @@ namespace InventorySystem
 
             if (slot.IsEmpty)
             {
-                 slot.SetItem(item, amountToAdd);
+                slot.SetItem(item, amountToAdd);
             }
             else
             {
@@ -80,7 +81,7 @@ namespace InventorySystem
             }
 
             OnItemAdded?.Invoke(sender, item, amountToAdd);
-            
+
             if (amountLeft <= 0)
             {
                 return true;
@@ -92,31 +93,31 @@ namespace InventorySystem
         public void Remove(object sender, Type itemType, int amount = 1)
         {
             var slotsWithItem = GetAllSlots(itemType);
-            if(slotsWithItem.Length == 0)
+            if (slotsWithItem.Length == 0)
                 return;
 
             var amountToRemove = amount;
             var count = slotsWithItem.Length;
 
-            for (int i = count - 1;i >= 0; i--)
+            for (int i = count - 1; i >= 0; i--)
             {
                 var slot = slotsWithItem[i];
                 if (slot.Amount >= amountToRemove)
                 {
                     slot.Amount -= amountToRemove;
-                    
-                    if(slot.Amount <= 0)
+
+                    if (slot.Amount <= 0)
                         slot.Clear();
-                    
+
                     OnItemRemoved?.Invoke(sender, itemType, amountToRemove);
-                    
+
                     break;
                 }
 
                 var amountRemoved = slot.Amount;
                 amountToRemove -= slot.Amount;
                 slot.Clear();
-                
+
                 OnItemRemoved?.Invoke(sender, itemType, amountRemoved);
             }
         }
@@ -127,8 +128,10 @@ namespace InventorySystem
             var containerItem = GetItem(type);
             return containerItem != null;
         }
-        
-        private ISlotContainer[] GetAllSlots(Type itemType) => Slots.FindAll(slot => !slot.IsEmpty && slot.ItemType == itemType).ToArray();
+
+        private ISlotContainer[] GetAllSlots(Type itemType) =>
+            Slots.FindAll(slot => !slot.IsEmpty && slot.ItemType == itemType).ToArray();
+
         private ISlotContainer[] GetAllSlots() => Slots.ToArray();
     }
 }

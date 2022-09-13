@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using InventorySystem.Items.Core;
 using StatsSystem.Core.Bonuses;
 using UnityEngine;
 

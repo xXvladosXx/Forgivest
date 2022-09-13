@@ -28,6 +28,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
   <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 3480261504482581523, guid: 07c0e4883cf5f7542897b81ebdb96b35,
+    type: 3}
   <MaxItemsInStack>k__BackingField: 4
   <Sprite>k__BackingField: {fileID: 0}
   <ItemID>k__BackingField:
@@ -38,5 +40,6 @@ MonoBehaviour:
   <StatsBonuses>k__BackingField:
   - <Stat>k__BackingField: 0
     <Value>k__BackingField: 1000
+  <RightHanded>k__BackingField: 1
   <NextLevel>k__BackingField: {fileID: 11400000, guid: 4e1c5ec5b1493d34f9398c383dd5882c,
     type: 2}
