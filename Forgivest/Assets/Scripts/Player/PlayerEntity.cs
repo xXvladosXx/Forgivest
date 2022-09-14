@@ -1,6 +1,7 @@
 using System;
 using AnimationSystem;
 using Data.Player;
+using InventorySystem.Interaction;
 using MovementSystem;
 using RaycastSystem;
 using RaycastSystem.Core;
@@ -20,8 +21,9 @@ namespace Player
         [field: SerializeField] public PlayerInputProvider PlayerInputProvider { get; private set; }
         [field: SerializeField] public AliveEntityAnimationData AliveEntityAnimationData { get; private set; }
         [field: SerializeField] public AliveEntityStateData StateData { get; set; }
-        [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
         [field: SerializeField] public Animator Animator { get; private set; }
+
+        [SerializeField] private ObjectPicker _objectPicker;
 
         public Camera Camera { get; private set; }
         
@@ -40,6 +42,8 @@ namespace Player
             Movement = new Movement(NavMeshAgent, Rigidbody, transform);
             Rotator = new Rotator(Rigidbody);
             RaycastUser = new PlayerRaycastUser(Camera);
+
+            _objectPicker.Init(RaycastUser);
             
             _playerStateMachine = new PlayerStateMachine(AnimationChanger,
                 Movement, Rotator, PlayerInputProvider, StateData,
