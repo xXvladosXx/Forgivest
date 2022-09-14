@@ -51,7 +51,7 @@ namespace InventorySystem.Interaction
             {
                 case PickableItem pickableItem:
                     Inventory.ItemContainer.TryToAdd(this, pickableItem.Item, pickableItem.Amount);
-                    ItemEquipHandler.Equip(pickableItem.Item as StatsableItem);
+                    ItemEquipHandler.TryToEquip(pickableItem.Item as StatsableItem);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(pickable));

@@ -16,23 +16,32 @@ namespace InventorySystem
 
         private GameObject _currentWeapon;
         
-        public void Equip(StatsableItem statsableItem)
+        public bool TryToEquip(StatsableItem statsableItem)
         {
             switch (statsableItem)
             {
                 case Armor armor:
-                    break;
+                    return true;
                 case Weapon weapon:
-                    EquipWeapon(weapon);
-                    break;
+                    return TryToEquipWeapon(weapon);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(statsableItem));
             }
         }
 
-        private void EquipWeapon(Weapon weapon)
+        private bool TryToEquipWeapon(Weapon weapon)
         {
-            _currentWeapon = Object.Instantiate(weapon.Prefab, weapon.RightHanded ? RightHand : LeftHand);
+            if (_currentWeapon == null)
+            {
+                _currentWeapon = Object.Instantiate(weapon.Prefab, weapon.RightHanded ? RightHand : LeftHand);
+                return true;
+            }
+            else
+            {
+                Debug.Log("You have a weapon");
+            }
+
+            return false;
         }
     }
 }
