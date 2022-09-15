@@ -371,7 +371,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555835720}
-  m_LocalRotation: {x: 0.36514142, y: 0.33891404, z: -0.14475554, w: 0.85490054}
+  m_LocalRotation: {x: 0.36514148, y: 0.3389141, z: -0.14475556, w: 0.8549005}
   m_LocalPosition: {x: -33.20352, y: 10.05, z: -26.771618}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -447,10 +447,10 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 800830063}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &800830065
 MeshRenderer:
@@ -711,7 +711,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301486876}
-  m_LocalRotation: {x: 0.36514142, y: 0.33891404, z: -0.14475554, w: 0.85490054}
+  m_LocalRotation: {x: 0.36514148, y: 0.3389141, z: -0.14475556, w: 0.8549005}
   m_LocalPosition: {x: -33.20352, y: 10.05, z: -26.771618}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -27676,6 +27676,7 @@ MonoBehaviour:
   <StateData>k__BackingField: {fileID: 11400000, guid: fb80194aae0bfab4f846f4637a1aeff1,
     type: 2}
   <Animator>k__BackingField: {fileID: 6702610202858371054}
+  <StatsHandler>k__BackingField: {fileID: 6702610202858371064}
   _objectPicker: {fileID: 6702610202858371063}
 --- !u!136 &6702610202858371058
 CapsuleCollider:

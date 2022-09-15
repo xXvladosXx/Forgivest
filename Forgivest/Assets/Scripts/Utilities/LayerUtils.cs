@@ -4,6 +4,6 @@
     {
         public static int Default => 0;
         public static int Player => 3;
-        public static int Enemy => 6;
+        public static int Enemy => 7;
     }
 }

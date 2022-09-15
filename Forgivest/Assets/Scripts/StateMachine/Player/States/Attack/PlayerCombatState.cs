@@ -8,7 +8,7 @@
 
         public override void Enter()
         {
-            PlayerStateMachine.ReusableData.AttackRate = 3;
+            PlayerStateMachine.ReusableData.AttackRate = PlayerStateMachine.AttackApplier.CurrentWeapon.AttackRate;
 
             base.Enter();
             

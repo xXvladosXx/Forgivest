@@ -1,4 +1,5 @@
 using System;
+using ColliderSystem;
 using InventorySystem.Core;
 using InventorySystem.Items;
 using InventorySystem.Items.Armor;
@@ -14,7 +15,8 @@ namespace InventorySystem
         [field: SerializeField] public Transform RightHand { get; private set; }
         [field: SerializeField] public Transform LeftHand { get; private set; }
 
-        private GameObject _currentWeapon;
+        public AttackColliderActivator CurrentColliderWeapon { get; private set; }
+        public Weapon CurrentWeapon { get; private set; }
         
         public bool TryToEquip(StatsableItem statsableItem)
         {
@@ -31,15 +33,14 @@ namespace InventorySystem
 
         private bool TryToEquipWeapon(Weapon weapon)
         {
-            if (_currentWeapon == null)
+            if (CurrentColliderWeapon == null)
             {
-                _currentWeapon = Object.Instantiate(weapon.Prefab, weapon.RightHanded ? RightHand : LeftHand);
+                CurrentWeapon = weapon;
+                CurrentColliderWeapon = Object.Instantiate(weapon.Prefab, weapon.RightHanded ? RightHand : LeftHand).GetComponent<AttackColliderActivator>();
                 return true;
             }
-            else
-            {
-                Debug.Log("You have a weapon");
-            }
+
+            Debug.Log("You have a weapon");
 
             return false;
         }

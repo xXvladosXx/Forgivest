@@ -8,5 +8,6 @@ namespace AnimationSystem
         void OnAnimationStarted();
         void OnAnimationTransitioned();
         void OnAnimationEnded();
+        void ApplyAttack(float timeOfActiveCollider);
     }
 }

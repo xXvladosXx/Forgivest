@@ -4836,6 +4836,8 @@ GameObject:
   - component: {fileID: 3483818857011754335}
   - component: {fileID: 3475828447934364473}
   - component: {fileID: 3466740141194706151}
+  - component: {fileID: -5238597190377150636}
+  - component: {fileID: -7196847633714104539}
   m_Layer: 6
   m_Name: Upg_Sword
   m_TagString: Untagged
@@ -4910,6 +4912,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &-5238597190377150636
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3480261504482581523}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.4
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.84, z: 0.000000013038516}
+--- !u!114 &-7196847633714104539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3480261504482581523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d166d5ba71124d0d8f6d174cbe448b55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Collider>k__BackingField: {fileID: -5238597190377150636}
 --- !u!1 &3481088669354304979
 GameObject:
   m_ObjectHideFlags: 0

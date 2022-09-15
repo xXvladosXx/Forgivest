@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using InventorySystem.Interaction;
 using Sirenix.OdinInspector;
 using StatsSystem.Core;
 using StatsSystem.Core.Bonuses;
@@ -35,7 +36,7 @@ namespace StatsSystem
             }
         }
 
-        public void CalculateStat(StatsEnum stat)
+        public float CalculateStat(StatsEnum stat)
         {
             var startValue = StatsContainer.CalculateStatFromCharacteristic(stat);
 
@@ -46,7 +47,9 @@ namespace StatsSystem
             }
 
             var characteristicValue = CalculateFromModifiers(stat, bonusList);
-            Debug.Log(startValue + characteristicValue);
+            var finalValue = startValue + characteristicValue;
+
+            return finalValue;
         }
 
         private float CalculateFromModifiers(StatsEnum stat, List<IBonus> bonusList)
@@ -62,10 +65,12 @@ namespace StatsSystem
                     switch (bonus)
                     {
                         case CharacteristicBonus characteristicBonus:
-                            startValue += characteristicBonus.Value * statDepender.Value.ModifierValue;
+                            if(characteristicBonus.Characteristic == statDepender.Value.Characteristic)
+                                startValue += characteristicBonus.Value * statDepender.Value.ModifierValue;
                             break;
                         case StatBonus statBonus:
-                            startValue += statBonus.Value;
+                            if(statBonus.Stat == stat)
+                                startValue += statBonus.Value;
                             break;
                     }
                 }
