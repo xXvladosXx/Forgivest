@@ -29,14 +29,6 @@ namespace InventorySystem.Interaction
             Inventory.Init();
         }
 
-        private void Update()
-        {
-            var raycast = _raycastUser?.Raycast(Mouse.current.position.ReadValue());
-                
-            if(raycast.HasValue)
-                Debug.Log(raycast.Value.collider);
-        }
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out IPickable pickable))

@@ -1,11 +1,15 @@
 using System;
 using AnimationSystem;
+using AttackSystem;
+using AttackSystem.Core;
 using Data.Player;
 using InventorySystem.Interaction;
 using MovementSystem;
 using RaycastSystem;
 using RaycastSystem.Core;
 using StateMachine.Player;
+using StatsSystem;
+using StatsSystem.Core;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -13,7 +17,14 @@ using Utilities;
 
 namespace Player
 {
-    public class PlayerEntity : MonoBehaviour, IAnimationEventUser
+    [RequireComponent(typeof(NavMeshAgent),
+        typeof(Rigidbody),
+        typeof(Collider))]
+    
+    [RequireComponent(typeof(StatsHandler),
+        typeof(Animator),
+        typeof(ObjectPicker))]
+    public class PlayerEntity : MonoBehaviour, IAnimationEventUser, IDamageReceiver
     {
         [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
         [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
@@ -22,6 +33,7 @@ namespace Player
         [field: SerializeField] public AliveEntityAnimationData AliveEntityAnimationData { get; private set; }
         [field: SerializeField] public AliveEntityStateData StateData { get; set; }
         [field: SerializeField] public Animator Animator { get; private set; }
+        [field: SerializeField] public StatsHandler StatsHandler { get; private set; }
 
         [SerializeField] private ObjectPicker _objectPicker;
 
@@ -32,7 +44,18 @@ namespace Player
         public Rotator Rotator { get; private set; }
         public RaycastUser RaycastUser { get; private set; }
         
+        public AttackApplier AttackApplier { get; private set; }
+        
         private PlayerStateMachine _playerStateMachine;
+        
+        public event Action<AttackData> OnDamageReceived;
+        public LayerMask LayerMask => gameObject.layer;
+
+        public void ReceiverDamage(AttackData attackData)
+        {
+            Debug.Log("Player recieved damage");
+        }
+        
         private void Awake()
         {
             Camera = Camera.main;
@@ -45,9 +68,12 @@ namespace Player
 
             _objectPicker.Init(RaycastUser);
             
+            AttackApplier = new AttackApplier(_objectPicker.ItemEquipHandler);
+            
             _playerStateMachine = new PlayerStateMachine(AnimationChanger,
                 Movement, Rotator, PlayerInputProvider, StateData,
-                RaycastUser, AliveEntityAnimationData);
+                RaycastUser, AliveEntityAnimationData, 
+                AttackApplier);
         }
 
         private void Start()
@@ -74,5 +100,16 @@ namespace Player
         {
             _playerStateMachine.OnAnimationExitEvent();
         }
+
+        public void ApplyAttack(float timeOfActiveCollider)
+        {
+            AttackApplier.ApplyDamage(new AttackData
+            {
+                Damage = StatsHandler.CalculateStat(StatsEnum.Damage),
+                DamageApplierLayerMask = LayerMask
+            }, timeOfActiveCollider);
+        }
+
+        
     }
 }

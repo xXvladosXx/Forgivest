@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AttackSystem.Core;
 using StatsSystem.Core;
 using StatsSystem.Core.Bonuses;
 using StatsSystem.Core.Bonuses.Core;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace StatsSystem
 {
-    public class TestController : MonoBehaviour, IModifier
+    public class TestController : MonoBehaviour, IModifier, IDamageReceiver
     {
         [SerializeField] private List<Weapon> _weapon;
 
@@ -31,6 +32,12 @@ namespace StatsSystem
             }
 
             return bonuses;
+        }
+
+        public event Action<AttackData> OnDamageReceived;
+        public LayerMask LayerMask => gameObject.layer;
+        public void ReceiverDamage(AttackData attackData)
+        {
         }
     }
 

@@ -41,5 +41,7 @@ MonoBehaviour:
   - <Stat>k__BackingField: 0
     <Value>k__BackingField: 1000
   <RightHanded>k__BackingField: 1
+  <AttackRate>k__BackingField: 2
+  <AnimatorController>k__BackingField: {fileID: 0}
   <NextLevel>k__BackingField: {fileID: 11400000, guid: 4e1c5ec5b1493d34f9398c383dd5882c,
     type: 2}

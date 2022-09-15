@@ -21,5 +21,10 @@ namespace AnimationSystem
         {
             AnimationEventUser.OnAnimationEnded();
         }
+
+        public void ApplyDamage(float colliderActivationTime)
+        {
+            AnimationEventUser.ApplyAttack(colliderActivationTime);
+        }
     }
 }
