@@ -65,10 +65,12 @@ namespace StatsSystem
                     switch (bonus)
                     {
                         case CharacteristicBonus characteristicBonus:
-                            startValue += characteristicBonus.Value * statDepender.Value.ModifierValue;
+                            if(characteristicBonus.Characteristic == statDepender.Value.Characteristic)
+                                startValue += characteristicBonus.Value * statDepender.Value.ModifierValue;
                             break;
                         case StatBonus statBonus:
-                            startValue += statBonus.Value;
+                            if(statBonus.Stat == stat)
+                                startValue += statBonus.Value;
                             break;
                     }
                 }

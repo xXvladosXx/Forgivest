@@ -17,8 +17,11 @@ namespace ColliderSystem
         
         private void OnTriggerEnter(Collider other)
         {
+            if(_currentAttackData == null) return;
+            
             if (other.TryGetComponent(out IDamageReceiver damageReceiver))
             {
+                
                 if(damageReceiver.LayerMask == _currentAttackData.DamageApplierLayerMask) return;
                 
                 damageReceiver.ReceiverDamage(_currentAttackData);

@@ -103,6 +103,9 @@ namespace Player
 
         public void ApplyAttack(float timeOfActiveCollider)
         {
+            Debug.Log(StatsHandler.CalculateStat(StatsEnum.Health) + " Health ");
+            Debug.Log(StatsHandler.CalculateStat(StatsEnum.Damage) + " Dam ");
+            
             AttackApplier.ApplyDamage(new AttackData
             {
                 Damage = StatsHandler.CalculateStat(StatsEnum.Damage),
