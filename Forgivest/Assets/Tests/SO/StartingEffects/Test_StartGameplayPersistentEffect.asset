@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c5fd9c363a44de48531770a2bdc4d38, type: 3}
+  m_Name: Test_StartGameplayPersistentEffect
+  m_EditorClassIdentifier: 
+  _modifiers:
+  - {fileID: 2255975462165128282}
+  _isInfinite: 1
+  _durationFormula: {fileID: 0}
+--- !u!114 &193644078224066957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dab45cb8a84b5f8bbf6c0f680f9ae9, type: 3}
+  m_Name: Modifier
+  m_EditorClassIdentifier: 
+  <Formula>k__BackingField: {fileID: 0}
+  <StatName>k__BackingField: Heath
+  <Type>k__BackingField: 0
+  <CanCauseCriticalHit>k__BackingField: 0
+--- !u!114 &2255975462165128282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0c60a0303442cda89d6ea5ef02c25e, type: 3}
+  m_Name: Modifier
+  m_EditorClassIdentifier: 
+  <Formula>k__BackingField: {fileID: 11400000, guid: fcc2406b80743204a9ea5481b1f3f85f,
+    type: 2}
+  <StatName>k__BackingField: Dexterity
+  <Type>k__BackingField: 1
