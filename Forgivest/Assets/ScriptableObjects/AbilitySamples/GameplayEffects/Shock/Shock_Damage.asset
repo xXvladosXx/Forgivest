@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _modifiers:
   - {fileID: 46019154419237379}
+  _specialEffectDefinition: {fileID: 11400000, guid: 702bb063b02eefc4c89d235fc3c1c9d5,
+    type: 2}
 --- !u!114 &46019154419237379
 MonoBehaviour:
   m_ObjectHideFlags: 0

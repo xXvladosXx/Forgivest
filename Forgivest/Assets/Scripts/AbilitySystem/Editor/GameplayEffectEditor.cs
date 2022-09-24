@@ -16,10 +16,20 @@ namespace AbilitySystem
             var root = new VisualElement();
             
             root.Add(CreateApplicationFieldsGUI());
+            root.Add(CreateSpecialEffectFieldsGUI());
 
             return root;
         }
 
+        protected virtual VisualElement CreateSpecialEffectFieldsGUI()
+        {
+            var root = new VisualElement();
+            
+            root.Add(new PropertyField(serializedObject.FindProperty("_specialEffectDefinition")));
+
+            return root;
+        }
+        
         protected VisualElement CreateApplicationFieldsGUI()
         {
             var root = new VisualElement();

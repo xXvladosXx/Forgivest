@@ -11,8 +11,9 @@ namespace AbilitySystem.AbilitySystem.Runtime
     {
         [SerializeField] private List<BaseGameplayEffectStatModifier> _modifiers;
         public ReadOnlyCollection<BaseGameplayEffectStatModifier> Modifiers => _modifiers.AsReadOnly();
-        
-        [field: SerializeField] public SpecialEffectDefinition SpecialEffectDefinition { get; private set; }
 
+        [SerializeField] private SpecialEffectDefinition _specialEffectDefinition;
+
+        public SpecialEffectDefinition SpecialEffectDefinition => _specialEffectDefinition;
     }
 }

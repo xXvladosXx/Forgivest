@@ -115,7 +115,7 @@ namespace AbilitySystem
                 TagController.AddTag(grantedTag);
             }
 
-            if (persistentEffect.Definition.SpecialEffectDefinition != null)
+            if (persistentEffect.Definition.SpecialPersistentEffectDefinition != null)
             {
                 PlaySpecialEffect(persistentEffect);
             }
@@ -136,7 +136,7 @@ namespace AbilitySystem
                 TagController.RemoveTag(grantedTag);
             }
 
-            if (persistentEffect.Definition.SpecialEffectDefinition != null)
+            if (persistentEffect.Definition.SpecialPersistentEffectDefinition != null)
             {
                 StopSpecialEffect(persistentEffect);
             }

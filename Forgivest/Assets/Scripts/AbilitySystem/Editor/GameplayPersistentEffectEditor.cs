@@ -14,10 +14,20 @@ namespace AbilitySystem
             
             root.Add(CreateApplicationFieldsGUI());
             root.Add(CreateDurationFieldsGUI());
+            root.Add(CreateSpecialEffectFieldsGUI());
             root.Add(CreateTagFieldsGUI());
 
             RegisterCallbacks(root);
             
+            return root;
+        }
+
+        protected override VisualElement CreateSpecialEffectFieldsGUI()
+        {
+            var root = base.CreateSpecialEffectFieldsGUI();
+            
+            root.Add(new PropertyField(serializedObject.FindProperty("_specialPersistentEffectDefinition")));
+
             return root;
         }
 
