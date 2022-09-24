@@ -5,7 +5,7 @@ namespace AbilitySystem.AbilitySystem.Runtime
 {
     public class GameplayEffectStatModifyDamage : BaseGameplayEffectStatModifier
     {
-        [field: SerializeField] public override string StatName { get; protected set; } = "Heath";
+        [field: SerializeField] public override string StatName { get; protected set; } = "Health";
 
         [field: SerializeField]
         public override ModifierOperationType Type { get; protected set; } = ModifierOperationType.Additive;

@@ -28,7 +28,9 @@ namespace AbilitySystem.AbilitySystem.Runtime
 
         [SerializeField] private List<string> _grantedTags;
         public ReadOnlyCollection<string> GrantedTags => _grantedTags.AsReadOnly();
-        
-        [field: SerializeField] public SpecialEffectDefinition SpecialEffectDefinition { get; private set; }
+
+        [SerializeField] private SpecialEffectDefinition _specialPersistentEffectDefinition;
+
+        public SpecialEffectDefinition SpecialPersistentEffectDefinition => _specialPersistentEffectDefinition;
     }
 }

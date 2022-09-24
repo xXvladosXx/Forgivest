@@ -17,3 +17,5 @@ MonoBehaviour:
   <AnimationName>k__BackingField: Cast
   <Cost>k__BackingField: {fileID: 11400000, guid: 74d19faa2ec925d45ab9446a431b7294,
     type: 2}
+  <Cooldown>k__BackingField: {fileID: 11400000, guid: bdcc0a39ff6f9f048a4f24c4fcae36a9,
+    type: 2}

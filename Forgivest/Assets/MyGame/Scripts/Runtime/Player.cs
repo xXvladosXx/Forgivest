@@ -32,6 +32,12 @@ namespace MyGame.Scripts
                 var actived = _abilityController.TryActiveAbility("Shock", m_Target.gameObject);
                 print(actived);
             }
+            
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                var actived = _abilityController.TryActiveAbility("Heal", m_Target.gameObject);
+                print(actived);
+            }
         }
     }
 }

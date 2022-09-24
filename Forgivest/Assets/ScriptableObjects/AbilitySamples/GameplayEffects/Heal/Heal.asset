@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c24fec08f9f4c66ac5bdd6a1be3db6d, type: 3}
+  m_Name: Heal
+  m_EditorClassIdentifier: 
+  _modifiers:
+  - {fileID: 5328612638485777080}
+  _specialEffectDefinition: {fileID: 0}
+--- !u!114 &5328612638485777080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dab45cb8a84b5f8bbf6c0f680f9ae9, type: 3}
+  m_Name: Modifier
+  m_EditorClassIdentifier: 
+  <Formula>k__BackingField: {fileID: 11400000, guid: 99e83b4354cfd6b4782a2631cc5c9563,
+    type: 2}
+  <StatName>k__BackingField: Health
+  <Type>k__BackingField: 0
+  <CanCauseCriticalHit>k__BackingField: 0
