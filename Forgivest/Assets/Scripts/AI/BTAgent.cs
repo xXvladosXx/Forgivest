@@ -30,19 +30,21 @@ namespace AI
         {
             var transform1 = this.transform;
             Vector3 directionToTarget = target - transform1.position;
-            float angle = Vector3.Angle(directionToTarget, transform1.forward);
-
-            if (angle <= maxAngle || directionToTarget.magnitude <= distance)
+            if (directionToTarget.magnitude > distance)
             {
-                RaycastHit hitInfo;
-                if (Physics.Raycast(this.transform.position, directionToTarget, out hitInfo))
-                {
-                    if (hitInfo.collider.gameObject.CompareTag(tag))
-                    {
-                        return Node.Status.SUCCESS;
-                    }
-                }
+                return Node.Status.FAILURE;
             }
+
+            Vector3 agentDirection = agent.transform.forward;
+            
+            directionToTarget.Normalize();
+
+            float dotProduct = Vector3.Dot(directionToTarget, agentDirection);
+            if (dotProduct > 0.0f)
+            {
+               return Node.Status.SUCCESS;
+            }
+         
             return Node.Status.FAILURE;
         }
     
