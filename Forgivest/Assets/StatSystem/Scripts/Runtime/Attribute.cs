@@ -49,7 +49,7 @@ namespace StatSystem
 
         #region Save System
 
-        public object data => new AttributeData
+        public object Data => new AttributeData
         {
             currentValue = currentValue
         };

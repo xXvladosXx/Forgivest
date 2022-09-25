@@ -4,6 +4,6 @@ namespace Core
 {
     public interface ITaggable
     {
-        ReadOnlyCollection<string> tags { get; }
+        ReadOnlyCollection<string> Tags { get; }
     }
 }

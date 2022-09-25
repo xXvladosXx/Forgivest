@@ -38,6 +38,20 @@ namespace MyGame.Scripts
                 var actived = _abilityController.TryActiveAbility("Heal", m_Target.gameObject);
                 print(actived);
             }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                var actived = _abilityController.TryActiveAbility("Regeneration", m_Target.gameObject);
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                var actived = _abilityController.TryActiveAbility("Poison", m_Target.gameObject);
+            }
+            
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                var actived = _abilityController.TryActiveAbility("Malediction", m_Target.gameObject);
+            }
         }
     }
 }

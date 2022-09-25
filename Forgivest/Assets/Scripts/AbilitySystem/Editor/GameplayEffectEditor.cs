@@ -17,6 +17,7 @@ namespace AbilitySystem
             
             root.Add(CreateApplicationFieldsGUI());
             root.Add(CreateSpecialEffectFieldsGUI());
+            root.Add(CreateTagFieldsGUI());
 
             return root;
         }
@@ -26,6 +27,14 @@ namespace AbilitySystem
             var root = new VisualElement();
             
             root.Add(new PropertyField(serializedObject.FindProperty("_specialEffectDefinition")));
+
+            return root;
+        }
+        
+        protected virtual VisualElement CreateTagFieldsGUI()
+        {
+            var root = new VisualElement();
+            root.Add(new PropertyField(serializedObject.FindProperty("_tags")));
 
             return root;
         }

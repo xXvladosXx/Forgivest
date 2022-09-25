@@ -46,5 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _modifiers:
   - {fileID: -1515865631831480236}
+  _specialEffectDefinition: {fileID: 0}
   _isInfinite: 1
   _durationFormula: {fileID: 0}
+  _isPeriodic: 0
+  _period: 0
+  _isExecutableEffectOnApply: 0
+  _grantedTags: []
+  _specialPersistentEffectDefinition: {fileID: 0}

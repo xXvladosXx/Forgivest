@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9152561701100224788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0c60a0303442cda89d6ea5ef02c25e, type: 3}
+  m_Name: Modifier
+  m_EditorClassIdentifier: 
+  <Formula>k__BackingField: {fileID: 0}
+  <StatName>k__BackingField: 
+  <Type>k__BackingField: 0
+--- !u!114 &-8098405406943731743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dab45cb8a84b5f8bbf6c0f680f9ae9, type: 3}
+  m_Name: Modifier
+  m_EditorClassIdentifier: 
+  <Formula>k__BackingField: {fileID: 11400000, guid: f182eee6d25da6c43bcd9b63da3fe54b,
+    type: 2}
+  <StatName>k__BackingField: Health
+  <Type>k__BackingField: 0
+  <CanCauseCriticalHit>k__BackingField: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c5fd9c363a44de48531770a2bdc4d38, type: 3}
+  m_Name: Regeneration
+  m_EditorClassIdentifier: 
+  _modifiers:
+  - {fileID: -8098405406943731743}
+  _specialEffectDefinition: {fileID: 0}
+  _tags:
+  - healing
+  _isInfinite: 0
+  _durationFormula: {fileID: 11400000, guid: 978b4eaa3d00f05448a2e43447b36701, type: 2}
+  _isPeriodic: 1
+  _period: 2
+  _isExecutableEffectOnApply: 1
+  _grantedTags: []
+  _specialPersistentEffectDefinition: {fileID: 11400000, guid: 2cd735b857afca14caa6d1b9e8deb549,
+    type: 2}
+--- !u!114 &34117187312028808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dab45cb8a84b5f8bbf6c0f680f9ae9, type: 3}
+  m_Name: Modifier
+  m_EditorClassIdentifier: 
+  <Formula>k__BackingField: {fileID: 11400000, guid: f182eee6d25da6c43bcd9b63da3fe54b,
+    type: 2}
+  <StatName>k__BackingField: Health
+  <Type>k__BackingField: 0
+  <CanCauseCriticalHit>k__BackingField: 0

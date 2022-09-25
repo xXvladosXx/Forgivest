@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using AbilitySystem.AbilitySystem.Runtime;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Stackable;
 using StatSystem;
 using UnityEngine;
 using Attribute = StatSystem.Attribute;
@@ -71,11 +72,75 @@ namespace AbilitySystem
             HandleDuration();
         }
 
-        public void ApplyGameplayEffectToSelf(GameplayEffect effectToApply)
+        public bool ApplyGameplayEffectToSelf(GameplayEffect effectToApply)
         {
+            bool isAdded = true;
+            
+            if (effectToApply is GameplayStackableEffect stackableEffect)
+            {
+                var existingStackableEffect =
+                    ActiveEffects.Find(effect => effect.Definition == stackableEffect.Definition) 
+                        as GameplayStackableEffect;
+
+                if (existingStackableEffect != null)
+                {
+                    isAdded = false;
+
+                    if (existingStackableEffect.StackCount == existingStackableEffect.Definition.StackCountLimit)
+                    {
+                        foreach (var effectDefinition in existingStackableEffect.Definition.OverflowEffects)
+                        {
+                            var attribute = effectDefinition
+                                .GetType()
+                                .GetCustomAttributes(true)
+                                .OfType<EffectTypeAttribute>()
+                                .FirstOrDefault();
+
+                            var overflowEffect = Activator
+                                .CreateInstance(attribute.Type, effectDefinition,
+                                existingStackableEffect, gameObject) as GameplayEffect;
+                            
+                            ApplyGameplayEffectToSelf(overflowEffect);
+                        }
+
+                        if (existingStackableEffect.Definition.ClearStackOnOverflow)
+                        {
+                            RemoveActiveGameplayEffect(existingStackableEffect, true);
+                            isAdded = true;
+                        }
+
+                        if (existingStackableEffect.Definition.DenyOverflowApplication)
+                        {
+                            Debug.Log("Denied overflow application");
+                            return false;
+                        }
+                    }
+
+                    if (!isAdded)
+                    {
+                        existingStackableEffect.StackCount =
+                            Math.Min(existingStackableEffect.StackCount + stackableEffect.StackCount,
+                                existingStackableEffect.Definition.StackCountLimit);
+
+                        if (existingStackableEffect.Definition.StackingDurationRefresh ==
+                            GameplayEffectStackingDuration.RefreshOnSuccessfulApplication)
+                        {
+                            existingStackableEffect.RemainingDuration = existingStackableEffect.CurrentDuration;
+                        }
+
+                        if (existingStackableEffect.Definition.StackingPeriodReset ==
+                            GameplayEffectStackingPeriod.ResetOnSuccessfulApplication)
+                        {
+                            existingStackableEffect.RemainingPeriod = existingStackableEffect.Definition.Period;
+                        }
+                    }
+                }
+            }
+            
             if (effectToApply is GameplayPersistentEffect persistentEffect)
             {
-                AddActiveGameplayEffect(persistentEffect);
+                if(isAdded)
+                    AddActiveGameplayEffect(persistentEffect);
             }
             else
             {
@@ -86,12 +151,22 @@ namespace AbilitySystem
             {
                 PlaySpecialEffect(effectToApply);
             }
+
+            return true;
         }
 
-        private void AddActiveGameplayEffect(GameplayPersistentEffect persistentEffect)
+        private void AddActiveGameplayEffect(GameplayPersistentEffect effect)
         {
-            ActiveEffects.Add(persistentEffect);
-            AddSecondaryEffects(persistentEffect);
+            ActiveEffects.Add(effect);
+            AddSecondaryEffects(effect);
+
+            if (effect.Definition.IsPeriodic)
+            {
+                if (effect.Definition.IsExecutableEffectOnApply)
+                {
+                    ExecuteGameplayEffect(effect);
+                }
+            }
         }
 
         private void RemoveActiveGameplayEffect(GameplayPersistentEffect persistentEffect, bool prematureRemoval)
@@ -162,12 +237,48 @@ namespace AbilitySystem
             List<GameplayPersistentEffect> effectsToRemove = new List<GameplayPersistentEffect>();
             foreach (var activeEffect in ActiveEffects)
             {
+                if (activeEffect.Definition.IsPeriodic)
+                {
+                    activeEffect.RemainingPeriod = Math.Max(activeEffect.RemainingPeriod - Time.deltaTime, 0f);
+
+                    if (Mathf.Approximately(activeEffect.RemainingPeriod, 0f))
+                    {
+                        ExecuteGameplayEffect(activeEffect);
+                        activeEffect.RemainingPeriod = activeEffect.Definition.Period;
+                    }
+                }
+                
                 if (!activeEffect.Definition.IsInfinite)
                 {
                     activeEffect.RemainingDuration = Mathf.Max(activeEffect.RemainingDuration - Time.deltaTime, 0f);
                     if (Mathf.Approximately(activeEffect.RemainingDuration, 0f))
                     {
-                        effectsToRemove.Add(activeEffect);
+                        if (activeEffect is GameplayStackableEffect stackableEffect)
+                        {
+                            switch (stackableEffect.Definition.StackingExpiration)
+                            {
+                                case GameplayEffectStackingExpiration.NeverRefresh:
+                                    effectsToRemove.Add(stackableEffect);
+                                    break;
+                                case GameplayEffectStackingExpiration.RemoveSingleStackAndRefreshDuration:
+                                    stackableEffect.StackCount--;
+                                    if (stackableEffect.StackCount == 0)
+                                    {
+                                        effectsToRemove.Add(stackableEffect);
+                                    }
+                                    else
+                                    {
+                                        activeEffect.RemainingDuration = activeEffect.CurrentDuration;
+                                    }
+                                    break;
+                                default:
+                                    throw new ArgumentOutOfRangeException();
+                            }
+                        }
+                        else
+                        {
+                            effectsToRemove.Add(activeEffect);
+                        }
                     }
                 }
             }

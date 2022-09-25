@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4042212387136400691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dab45cb8a84b5f8bbf6c0f680f9ae9, type: 3}
+  m_Name: Modifier
+  m_EditorClassIdentifier: 
+  <Formula>k__BackingField: {fileID: 11400000, guid: 8969521dc673a03409c00b069433b03c,
+    type: 2}
+  <StatName>k__BackingField: Health
+  <Type>k__BackingField: 0
+  <CanCauseCriticalHit>k__BackingField: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d857ad9e53c40febcc3995c0f3c4cf6, type: 3}
+  m_Name: Poison
+  m_EditorClassIdentifier: 
+  _modifiers:
+  - {fileID: -4042212387136400691}
+  _specialEffectDefinition: {fileID: 0}
+  _tags:
+  - status
+  _isInfinite: 0
+  _durationFormula: {fileID: 11400000, guid: 3d0a14dea297b7546a9c1df9a4917c92, type: 2}
+  _isPeriodic: 1
+  _period: 1
+  _isExecutableEffectOnApply: 1
+  _grantedTags: []
+  _specialPersistentEffectDefinition: {fileID: 11400000, guid: a755ffc47ec5ee74a8b70b489bca23f0,
+    type: 2}
+  _overflowEffects: []
+  _denyOverflowApplication: 0
+  _clearStackOnOverflow: 0
+  _stackCountLimit: 1
+  _stackingDuration: 1
+  _stackingPeriod: 0
+  _stackingExpiration: 0

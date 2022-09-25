@@ -1,5 +1,7 @@
 ﻿using System.Collections;
+using System.Linq;
 using AbilitySystem.AbilitySystem.Runtime;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Stackable;
 using FluentAssertions;
 using NUnit.Framework;
 using StatSystem;
@@ -101,7 +103,7 @@ namespace AbilitySystem.Tests
                     "Assets/Tests/SO/GrantedTags/GameplayPersistentEffect.asset");
             var persistentEffect = new GameplayPersistentEffect(persistentEffectDefinition, null, _player);
             effectController.ApplyGameplayEffectToSelf(persistentEffect);
-            tagController.tags.Should().Contain("Test");
+            tagController.Tags.Should().Contain("Test");
         }
         
         [UnityTest]
@@ -118,10 +120,145 @@ namespace AbilitySystem.Tests
             
             yield return new WaitForSeconds(2);
 
-            tagController.tags.Should().NotContain("Test");
-            tagController.tags.Count.Should().Be(0);
+            tagController.Tags.Should().NotContain("Test");
+            tagController.Tags.Count.Should().Be(0);
         }
         
+        [UnityTest]
+        public IEnumerator GameplayEffectController_WhenPeriodReached_ExecuteGameplayEffect()
+        {
+            yield return null;
+            var effectContrller = _player.GetComponent<GameplayEffectController>();
+            var statController = _player.GetComponent<StatController>();
+            var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayPersistentEffectDefinition>(
+                "Assets/Tests/SO/PeriodicEffects/Period/GameplayPersistentEffect.asset");
+
+            var health = statController.stats["Health"] as Health;
+            var effect = new GameplayPersistentEffect(effectDefinition, null, _player);
+            effectContrller.ApplyGameplayEffectToSelf(effect);
+            health.currentValue.Should().Be(100);
+            yield return new WaitForSeconds(1);
+            health.currentValue.Should().Be(110);
+        }
         
+        [UnityTest]
+        public IEnumerator GameplayEffectController_WhenApplied_ExecutePeriodicGameplayEffect()
+        {
+            yield return null;
+            var effectContrller = _player.GetComponent<GameplayEffectController>();
+            var statController = _player.GetComponent<StatController>();
+            var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayPersistentEffectDefinition>(
+                "Assets/Tests/SO/PeriodicEffects/Instant/GameplayPersistentEffect.asset");
+
+            var health = statController.stats["Health"] as Health;
+            var effect = new GameplayPersistentEffect(effectDefinition, null, _player);
+            health.currentValue.Should().Be(100);
+            effectContrller.ApplyGameplayEffectToSelf(effect);
+            health.currentValue.Should().Be(110);
+        }
+        
+        [UnityTest]
+        public IEnumerator GameplayEffectController_WhenOverflow_AppliesOverflowEffects()
+        {
+            yield return null;
+            var effectController = _player.GetComponent<GameplayEffectController>();
+            var statController = _player.GetComponent<StatController>();
+            var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayStackableEffectDefinition>(
+                "Assets/Tests/SO/OverflowEffects/GameplayStackableEffect.asset");
+            
+            var health = statController.stats["Health"] as Health;
+            health.currentValue.Should().Be(100);
+            effectController.ApplyGameplayEffectToSelf(new GameplayStackableEffect(effectDefinition, null, _player));
+            effectController.ApplyGameplayEffectToSelf(new GameplayStackableEffect(effectDefinition, null, _player));
+            health.currentValue.Should().Be(95);
+        }
+        
+        [UnityTest]
+        public IEnumerator GameplayEffectController_WhenOverflow_ClearStack()
+        {
+            yield return null;
+            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayStackableEffectDefinition>(
+                "Assets/Tests/SO/ClearStack/GameplayStackableEffect.asset");
+
+            var stackableEffect = new GameplayStackableEffect(effectDefinition, null, _player);
+            effectController.ApplyGameplayEffectToSelf(stackableEffect);
+            effectController.ApplyGameplayEffectToSelf(new GameplayStackableEffect(effectDefinition, null, _player));
+            var secondStackableEffect = effectController.GetActiveEffects
+                .FirstOrDefault(effect => effect.Definition == effectDefinition) as GameplayStackableEffect;
+            stackableEffect.Should().NotBe(secondStackableEffect);
+        }
+
+        [UnityTest]
+        public IEnumerator GameplayEffectController_WhenOverflow_DoNotApplyEffect()
+        {
+            yield return null;
+            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayStackableEffectDefinition>(
+                "Assets/Tests/SO/DoNotApply/GameplayStackableEffect.asset");
+            effectController.ApplyGameplayEffectToSelf(new GameplayStackableEffect(effectDefinition, null, _player));
+            effectController.ApplyGameplayEffectToSelf(new GameplayStackableEffect(effectDefinition, null, _player)).Should().BeFalse();
+        }
+        
+        [UnityTest]
+        public IEnumerator GameplayEffectController_WhenApplyStack_ResetDuration()
+        {
+            yield return null;
+            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayStackableEffectDefinition>(
+                "Assets/Tests/SO/ResetStack/GameplayStackableEffect.asset");
+            var stackableEffect = new GameplayStackableEffect(effectDefinition, null, _player);
+            effectController.ApplyGameplayEffectToSelf(stackableEffect);
+            yield return new WaitForSeconds(1);
+            UnityEngine.Assertions.Assert.AreApproximatelyEqual(stackableEffect.RemainingDuration, 9f, .1f);
+            yield return new WaitForSeconds(1);
+            effectController.ApplyGameplayEffectToSelf(new GameplayStackableEffect(effectDefinition, null, _player));
+            UnityEngine.Assertions.Assert.AreApproximatelyEqual(stackableEffect.RemainingDuration, 10f, .1f);
+        }
+
+        [UnityTest]
+        public IEnumerator GameplayEffectController_WhenApplyStack_ResetPeriod()
+        {
+            yield return null;
+            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayStackableEffectDefinition>(
+                "Assets/Tests/SO/ResetPeriod/GameplayStackableEffect.asset");
+            var stackableEffect = new GameplayStackableEffect(effectDefinition, null, _player);
+            effectController.ApplyGameplayEffectToSelf(stackableEffect);
+            yield return new WaitForSeconds(2);
+            UnityEngine.Assertions.Assert.AreApproximatelyEqual(stackableEffect.RemainingPeriod, 1f, .1f);
+            effectController.ApplyGameplayEffectToSelf(new GameplayStackableEffect(effectDefinition, null, _player));
+            UnityEngine.Assertions.Assert.AreApproximatelyEqual(stackableEffect.RemainingPeriod, 3f, .1f);
+        }
+        
+        [UnityTest]
+        public IEnumerator GameplayEffectController_WhenApplyStack_IncreaseStackCount()
+        {
+            yield return null;
+            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayStackableEffectDefinition>(
+                "Assets/Tests/SO/ResetPeriod/GameplayStackableEffect.asset");
+            var stackableEffect = new GameplayStackableEffect(effectDefinition, null, _player);
+            effectController.ApplyGameplayEffectToSelf(stackableEffect);
+            effectController.ApplyGameplayEffectToSelf(new GameplayStackableEffect(effectDefinition, null, _player));
+            stackableEffect.StackCount.Should().Be(2);
+        }
+        
+        [UnityTest]
+        public IEnumerator GameplayEffectController_WhenDurationReached_RemoveStackAndRefresh()
+        {
+            yield return null;
+            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayStackableEffectDefinition>(
+                "Assets/Tests/SO/RemoveAndRefresh/GameplayStackableEffect.asset");
+            var stackableEffect = new GameplayStackableEffect(effectDefinition, null, _player);
+            effectController.ApplyGameplayEffectToSelf(stackableEffect);
+            effectController.ApplyGameplayEffectToSelf(new GameplayStackableEffect(effectDefinition, null, _player));
+            UnityEngine.Assertions.Assert.AreApproximatelyEqual(stackableEffect.RemainingDuration, 3f, .1f);
+            stackableEffect.StackCount.Should().Be(2);
+            yield return new WaitForSeconds(3);
+            UnityEngine.Assertions.Assert.AreApproximatelyEqual(stackableEffect.RemainingDuration, 3f, .1f);
+            stackableEffect.StackCount.Should().Be(1);
+        }
     }
 }

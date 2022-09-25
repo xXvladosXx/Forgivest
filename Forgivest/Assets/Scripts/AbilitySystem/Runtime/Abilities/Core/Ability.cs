@@ -9,6 +9,31 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
     {
         public AbilityDefinition AbilityDefinition { get; protected set; }
         protected AbilityController AbilityController;
+
+        private int _level;
+        public event Action OnLevelChanged;
+        
+        public int Level
+        {
+            get
+            {
+                if (_level == 0)
+                {
+                    _level = AbilityDefinition.Level;
+                }
+                
+                return _level;
+            } 
+            set
+            {
+                int newLevel = Mathf.Min(value, AbilityDefinition.MaxLevel);
+                if (newLevel != AbilityDefinition.Level && AbilityDefinition.Level > 0)
+                {
+                    _level = newLevel;
+                    OnLevelChanged?.Invoke();
+                }
+            }
+        }
         
         public Ability(AbilityDefinition definition, AbilityController abilityController)
         {
