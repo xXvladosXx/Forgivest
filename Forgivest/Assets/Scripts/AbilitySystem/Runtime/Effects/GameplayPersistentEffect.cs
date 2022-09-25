@@ -7,11 +7,14 @@ namespace AbilitySystem.AbilitySystem.Runtime
         public new GameplayPersistentEffectDefinition Definition => (GameplayPersistentEffectDefinition) base.Definition;
 
         public float RemainingDuration;
+        public float RemainingPeriod;
         public float CurrentDuration { get; private set; }
         
         public GameplayPersistentEffect(GameplayPersistentEffectDefinition definition, object source, GameObject instigator)
             : base(definition, source, instigator)
         {
+            RemainingPeriod = definition.Period;
+            
             if (!definition.IsInfinite)
             {
                 RemainingDuration = CurrentDuration = definition.DurationFormula.CalculateValue(instigator);

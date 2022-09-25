@@ -87,12 +87,14 @@ namespace AbilitySystem.Tests
             var tagController = _player.GetComponent<TagController>();
             var abilityController = _player.GetComponent<AbilityController>();
             abilityController.TryActiveAbility("CooldownAbility", _enemy);
-            tagController.tags.Should().Contain("test_cooldown");
+            tagController.Tags.Should().Contain("test_cooldown");
             bool canBeActivated = abilityController.TryActiveAbility("CooldownAbility", _player);
             canBeActivated.Should().BeFalse();
             yield return new WaitForSeconds(2f);
             canBeActivated = abilityController.TryActiveAbility("CooldownAbility", _player);
             canBeActivated.Should().BeTrue();
         }
+        
+        
     }
 }

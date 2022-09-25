@@ -9,6 +9,6 @@ namespace CombatSystem.Scripts.Runtime
     {
         [SerializeField] private List<string> m_Tags = new List<string>() { "physical" };
 
-        public ReadOnlyCollection<string> tags => m_Tags.AsReadOnly();
+        public ReadOnlyCollection<string> Tags => m_Tags.AsReadOnly();
     }
 }

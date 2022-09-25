@@ -15,5 +15,8 @@ namespace AbilitySystem.AbilitySystem.Runtime
         [SerializeField] private SpecialEffectDefinition _specialEffectDefinition;
 
         public SpecialEffectDefinition SpecialEffectDefinition => _specialEffectDefinition;
+        
+        [SerializeField] private List<string> _tags;
+        public ReadOnlyCollection<string> Tags => _tags.AsReadOnly();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Core;
 using StatSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,7 +9,7 @@ using Random = UnityEngine.Random;
 namespace AbilitySystem.AbilitySystem.Runtime
 {
     [Serializable]
-    public class GameplayEffect
+    public class GameplayEffect : ITaggable
     {
         [field: SerializeField] public GameplayEffectDefinition Definition { get; protected set; }
         public object Source { get; private set; }
@@ -16,6 +17,8 @@ namespace AbilitySystem.AbilitySystem.Runtime
 
         private List<StatModifier> _modifiers = new List<StatModifier>();
         public ReadOnlyCollection<StatModifier> Modifiers => _modifiers.AsReadOnly();
+
+        public ReadOnlyCollection<string> Tags => Definition.Tags;
         
         public GameplayEffect(
             GameplayEffectDefinition definition,
@@ -31,7 +34,7 @@ namespace AbilitySystem.AbilitySystem.Runtime
             {
                 StatModifier statModifier;
                 
-                if (modifier is GameplayEffectStatModifyDamage effectDamage)
+                if (modifier is GameplayEffectDamage effectDamage)
                 {
                     HealthModifier healthModifier = new HealthModifier
                     {
@@ -64,5 +67,6 @@ namespace AbilitySystem.AbilitySystem.Runtime
                 _modifiers.Add(statModifier);
             }
         }
+
     }
 }

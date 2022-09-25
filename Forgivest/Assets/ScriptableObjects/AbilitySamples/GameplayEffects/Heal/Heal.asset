@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _modifiers:
   - {fileID: 5328612638485777080}
-  _specialEffectDefinition: {fileID: 0}
+  _specialEffectDefinition: {fileID: 11400000, guid: 97192f7792bbc584da3a905ddc2e9f7a,
+    type: 2}
+  _tags:
+  - healing
 --- !u!114 &5328612638485777080
 MonoBehaviour:
   m_ObjectHideFlags: 0

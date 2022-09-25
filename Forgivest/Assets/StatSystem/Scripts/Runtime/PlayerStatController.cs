@@ -89,11 +89,11 @@ namespace StatSystem
 
         #region Stat System
 
-        public override object data
+        public override object Data
         {
             get
             {
-                return new PlayerStatControllerData(base.data as StatControllerData)
+                return new PlayerStatControllerData(base.Data as StatControllerData)
                 {
                     statPoints = m_StatPoints
                 };

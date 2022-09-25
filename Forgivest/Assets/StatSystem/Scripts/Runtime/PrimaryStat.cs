@@ -34,7 +34,7 @@ namespace StatSystem
 
         #region Stat System
 
-        public object data => new PrimaryStatData
+        public object Data => new PrimaryStatData
         {
             baseValue = baseValue
         };

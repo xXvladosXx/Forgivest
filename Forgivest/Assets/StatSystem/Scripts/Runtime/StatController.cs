@@ -1,23 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using AbilitySystem.AbilitySystem.Runtime;
 using SaveSystem.Scripts.Runtime;
 using StatSystem.Nodes;
 using UnityEngine;
 
 namespace StatSystem
 {
+    [RequireComponent(typeof(TagController))]
     public class StatController : MonoBehaviour, ISavable
     {
         [SerializeField] private StatDatabase m_StatDatabase;
         protected Dictionary<string, Stat> m_Stats = new Dictionary<string, Stat>(StringComparer.OrdinalIgnoreCase);
         public Dictionary<string, Stat> stats => m_Stats;
-
+        private TagController _tagController;
         public bool IsInitialized { get; private set; }
         public event Action OnInitialized;
         public event Action willUninitialize;
 
         protected virtual void Awake()
         {
+            _tagController = GetComponent<TagController>();
+            
             if (!IsInitialized)
             {
                 Initialize();
@@ -40,7 +44,7 @@ namespace StatSystem
             {
                 if (definition.name.Equals("Health", StringComparison.OrdinalIgnoreCase))
                 {
-                    m_Stats.Add(definition.name, new Health(definition, this));
+                    m_Stats.Add(definition.name, new Health(definition, this, _tagController));
                 }
                 else
                 {
@@ -90,7 +94,7 @@ namespace StatSystem
 
         #region Stat System
 
-        public virtual object data
+        public virtual object Data
         {
             get
             {
@@ -99,7 +103,7 @@ namespace StatSystem
                 {
                     if (stat is ISavable savable)
                     {
-                        stats.Add(stat.definition.name, savable.data);
+                        stats.Add(stat.definition.name, savable.Data);
                     }
                 }
 

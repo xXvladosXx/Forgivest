@@ -45,4 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: -368, y: 0}
   guid: e7670342dd7ebb844bb266452753a403
-  m_Value: 10
+  m_Value: 5

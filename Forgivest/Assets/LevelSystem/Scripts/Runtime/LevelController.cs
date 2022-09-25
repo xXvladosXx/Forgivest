@@ -71,7 +71,7 @@ namespace LevelSystem
 
         #region Save System
 
-        public object data => new LevelControllerData
+        public object Data => new LevelControllerData
         {
             level = m_Level,
             currentExperience = m_CurrentExperience

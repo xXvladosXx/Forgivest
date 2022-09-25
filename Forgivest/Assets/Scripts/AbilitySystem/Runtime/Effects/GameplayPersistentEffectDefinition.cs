@@ -11,7 +11,6 @@ namespace AbilitySystem.AbilitySystem.Runtime
     public class GameplayPersistentEffectDefinition : GameplayEffectDefinition
     {
         [SerializeField] private bool _isInfinite;
-
         public bool IsInfinite
         {
             get => _isInfinite;
@@ -19,11 +18,31 @@ namespace AbilitySystem.AbilitySystem.Runtime
         }
 
         [SerializeField] private NodeGraph _durationFormula;
-        
         public NodeGraph DurationFormula
         {
             get => _durationFormula;
             protected set => _durationFormula = value;
+        }
+
+        [SerializeField] private bool _isPeriodic;
+        public bool IsPeriodic
+        {
+            get => _isPeriodic;
+            protected set => _isPeriodic = value;
+        }
+        
+        [SerializeField] private float _period;
+        public float Period
+        {
+            get => _period;
+            protected set => _period = value;
+        }
+        
+        [SerializeField] private bool _isExecutableEffectOnApply;
+        public bool IsExecutableEffectOnApply
+        {
+            get => _isExecutableEffectOnApply;
+            protected set => _isExecutableEffectOnApply = value;
         }
 
         [SerializeField] private List<string> _grantedTags;
@@ -32,5 +51,6 @@ namespace AbilitySystem.AbilitySystem.Runtime
         [SerializeField] private SpecialEffectDefinition _specialPersistentEffectDefinition;
 
         public SpecialEffectDefinition SpecialPersistentEffectDefinition => _specialPersistentEffectDefinition;
+        
     }
 }
