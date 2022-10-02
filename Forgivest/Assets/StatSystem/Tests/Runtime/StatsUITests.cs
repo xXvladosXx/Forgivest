@@ -80,8 +80,8 @@ namespace StatSystem.Tests
             Assert.AreEqual("3", physicalAttackValue.text);
             playerStatController.stats["PhysicalAttack"].AddModifier(new StatModifier
             {
-                magnitude = 5,
-                type = ModifierOperationType.Additive
+                Magnitude = 5,
+                Type = ModifierOperationType.Additive
             });
             Assert.AreEqual("8", physicalAttackValue.text);
         }

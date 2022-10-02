@@ -5,7 +5,7 @@ namespace StatSystem
 {
     public class HealthModifier : StatModifier, IDamage
     {
-        public bool isCriticalHit { get; set; }
-        public GameObject instigator { get; set; }
+        public bool IsCriticalHit { get; set; }
+        public GameObject Instigator { get; set; }
     }
 }

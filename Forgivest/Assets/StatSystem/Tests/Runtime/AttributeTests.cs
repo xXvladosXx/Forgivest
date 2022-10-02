@@ -30,8 +30,8 @@ namespace StatSystem.Tests
             Assert.AreEqual(100, health.value);
             health.ApplyModifier(new StatModifier
             {
-                magnitude = 20,
-                type = ModifierOperationType.Additive
+                Magnitude = 20,
+                Type = ModifierOperationType.Additive
             });
             Assert.AreEqual(100, health.currentValue);
         }
@@ -45,8 +45,8 @@ namespace StatSystem.Tests
             Assert.AreEqual(100, health.currentValue);
             health.ApplyModifier(new StatModifier
             {
-                magnitude = -150,
-                type = ModifierOperationType.Additive
+                Magnitude = -150,
+                Type = ModifierOperationType.Additive
             });
             Assert.AreEqual(0, health.currentValue);
         }
@@ -60,10 +60,10 @@ namespace StatSystem.Tests
             Assert.AreEqual(100, health.currentValue);
             health.ApplyModifier(new HealthModifier
             {
-                magnitude = -10,
-                type = ModifierOperationType.Additive,
-                isCriticalHit = false,
-                source = ScriptableObject.CreateInstance<Ability>()
+                Magnitude = -10,
+                Type = ModifierOperationType.Additive,
+                IsCriticalHit = false,
+                Source = ScriptableObject.CreateInstance<Ability>()
             });
             Assert.AreEqual(95, health.currentValue);
         }

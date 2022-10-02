@@ -66,6 +66,14 @@ namespace MyGame
             }
         }
 
+        public void Shoot()
+        {
+            if (_abilityController.CurrentAbility is ProjectileAbility projectileAbility)
+            {
+                projectileAbility.Shoot(_abilityController.Target);
+            }
+        }
+
         private void ActivateAbility(ActiveAbility activeAbility)
         {
             m_Animator.SetTrigger(activeAbility.ActiveAbilityDefinition.AnimationName);

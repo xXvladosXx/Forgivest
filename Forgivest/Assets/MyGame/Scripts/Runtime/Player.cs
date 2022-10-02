@@ -29,13 +29,13 @@ namespace MyGame.Scripts
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                var actived = _abilityController.TryActiveAbility("Shock", m_Target.gameObject);
+                var actived = _abilityController.TryActiveAbility("Projectile", m_Target.gameObject);
                 print(actived);
             }
             
             if (Input.GetKeyDown(KeyCode.E))
             {
-                var actived = _abilityController.TryActiveAbility("Heal", m_Target.gameObject);
+                var actived = _abilityController.TryActiveAbility("Combustion", m_Target.gameObject);
                 print(actived);
             }
 
@@ -51,6 +51,21 @@ namespace MyGame.Scripts
             if (Input.GetKeyDown(KeyCode.S))
             {
                 var actived = _abilityController.TryActiveAbility("Malediction", m_Target.gameObject);
+            }
+            
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                var actived = _abilityController.TryActiveAbility("FrostAura", m_Target.gameObject);
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                var actived = _abilityController.TryActiveAbility("ShieldAura", m_Target.gameObject);
+            }
+            
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                var actived = _abilityController.TryActiveAbility("Shock", m_Target.gameObject);
             }
         }
     }

@@ -36,7 +36,7 @@ namespace StatSystem
 
         public void RemoveModifierFromSource(object source)
         {
-            int num = m_Modifiers.RemoveAll(modifier => modifier.source == source);
+            int num = m_Modifiers.RemoveAll(modifier => modifier.Source == source);
             if (num > 0)
             {
                 CalculateValue();
@@ -52,18 +52,18 @@ namespace StatSystem
                 newValue += Mathf.RoundToInt(m_Definition.formula.rootNode.Value);
             }
             
-            m_Modifiers.Sort((x, y) => x.type.CompareTo(y.type));
+            m_Modifiers.Sort((x, y) => x.Type.CompareTo(y.Type));
 
             for (int i = 0; i < m_Modifiers.Count; i++)
             {
                 StatModifier modifier = m_Modifiers[i];
-                if (modifier.type == ModifierOperationType.Additive)
+                if (modifier.Type == ModifierOperationType.Additive)
                 {
-                    newValue += modifier.magnitude;
+                    newValue += modifier.Magnitude;
                 }
-                else if (modifier.type == ModifierOperationType.Multiplicative)
+                else if (modifier.Type == ModifierOperationType.Multiplicative)
                 {
-                    newValue *= modifier.magnitude;
+                    newValue *= modifier.Magnitude;
                 }
             }
             

@@ -37,6 +37,9 @@ namespace AbilitySystem
         {
             var root = base.CreateTagFieldsGUI();
             root.Add(new PropertyField(serializedObject.FindProperty("_grantedTags")));
+            root.Add(new PropertyField(serializedObject.FindProperty("_grantedImmunityTags")));
+            root.Add(new PropertyField(serializedObject.FindProperty("_persistMustBePresentTags")));
+            root.Add(new PropertyField(serializedObject.FindProperty("_persistMustBeAbsentTags")));
 
             return root;
         }

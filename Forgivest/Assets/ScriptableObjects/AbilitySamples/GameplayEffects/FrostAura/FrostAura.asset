@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d857ad9e53c40febcc3995c0f3c4cf6, type: 3}
+  m_Name: FrostAura
+  m_EditorClassIdentifier: 
+  _modifiers:
+  - {fileID: 4804938752728115524}
+  _specialEffectDefinition: {fileID: 0}
+  _tags: []
+  _removeEffectsWithTags: []
+  _applicationMustBePresentTags: []
+  _applicationMustBeAbsentTags: []
+  _isInfinite: 0
+  _durationFormula: {fileID: 11400000, guid: 8327087a677eebd45bc7ed891a76191f, type: 2}
+  _isPeriodic: 0
+  _period: 0
+  _isExecutableEffectOnApply: 0
+  _grantedTags: []
+  _grantedImmunityTags:
+  - poison
+  _specialPersistentEffectDefinition: {fileID: 11400000, guid: 9a93f3ecc39a239419c5015bf7d599e3,
+    type: 2}
+  _persistMustBePresentTags: []
+  _persistMustBeAbsentTags:
+  - burning
+  _overflowEffects: []
+  _denyOverflowApplication: 0
+  _clearStackOnOverflow: 0
+  _stackCountLimit: 1
+  _stackingDuration: 1
+  _stackingPeriod: 0
+  _stackingExpiration: 0
+--- !u!114 &4804938752728115524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0c60a0303442cda89d6ea5ef02c25e, type: 3}
+  m_Name: Modifier
+  m_EditorClassIdentifier: 
+  <Formula>k__BackingField: {fileID: 11400000, guid: 93e12987d1babc444917294a5fa604e7,
+    type: 2}
+  <StatName>k__BackingField: MagicalDefense
+  <Type>k__BackingField: 0

@@ -17,6 +17,7 @@ namespace AbilitySystem
             
             root.Add(CreateApplicationFieldsGUI());
             root.Add(CreateSpecialEffectFieldsGUI());
+            root.Add(CreateGameplayEffectFieldsGUI());
             root.Add(CreateTagFieldsGUI());
 
             return root;
@@ -35,7 +36,29 @@ namespace AbilitySystem
         {
             var root = new VisualElement();
             root.Add(new PropertyField(serializedObject.FindProperty("_tags")));
+            root.Add(new PropertyField(serializedObject.FindProperty("_removeEffectsWithTags")));
+            root.Add(new PropertyField(serializedObject.FindProperty("_applicationMustBePresentTags")));
+            root.Add(new PropertyField(serializedObject.FindProperty("_applicationMustBeAbsentTags")));
 
+            return root;
+        }
+        
+        protected virtual VisualElement CreateGameplayEffectFieldsGUI()
+        {
+            var root = new VisualElement();
+            ListView listView = new ListView
+            {
+                 bindingPath = "_conditionalEffects",
+                 virtualizationMethod = CollectionVirtualizationMethod.DynamicHeight,
+                 reorderable = true,
+                 showFoldoutHeader = true,
+                 showAddRemoveFooter = true,
+                 headerTitle = "Conditional Effects"
+            };
+            
+            listView.Bind(serializedObject);
+            root.Add(listView);
+            
             return root;
         }
         

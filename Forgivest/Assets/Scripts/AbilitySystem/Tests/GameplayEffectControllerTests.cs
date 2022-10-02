@@ -37,7 +37,7 @@ namespace AbilitySystem.Tests
         public IEnumerator GameplayEffectController_WhenEffectApplied_ModifyAttribute()
         {
             yield return null;
-            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectController = _player.GetComponent<GameplayEffectHandler>();
             var statController = _player.GetComponent<StatController>();
             var damageEffectDefinition = AssetDatabase.LoadAssetAtPath<GameplayEffectDefinition>("Assets/Tests/SO/Test_GameplayEffect.asset");
             var damageEffect = new GameplayEffect(damageEffectDefinition, null, _enemy);
@@ -51,7 +51,7 @@ namespace AbilitySystem.Tests
         public IEnumerator GameplayEffectController_WhenPersistentEffectApplied_AddStatModifier()
         {
             yield return null;
-            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectController = _player.GetComponent<GameplayEffectHandler>();
             var statController = _player.GetComponent<StatController>();
             var testEffectDefinition =
                 AssetDatabase.LoadAssetAtPath<GameplayPersistentEffectDefinition>(
@@ -68,7 +68,7 @@ namespace AbilitySystem.Tests
         public IEnumerator GameplayEffectController_WhenPersistentEffectExpires_RemoveStatModifier()
         {
             yield return null;
-            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectController = _player.GetComponent<GameplayEffectHandler>();
             var statController = _player.GetComponent<StatController>();
             var testEffectDefinition =
                 AssetDatabase.LoadAssetAtPath<GameplayPersistentEffectDefinition>(
@@ -97,7 +97,7 @@ namespace AbilitySystem.Tests
         {
             yield return null;
             var tagController = _player.GetComponent<TagController>();
-            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectController = _player.GetComponent<GameplayEffectHandler>();
             var persistentEffectDefinition = AssetDatabase
                 .LoadAssetAtPath<GameplayPersistentEffectDefinition>(
                     "Assets/Tests/SO/GrantedTags/GameplayPersistentEffect.asset");
@@ -111,7 +111,7 @@ namespace AbilitySystem.Tests
         {
             yield return null;
             var tagController = _player.GetComponent<TagController>();
-            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectController = _player.GetComponent<GameplayEffectHandler>();
             var persistentEffectDefinition = AssetDatabase
                 .LoadAssetAtPath<GameplayPersistentEffectDefinition>(
                     "Assets/Tests/SO/GrantedTags/GameplayPersistentEffect.asset");
@@ -128,7 +128,7 @@ namespace AbilitySystem.Tests
         public IEnumerator GameplayEffectController_WhenPeriodReached_ExecuteGameplayEffect()
         {
             yield return null;
-            var effectContrller = _player.GetComponent<GameplayEffectController>();
+            var effectContrller = _player.GetComponent<GameplayEffectHandler>();
             var statController = _player.GetComponent<StatController>();
             var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayPersistentEffectDefinition>(
                 "Assets/Tests/SO/PeriodicEffects/Period/GameplayPersistentEffect.asset");
@@ -145,7 +145,7 @@ namespace AbilitySystem.Tests
         public IEnumerator GameplayEffectController_WhenApplied_ExecutePeriodicGameplayEffect()
         {
             yield return null;
-            var effectContrller = _player.GetComponent<GameplayEffectController>();
+            var effectContrller = _player.GetComponent<GameplayEffectHandler>();
             var statController = _player.GetComponent<StatController>();
             var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayPersistentEffectDefinition>(
                 "Assets/Tests/SO/PeriodicEffects/Instant/GameplayPersistentEffect.asset");
@@ -161,7 +161,7 @@ namespace AbilitySystem.Tests
         public IEnumerator GameplayEffectController_WhenOverflow_AppliesOverflowEffects()
         {
             yield return null;
-            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectController = _player.GetComponent<GameplayEffectHandler>();
             var statController = _player.GetComponent<StatController>();
             var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayStackableEffectDefinition>(
                 "Assets/Tests/SO/OverflowEffects/GameplayStackableEffect.asset");
@@ -177,7 +177,7 @@ namespace AbilitySystem.Tests
         public IEnumerator GameplayEffectController_WhenOverflow_ClearStack()
         {
             yield return null;
-            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectController = _player.GetComponent<GameplayEffectHandler>();
             var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayStackableEffectDefinition>(
                 "Assets/Tests/SO/ClearStack/GameplayStackableEffect.asset");
 
@@ -193,7 +193,7 @@ namespace AbilitySystem.Tests
         public IEnumerator GameplayEffectController_WhenOverflow_DoNotApplyEffect()
         {
             yield return null;
-            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectController = _player.GetComponent<GameplayEffectHandler>();
             var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayStackableEffectDefinition>(
                 "Assets/Tests/SO/DoNotApply/GameplayStackableEffect.asset");
             effectController.ApplyGameplayEffectToSelf(new GameplayStackableEffect(effectDefinition, null, _player));
@@ -204,7 +204,7 @@ namespace AbilitySystem.Tests
         public IEnumerator GameplayEffectController_WhenApplyStack_ResetDuration()
         {
             yield return null;
-            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectController = _player.GetComponent<GameplayEffectHandler>();
             var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayStackableEffectDefinition>(
                 "Assets/Tests/SO/ResetStack/GameplayStackableEffect.asset");
             var stackableEffect = new GameplayStackableEffect(effectDefinition, null, _player);
@@ -220,7 +220,7 @@ namespace AbilitySystem.Tests
         public IEnumerator GameplayEffectController_WhenApplyStack_ResetPeriod()
         {
             yield return null;
-            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectController = _player.GetComponent<GameplayEffectHandler>();
             var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayStackableEffectDefinition>(
                 "Assets/Tests/SO/ResetPeriod/GameplayStackableEffect.asset");
             var stackableEffect = new GameplayStackableEffect(effectDefinition, null, _player);
@@ -235,7 +235,7 @@ namespace AbilitySystem.Tests
         public IEnumerator GameplayEffectController_WhenApplyStack_IncreaseStackCount()
         {
             yield return null;
-            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectController = _player.GetComponent<GameplayEffectHandler>();
             var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayStackableEffectDefinition>(
                 "Assets/Tests/SO/ResetPeriod/GameplayStackableEffect.asset");
             var stackableEffect = new GameplayStackableEffect(effectDefinition, null, _player);
@@ -248,7 +248,7 @@ namespace AbilitySystem.Tests
         public IEnumerator GameplayEffectController_WhenDurationReached_RemoveStackAndRefresh()
         {
             yield return null;
-            var effectController = _player.GetComponent<GameplayEffectController>();
+            var effectController = _player.GetComponent<GameplayEffectHandler>();
             var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayStackableEffectDefinition>(
                 "Assets/Tests/SO/RemoveAndRefresh/GameplayStackableEffect.asset");
             var stackableEffect = new GameplayStackableEffect(effectDefinition, null, _player);

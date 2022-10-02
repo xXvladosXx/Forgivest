@@ -34,12 +34,15 @@ MonoBehaviour:
   _specialEffectDefinition: {fileID: 0}
   _tags:
   - status
+  - poison
+  _removeEffectsWithTags: []
   _isInfinite: 0
   _durationFormula: {fileID: 11400000, guid: 3d0a14dea297b7546a9c1df9a4917c92, type: 2}
   _isPeriodic: 1
   _period: 1
   _isExecutableEffectOnApply: 1
   _grantedTags: []
+  _grantedImmunityTags: []
   _specialPersistentEffectDefinition: {fileID: 11400000, guid: a755ffc47ec5ee74a8b70b489bca23f0,
     type: 2}
   _overflowEffects: []
