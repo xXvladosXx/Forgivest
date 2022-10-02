@@ -58,8 +58,8 @@ namespace StatSystem.Tests
             Attribute mana = playerStatController.stats["Mana"] as Attribute;
             mana.ApplyModifier(new StatModifier
             {
-                magnitude = -10,
-                type = ModifierOperationType.Additive
+                Magnitude = -10,
+                Type = ModifierOperationType.Additive
             });
             UnityEngine.Assertions.Assert.AreEqual(90, manaBar.value);
         }
@@ -76,8 +76,8 @@ namespace StatSystem.Tests
             Attribute health = playerStatController.stats["Health"] as Attribute;
             health.ApplyModifier(new StatModifier
             {
-                magnitude = -10,
-                type = ModifierOperationType.Additive
+                Magnitude = -10,
+                Type = ModifierOperationType.Additive
             });
             UnityEngine.Assertions.Assert.AreEqual(90, healthBar.value);
         }

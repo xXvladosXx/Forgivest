@@ -24,16 +24,16 @@ namespace StatSystem
         public virtual void ApplyModifier(StatModifier modifier)
         {
             int newValue = m_CurrentValue;
-            switch (modifier.type)
+            switch (modifier.Type)
             {
                 case ModifierOperationType.Override:
-                    newValue = modifier.magnitude;
+                    newValue = modifier.Magnitude;
                     break;
                 case ModifierOperationType.Additive:
-                    newValue += modifier.magnitude;
+                    newValue += modifier.Magnitude;
                     break;
                 case ModifierOperationType.Multiplicative:
-                    newValue *= modifier.magnitude;
+                    newValue *= modifier.Magnitude;
                     break;
             }
 

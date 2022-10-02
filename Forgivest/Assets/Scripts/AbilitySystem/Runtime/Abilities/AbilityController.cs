@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace AbilitySystem.AbilitySystem.Runtime.Abilities
 {
-    [RequireComponent(typeof(GameplayEffectController),
+    [RequireComponent(typeof(GameplayEffectHandler),
         typeof(TagController))]
     public class AbilityController : MonoBehaviour
     {
@@ -18,32 +18,32 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
         public GameObject Target { get; set; }
         public ActiveAbility CurrentAbility { get; private set; }
 
-        private GameplayEffectController _gameplayEffectController;
+        private GameplayEffectHandler _gameplayEffectHandler;
         private TagController _tagController;
         
         public event Action<ActiveAbility> OnAbilityActivated; 
 
         protected virtual void Awake()
         {
-            _gameplayEffectController = GetComponent<GameplayEffectController>();
+            _gameplayEffectHandler = GetComponent<GameplayEffectHandler>();
             _tagController = GetComponent<TagController>();
         }
 
         private void OnEnable()
         {
-            _gameplayEffectController.OnInitialized += OnEffectControllerInit;
-            if (_gameplayEffectController.IsInitialized)
+            _gameplayEffectHandler.OnInitialized += OnEffectHandlerInit;
+            if (_gameplayEffectHandler.IsInitialized)
             {
-                OnEffectControllerInit();
+                OnEffectHandlerInit();
             }
         }
 
         private void OnDisable()
         {
-            _gameplayEffectController.OnInitialized -= OnEffectControllerInit;
+            _gameplayEffectHandler.OnInitialized -= OnEffectHandlerInit;
         }
 
-        private void OnEffectControllerInit()
+        private void OnEffectHandlerInit()
         {
             Initialize();
         }
@@ -106,7 +106,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
             
             if (ability.ActiveAbilityDefinition.Cost != null)
             {
-                return _gameplayEffectController.CanApplyAttributeModifiers(ability.ActiveAbilityDefinition.Cost);
+                return _gameplayEffectHandler.CanApplyAttributeModifiers(ability.ActiveAbilityDefinition.Cost);
             }
 
             return true;
@@ -114,9 +114,9 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
         
         private void CommitAbility(ActiveAbility ability)
         {
-            _gameplayEffectController.ApplyGameplayEffectToSelf(
+            _gameplayEffectHandler.ApplyGameplayEffectToSelf(
                 new GameplayEffect(ability.ActiveAbilityDefinition.Cost, ability, gameObject));
-            _gameplayEffectController.ApplyGameplayEffectToSelf(
+            _gameplayEffectHandler.ApplyGameplayEffectToSelf(
                 new GameplayPersistentEffect(ability.ActiveAbilityDefinition.Cooldown, ability, gameObject));
         }
     }

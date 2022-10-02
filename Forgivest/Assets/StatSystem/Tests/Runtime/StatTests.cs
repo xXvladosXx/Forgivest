@@ -24,8 +24,8 @@ namespace StatSystem.Tests
             Assert.AreEqual(0, physicalAttack.value);
             physicalAttack.AddModifier(new StatModifier
             {
-                magnitude = 5,
-                type = ModifierOperationType.Additive
+                Magnitude = 5,
+                Type = ModifierOperationType.Additive
             });
             Assert.AreEqual(5, physicalAttack.value);
         }
@@ -39,8 +39,8 @@ namespace StatSystem.Tests
             Assert.AreEqual(1, attackSpeed.value);
             attackSpeed.AddModifier(new StatModifier
             {
-                magnitude = 5,
-                type = ModifierOperationType.Additive
+                Magnitude = 5,
+                Type = ModifierOperationType.Additive
             });
             Assert.AreEqual(3, attackSpeed.value);
         }

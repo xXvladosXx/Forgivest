@@ -4,9 +4,9 @@ namespace Core
 {
     public interface IDamage
     {
-        bool isCriticalHit { get; }
-        int magnitude { get; }
-        GameObject instigator { get; }
-        object source { get; }
+        bool IsCriticalHit { get; }
+        int Magnitude { get; }
+        GameObject Instigator { get; }
+        object Source { get; }
     }
 }

@@ -14,13 +14,13 @@ namespace StatSystem
 
         public override void ApplyModifier(StatModifier modifier)
         {
-            ITaggable source = modifier.source as ITaggable;
+            ITaggable source = modifier.Source as ITaggable;
 
             if (_tagController.Contains("zombify"))
             {
                 if (source.Tags.Contains("healing"))
                 {
-                    modifier.magnitude *= -1;
+                    modifier.Magnitude *= -1;
                 }
             }
             
@@ -28,11 +28,11 @@ namespace StatSystem
             {
                 if (source.Tags.Contains("physical"))
                 {
-                    modifier.magnitude += m_Controller.stats["PhysicalDefense"].value;
+                    modifier.Magnitude += m_Controller.stats["PhysicalDefense"].value;
                 }
                 else if (source.Tags.Contains("magical"))
                 {
-                    modifier.magnitude += m_Controller.stats["MagicalDefense"].value;
+                    modifier.Magnitude += m_Controller.stats["MagicalDefense"].value;
                 }
                 else if (source.Tags.Contains("pure"))
                 {

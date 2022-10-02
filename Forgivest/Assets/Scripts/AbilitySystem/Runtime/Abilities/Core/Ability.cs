@@ -48,7 +48,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
 
         private void ApplyEffectsInternal(ReadOnlyCollection<GameplayEffectDefinition> effectDefinitions, GameObject other)
         {
-            if (other.TryGetComponent(out GameplayEffectController gameplayEffectController))
+            if (other.TryGetComponent(out GameplayEffectHandler gameplayEffectController))
             {
                 foreach (var effectDefinition in effectDefinitions)
                 {

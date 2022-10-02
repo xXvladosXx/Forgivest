@@ -66,19 +66,19 @@ namespace MyGame
 
         private void OnAppliedModifier(StatModifier modifier)
         {
-            if (modifier.magnitude > 0)
+            if (modifier.Magnitude > 0)
             {
-                healed?.Invoke(modifier.magnitude);
+                healed?.Invoke(modifier.Magnitude);
             }
             else
             {
                 if (modifier is HealthModifier healthModifier)
                 {
-                    damaged?.Invoke(modifier.magnitude, healthModifier.isCriticalHit);
+                    damaged?.Invoke(modifier.Magnitude, healthModifier.IsCriticalHit);
                 }
                 else
                 {
-                    damaged?.Invoke(modifier.magnitude, false);
+                    damaged?.Invoke(modifier.Magnitude, false);
                 }
                 if ((m_StatController.stats[k_Health] as Attribute).currentValue == 0)
                     defeated?.Invoke();
@@ -99,11 +99,11 @@ namespace MyGame
         {
             (m_StatController.stats[k_Health] as Attribute).ApplyModifier(new HealthModifier
             {
-                magnitude = rawDamage.magnitude,
-                type = ModifierOperationType.Additive,
-                source = rawDamage.source,
-                isCriticalHit = rawDamage.isCriticalHit,
-                instigator = rawDamage.instigator
+                Magnitude = rawDamage.Magnitude,
+                Type = ModifierOperationType.Additive,
+                Source = rawDamage.Source,
+                IsCriticalHit = rawDamage.IsCriticalHit,
+                Instigator = rawDamage.Instigator
             });
         }
 
@@ -112,19 +112,19 @@ namespace MyGame
             IDamageable damageable = target.GetComponent<IDamageable>();
             HealthModifier rawDamage = new HealthModifier
             {
-                instigator = gameObject,
-                type = ModifierOperationType.Additive,
-                magnitude = -1 * m_StatController.stats["PhysicalAttack"].value,
-                source = source,
-                isCriticalHit = false
+                Instigator = gameObject,
+                Type = ModifierOperationType.Additive,
+                Magnitude = -1 * m_StatController.stats["PhysicalAttack"].value,
+                Source = source,
+                IsCriticalHit = false
             };
 
             if (m_StatController.stats["CriticalHitChance"].value / 100f >= Random.value)
             {
-                rawDamage.magnitude =
-                    Mathf.RoundToInt(rawDamage.magnitude * m_StatController.stats["CriticalHitMultiplier"].value /
+                rawDamage.Magnitude =
+                    Mathf.RoundToInt(rawDamage.Magnitude * m_StatController.stats["CriticalHitMultiplier"].value /
                                      100f);
-                rawDamage.isCriticalHit = true;
+                rawDamage.IsCriticalHit = true;
             }
             
             damageable.TakeDamage(rawDamage);
