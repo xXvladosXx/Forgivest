@@ -38,7 +38,7 @@ namespace StatSystem.Tests
         {
             yield return null;
             PlayerStatController playerStatController = GameObject.FindObjectOfType<PlayerStatController>();
-            Assert.AreEqual(5, playerStatController.statPoints);
+            Assert.AreEqual(5, playerStatController.StatPoints);
             UIDocument uiDocument = GameObject.FindObjectOfType<UIDocument>();
             VisualElement strengthElement = uiDocument.rootVisualElement.Q("strength");
             Button incrementButton = strengthElement.Q<Button>("increment-button");
@@ -46,7 +46,7 @@ namespace StatSystem.Tests
             {
                 incrementButton.SendEvent(e);
             }
-            Assert.AreEqual(4, playerStatController.statPoints);
+            Assert.AreEqual(4, playerStatController.StatPoints);
         }
         
         [UnityTest]
@@ -54,7 +54,7 @@ namespace StatSystem.Tests
         {
             yield return null;
             PlayerStatController playerStatController = GameObject.FindObjectOfType<PlayerStatController>();
-            Assert.AreEqual(5, playerStatController.statPoints);
+            Assert.AreEqual(5, playerStatController.StatPoints);
             UIDocument uiDocument = GameObject.FindObjectOfType<UIDocument>();
             VisualElement strengthElement = uiDocument.rootVisualElement.Q("strength");
             Button incrementButton = strengthElement.Q<Button>("increment-button");
@@ -65,7 +65,7 @@ namespace StatSystem.Tests
                     incrementButton.SendEvent(e);
                 }
             }
-            Assert.AreEqual(0, playerStatController.statPoints);
+            Assert.AreEqual(0, playerStatController.StatPoints);
             Assert.AreEqual(false, incrementButton.enabledSelf);
         }
         
@@ -106,7 +106,7 @@ namespace StatSystem.Tests
             VisualElement levelElement = uiDocument.rootVisualElement.Q("level");
             Label levelValue = levelElement.Q<Label>("value");
             Assert.AreEqual("1", levelValue.text);
-            levelController.currentExperience += 100;
+            levelController.CurrentExperience += 100;
             Assert.AreEqual("2", levelValue.text);
         }
         
@@ -119,7 +119,7 @@ namespace StatSystem.Tests
             VisualElement experienceElement = uiDocument.rootVisualElement.Q("experience");
             Label experienceValue = experienceElement.Q<Label>("value");
             Assert.AreEqual("0 / 83", experienceValue.text);
-            levelController.currentExperience += 5;
+            levelController.CurrentExperience += 5;
             Assert.AreEqual("5 / 83", experienceValue.text);
         }
     }

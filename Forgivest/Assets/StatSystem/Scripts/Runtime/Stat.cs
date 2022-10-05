@@ -11,9 +11,9 @@ namespace StatSystem
         protected StatDefinition m_Definition;
         protected StatController m_Controller;
         public StatDefinition definition => m_Definition;
-        protected int m_Value;
-        public int value => m_Value;
-        public virtual int baseValue => m_Definition.baseValue;
+        protected float m_Value;
+        public float value => m_Value;
+        public virtual float baseValue => m_Definition.BaseValue;
         public event Action valueChanged;
         protected List<StatModifier> m_Modifiers = new List<StatModifier>();
 
@@ -45,11 +45,11 @@ namespace StatSystem
 
         internal void CalculateValue()
         {
-            int newValue = baseValue;
+            float newValue = baseValue;
 
-            if (m_Definition.formula != null && m_Definition.formula.rootNode != null)
+            if (m_Definition.Formula != null && m_Definition.Formula.rootNode != null)
             {
-                newValue += Mathf.RoundToInt(m_Definition.formula.rootNode.Value);
+                newValue += Mathf.RoundToInt(m_Definition.Formula.rootNode.Value);
             }
             
             m_Modifiers.Sort((x, y) => x.Type.CompareTo(y.Type));
@@ -67,9 +67,9 @@ namespace StatSystem
                 }
             }
             
-            if (m_Definition.cap >= 0)
+            if (m_Definition.Cap >= 0)
             {
-                newValue = Mathf.Min(newValue, m_Definition.cap);
+                newValue = Mathf.Min(newValue, m_Definition.Cap);
             }
 
             if (m_Value != newValue)

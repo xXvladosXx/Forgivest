@@ -30,10 +30,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _modifiers:
   - {fileID: -4432880543987110819}
-  _specialEffectDefinition: {fileID: 0}
   _conditionalEffects: []
+  _specialEffectDefinition: {fileID: 0}
   _tags:
   - burning
+  - magical
   _removeEffectsWithTags: []
   _applicationMustBePresentTags: []
   _applicationMustBeAbsentTags: []
@@ -44,9 +45,12 @@ MonoBehaviour:
   _isExecutableEffectOnApply: 0
   _grantedTags:
   - burning
+  - magical
   _grantedImmunityTags: []
   _specialPersistentEffectDefinition: {fileID: 11400000, guid: 8c45e17ea658e204a8bd9d2713c2c13b,
     type: 2}
+  _persistMustBePresentTags: []
+  _persistMustBeAbsentTags: []
   _overflowEffects: []
   _denyOverflowApplication: 0
   _clearStackOnOverflow: 0

@@ -18,9 +18,9 @@ namespace CombatSystem.Scripts.Runtime.UI
 
         private void OnEnable()
         {
-            m_Damageable.initialized += OnDamageableInitialized;
-            m_Damageable.willUninitialize += OnDamageableWillUninitialize;
-            if (m_Damageable.isInitialized)
+            m_Damageable.OnInitialized += OnDamageableInitialized;
+            m_Damageable.OnWillUninitialized += OnDamageableWillUninitialize;
+            if (m_Damageable.IsInitialized)
                 OnDamageableInitialized();
         }
 
@@ -31,31 +31,31 @@ namespace CombatSystem.Scripts.Runtime.UI
 
         private void OnDamageableInitialized()
         {
-            m_Slider.maxValue = m_Damageable.maxHealth;
-            m_Slider.value = m_Damageable.health;
+            m_Slider.maxValue = m_Damageable.MaxHealth;
+            m_Slider.value = m_Damageable.Health;
             RegisterEvents();
         }
 
         private void UnregisterEvents()
         {
-            m_Damageable.healthChanged -= OnHealthChanged;
-            m_Damageable.maxHealthChanged -= OnMaxHealthChanged;
+            m_Damageable.OnHealthChanged -= OnHealthChanged;
+            m_Damageable.OnMaxHealthChanged -= OnMaxHealthChanged;
         }
 
         private void RegisterEvents()
         {
-            m_Damageable.maxHealthChanged += OnMaxHealthChanged;
-            m_Damageable.healthChanged += OnHealthChanged;
+            m_Damageable.OnMaxHealthChanged += OnMaxHealthChanged;
+            m_Damageable.OnHealthChanged += OnHealthChanged;
         }
 
         private void OnHealthChanged()
         {
-            m_Slider.value = m_Damageable.health;
+            m_Slider.value = m_Damageable.Health;
         }
 
         private void OnMaxHealthChanged()
         {
-            m_Slider.maxValue = m_Damageable.maxHealth;
+            m_Slider.maxValue = m_Damageable.MaxHealth;
         }
 
         private void OnValidate()

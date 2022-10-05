@@ -4,13 +4,13 @@ namespace LevelSystem
 {
     public interface ILevelable
     {
-        int level { get; }
-        event Action levelChanged;
-        event Action currentExperienceChanged;
-        int currentExperience { get; set; }
-        int requiredExperience { get; }
-        bool isInitialized { get; }
-        event Action initialized;
-        event Action willUninitialize;
+        int Level { get; }
+        event Action OnLevelChanged;
+        event Action OnCurrentExperienceChanged;
+        int CurrentExperience { get; set; }
+        int RequiredExperience { get; }
+        bool IsInitialized { get; }
+        event Action OnInitialized;
+        event Action OnWillUninitialize;
     }
 }

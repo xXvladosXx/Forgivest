@@ -25,7 +25,7 @@ namespace AttackSystem
         {
             Debug.Log(attackData.Damage);
             
-            _itemEquipHandler.CurrentColliderWeapon.ActivateCollider(attackData, timeOfActivation);
+            //_itemEquipHandler.CurrentColliderWeapon.ActivateCollider(attackData, timeOfActivation);
         }
     }
 }

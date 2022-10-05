@@ -12,15 +12,15 @@ namespace StatSystem
         protected ILevelable m_Levelable;
 
         protected int m_StatPoints = 5;
-        public event Action statPointsChanged;
+        public event Action OnStatPointsChanged;
 
-        public int statPoints
+        public int StatPoints
         {
             get => m_StatPoints;
             internal set
             {
                 m_StatPoints = value;
-                statPointsChanged?.Invoke();
+                OnStatPointsChanged?.Invoke();
             }
         }
 
@@ -31,25 +31,27 @@ namespace StatSystem
 
         private void OnEnable()
         {
-            m_Levelable.initialized += OnLevelableInitialized;
-            m_Levelable.willUninitialize += UnregisterEvents;
-            if (m_Levelable.isInitialized)
+            m_Levelable.OnInitialized += OnLevelableOnInitialized;
+            m_Levelable.OnWillUninitialize += UnregisterEvents;
+            if (m_Levelable.IsInitialized)
             {
-                OnLevelableInitialized();
+                OnLevelableOnInitialized();
             }
         }
 
+       
+
         private void OnDisable()
         {
-            m_Levelable.initialized -= OnLevelableInitialized;
-            m_Levelable.willUninitialize -= UnregisterEvents;
-            if (m_Levelable.isInitialized)
+            m_Levelable.OnInitialized -= OnLevelableOnInitialized;
+            m_Levelable.OnWillUninitialize -= UnregisterEvents;
+            if (m_Levelable.IsInitialized)
             {
                 UnregisterEvents();
             }
         }
 
-        private void OnLevelableInitialized()
+        private void OnLevelableOnInitialized()
         {
             Initialize();
             RegisterEvents();
@@ -57,17 +59,17 @@ namespace StatSystem
 
         private void RegisterEvents()
         {
-            m_Levelable.levelChanged += OnLevelChanged;
+            m_Levelable.OnLevelChanged += OnLevelChanged;
         }
         
         private void UnregisterEvents()
         {
-            m_Levelable.levelChanged -= OnLevelChanged;
+            m_Levelable.OnLevelChanged -= OnLevelChanged;
         }
 
         private void OnLevelChanged()
         {
-            statPoints += 5;
+            StatPoints += 5;
         }
 
         protected override void InitializeStatFormulas()
@@ -75,50 +77,16 @@ namespace StatSystem
             base.InitializeStatFormulas();
             foreach (Stat currentStat in m_Stats.Values)
             {
-                if (currentStat.definition.formula != null && currentStat.definition.formula.rootNode != null)
+                if (currentStat.definition.Formula != null && currentStat.definition.Formula.rootNode != null)
                 {
-                    List<LevelNode> levelNodes = currentStat.definition.formula.FindNodesOfType<LevelNode>();
+                    List<LevelNode> levelNodes = currentStat.definition.Formula.FindNodesOfType<LevelNode>();
                     foreach (LevelNode levelNode in levelNodes)
                     {
-                        levelNode.levelable = m_Levelable;
-                        m_Levelable.levelChanged += currentStat.CalculateValue;
+                        levelNode.Levelable = m_Levelable;
+                        m_Levelable.OnLevelChanged += currentStat.CalculateValue;
                     }
                 }
             }
         }
-
-        #region Stat System
-
-        public override object Data
-        {
-            get
-            {
-                return new PlayerStatControllerData(base.Data as StatControllerData)
-                {
-                    statPoints = m_StatPoints
-                };
-            }
-        }
-
-        public override void Load(object data)
-        {
-            base.Load(data);
-            PlayerStatControllerData playerStatControllerData = (PlayerStatControllerData)data;
-            m_StatPoints = playerStatControllerData.statPoints;
-            statPointsChanged?.Invoke();
-        }
-
-        [Serializable]
-        protected class PlayerStatControllerData : StatControllerData
-        {
-            public int statPoints;
-
-            public PlayerStatControllerData(StatControllerData statControllerData)
-            {
-                stats = statControllerData.stats;
-            }
-        }
-
-        #endregion
     }
 }

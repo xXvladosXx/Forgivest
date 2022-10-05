@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using InventorySystem.Interaction;
 using Sirenix.OdinInspector;
 using StatsSystem.Core;
 using StatsSystem.Core.Bonuses;

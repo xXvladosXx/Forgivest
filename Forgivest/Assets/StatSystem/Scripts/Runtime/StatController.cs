@@ -8,7 +8,7 @@ using UnityEngine;
 namespace StatSystem
 {
     [RequireComponent(typeof(TagController))]
-    public class StatController : MonoBehaviour, ISavable
+    public class StatController : MonoBehaviour
     {
         [SerializeField] private StatDatabase m_StatDatabase;
         protected Dictionary<string, Stat> m_Stats = new Dictionary<string, Stat>(StringComparer.OrdinalIgnoreCase);
@@ -68,13 +68,28 @@ namespace StatSystem
             OnInitialized?.Invoke();
         }
 
+        private void Update()
+        {
+            foreach (var stat in m_Stats.Values)
+            {
+                if (stat.definition.name == "Health")
+                {
+                    print(stat.value);
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+            }
+        }
+        
         protected virtual void InitializeStatFormulas()
         {
             foreach (Stat currentStat in m_Stats.Values)
             {
-                if (currentStat.definition.formula != null && currentStat.definition.formula.rootNode != null)
+                if (currentStat.definition.Formula != null && currentStat.definition.Formula.rootNode != null)
                 {
-                    List<StatNode> statNodes = currentStat.definition.formula.FindNodesOfType<StatNode>();
+                    List<StatNode> statNodes = currentStat.definition.Formula.FindNodesOfType<StatNode>();
 
                     foreach (StatNode statNode in statNodes)
                     {
@@ -91,48 +106,5 @@ namespace StatSystem
                 }
             }
         }
-
-        #region Stat System
-
-        public virtual object Data
-        {
-            get
-            {
-                Dictionary<string, object> stats = new Dictionary<string, object>();
-                foreach (Stat stat in m_Stats.Values)
-                {
-                    if (stat is ISavable savable)
-                    {
-                        stats.Add(stat.definition.name, savable.Data);
-                    }
-                }
-
-                return new StatControllerData
-                {
-                    stats = stats
-                };
-            }
-        }
-        public virtual void Load(object data)
-        {
-            StatControllerData statControllerData = (StatControllerData)data;
-            foreach (Stat stat in m_Stats.Values)
-            {
-                if (stat is ISavable savable)
-                {
-                    savable.Load(statControllerData.stats[stat.definition.name]);
-                }
-            }
-        }
-
-        [Serializable]
-        protected class StatControllerData
-        {
-            public Dictionary<string, object> stats;
-        }
-
-        #endregion
-
-        
     }
 }

@@ -28,7 +28,7 @@ namespace StatSystem.Tests
             UIDocument uiDocument = headsUpDisplayUI.GetComponent<UIDocument>();
             Label level = uiDocument.rootVisualElement.Q<Label>("level");
             Assert.AreEqual("1", level.text);
-            levelable.currentExperience += 100;
+            levelable.CurrentExperience += 100;
             Assert.AreEqual("2", level.text);
         }
 
@@ -42,7 +42,7 @@ namespace StatSystem.Tests
             UIDocument uiDocument = headsUpDisplayUI.GetComponent<UIDocument>();
             ProgressBar experienceBar = uiDocument.rootVisualElement.Q<ProgressBar>("experience");
             Assert.AreEqual(0, experienceBar.value);
-            levelable.currentExperience += 5;
+            levelable.CurrentExperience += 5;
             UnityEngine.Assertions.Assert.AreApproximatelyEqual(6, experienceBar.value, 0.5f);
         }
 

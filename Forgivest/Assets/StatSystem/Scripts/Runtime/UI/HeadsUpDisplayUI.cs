@@ -41,8 +41,8 @@ namespace StatSystem.UI
             mana.currentValueChanged += OnManaChanged;
             health.valueChanged += OnMaxHealthChanged;
             health.currentValueChanged += OnHealthChanged;
-            m_Levelable.levelChanged += OnLevelChanged;
-            m_Levelable.currentExperienceChanged += OnCurrentExperienceChanged;
+            m_Levelable.OnLevelChanged += OnLevelChanged;
+            m_Levelable.OnCurrentExperienceChanged += OnCurrentExperienceChanged;
         }
 
         private void OnDestroy()
@@ -53,8 +53,8 @@ namespace StatSystem.UI
             mana.currentValueChanged -= OnManaChanged;
             health.valueChanged -= OnMaxHealthChanged;
             health.currentValueChanged -= OnHealthChanged;
-            m_Levelable.levelChanged -= OnLevelChanged;
-            m_Levelable.currentExperienceChanged -= OnCurrentExperienceChanged;
+            m_Levelable.OnLevelChanged -= OnLevelChanged;
+            m_Levelable.OnCurrentExperienceChanged -= OnCurrentExperienceChanged;
         }
 
         private void OnCurrentExperienceChanged()
@@ -65,13 +65,13 @@ namespace StatSystem.UI
         private void OnLevelChanged()
         {
             OnExperienceChangedInternal();
-            m_Level.text = m_Levelable.level.ToString();
+            m_Level.text = m_Levelable.Level.ToString();
         }
 
         private void OnExperienceChangedInternal()
         {
-            m_ExperienceBar.value = (float)m_Levelable.currentExperience / m_Levelable.requiredExperience * 100f;
-            m_ExperienceBar.title = $"{m_Levelable.currentExperience} / {m_Levelable.requiredExperience}";
+            m_ExperienceBar.value = (float)m_Levelable.CurrentExperience / m_Levelable.RequiredExperience * 100f;
+            m_ExperienceBar.title = $"{m_Levelable.CurrentExperience} / {m_Levelable.RequiredExperience}";
         }
 
         private void OnHealthChanged()

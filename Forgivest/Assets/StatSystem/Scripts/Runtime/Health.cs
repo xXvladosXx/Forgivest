@@ -1,5 +1,6 @@
 ﻿using AbilitySystem.AbilitySystem.Runtime;
 using Core;
+using UnityEngine;
 
 namespace StatSystem
 {
@@ -16,23 +17,30 @@ namespace StatSystem
         {
             ITaggable source = modifier.Source as ITaggable;
 
-            if (_tagController.Contains("zombify"))
+            if(_tagController != null)
+            {if (_tagController.Contains("zombify"))
             {
                 if (source.Tags.Contains("healing"))
                 {
                     modifier.Magnitude *= -1;
                 }
-            }
+            }}
             
             if (source != null)
             {
                 if (source.Tags.Contains("physical"))
                 {
-                    modifier.Magnitude += m_Controller.stats["PhysicalDefense"].value;
+                    var possibleDamage = FindResistance(modifier, "PhysicalDefense");
+
+                    possibleDamage -= modifier.Magnitude;
+                    modifier.Magnitude = possibleDamage;
                 }
                 else if (source.Tags.Contains("magical"))
                 {
-                    modifier.Magnitude += m_Controller.stats["MagicalDefense"].value;
+                    var possibleDamage = FindResistance(modifier, "MagicalDefense");
+                    
+                        possibleDamage -= modifier.Magnitude;
+                        modifier.Magnitude = possibleDamage;
                 }
                 else if (source.Tags.Contains("pure"))
                 {
@@ -41,6 +49,14 @@ namespace StatSystem
             }
             
             base.ApplyModifier(modifier);
+        }
+
+        private float FindResistance(StatModifier modifier, string stat)
+        {
+            float resistance = Mathf.Clamp(m_Controller.stats[stat].value, 1, 100);
+            var possibleDamage = modifier.Magnitude;
+            possibleDamage =  (possibleDamage * 100) / resistance;
+            return possibleDamage;
         }
     }
 }

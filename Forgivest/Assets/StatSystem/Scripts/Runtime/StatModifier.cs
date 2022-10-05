@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace StatSystem
 {
@@ -9,10 +10,11 @@ namespace StatSystem
         Override
     }
     
+    [Serializable]
     public class StatModifier
     {
-        public object Source { get; set; }
-        public int Magnitude { get; set; }
-        public ModifierOperationType Type { get; set; }
+        [field: SerializeField] public object Source { get; set; }
+        [field: SerializeField] public float Magnitude { get; set; }
+        [field: SerializeField] public ModifierOperationType Type { get; set; }
     }
 }

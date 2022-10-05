@@ -1,6 +1,5 @@
 ﻿using AnimatorStateMachine.StateMachine;
 using Data.Player;
-using Enemy;
 using Interaction.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -111,12 +110,13 @@ namespace StateMachine.Player.States
 
         protected virtual void OnInteractableCheck()
         {
-            switch (PlayerStateMachine.ReusableData.InteractableObject)
+            //TO DO
+            /*switch (PlayerStateMachine.ReusableData.InteractableObject)
             {
                 case EnemyEntity enemyEntity:
                     PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerAggroState);
                     return;
-            }
+            }*/
         }
         
         private void UpdateMovementAnimation()

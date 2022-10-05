@@ -22,11 +22,11 @@ namespace StatSystem.Tests
             yield return null;
             PlayerStatController playerStatController = GameObject.FindObjectOfType<PlayerStatController>();
             ILevelable levelable = playerStatController.GetComponent<ILevelable>();
-            Assert.AreEqual(5, playerStatController.statPoints);
-            Assert.AreEqual(1, levelable.level);
-            levelable.currentExperience += 100;
-            Assert.AreEqual(2, levelable.level);
-            Assert.AreEqual(10, playerStatController.statPoints);
+            Assert.AreEqual(5, playerStatController.StatPoints);
+            Assert.AreEqual(1, levelable.Level);
+            levelable.CurrentExperience += 100;
+            Assert.AreEqual(2, levelable.Level);
+            Assert.AreEqual(10, playerStatController.StatPoints);
         }
     }
 }

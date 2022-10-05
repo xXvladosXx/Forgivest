@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using InventorySystem.Items;
 using RaycastSystem.Core;
 using Sirenix.OdinInspector;
-using StatsSystem.Core;
-using StatsSystem.Core.Bonuses.Core;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace InventorySystem.Interaction
 {
-    public class ObjectPicker : SerializedMonoBehaviour, IModifier
+    public class ObjectPicker : SerializedMonoBehaviour
     {
         [field: SerializeField] public Inventory Inventory { get; private set; }
         [field: SerializeField] public ItemEquipHandler ItemEquipHandler { get; private set; }
@@ -50,7 +47,7 @@ namespace InventorySystem.Interaction
             }
         }
 
-        public event Action<List<IBonus>> OnBonusAdded;
+        /*public event Action<List<IBonus>> OnBonusAdded;
         public event Action<List<IBonus>> OnBonusRemoved;
         public List<IBonus> GetBonus()
         {
@@ -60,14 +57,12 @@ namespace InventorySystem.Interaction
             {
                 if (weapon is IStatsable statsable)
                 {
-                    bonuses.AddRange(statsable.StatsBonuses);
-                    bonuses.AddRange(statsable.CharacteristicBonuses);
+                    //bonuses.AddRange(statsable.StatsBonuses);
+                    //bonuses.AddRange(statsable.CharacteristicBonuses);
                 }
             }
 
             return bonuses;
-        }
-
-        
+        }*/
     }
 }
