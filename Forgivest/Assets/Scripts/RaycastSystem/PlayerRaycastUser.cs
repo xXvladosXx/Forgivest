@@ -1,7 +1,5 @@
 ﻿using RaycastSystem.Core;
-using StateMachine.Player;
 using UnityEngine;
-using Utilities;
 
 namespace RaycastSystem
 {

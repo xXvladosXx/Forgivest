@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CombatSystem.Scripts.Runtime.Core;
 using Core;
 using UnityEngine;
@@ -33,25 +34,30 @@ namespace CombatSystem.Scripts.Runtime
             if (!m_Collider.enabled)
                 m_Collider.enabled = true;
 
-            m_Damageable.initialized += OnDamageableInitialized;
-            m_Damageable.willUninitialize += OnDamageableWillUninitialize;
-            if (m_Damageable.isInitialized)
+            m_Damageable.OnInitialized += OnDamageableInitialized;
+            m_Damageable.OnWillUninitialized += OnDamageableWillUninitialized;
+            if (m_Damageable.IsInitialized)
                 OnDamageableInitialized();
         }
 
-        private void OnDamageableWillUninitialize()
+        private void OnDamageableWillUninitialized()
         {
-            m_Damageable.damaged -= DisplayDamage;
-            m_Damageable.healed -= DisplayRestorationAmount;
-            m_Damageable.defeated -= OnDefeated;
+            m_Damageable.OnDamaged -= DisplayDamage;
+            m_Damageable.OnHealed -= DisplayRestorationAmount;
+            m_Damageable.OnDefeated -= OnDefeated;
         }
 
 
         private void OnDamageableInitialized()
         {
-            m_Damageable.damaged += DisplayDamage;
-            m_Damageable.healed += DisplayRestorationAmount;
-            m_Damageable.defeated += OnDefeated;
+            m_Damageable.OnDamaged += DisplayDamage;
+            m_Damageable.OnHealed += DisplayRestorationAmount;
+            m_Damageable.OnDefeated += OnDefeated;
+        }
+
+        private void Update()
+        {
+            
         }
 
         private void OnDefeated()
@@ -59,13 +65,13 @@ namespace CombatSystem.Scripts.Runtime
             m_Collider.enabled = false;
         }
 
-        private void DisplayRestorationAmount(int amount)
+        private void DisplayRestorationAmount(float amount)
         {
             FloatingText floatingText = m_Pool.Get();
             floatingText.Set(amount.ToString(), Color.green);
         }
 
-        private void DisplayDamage(int magnitude, bool isCriticalHit)
+        private void DisplayDamage(float magnitude, bool isCriticalHit)
         {
             FloatingText damageText = m_Pool.Get();
             damageText.Set(magnitude.ToString(), isCriticalHit ? Color.red : Color.white);

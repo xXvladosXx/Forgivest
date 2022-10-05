@@ -23,19 +23,19 @@ namespace StatSystem.UI
 
             VisualElement experience = root.Q("experience");
             Label experienceValue = experience.Q<Label>("value");
-            experienceValue.text = $"{m_Levelable.currentExperience} / {m_Levelable.requiredExperience}";
-            m_Levelable.currentExperienceChanged += () =>
+            experienceValue.text = $"{m_Levelable.CurrentExperience} / {m_Levelable.RequiredExperience}";
+            m_Levelable.OnCurrentExperienceChanged += () =>
             {
-                experienceValue.text = $"{m_Levelable.currentExperience} / {m_Levelable.requiredExperience}";
+                experienceValue.text = $"{m_Levelable.CurrentExperience} / {m_Levelable.RequiredExperience}";
             };
 
             VisualElement level = root.Q("level");
             Label levelValue = level.Q<Label>("value");
-            levelValue.text = m_Levelable.level.ToString();
-            m_Levelable.levelChanged += () =>
+            levelValue.text = m_Levelable.Level.ToString();
+            m_Levelable.OnLevelChanged += () =>
             {
-                experienceValue.text = $"{m_Levelable.currentExperience} / {m_Levelable.requiredExperience}";
-                levelValue.text = m_Levelable.level.ToString();
+                experienceValue.text = $"{m_Levelable.CurrentExperience} / {m_Levelable.RequiredExperience}";
+                levelValue.text = m_Levelable.Level.ToString();
             };
 
             VisualElement primaryStats = root.Q("primary-stats");
@@ -49,13 +49,13 @@ namespace StatSystem.UI
                     label.text = stat.value.ToString();
                 };
                 Button incrementButton = primaryStats[i].Q<Button>("increment-button");
-                incrementButton.SetEnabled(m_Controller.statPoints > 0 && stat.baseValue != stat.definition.cap);
+                incrementButton.SetEnabled(m_Controller.StatPoints > 0 && stat.baseValue != stat.definition.Cap);
                 incrementButton.clicked += () =>
                 {
                     (stat as PrimaryStat).Add(1);
                     label.text = stat.value.ToString();
-                    incrementButton.SetEnabled(stat.baseValue != stat.definition.cap);
-                    m_Controller.statPoints--;
+                    incrementButton.SetEnabled(stat.baseValue != stat.definition.Cap);
+                    m_Controller.StatPoints--;
                 };
             }
 
@@ -73,14 +73,14 @@ namespace StatSystem.UI
 
             VisualElement statPoints = root.Q("stat-points");
             Label statPointsValue = statPoints.Q<Label>("value");
-            statPointsValue.text = m_Controller.statPoints.ToString();
-            m_Controller.statPointsChanged += () =>
+            statPointsValue.text = m_Controller.StatPoints.ToString();
+            m_Controller.OnStatPointsChanged += () =>
             {
-                statPointsValue.text = m_Controller.statPoints.ToString();
+                statPointsValue.text = m_Controller.StatPoints.ToString();
                 for (int i = 0; i < primaryStats.childCount; i++)
                 {
                     Button incrementButton = primaryStats[i].Q<Button>("increment-button");
-                    incrementButton.SetEnabled(m_Controller.statPoints > 0);
+                    incrementButton.SetEnabled(m_Controller.StatPoints > 0);
                 }
             };
         }

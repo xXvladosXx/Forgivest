@@ -12,6 +12,7 @@ namespace InventorySystem
     {
         [field: SerializeField] public List<ItemSlot> Slots { get; private set; }
         public int Capacity { get; set; }
+        private ItemContainer _container;
         public bool IsFull => Slots.All(slot => slot.IsFull);
 
         public event Action<object, IItemContainer, int> OnItemAdded;
@@ -50,7 +51,7 @@ namespace InventorySystem
         {
             var slotWithSameItemButNotEmpty = Slots
                 .Find(slot => !slot.IsEmpty && slot.Item.ItemID.Id == item.ItemID.Id && !slot.IsFull);
-
+            
             if (slotWithSameItemButNotEmpty is {IsFull: false})
             {
                 return TryToAddToSlot(sender, slotWithSameItemButNotEmpty, item, amount);

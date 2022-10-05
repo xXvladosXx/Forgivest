@@ -1,0 +1,16 @@
+{
+    "name": "Attack",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7c8e291869ff18945bd9c5af27a37639"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -5,12 +5,12 @@ namespace LevelSystem.Nodes
 {
     public class LevelNode : CodeFunctionNode
     {
-        public ILevelable levelable;
-        public override float Value => levelable.level;
+        public ILevelable Levelable;
+        public override float Value => Levelable.Level;
         public override float CalculateValue(GameObject source)
         {
             var levelable = source.GetComponent<ILevelable>();
-            return levelable.level;
+            return levelable.Level;
         }
     }
 }

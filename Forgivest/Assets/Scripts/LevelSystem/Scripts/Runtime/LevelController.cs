@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace LevelSystem
 {
-    public class LevelController : MonoBehaviour, ILevelable, ISavable
+    public class LevelController : MonoBehaviour, ILevelable
     {
         [SerializeField] private int m_Level = 1;
         [SerializeField] private int m_CurrentExperience;
@@ -15,34 +15,34 @@ namespace LevelSystem
 
         private bool m_IsInitialized;
 
-        public int level => m_Level;
-        public event Action levelChanged;
-        public event Action currentExperienceChanged;
+        public int Level => m_Level;
+        public event Action OnLevelChanged;
+        public event Action OnCurrentExperienceChanged;
 
-        public int currentExperience
+        public int CurrentExperience
         {
             get => m_CurrentExperience;
             set
             {
-                if (value >= requiredExperience)
+                if (value >= RequiredExperience)
                 {
-                    m_CurrentExperience = value - requiredExperience;
-                    currentExperienceChanged?.Invoke();
+                    m_CurrentExperience = value - RequiredExperience;
+                    OnCurrentExperienceChanged?.Invoke();
                     m_Level++;
-                    levelChanged?.Invoke();
+                    OnLevelChanged?.Invoke();
                 }
-                else if (value < requiredExperience)
+                else if (value < RequiredExperience)
                 {
                     m_CurrentExperience = value;
-                    currentExperienceChanged?.Invoke();
+                    OnCurrentExperienceChanged?.Invoke();
                 }
             }
         }
 
-        public int requiredExperience => Mathf.RoundToInt(m_RequiredExperienceFormula.rootNode.Value);
-        public bool isInitialized => m_IsInitialized;
-        public event Action initialized;
-        public event Action willUninitialize;
+        public int RequiredExperience => Mathf.RoundToInt(m_RequiredExperienceFormula.rootNode.Value);
+        public bool IsInitialized => m_IsInitialized;
+        public event Action OnInitialized;
+        public event Action OnWillUninitialize;
 
         private void Awake()
         {
@@ -57,43 +57,17 @@ namespace LevelSystem
             List<LevelNode> levelNodes = m_RequiredExperienceFormula.FindNodesOfType<LevelNode>();
             foreach (LevelNode levelNode in levelNodes)
             {
-                levelNode.levelable = this;
+                levelNode.Levelable = this;
             }
 
             m_IsInitialized = true;
-            initialized?.Invoke();
+            OnInitialized?.Invoke();
         }
 
+      
         private void OnDestroy()
         {
-            willUninitialize?.Invoke();
+            OnWillUninitialize?.Invoke();
         }
-
-        #region Save System
-
-        public object Data => new LevelControllerData
-        {
-            level = m_Level,
-            currentExperience = m_CurrentExperience
-        };
-        public void Load(object data)
-        {
-            LevelControllerData levelControllerData = (LevelControllerData)data;
-            m_CurrentExperience = levelControllerData.currentExperience;
-            currentExperienceChanged?.Invoke();
-            m_Level = levelControllerData.level;
-            levelChanged?.Invoke();
-        }
-
-        [Serializable]
-        protected class LevelControllerData
-        {
-            public int level;
-            public int currentExperience;
-        }
-
-        #endregion
-        
-        
     }
 }

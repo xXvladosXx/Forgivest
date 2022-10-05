@@ -14,16 +14,16 @@ namespace MyGame
     {
         private const string k_Health = "Health";
         private bool m_IsInitialized;
-        public int health => (m_StatController.stats[k_Health] as Attribute).currentValue;
-        public int maxHealth => m_StatController.stats[k_Health].value;
-        public event Action healthChanged;
-        public event Action maxHealthChanged;
-        public bool isInitialized => m_IsInitialized;
-        public event Action initialized;
-        public event Action willUninitialize;
-        public event Action defeated;
-        public event Action<int> healed;
-        public event Action<int, bool> damaged;
+        public float Health => (m_StatController.stats[k_Health] as Attribute).currentValue;
+        public float MaxHealth => m_StatController.stats[k_Health].value;
+        public event Action OnHealthChanged;
+        public event Action OnMaxHealthChanged;
+        public bool IsInitialized => m_IsInitialized;
+        public event Action OnInitialized;
+        public event Action OnWillUninitialized;
+        public event Action OnDefeated;
+        public event Action<float> OnHealed;
+        public event Action<float, bool> OnDamaged;
 
         protected StatController m_StatController;
         protected virtual void Awake()
@@ -49,50 +49,50 @@ namespace MyGame
 
         private void OnStatControllerWillUninitialize()
         {
-            willUninitialize?.Invoke();
-            m_StatController.stats[k_Health].valueChanged -= OnMaxHealthChanged;
-            (m_StatController.stats[k_Health] as Attribute).currentValueChanged -= OnHealthChanged;
+            OnWillUninitialized?.Invoke();
+            m_StatController.stats[k_Health].valueChanged -= MaxHealthChanged;
+            (m_StatController.stats[k_Health] as Attribute).currentValueChanged -= HealthChanged;
             (m_StatController.stats[k_Health] as Attribute).appliedModifier -= OnAppliedModifier;
         }
 
         private void OnStatControllerOnInitialized()
         {
-            m_StatController.stats[k_Health].valueChanged += OnMaxHealthChanged;
-            (m_StatController.stats[k_Health] as Attribute).currentValueChanged += OnHealthChanged;
+            m_StatController.stats[k_Health].valueChanged += MaxHealthChanged;
+            (m_StatController.stats[k_Health] as Attribute).currentValueChanged += HealthChanged;
             (m_StatController.stats[k_Health] as Attribute).appliedModifier += OnAppliedModifier;
             m_IsInitialized = true;
-            initialized?.Invoke();
+            OnInitialized?.Invoke();
         }
 
         private void OnAppliedModifier(StatModifier modifier)
         {
             if (modifier.Magnitude > 0)
             {
-                healed?.Invoke(modifier.Magnitude);
+                OnHealed?.Invoke(modifier.Magnitude);
             }
             else
             {
                 if (modifier is HealthModifier healthModifier)
                 {
-                    damaged?.Invoke(modifier.Magnitude, healthModifier.IsCriticalHit);
+                    OnDamaged?.Invoke(modifier.Magnitude, healthModifier.IsCriticalHit);
                 }
                 else
                 {
-                    damaged?.Invoke(modifier.Magnitude, false);
+                    OnDamaged?.Invoke(modifier.Magnitude, false);
                 }
                 if ((m_StatController.stats[k_Health] as Attribute).currentValue == 0)
-                    defeated?.Invoke();
+                    OnDefeated?.Invoke();
             }
         }
 
-        private void OnHealthChanged()
+        private void HealthChanged()
         {
-            healthChanged?.Invoke();
+            OnHealthChanged?.Invoke();
         }
 
-        private void OnMaxHealthChanged()
+        private void MaxHealthChanged()
         {
-            maxHealthChanged?.Invoke();
+            OnMaxHealthChanged?.Invoke();
         }
 
         public void TakeDamage(IDamage rawDamage)

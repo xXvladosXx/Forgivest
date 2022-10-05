@@ -6,8 +6,8 @@ namespace StatSystem
 {
     public class Attribute : Stat, ISavable
     {
-        protected int m_CurrentValue;
-        public int currentValue => m_CurrentValue;
+        protected float m_CurrentValue;
+        public float currentValue => m_CurrentValue;
         public event Action currentValueChanged;
         public event Action<StatModifier> appliedModifier;
         
@@ -23,7 +23,7 @@ namespace StatSystem
 
         public virtual void ApplyModifier(StatModifier modifier)
         {
-            int newValue = m_CurrentValue;
+            var newValue = m_CurrentValue;
             switch (modifier.Type)
             {
                 case ModifierOperationType.Override:
@@ -63,7 +63,7 @@ namespace StatSystem
         [Serializable]
         protected class AttributeData
         {
-            public int currentValue;
+            public float currentValue;
         }
 
         #endregion

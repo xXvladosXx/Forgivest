@@ -21,11 +21,11 @@ namespace LevelSystem.Tests
         {
             yield return null;
             LevelController levelController = GameObject.FindObjectOfType<LevelController>();
-            Assert.AreEqual(1, levelController.level);
-            levelController.currentExperience += 83;
-            Assert.AreEqual(2, levelController.level);
-            Assert.AreEqual(0, levelController.currentExperience);
-            Assert.AreEqual(92, levelController.requiredExperience);
+            Assert.AreEqual(1, levelController.Level);
+            levelController.CurrentExperience += 83;
+            Assert.AreEqual(2, levelController.Level);
+            Assert.AreEqual(0, levelController.CurrentExperience);
+            Assert.AreEqual(92, levelController.RequiredExperience);
         }
     }
 }

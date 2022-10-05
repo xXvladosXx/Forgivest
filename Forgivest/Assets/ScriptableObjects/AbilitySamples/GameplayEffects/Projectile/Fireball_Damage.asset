@@ -31,7 +31,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _modifiers:
   - {fileID: -4209731609570648883}
+  _conditionalEffects: []
   _specialEffectDefinition: {fileID: 0}
   _tags:
   - damage
+  - magical
   _removeEffectsWithTags: []
+  _applicationMustBePresentTags: []
+  _applicationMustBeAbsentTags: []

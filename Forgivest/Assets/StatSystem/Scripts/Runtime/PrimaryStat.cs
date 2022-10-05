@@ -7,8 +7,8 @@ namespace StatSystem
 {
     public class PrimaryStat : Stat, ISavable
     {
-        private int m_BaseValue;
-        public override int baseValue => m_BaseValue;
+        private float m_BaseValue;
+        public override float baseValue => m_BaseValue;
         
         public PrimaryStat(StatDefinition definition, StatController controller) : base(definition, controller)
         {
@@ -16,7 +16,7 @@ namespace StatSystem
         
         public override void Initialize()
         {
-            m_BaseValue = definition.baseValue;
+            m_BaseValue = definition.BaseValue;
             base.Initialize();
         }
 
@@ -48,7 +48,7 @@ namespace StatSystem
         [Serializable]
         protected class PrimaryStatData
         {
-            public int baseValue;
+            public float baseValue;
         }
 
         #endregion
