@@ -15,6 +15,7 @@ using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using Utilities;
 
+
 namespace Player
 {
     [RequireComponent(typeof(NavMeshAgent),

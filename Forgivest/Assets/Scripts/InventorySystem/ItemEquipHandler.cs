@@ -15,7 +15,7 @@ namespace InventorySystem
         [field: SerializeField] public Transform RightHand { get; private set; }
         [field: SerializeField] public Transform LeftHand { get; private set; }
 
-        public AttackColliderActivator CurrentColliderWeapon { get; private set; }
+        [field: SerializeField] public AttackColliderActivator CurrentColliderWeapon { get; private set; }
         public Weapon CurrentWeapon { get; private set; }
         
         public bool TryToEquip(StatsableItem statsableItem)
