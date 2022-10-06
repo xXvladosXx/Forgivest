@@ -14,8 +14,8 @@ namespace MyGame
     {
         private const string k_Health = "Health";
         private bool m_IsInitialized;
-        public float Health => (m_StatController.stats[k_Health] as Attribute).currentValue;
-        public float MaxHealth => m_StatController.stats[k_Health].value;
+        public float Health => (m_StatController.Stats[k_Health] as Attribute).currentValue;
+        public float MaxHealth => m_StatController.Stats[k_Health].value;
         public event Action OnHealthChanged;
         public event Action OnMaxHealthChanged;
         public bool IsInitialized => m_IsInitialized;
@@ -50,16 +50,16 @@ namespace MyGame
         private void OnStatControllerWillUninitialize()
         {
             OnWillUninitialized?.Invoke();
-            m_StatController.stats[k_Health].valueChanged -= MaxHealthChanged;
-            (m_StatController.stats[k_Health] as Attribute).currentValueChanged -= HealthChanged;
-            (m_StatController.stats[k_Health] as Attribute).appliedModifier -= OnAppliedModifier;
+            m_StatController.Stats[k_Health].valueChanged -= MaxHealthChanged;
+            (m_StatController.Stats[k_Health] as Attribute).currentValueChanged -= HealthChanged;
+            (m_StatController.Stats[k_Health] as Attribute).appliedModifier -= OnAppliedModifier;
         }
 
         private void OnStatControllerOnInitialized()
         {
-            m_StatController.stats[k_Health].valueChanged += MaxHealthChanged;
-            (m_StatController.stats[k_Health] as Attribute).currentValueChanged += HealthChanged;
-            (m_StatController.stats[k_Health] as Attribute).appliedModifier += OnAppliedModifier;
+            m_StatController.Stats[k_Health].valueChanged += MaxHealthChanged;
+            (m_StatController.Stats[k_Health] as Attribute).currentValueChanged += HealthChanged;
+            (m_StatController.Stats[k_Health] as Attribute).appliedModifier += OnAppliedModifier;
             m_IsInitialized = true;
             OnInitialized?.Invoke();
         }
@@ -80,7 +80,7 @@ namespace MyGame
                 {
                     OnDamaged?.Invoke(modifier.Magnitude, false);
                 }
-                if ((m_StatController.stats[k_Health] as Attribute).currentValue == 0)
+                if ((m_StatController.Stats[k_Health] as Attribute).currentValue == 0)
                     OnDefeated?.Invoke();
             }
         }
@@ -97,7 +97,7 @@ namespace MyGame
 
         public void TakeDamage(IDamage rawDamage)
         {
-            (m_StatController.stats[k_Health] as Attribute).ApplyModifier(new HealthModifier
+            (m_StatController.Stats[k_Health] as Attribute).ApplyModifier(new HealthModifier
             {
                 Magnitude = rawDamage.Magnitude,
                 Type = ModifierOperationType.Additive,
@@ -114,15 +114,15 @@ namespace MyGame
             {
                 Instigator = gameObject,
                 Type = ModifierOperationType.Additive,
-                Magnitude = -1 * m_StatController.stats["PhysicalAttack"].value,
+                Magnitude = -1 * m_StatController.Stats["PhysicalAttack"].value,
                 Source = source,
                 IsCriticalHit = false
             };
 
-            if (m_StatController.stats["CriticalHitChance"].value / 100f >= Random.value)
+            if (m_StatController.Stats["CriticalHitChance"].value / 100f >= Random.value)
             {
                 rawDamage.Magnitude =
-                    Mathf.RoundToInt(rawDamage.Magnitude * m_StatController.stats["CriticalHitMultiplier"].value /
+                    Mathf.RoundToInt(rawDamage.Magnitude * m_StatController.Stats["CriticalHitMultiplier"].value /
                                      100f);
                 rawDamage.IsCriticalHit = true;
             }

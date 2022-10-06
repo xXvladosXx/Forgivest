@@ -32,8 +32,8 @@ namespace StatSystem.UI
 
         private void Start()
         {
-            Attribute mana = m_Controller.stats["Mana"] as Attribute;
-            Attribute health = m_Controller.stats["Health"] as Attribute;
+            Attribute mana = m_Controller.Stats["Mana"] as Attribute;
+            Attribute health = m_Controller.Stats["Health"] as Attribute;
             OnManaChangedInternal();
             OnHealthChangedInternal();
             OnLevelChanged();
@@ -47,8 +47,8 @@ namespace StatSystem.UI
 
         private void OnDestroy()
         {
-            Attribute mana = m_Controller.stats["Mana"] as Attribute;
-            Attribute health = m_Controller.stats["Health"] as Attribute;
+            Attribute mana = m_Controller.Stats["Mana"] as Attribute;
+            Attribute health = m_Controller.Stats["Health"] as Attribute;
             mana.valueChanged -= OnMaxManaChanged;
             mana.currentValueChanged -= OnManaChanged;
             health.valueChanged -= OnMaxHealthChanged;
@@ -86,7 +86,7 @@ namespace StatSystem.UI
 
         private void OnHealthChangedInternal()
         {
-            Attribute health = m_Controller.stats["Health"] as Attribute;
+            Attribute health = m_Controller.Stats["Health"] as Attribute;
             m_HealthBar.value = (float)health.currentValue / health.value * 100f;
             m_HealthBar.title = $"{health.currentValue} / {health.value}";
         }
@@ -103,7 +103,7 @@ namespace StatSystem.UI
 
         private void OnManaChangedInternal()
         {
-            Attribute mana = m_Controller.stats["Mana"] as Attribute;
+            Attribute mana = m_Controller.Stats["Mana"] as Attribute;
             m_ManaBar.value = (float)mana.currentValue / mana.value * 100f;
             m_ManaBar.title = $"{mana.currentValue} / {mana.value}";
         }

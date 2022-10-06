@@ -44,10 +44,10 @@ namespace AbilitySystem.AbilitySystem.Runtime
 
                     if (effectDamage.CanCauseCriticalHit)
                     {
-                        if (statController.stats["CriticalHitChance"].value / 100f >= Random.value)
+                        if (statController.Stats["CriticalHitChance"].value / 100f >= Random.value)
                         {
                             healthModifier.Magnitude = Mathf.RoundToInt(healthModifier.Magnitude *
-                                statController.stats["CriticalHitMultiplier"].value / 100f);
+                                statController.Stats["CriticalHitMultiplier"].value / 100f);
                             healthModifier.IsCriticalHit = true;
                         }
                     }

@@ -1,8 +1,8 @@
 ﻿namespace StateMachine.Player.States.Attack
 {
-    public class PlayerAggroState : PlayerAttackState
+    public class PlayerChasingState : PlayerAttackState
     {
-        public PlayerAggroState(PlayerStateMachine playerPlayerStateMachine) : base(playerPlayerStateMachine)
+        public PlayerChasingState(PlayerStateMachine playerPlayerStateMachine) : base(playerPlayerStateMachine)
         {
         }
 

@@ -1,0 +1,27 @@
+{
+    "name": "Inventory_Tests",
+    "rootNamespace": "",
+    "references": [
+        "GUID:53fde695a805bd343831eaac2b9819c0",
+        "GUID:6927184e88a8ffb4981b0ed699df1351",
+        "GUID:7c8e291869ff18945bd9c5af27a37639",
+        "GUID:0acc523941302664db1f4e527237feb3",
+        "GUID:27619889b8ba8c24980f49ee34dbb44a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "NSubstitute.dll",
+        "FluentAssertions.dll",
+        "nunit.framework.dll",
+        "Sirenix.Serialization.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

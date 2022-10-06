@@ -260,7 +260,7 @@ namespace AbilitySystem
         {
             for (int i = 0; i < persistentEffect.Modifiers.Count; i++)
             {
-                if (StatController.stats.TryGetValue(((GameplayEffect) persistentEffect).Definition.Modifiers[i].StatName, out var stat))
+                if (StatController.Stats.TryGetValue(((GameplayEffect) persistentEffect).Definition.Modifiers[i].StatName, out var stat))
                 {
                     stat.AddModifier(persistentEffect.Modifiers[i]);
                 }
@@ -281,7 +281,7 @@ namespace AbilitySystem
         {
             foreach (var modifier in ((GameplayEffect) persistentEffect).Definition.Modifiers)
             {
-                if (StatController.stats.TryGetValue(modifier.StatName, out var stat))
+                if (StatController.Stats.TryGetValue(modifier.StatName, out var stat))
                 {
                     stat.RemoveModifierFromSource(persistentEffect);
                 }
@@ -302,7 +302,7 @@ namespace AbilitySystem
         {
             for (int i = 0; i < gameplayEffect.Modifiers.Count; i++)
             {
-                if (!StatController.stats
+                if (!StatController.Stats
                         .TryGetValue(gameplayEffect.Definition.Modifiers[i].StatName,
                             out var stat)) continue;
 
@@ -374,7 +374,7 @@ namespace AbilitySystem
         {
             foreach (var modifier in gameplayEffectDefinition.Modifiers)
             {
-                if (StatController.stats.TryGetValue(modifier.StatName, out var stat))
+                if (StatController.Stats.TryGetValue(modifier.StatName, out var stat))
                 {
                     if (stat is Attribute attribute)
                     {

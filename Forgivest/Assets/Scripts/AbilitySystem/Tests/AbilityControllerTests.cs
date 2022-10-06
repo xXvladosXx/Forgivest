@@ -37,7 +37,7 @@ namespace AbilitySystem.Tests
         {
             yield return null;
             var statController = _player.GetComponent<StatController>();
-            var wisdom = statController.stats["Wisdom"];
+            var wisdom = statController.Stats["Wisdom"];
             wisdom.value.Should().Be(11);
         }
         
@@ -47,7 +47,7 @@ namespace AbilitySystem.Tests
             yield return null;
             var abilityController = _player.GetComponent<AbilityController>();
             var statController = _enemy.GetComponent<StatController>();
-            var health = statController.stats["Health"] as Health;
+            var health = statController.Stats["Health"] as Health;
             health.currentValue.Should().Be(100);
             abilityController.TryActiveAbility("SingleTargetAbility", _enemy);
             health.currentValue.Should().Be(95);
@@ -59,7 +59,7 @@ namespace AbilitySystem.Tests
             yield return null;
             var abilityController = _player.GetComponent<AbilityController>();
             var statController = _player.GetComponent<StatController>();
-            var mana = statController.stats["Mana"] as Attribute;
+            var mana = statController.Stats["Mana"] as Attribute;
             mana.currentValue.Should().Be(100);
             abilityController.TryActiveAbility("AbilityWithCost", _enemy);
             mana.currentValue.Should().Be(50);
@@ -71,7 +71,7 @@ namespace AbilitySystem.Tests
             yield return null;
             var abilityController = _player.GetComponent<AbilityController>();
             var statController = _player.GetComponent<StatController>();
-            var mana = statController.stats["Mana"] as Attribute;
+            var mana = statController.Stats["Mana"] as Attribute;
             mana.currentValue.Should().Be(100);
             abilityController.TryActiveAbility("AbilityWithCost", _enemy);
             abilityController.TryActiveAbility("AbilityWithCost", _enemy).Should().BeTrue();

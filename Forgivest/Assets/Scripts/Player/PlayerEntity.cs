@@ -10,9 +10,10 @@ using RaycastSystem.Core;
 using StateMachine.Player;
 using StatsSystem;
 using StatsSystem.Core;
+using StatSystem;
+using StatSystem.Scripts.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem;
 using Utilities;
 
 namespace Player
@@ -21,7 +22,7 @@ namespace Player
         typeof(Rigidbody),
         typeof(Collider))]
     
-    [RequireComponent(typeof(StatsHandler),
+    [RequireComponent(typeof(StatController),
         typeof(Animator),
         typeof(ObjectPicker))]
     public class PlayerEntity : MonoBehaviour, IAnimationEventUser, IDamageReceiver
@@ -33,7 +34,8 @@ namespace Player
         [field: SerializeField] public AliveEntityAnimationData AliveEntityAnimationData { get; private set; }
         [field: SerializeField] public AliveEntityStateData StateData { get; set; }
         [field: SerializeField] public Animator Animator { get; private set; }
-        [field: SerializeField] public StatsHandler StatsHandler { get; private set; }
+        [field: SerializeField] public StatController StatController { get; private set; }
+        [field: SerializeField] public StatsFinder StatsFinder { get; private set; }
 
         [SerializeField] private ObjectPicker _objectPicker;
 
@@ -103,14 +105,18 @@ namespace Player
 
         public void ApplyAttack(float timeOfActiveCollider)
         {
-            Debug.Log(StatsHandler.CalculateStat(StatsEnum.Health) + " Health ");
+            Debug.Log(StatsFinder.FindStat("PhysicalAttack"));
+            
+            /*Debug.Log(StatsHandler.CalculateStat(StatsEnum.Health) + " Health ");
             Debug.Log(StatsHandler.CalculateStat(StatsEnum.Damage) + " Dam ");
+            */
             
             AttackApplier.ApplyDamage(new AttackData
             {
-                Damage = StatsHandler.CalculateStat(StatsEnum.Damage),
+                Damage = StatsFinder.FindStat("PhysicalAttack"),
                 DamageApplierLayerMask = LayerMask
             }, timeOfActiveCollider);
+            
         }
 
         

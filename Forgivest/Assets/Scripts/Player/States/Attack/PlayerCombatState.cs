@@ -17,7 +17,7 @@
 
         public override void OnAnimationExitEvent()
         {
-            PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerAggroState);
+            PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerChasingState);
         }
 
         protected override void OnInteractableCheck()

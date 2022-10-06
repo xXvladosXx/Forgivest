@@ -371,7 +371,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555835720}
-  m_LocalRotation: {x: 0.36514142, y: 0.33891404, z: -0.14475554, w: 0.85490054}
+  m_LocalRotation: {x: 0.36514148, y: 0.3389141, z: -0.14475556, w: 0.8549005}
   m_LocalPosition: {x: -33.20352, y: 10.05, z: -26.771618}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -711,7 +711,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301486876}
-  m_LocalRotation: {x: 0.36514142, y: 0.33891404, z: -0.14475554, w: 0.85490054}
+  m_LocalRotation: {x: 0.36514148, y: 0.3389141, z: -0.14475556, w: 0.8549005}
   m_LocalPosition: {x: -33.20352, y: 10.05, z: -26.771618}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -27647,7 +27647,10 @@ GameObject:
   - component: {fileID: 6702610202858371057}
   - component: {fileID: 6702610202858371062}
   - component: {fileID: 6702610202858371063}
-  - component: {fileID: 6702610202858371064}
+  - component: {fileID: 6702610202858371066}
+  - component: {fileID: 6702610202858371065}
+  - component: {fileID: 6702610202858371067}
+  - component: {fileID: 6702610202858371068}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -27676,7 +27679,8 @@ MonoBehaviour:
   <StateData>k__BackingField: {fileID: 11400000, guid: fb80194aae0bfab4f846f4637a1aeff1,
     type: 2}
   <Animator>k__BackingField: {fileID: 6702610202858371054}
-  <StatsHandler>k__BackingField: {fileID: 6702610202858371064}
+  <StatController>k__BackingField: {fileID: 0}
+  <StatsFinder>k__BackingField: {fileID: 0}
   _objectPicker: {fileID: 6702610202858371063}
 --- !u!136 &6702610202858371058
 CapsuleCollider:
@@ -27795,7 +27799,7 @@ MonoBehaviour:
     <LeftHand>k__BackingField: {fileID: 6702610202564482009}
   <PickableItem>k__BackingField: {fileID: 0}
   <PickableItem1>k__BackingField: {fileID: 0}
---- !u!114 &6702610202858371064
+--- !u!114 &6702610202858371065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -27804,37 +27808,59 @@ MonoBehaviour:
   m_GameObject: {fileID: 6702610202858371055}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27fba32baad3458687d7d0fe44638475, type: 3}
+  m_Script: {fileID: 11500000, guid: 0591b16440744ab9943d5c70726204b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statDatabase: {fileID: 11400000, guid: 0150d0194a4ca3e4c8903e4aeb7857c3, type: 2}
+--- !u!114 &6702610202858371066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6702610202858371055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93cd15418e07438b85a6b5972ab6f924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6702610202858371067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6702610202858371055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1057846cc6b242268d78cb272fd3f912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Level: 1
+  m_CurrentExperience: 0
+  m_RequiredExperienceFormula: {fileID: 11400000, guid: 41a6a3d4b15316d40891dfd93b6d6416,
+    type: 2}
+--- !u!114 &6702610202858371068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6702610202858371055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c4f950432384e0583635cf80daaa8c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 6702610202858371063}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: <Modifiers>k__BackingField
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[StatsSystem.Core.IModifier, Assembly-CSharp]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-  <StatsContainer>k__BackingField: {fileID: 11400000, guid: 6cba0b19cfc037244982ac7f072af1ba,
-    type: 2}
+    SerializationNodes: []
 --- !u!1 &6702610202861559724
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,8 +38,8 @@ namespace StatSystem
                 OnLevelableOnInitialized();
             }
         }
-
-       
+    
+           
 
         private void OnDisable()
         {
@@ -75,7 +75,7 @@ namespace StatSystem
         protected override void InitializeStatFormulas()
         {
             base.InitializeStatFormulas();
-            foreach (Stat currentStat in m_Stats.Values)
+            foreach (Stat currentStat in _stats.Values)
             {
                 if (currentStat.definition.Formula != null && currentStat.definition.Formula.rootNode != null)
                 {

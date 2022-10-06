@@ -41,7 +41,7 @@ namespace StatSystem.UI
             VisualElement primaryStats = root.Q("primary-stats");
             for (int i = 0; i < primaryStats.childCount; i++)
             {
-                Stat stat = m_Controller.stats[primaryStats[i].name];
+                Stat stat = m_Controller.Stats[primaryStats[i].name];
                 Label label = primaryStats[i].Q<Label>("value");
                 label.text = stat.value.ToString();
                 stat.valueChanged += () =>
@@ -62,7 +62,7 @@ namespace StatSystem.UI
             VisualElement stats = root.Q("stats");
             for (int i = 0; i < stats.childCount; i++)
             {
-                Stat stat = m_Controller.stats[stats[i].name.Replace("-", "")];
+                Stat stat = m_Controller.Stats[stats[i].name.Replace("-", "")];
                 Label label = stats[i].Q<Label>("value");
                 label.text = stat.value.ToString();
                 stat.valueChanged += () =>
