@@ -2,6 +2,7 @@ using System;
 using InventorySystem.Items;
 using InventorySystem.Items.Armor;
 using InventorySystem.Items.Weapon;
+using StatSystem;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -15,7 +16,8 @@ namespace InventorySystem
 
         public GameObject CurrentColliderWeapon { get; private set; }
         public Weapon CurrentWeapon { get; private set; }
-        
+
+        public event Action<StatsableItem> OnItemEquipped;
         public bool TryToEquip(StatsableItem statsableItem)
         {
             switch (statsableItem)
@@ -35,6 +37,7 @@ namespace InventorySystem
             {
                 CurrentWeapon = weapon;
                 CurrentColliderWeapon = Object.Instantiate(weapon.Prefab, weapon.RightHanded ? RightHand : LeftHand);
+                OnItemEquipped?.Invoke(weapon);
                 return true;
             }
 
@@ -42,5 +45,6 @@ namespace InventorySystem
 
             return false;
         }
+
     }
 }

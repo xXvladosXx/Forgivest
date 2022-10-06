@@ -10,9 +10,9 @@ namespace StatSystem
     [RequireComponent(typeof(TagController))]
     public class StatController : MonoBehaviour
     {
-        [SerializeField] private StatDatabase m_StatDatabase;
-        protected Dictionary<string, Stat> m_Stats = new Dictionary<string, Stat>(StringComparer.OrdinalIgnoreCase);
-        public Dictionary<string, Stat> stats => m_Stats;
+        [SerializeField] private StatDatabase _statDatabase;
+        protected Dictionary<string, Stat> _stats = new Dictionary<string, Stat>(StringComparer.OrdinalIgnoreCase);
+        public Dictionary<string, Stat> Stats => _stats;
         private TagController _tagController;
         public bool IsInitialized { get; private set; }
         public event Action OnInitialized;
@@ -35,31 +35,31 @@ namespace StatSystem
 
         protected void Initialize()
         {
-            foreach (StatDefinition definition in m_StatDatabase.stats)
+            foreach (StatDefinition definition in _statDatabase.stats)
             {
-                m_Stats.Add(definition.name, new Stat(definition, this));
+                _stats.Add(definition.name, new Stat(definition, this));
             }
 
-            foreach (StatDefinition definition in m_StatDatabase.attributes)
+            foreach (StatDefinition definition in _statDatabase.attributes)
             {
                 if (definition.name.Equals("Health", StringComparison.OrdinalIgnoreCase))
                 {
-                    m_Stats.Add(definition.name, new Health(definition, this, _tagController));
+                    _stats.Add(definition.name, new Health(definition, this, _tagController));
                 }
                 else
                 {
-                    m_Stats.Add(definition.name, new Attribute(definition, this));   
+                    _stats.Add(definition.name, new Attribute(definition, this));   
                 }
             }
 
-            foreach (StatDefinition definition in m_StatDatabase.primaryStats)
+            foreach (StatDefinition definition in _statDatabase.primaryStats)
             {
-                m_Stats.Add(definition.name, new PrimaryStat(definition, this));
+                _stats.Add(definition.name, new PrimaryStat(definition, this));
             }
             
             InitializeStatFormulas();
 
-            foreach (Stat stat in m_Stats.Values)
+            foreach (Stat stat in _stats.Values)
             {
                 stat.Initialize();
             }
@@ -70,9 +70,14 @@ namespace StatSystem
 
         private void Update()
         {
-            foreach (var stat in m_Stats.Values)
+            foreach (var stat in _stats.Values)
             {
                 if (stat.definition.name == "Health")
+                {
+                    print(stat.value);
+                }
+                
+                if(stat.definition.name == "Strength")
                 {
                     print(stat.value);
                 }
@@ -80,12 +85,38 @@ namespace StatSystem
 
             if (Input.GetKeyDown(KeyCode.I))
             {
+                _stats["Health"].AddModifier(new StatModifier
+                {
+                    Magnitude = 10,
+                    Type = ModifierOperationType.Additive,
+                    Source = this
+                });
             }
+            
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                _stats["Strength"].AddModifier(new StatModifier
+                {
+                    Magnitude = 10,
+                    Type = ModifierOperationType.Additive,
+                    Source = this
+                });
+            }
+        }
+
+        public void AddStat(StatModifier statModifier)
+        {
+            _stats[statModifier.StatName].AddModifier(statModifier);
+        }
+
+        public void RemoveStat(StatModifier statModifier)
+        {
+            _stats[statModifier.StatName].RemoveModifier(statModifier);
         }
         
         protected virtual void InitializeStatFormulas()
         {
-            foreach (Stat currentStat in m_Stats.Values)
+            foreach (Stat currentStat in _stats.Values)
             {
                 if (currentStat.definition.Formula != null && currentStat.definition.Formula.rootNode != null)
                 {
@@ -93,7 +124,7 @@ namespace StatSystem
 
                     foreach (StatNode statNode in statNodes)
                     {
-                        if (m_Stats.TryGetValue(statNode.statName.Trim(), out Stat stat))
+                        if (_stats.TryGetValue(statNode.statName.Trim(), out Stat stat))
                         {
                             statNode.stat = stat;
                             stat.valueChanged += currentStat.CalculateValue;

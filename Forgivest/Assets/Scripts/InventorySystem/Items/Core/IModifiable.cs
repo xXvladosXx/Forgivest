@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using StatSystem;
+
 //using StatsSystem.Core.Bonuses;
 
 namespace InventorySystem.Items
@@ -7,5 +9,7 @@ namespace InventorySystem.Items
     {
         //List<CharacteristicBonus> CharacteristicBonuses { get; }
         //List<StatBonus> StatsBonuses { get; }
+        
+         public List<StatModifier> StatModifier { get;  }
     }
 }

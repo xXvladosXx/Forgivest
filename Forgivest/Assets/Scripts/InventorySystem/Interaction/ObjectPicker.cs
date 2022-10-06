@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using InventorySystem.Items;
 using RaycastSystem.Core;
 using Sirenix.OdinInspector;
+using StatSystem;
 using UnityEngine;
 
 namespace InventorySystem.Interaction
 {
-    public class ObjectPicker : SerializedMonoBehaviour
+    public class ObjectPicker : SerializedMonoBehaviour, IStatsChangeable
     {
         [field: SerializeField] public Inventory Inventory { get; private set; }
         [field: SerializeField] public ItemEquipHandler ItemEquipHandler { get; private set; }
@@ -15,6 +16,7 @@ namespace InventorySystem.Interaction
         [field: SerializeField] public PickableItem PickableItem1 { get; private set; }
         
         private RaycastUser _raycastUser;
+        public event Action<List<StatModifier>> OnStatChanged;
 
         public void Init(RaycastUser raycastUser)
         {
@@ -24,6 +26,16 @@ namespace InventorySystem.Interaction
         private void Awake()
         {
             Inventory.Init();
+        }
+
+        private void OnEnable()
+        {
+            ItemEquipHandler.OnItemEquipped += RecalculateStats;
+        }
+
+        private void OnDisable()
+        {
+            ItemEquipHandler.OnItemEquipped -= RecalculateStats;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -46,6 +58,22 @@ namespace InventorySystem.Interaction
                     throw new ArgumentOutOfRangeException(nameof(pickable));
             }
         }
+        
+        private void RecalculateStats(StatsableItem statsableItem)
+        {
+            var modifiers = new List<StatModifier>();
+            
+            foreach (var weapon in Inventory.ItemContainer.GetAllItems())
+            {
+                if (weapon is IStatsable statsable)
+                {
+                    modifiers.AddRange(statsable.StatModifier);
+                }
+            }
+            
+            OnStatChanged?.Invoke(modifiers);
+        }
+
 
         /*public event Action<List<IBonus>> OnBonusAdded;
         public event Action<List<IBonus>> OnBonusRemoved;

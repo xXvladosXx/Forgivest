@@ -22,7 +22,7 @@ namespace StatSystem.Tests
         {
             yield return null;
             PlayerStatController playerStatController = GameObject.FindObjectOfType<PlayerStatController>();
-            Assert.AreEqual(1, playerStatController.stats["Strength"].value);
+            Assert.AreEqual(1, playerStatController.Stats["Strength"].value);
             UIDocument uiDocument = GameObject.FindObjectOfType<UIDocument>();
             VisualElement strengthElement = uiDocument.rootVisualElement.Q("strength");
             Button incrementButton = strengthElement.Q<Button>("increment-button");
@@ -30,7 +30,7 @@ namespace StatSystem.Tests
             {
                 incrementButton.SendEvent(e);
             }
-            Assert.AreEqual(2, playerStatController.stats["Strength"].value);
+            Assert.AreEqual(2, playerStatController.Stats["Strength"].value);
         }
         
         [UnityTest]
@@ -78,7 +78,7 @@ namespace StatSystem.Tests
             VisualElement physicalAttackElement = uiDocument.rootVisualElement.Q("physical-attack");
             Label physicalAttackValue = physicalAttackElement.Q<Label>("value");
             Assert.AreEqual("3", physicalAttackValue.text);
-            playerStatController.stats["PhysicalAttack"].AddModifier(new StatModifier
+            playerStatController.Stats["PhysicalAttack"].AddModifier(new StatModifier
             {
                 Magnitude = 5,
                 Type = ModifierOperationType.Additive

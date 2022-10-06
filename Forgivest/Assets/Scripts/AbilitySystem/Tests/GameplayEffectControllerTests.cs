@@ -41,7 +41,7 @@ namespace AbilitySystem.Tests
             var statController = _player.GetComponent<StatController>();
             var damageEffectDefinition = AssetDatabase.LoadAssetAtPath<GameplayEffectDefinition>("Assets/Tests/SO/Test_GameplayEffect.asset");
             var damageEffect = new GameplayEffect(damageEffectDefinition, null, _enemy);
-            Health health = statController.stats["Health"] as Health;
+            Health health = statController.Stats["Health"] as Health;
             health.currentValue.Should().Be(100);
             effectController.ApplyGameplayEffectToSelf(damageEffect);
             health.currentValue.Should().Be(90);
@@ -58,7 +58,7 @@ namespace AbilitySystem.Tests
                     "Assets/Tests/SO/Test_GameplayPersistentEffect.asset");
 
             var testEffect = new GameplayPersistentEffect(testEffectDefinition, null, _player);
-            var intelligence = statController.stats["Intelligence"];
+            var intelligence = statController.Stats["Intelligence"];
             intelligence.value.Should().Be(1);
             effectController.ApplyGameplayEffectToSelf(testEffect);
             intelligence.value.Should().Be(4);
@@ -75,7 +75,7 @@ namespace AbilitySystem.Tests
                     "Assets/Tests/SO/Persistance/Test_TimeableGameplayPersistentEffect.asset");
 
             var testEffect = new GameplayPersistentEffect(testEffectDefinition, null, _player);
-            var intelligence = statController.stats["Intelligence"];
+            var intelligence = statController.Stats["Intelligence"];
             intelligence.value.Should().Be(1);
             effectController.ApplyGameplayEffectToSelf(testEffect);
             intelligence.value.Should().Be(4);
@@ -88,7 +88,7 @@ namespace AbilitySystem.Tests
         {
             yield return null;
             var statController = _player.GetComponent<StatController>();
-            var dexterity = statController.stats["Dexterity"];
+            var dexterity = statController.Stats["Dexterity"];
             dexterity.value.Should().Be(4);
         }
         
@@ -133,7 +133,7 @@ namespace AbilitySystem.Tests
             var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayPersistentEffectDefinition>(
                 "Assets/Tests/SO/PeriodicEffects/Period/GameplayPersistentEffect.asset");
 
-            var health = statController.stats["Health"] as Health;
+            var health = statController.Stats["Health"] as Health;
             var effect = new GameplayPersistentEffect(effectDefinition, null, _player);
             effectContrller.ApplyGameplayEffectToSelf(effect);
             health.currentValue.Should().Be(100);
@@ -150,7 +150,7 @@ namespace AbilitySystem.Tests
             var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayPersistentEffectDefinition>(
                 "Assets/Tests/SO/PeriodicEffects/Instant/GameplayPersistentEffect.asset");
 
-            var health = statController.stats["Health"] as Health;
+            var health = statController.Stats["Health"] as Health;
             var effect = new GameplayPersistentEffect(effectDefinition, null, _player);
             health.currentValue.Should().Be(100);
             effectContrller.ApplyGameplayEffectToSelf(effect);
@@ -166,7 +166,7 @@ namespace AbilitySystem.Tests
             var effectDefinition = AssetDatabase.LoadAssetAtPath<GameplayStackableEffectDefinition>(
                 "Assets/Tests/SO/OverflowEffects/GameplayStackableEffect.asset");
             
-            var health = statController.stats["Health"] as Health;
+            var health = statController.Stats["Health"] as Health;
             health.currentValue.Should().Be(100);
             effectController.ApplyGameplayEffectToSelf(new GameplayStackableEffect(effectDefinition, null, _player));
             effectController.ApplyGameplayEffectToSelf(new GameplayStackableEffect(effectDefinition, null, _player));

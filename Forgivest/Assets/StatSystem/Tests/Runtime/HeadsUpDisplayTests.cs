@@ -55,7 +55,7 @@ namespace StatSystem.Tests
             UIDocument uiDocument = headsUpDisplayUI.GetComponent<UIDocument>();
             ProgressBar manaBar = uiDocument.rootVisualElement.Q<ProgressBar>("mana");
             Assert.AreEqual(100, manaBar.value);
-            Attribute mana = playerStatController.stats["Mana"] as Attribute;
+            Attribute mana = playerStatController.Stats["Mana"] as Attribute;
             mana.ApplyModifier(new StatModifier
             {
                 Magnitude = -10,
@@ -73,7 +73,7 @@ namespace StatSystem.Tests
             UIDocument uiDocument = headsUpDisplayUI.GetComponent<UIDocument>();
             ProgressBar healthBar = uiDocument.rootVisualElement.Q<ProgressBar>("health");
             Assert.AreEqual(100, healthBar.value);
-            Attribute health = playerStatController.stats["Health"] as Attribute;
+            Attribute health = playerStatController.Stats["Health"] as Attribute;
             health.ApplyModifier(new StatModifier
             {
                 Magnitude = -10,

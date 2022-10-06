@@ -24,7 +24,7 @@ namespace StateMachine.Player
         public AliveEntityStateReusableData ReusableData { get; }
 
         public PlayerIdlingState IdlingState { get; }
-        public PlayerAggroState PlayerAggroState { get; }
+        public PlayerChasingState PlayerChasingState { get; }
         public PlayerCombatState PlayerCombatState { get; }
         public PlayerRunningState RunningState { get; }
         public AttackApplier AttackApplier { get; }
@@ -51,7 +51,7 @@ namespace StateMachine.Player
             IdlingState = new PlayerIdlingState(this);
 
             RunningState = new PlayerRunningState(this);
-            PlayerAggroState = new PlayerAggroState(this);
+            PlayerChasingState = new PlayerChasingState(this);
             PlayerCombatState = new PlayerCombatState(this);
         }
     }

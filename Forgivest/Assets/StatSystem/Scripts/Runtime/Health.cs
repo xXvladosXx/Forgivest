@@ -53,7 +53,7 @@ namespace StatSystem
 
         private float FindResistance(StatModifier modifier, string stat)
         {
-            float resistance = Mathf.Clamp(m_Controller.stats[stat].value, 1, 100);
+            float resistance = Mathf.Clamp(m_Controller.Stats[stat].value, 1, 100);
             var possibleDamage = modifier.Magnitude;
             possibleDamage =  (possibleDamage * 100) / resistance;
             return possibleDamage;

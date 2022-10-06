@@ -51,8 +51,8 @@ namespace MyGame
             m_StatController.OnInitialized -= OnStatControllerOnInitialized;
             if (m_StatController.IsInitialized)
             {
-                m_StatController.stats["MovementSpeed"].valueChanged -= OnMovementSpeedChanged;
-                m_StatController.stats["AttackSpeed"].valueChanged -= OnAttackSpeedChanged;
+                m_StatController.Stats["MovementSpeed"].valueChanged -= OnMovementSpeedChanged;
+                m_StatController.Stats["AttackSpeed"].valueChanged -= OnAttackSpeedChanged;
             }
 
             _abilityController.OnAbilityActivated -= ActivateAbility;
@@ -83,19 +83,19 @@ namespace MyGame
         {
             OnMovementSpeedChanged();
             OnAttackSpeedChanged();
-            m_StatController.stats["MovementSpeed"].valueChanged += OnMovementSpeedChanged;
-            m_StatController.stats["AttackSpeed"].valueChanged += OnAttackSpeedChanged;
+            m_StatController.Stats["MovementSpeed"].valueChanged += OnMovementSpeedChanged;
+            m_StatController.Stats["AttackSpeed"].valueChanged += OnAttackSpeedChanged;
         }
         
         private void OnAttackSpeedChanged()
         {
-            m_Animator.SetFloat(ATTACK_SPEED, m_StatController.stats["AttackSpeed"].value / 100f);
+            m_Animator.SetFloat(ATTACK_SPEED, m_StatController.Stats["AttackSpeed"].value / 100f);
         }
 
         private void OnMovementSpeedChanged()
         {
-            m_Animator.SetFloat(MOVEMENT_SPEED, m_StatController.stats["MovementSpeed"].value / 100f);
-            m_NavMeshAgent.speed = m_BaseSpeed * m_StatController.stats["MovementSpeed"].value / 100f;
+            m_Animator.SetFloat(MOVEMENT_SPEED, m_StatController.Stats["MovementSpeed"].value / 100f);
+            m_NavMeshAgent.speed = m_BaseSpeed * m_StatController.Stats["MovementSpeed"].value / 100f;
         }
     }
 }

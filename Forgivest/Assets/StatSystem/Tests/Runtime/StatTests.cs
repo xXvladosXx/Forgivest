@@ -20,7 +20,7 @@ namespace StatSystem.Tests
         {
             yield return null;
             StatController statController = GameObject.FindObjectOfType<StatController>();
-            Stat physicalAttack = statController.stats["PhysicalAttack"];
+            Stat physicalAttack = statController.Stats["PhysicalAttack"];
             Assert.AreEqual(0, physicalAttack.value);
             physicalAttack.AddModifier(new StatModifier
             {
@@ -35,7 +35,7 @@ namespace StatSystem.Tests
         {
             yield return null;
             StatController statController = GameObject.FindObjectOfType<StatController>();
-            Stat attackSpeed = statController.stats["AttackSpeed"];
+            Stat attackSpeed = statController.Stats["AttackSpeed"];
             Assert.AreEqual(1, attackSpeed.value);
             attackSpeed.AddModifier(new StatModifier
             {
@@ -50,8 +50,8 @@ namespace StatSystem.Tests
         {
             yield return null;
             StatController statController = GameObject.FindObjectOfType<StatController>();
-            PrimaryStat strength = statController.stats["Strength"] as PrimaryStat;
-            Stat physicalAttack = statController.stats["PhysicalAttack"];
+            PrimaryStat strength = statController.Stats["Strength"] as PrimaryStat;
+            Stat physicalAttack = statController.Stats["PhysicalAttack"];
             Assert.AreEqual(1, strength.value);
             Assert.AreEqual(3, physicalAttack.value);
             strength.Add(3);

@@ -25,7 +25,7 @@ namespace StatSystem.Tests
         {
             yield return null;
             StatController statController = GameObject.FindObjectOfType<StatController>();
-            Attribute health = statController.stats["Health"] as Attribute;
+            Attribute health = statController.Stats["Health"] as Attribute;
             Assert.AreEqual(100, health.currentValue);
             Assert.AreEqual(100, health.value);
             health.ApplyModifier(new StatModifier
@@ -41,7 +41,7 @@ namespace StatSystem.Tests
         {
             yield return null;
             StatController statController = GameObject.FindObjectOfType<StatController>();
-            Attribute health = statController.stats["Health"] as Attribute;
+            Attribute health = statController.Stats["Health"] as Attribute;
             Assert.AreEqual(100, health.currentValue);
             health.ApplyModifier(new StatModifier
             {
@@ -56,7 +56,7 @@ namespace StatSystem.Tests
         {
             yield return null;
             StatController statController = GameObject.FindObjectOfType<StatController>();
-            Health health = statController.stats["Health"] as Health;
+            Health health = statController.Stats["Health"] as Health;
             Assert.AreEqual(100, health.currentValue);
             health.ApplyModifier(new HealthModifier
             {

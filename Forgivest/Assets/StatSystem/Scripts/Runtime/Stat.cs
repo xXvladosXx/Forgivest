@@ -33,6 +33,12 @@ namespace StatSystem
             m_Modifiers.Add(modifier);
             CalculateValue();
         }
+        
+        public void RemoveModifier(StatModifier modifier)
+        {
+            m_Modifiers.Remove(modifier);
+            CalculateValue();
+        }
 
         public void RemoveModifierFromSource(object source)
         {
