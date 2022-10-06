@@ -1,6 +1,8 @@
 using AI.StateMachine.Config;
 using AnimationSystem;
+using AttackSystem;
 using MovementSystem;
+using StatsSystem;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,6 +27,10 @@ namespace AI.StateMachine.Core
         AnimationChanger AnimationChanger { get; }
         
         IAnimationEventUser AnimationEventUser { get; }
+        
+        StatsHandler StatsHandler { get; }
+
+        AttackApplier AttackApplier { get; }
 
     }
 }

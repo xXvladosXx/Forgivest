@@ -36,7 +36,7 @@ namespace AI.StateMachine.States
         public override void Update()
         {
             base.Update();
-            Debug.Log("Attacked!");
+            //Debug.Log("Attacked!");
             if (GetPlayerDistance() > AIStateMachine.AIEnemy.Config.DistanceToAttack)
             {
                 AIStateMachine.ChangeState(AIStateMachine.AIChasingEnemyState);
