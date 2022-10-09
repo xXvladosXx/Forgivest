@@ -35,9 +35,11 @@ namespace StateMachine.Player.States
         {
             if (PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.IsPressed())
             {
-                CheckRaycast();
-                OnInteractableCheck();
-                OnClickPressed();
+                if (CheckRaycast())
+                {
+                    OnInteractableCheck();
+                    OnClickPressed();
+                }
             }
 
             UpdateMovementAnimation();
@@ -59,13 +61,15 @@ namespace StateMachine.Player.States
             PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.canceled -= OnClickCanceled;
         }
 
-        private void CheckRaycast()
+        private bool CheckRaycast()
         {
-            if (!TryToGetHitRaycast(out var raycastHit)) return;
+            if (!PlayerStateMachine.RaycastUser.RaycastHit.HasValue) return false;
 
-            PlayerStateMachine.ReusableData.RaycastClickedPoint = raycastHit.Value.point;
-            raycastHit.Value.collider.TryGetComponent(out IInteractable interactable);
+            PlayerStateMachine.ReusableData.RaycastClickedPoint = PlayerStateMachine.RaycastUser.RaycastHit.Value.point;
+            PlayerStateMachine.RaycastUser.RaycastHit.Value.collider.TryGetComponent(out IInteractable interactable);
             PlayerStateMachine.ReusableData.InteractableObject = interactable;
+
+            return true;
         }
 
         public virtual void OnAnimationEnterEvent()
@@ -99,16 +103,7 @@ namespace StateMachine.Player.States
         protected virtual void OnStop()
         {
         }
-
-        protected bool TryToGetHitRaycast(out RaycastHit? raycastHit)
-        {
-            raycastHit = PlayerStateMachine.RaycastUser.RaycastExcept(
-                PlayerStateMachine.PlayerInputProvider.ReadMousePosition(),
-                LayerUtils.Player);
-
-            return raycastHit != null;
-        }
-
+        
         protected virtual void OnInteractableCheck()
         {
              switch (PlayerStateMachine.ReusableData.InteractableObject)

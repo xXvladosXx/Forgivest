@@ -10,7 +10,7 @@ namespace InventorySystem
         
         public void Init()
         {
-            ItemContainer.Capacity = Capacity;
+            ItemContainer.Init(Capacity);;
         }
     }
 }
