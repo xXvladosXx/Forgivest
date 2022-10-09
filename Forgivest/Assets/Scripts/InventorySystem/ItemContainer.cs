@@ -10,24 +10,34 @@ namespace InventorySystem
     [Serializable]
     public class ItemContainer : IContainer
     {
-        [field: SerializeField] public List<ItemSlot> Slots { get; private set; }
+        [field: SerializeField] public List<ItemSlot> Slots { get; private set; } = new List<ItemSlot>();
         public int Capacity { get; set; }
-        private ItemContainer _container;
         public bool IsFull => Slots.All(slot => slot.IsFull);
 
         public event Action<object, IItemContainer, int> OnItemAdded;
         public event Action<object, Type, int> OnItemRemoved;
 
-        public ItemContainer(int capacity)
+        
+        public void Init(int capacity)
         {
             Capacity = capacity;
-            Slots = new List<ItemSlot>(capacity);
+            if (Slots.Count < capacity)
+            {
+                for (int i = Slots.Count; i < capacity; i++)
+                {
+                    Slots.Add(new ItemSlot());
+                }
+            }
+            
             for (int i = 0; i < capacity; i++)
             {
-                Slots.Add(new ItemSlot());
+                if (Slots[i] == null)
+                {
+                    Slots.Add(new ItemSlot());
+                }
             }
         }
-
+       
         public IItemContainer GetItem(Type itemType) => Slots.Find(slot => slot.ItemType == itemType).Item;
 
         public IItemContainer[] GetAllItems() =>
@@ -134,5 +144,7 @@ namespace InventorySystem
             Slots.FindAll(slot => !slot.IsEmpty && slot.ItemType == itemType).ToArray();
 
         private ISlotContainer[] GetAllSlots() => Slots.ToArray();
+
+        
     }
 }

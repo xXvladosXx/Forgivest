@@ -2,6 +2,7 @@
 using AttackSystem;
 using Data.Player;
 using MovementSystem;
+using RaycastSystem;
 using RaycastSystem.Core;
 using StateMachine.Player.States;
 using StateMachine.Player.States.Attack;
@@ -18,7 +19,7 @@ namespace StateMachine.Player
         public Movement Movement { get; }
         public PlayerInputProvider PlayerInputProvider { get; }
         public AliveEntityStateData AliveEntityStateData { get; }
-        public RaycastUser RaycastUser { get; }
+        public PlayerRaycastUser RaycastUser { get; }
         public AliveEntityAnimationData AnimationData { get; }
 
         public AliveEntityStateReusableData ReusableData { get; }
@@ -33,7 +34,7 @@ namespace StateMachine.Player
             Movement movement, Rotator rotator,
             PlayerInputProvider playerInputProvider,
             AliveEntityStateData aliveEntityStateData,
-            RaycastUser raycastUser, 
+            PlayerRaycastUser raycastUser, 
             AliveEntityAnimationData animationData,
             AttackApplier attackApplier)
         {
@@ -49,7 +50,6 @@ namespace StateMachine.Player
             ReusableData = new AliveEntityStateReusableData();
 
             IdlingState = new PlayerIdlingState(this);
-
             RunningState = new PlayerRunningState(this);
             PlayerChasingState = new PlayerChasingState(this);
             PlayerCombatState = new PlayerCombatState(this);

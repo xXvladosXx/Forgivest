@@ -8,8 +8,6 @@ using MovementSystem;
 using RaycastSystem;
 using RaycastSystem.Core;
 using StateMachine.Player;
-using StatsSystem;
-using StatsSystem.Core;
 using StatSystem;
 using StatSystem.Scripts.Runtime;
 using UnityEngine;
@@ -38,6 +36,7 @@ namespace Player
         [field: SerializeField] public StatController StatController { get; private set; }
         [field: SerializeField] public StatsFinder StatsFinder { get; private set; }
 
+        [field: SerializeField] public PlayerRaycastSettings PlayerRaycastSettings { get; private set; }
         [SerializeField] private ObjectPicker _objectPicker;
 
         public Camera Camera { get; private set; }
@@ -45,7 +44,7 @@ namespace Player
         public AnimationChanger AnimationChanger { get; private set; }
         public Movement Movement { get; private set; }
         public Rotator Rotator { get; private set; }
-        public RaycastUser RaycastUser { get; private set; }
+        public PlayerRaycastUser RaycastUser { get; private set; }
         
         public AttackApplier AttackApplier { get; private set; }
         
@@ -67,7 +66,7 @@ namespace Player
             AnimationChanger = new AnimationChanger(Animator);
             Movement = new Movement(NavMeshAgent, Rigidbody, transform);
             Rotator = new Rotator(Rigidbody);
-            RaycastUser = new PlayerRaycastUser(Camera);
+            RaycastUser = new PlayerRaycastUser(Camera, PlayerInputProvider, PlayerRaycastSettings, Movement);
 
             _objectPicker.Init(RaycastUser);
             
@@ -86,6 +85,9 @@ namespace Player
 
         private void Update()
         {
+            Debug.Log(RaycastUser.RaycastHit.HasValue);
+            
+            RaycastUser.Tick();
             _playerStateMachine.Update();
         }
 

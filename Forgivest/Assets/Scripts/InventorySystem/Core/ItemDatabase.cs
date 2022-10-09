@@ -24,7 +24,8 @@ namespace InventorySystem
             
             for (int i = 0; i < InventoryItems.Length; i++)
             {
-                if (InventoryItems[i].ItemID.Id != i)
+                var itemID = InventoryItems[i].ItemID;
+                if (itemID != null && itemID.Id != i)
                 {
                     InventoryItems[i].ItemID.Id = i;
                 }
