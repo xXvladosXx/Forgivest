@@ -7,6 +7,8 @@ namespace AI.StateMachine.States
     {
         public AIStateMachine AIStateMachine { get; }
 
+
+        public int SkillSelector = Random.Range(0, 1);
         public AIBaseState(AIStateMachine aiStateMachine)
         {
             AIStateMachine = aiStateMachine;

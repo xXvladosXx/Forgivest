@@ -24,5 +24,9 @@ namespace AI.StateMachine.Config
         
         [field: SerializeField] public float TimeDelayBeforeAttack { get; private set; } = 1.5f;
         
+        [field: SerializeField] public float Skill1CooldownTime { get; private set; } = 5f;
+        
+        [field: SerializeField] public float Skill2CooldownTime { get; private set; } = 3f;
+        
     }
 }

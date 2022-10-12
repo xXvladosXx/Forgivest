@@ -10,6 +10,7 @@ namespace AI.StateMachine.States
         {
         }
         
+
         public override void Update()
         {
             base.Update();
@@ -25,7 +26,11 @@ namespace AI.StateMachine.States
                     _currentAttackRate -= Time.deltaTime;
                     if(_currentAttackRate <= 0)
                     {
-                        AIStateMachine.ChangeState(AIStateMachine.AIAttackingEnemyState);
+                        SkillSelector = Random.Range(0, 2);
+                        if(SkillSelector == 0)
+                            AIStateMachine.ChangeState(AIStateMachine.AISkillExampleState);
+                        else
+                            AIStateMachine.ChangeState(AIStateMachine.AISkillExample1State);
                         _currentAttackRate = AIStateMachine.AIEnemy.Config.TimeDelayBeforeAttack;
                     }
                 }
