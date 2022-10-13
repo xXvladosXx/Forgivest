@@ -1,8 +1,11 @@
-﻿namespace Utilities.UI.Dragging
+﻿using UnityEngine;
+
+namespace Utilities.UI.Dragging
 {
-    public interface IDragSource<out T> where T : class
+    public interface IDragSource 
     {
-        T GetItem();
+        int SourceIndex { get; }
+        Sprite GetItem();
         int GetNumber();
         void RemoveItems(int number);
     }
