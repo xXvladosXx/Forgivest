@@ -6,7 +6,7 @@ using Utilities.UI.Dragging;
 namespace GameDevTV.UI.Inventories
 {
     
-    public class InventoryDragItem : DragItem<Sprite>
+    public class InventoryDragItem : DragItem 
     {
     }
 }

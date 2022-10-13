@@ -30,7 +30,8 @@ MonoBehaviour:
   <Name>k__BackingField: Sword
   <Prefab>k__BackingField: {fileID: 0}
   <MaxItemsInStack>k__BackingField: 4
-  <Sprite>k__BackingField: {fileID: 0}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: aa6156860ed77af4b828c1a7e9388f5d,
+    type: 3}
   <ItemID>k__BackingField:
     Id: -1
   <StatModifier>k__BackingField:

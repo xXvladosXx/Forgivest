@@ -1,30 +1,33 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Utilities.UI.Dragging
 {
  
-    public class DragItem<T> : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
-        where T : class
+    public class DragItem  : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        Vector3 startPosition;
-        Transform originalParent;
-        IDragSource<T> source;
+        private Vector3 _startPosition;
+        private Transform _originalParent;
+        private IDragSource _source;
 
-        Canvas parentCanvas;
+        private Canvas _parentCanvas;
 
+        public event Action<int, GameObject> OnDragEnded;
+        public event Action<int, int> OnItemSwapped; 
+        public event Action<int> OnItemSlotChanged; 
         private void Awake()
         {
-            parentCanvas = GetComponentInParent<Canvas>();
-            source = GetComponentInParent<IDragSource<T>>();
+            _parentCanvas = GetComponentInParent<Canvas>();
+            _source = GetComponentInParent<IDragSource >();
         }
 
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
         {
-            startPosition = transform.position;
-            originalParent = transform.parent;
+            _startPosition = transform.position;
+            _originalParent = transform.parent;
             GetComponent<CanvasGroup>().blocksRaycasts = false;
-            transform.SetParent(parentCanvas.transform, true);
+            transform.SetParent(_parentCanvas.transform, true);
         }
 
         void IDragHandler.OnDrag(PointerEventData eventData)
@@ -34,14 +37,14 @@ namespace Utilities.UI.Dragging
 
         void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
-            transform.position = startPosition;
+            transform.position = _startPosition;
             GetComponent<CanvasGroup>().blocksRaycasts = true;
-            transform.SetParent(originalParent, true);
+            transform.SetParent(_originalParent, true);
 
-            IDragDestination<T> container;
+            IDragDestination  container;
             if (!EventSystem.current.IsPointerOverGameObject())
             {
-                container = parentCanvas.GetComponent<IDragDestination<T>>();
+                container = _parentCanvas.GetComponent<IDragDestination >();
             }
             else
             {
@@ -52,44 +55,50 @@ namespace Utilities.UI.Dragging
             {
                 DropItemIntoContainer(container);
             }
+            
+            OnDragEnded?.Invoke(_source.SourceIndex , gameObject);
         }
 
-        private IDragDestination<T> GetContainer(PointerEventData eventData)
+        private IDragDestination GetContainer(PointerEventData eventData)
         {
             if (eventData.pointerEnter)
             {
-                var container = eventData.pointerEnter.GetComponentInParent<IDragDestination<T>>();
+                var container = eventData.pointerEnter.GetComponentInParent<IDragDestination>();
 
                 return container;
             }
             return null;
         }
 
-        private void DropItemIntoContainer(IDragDestination<T> destination)
+        private void DropItemIntoContainer(IDragDestination  destination)
         {
-            if (object.ReferenceEquals(destination, source)) return;
+            if (object.ReferenceEquals(destination, _source)) return;
 
-            var destinationContainer = destination as IDragContainer<T>;
-            var sourceContainer = source as IDragContainer<T>;
+            var destinationContainer = destination as IDragContainer ;
+            var sourceContainer = _source as IDragContainer ;
 
-            // Swap won't be possible
             if (destinationContainer == null || sourceContainer == null || 
                 destinationContainer.GetItem() == null || 
                 object.ReferenceEquals(destinationContainer.GetItem(), sourceContainer.GetItem()))
             {
                 AttemptSimpleTransfer(destination);
+                
+                OnItemSlotChanged?.Invoke(destination.Index );
+                print($"item swapped {destination.Index }");
                 return;
             }
 
             AttemptSwap(destinationContainer, sourceContainer);
         }
 
-        private void AttemptSwap(IDragContainer<T> destination, IDragContainer<T> source)
+        private void AttemptSwap(IDragContainer  destination, IDragContainer  source)
         {
             var removedSourceNumber = source.GetNumber();
             var removedSourceItem = source.GetItem();
             var removedDestinationNumber = destination.GetNumber();
             var removedDestinationItem = destination.GetItem();
+            var removedSourceIndex = source.Index;
+            var removedDestination = destination.Index;
 
             source.RemoveItems(removedSourceNumber);
             destination.RemoveItems(removedDestinationNumber);
@@ -99,52 +108,60 @@ namespace Utilities.UI.Dragging
 
             if (sourceTakeBackNumber > 0)
             {
-                source.AddItems(removedSourceItem, sourceTakeBackNumber);
+                source.AddItems(removedSourceItem, sourceTakeBackNumber, source.Index);
                 removedSourceNumber -= sourceTakeBackNumber;
             }
             if (destinationTakeBackNumber > 0)
             {
-                destination.AddItems(removedDestinationItem, destinationTakeBackNumber);
+                destination.AddItems(removedDestinationItem, destinationTakeBackNumber, destination.Index);
                 removedDestinationNumber -= destinationTakeBackNumber;
             }
 
             if (source.MaxAcceptable(removedDestinationItem) < removedDestinationNumber ||
                 destination.MaxAcceptable(removedSourceItem) < removedSourceNumber)
             {
-                destination.AddItems(removedDestinationItem, removedDestinationNumber);
-                source.AddItems(removedSourceItem, removedSourceNumber);
+                destination.AddItems(removedDestinationItem, removedDestinationNumber, destination.Index);
+                source.AddItems(removedSourceItem, removedSourceNumber, source.Index);
+                
+                OnItemSwapped?.Invoke(source.Index , destination.Index );
+                print($"item swapped {source.Index }, {destination.Index }");
                 return;
             }
 
             if (removedDestinationNumber > 0)
             {
-                source.AddItems(removedDestinationItem, removedDestinationNumber);
+                source.AddItems(removedDestinationItem, removedDestinationNumber, removedSourceIndex);
             }
             if (removedSourceNumber > 0)
             {
-                destination.AddItems(removedSourceItem, removedSourceNumber);
+                destination.AddItems(removedSourceItem, removedSourceNumber, removedDestination);
             }
+            
+            OnItemSwapped?.Invoke(source.Index, destination.Index );
+            print($"item swapped {source.SourceIndex }, {destination.Index }");
         }
 
-        private bool AttemptSimpleTransfer(IDragDestination<T> destination)
+        private bool AttemptSimpleTransfer(IDragDestination destination)
         {
-            var draggingItem = source.GetItem();
-            var draggingNumber = source.GetNumber();
+            var draggingItem = _source.GetItem();
+            var draggingNumber = _source.GetNumber();
 
             var acceptable = destination.MaxAcceptable(draggingItem);
             var toTransfer = Mathf.Min(acceptable, draggingNumber);
 
             if (toTransfer > 0)
             {
-                source.RemoveItems(toTransfer);
-                destination.AddItems(draggingItem, toTransfer);
+                _source.RemoveItems(toTransfer);
+
+                destination.AddItems(draggingItem, toTransfer, destination.Index);
+                
                 return false;
             }
 
             return true;
         }
 
-        private int CalculateTakeBack(T removedItem, int removedNumber, IDragContainer<T> removeSource, IDragContainer<T> destination)
+        private int CalculateTakeBack(Sprite removedItem, int removedNumber, IDragContainer  removeSource, IDragContainer  destination)
         {
             var takeBackNumber = 0;
             var destinationMaxAcceptable = destination.MaxAcceptable(removedItem);
