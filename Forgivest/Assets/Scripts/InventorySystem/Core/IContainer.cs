@@ -1,5 +1,6 @@
 using System;
 using InventorySystem.Items;
+using InventorySystem.Items.Core;
 
 namespace InventorySystem.Core
 {
@@ -8,14 +9,13 @@ namespace InventorySystem.Core
         int Capacity { get; set; }
         bool IsFull { get; }
 
-        IItemContainer GetItem(Type itemType);
-        IItemContainer[] GetAllItems();
-        IItemContainer[] GetAllItems(Type itemType);
-        IItemContainer[] GetEquippedItems();
+        IItem GetItem(Type itemType);
+        Item[] GetAllItems();
+        Item[] GetAllItems(Type itemType);
+        Item[] GetEquippedItems();
 
         int GetItemAmount(Type itemType);
-        bool TryToAdd(object sender, IItemContainer item, int amount = 1);
-        void Remove(object sender, Type itemType, int amount = 1);
+        bool TryToAdd(object sender, IItem item, int amount = 1);
         bool HasItem(Type type);
     }
 }

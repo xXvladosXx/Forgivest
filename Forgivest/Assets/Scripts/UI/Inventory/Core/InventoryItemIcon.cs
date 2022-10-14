@@ -13,7 +13,7 @@ namespace GameDevTV.UI.Inventories
     public class InventoryItemIcon : MonoBehaviour
     {
 
-        public void SetItem(Sprite item)
+        public void SetIcon(Sprite item)
         {
             var iconImage = GetComponent<Image>();
             if (item == null)

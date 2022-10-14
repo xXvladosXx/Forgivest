@@ -1,4 +1,5 @@
 ﻿using InventorySystem.Items.Core;
+using InventorySystem.Items.Weapon.SwordItem;
 using UnityEngine;
 
 namespace InventorySystem.Items.Weapon

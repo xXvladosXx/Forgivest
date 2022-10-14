@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 1525608778226075600}
   - component: {fileID: 1703484757560212284}
   - component: {fileID: 5758381053814450822}
+  - component: {fileID: 8155175675181156552}
   m_Layer: 5
-  m_Name: InventorySlot
+  m_Name: EquipmentSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,6 +95,33 @@ MonoBehaviour:
   <SlotRequirements>k__BackingField: []
   _itemIcon: {fileID: 819548288145586085}
   _itemAmount: {fileID: 4260172161126377295}
+--- !u!114 &8155175675181156552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602997939324067808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f559055d98c4aac8ebe5e07cc1938a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: <ItemType>k__BackingField
+      Entry: 7
+      Data: 0|InventorySystem.Items.ItemTypes.PotionType, Inventory
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!1001 &3738852935408870244
 PrefabInstance:
   m_ObjectHideFlags: 0
