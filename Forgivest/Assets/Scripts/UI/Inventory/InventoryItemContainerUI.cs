@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using GameDevTV.UI.Inventories;
 using UI.Core;
 using UI.Inventory.Core;
-using UI.Inventory.Dragging;
 using UnityEngine;
 
 namespace UI.Inventory
@@ -52,7 +50,6 @@ namespace UI.Inventory
         {
             foreach (var inventorySlot in _inventorySlots)
             {
-                print(inventorySlot.GetIcon() + " " + inventorySlot.Index + "\n");
             }
         }
 
@@ -68,7 +65,7 @@ namespace UI.Inventory
         {
             if(_inventorySlots[slotIndex] != null)
             {
-                _inventorySlots[slotIndex].SetItemData(itemSprite, itemAmount, slotIndex);
+                _inventorySlots[slotIndex].SetSlotData(itemSprite, itemAmount, slotIndex);
             }
         }
 

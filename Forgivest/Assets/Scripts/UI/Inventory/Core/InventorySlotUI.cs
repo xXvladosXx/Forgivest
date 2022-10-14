@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GameDevTV.UI.Inventories;
 using TMPro;
-using UI.Inventory.Dragging;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -28,8 +26,14 @@ namespace UI.Inventory.Core
       
         public event Action<int, GameObject> OnDragEnded;
         public event Action<int, int> OnItemSwapped; 
-        public event Action<int> OnItemSlotChanged; 
-        
+        public event Action<int> OnItemSlotChanged;
+
+        private void Awake()
+        {
+            _parentCanvas = GetComponentInParent<Canvas>();
+            InventoryDragItem.Init(this, _parentCanvas);
+        }
+
         public int SourceIndex
         {
             get => _slotIndex;
@@ -53,16 +57,18 @@ namespace UI.Inventory.Core
 
         public void AddItems(Sprite itemSprite, int number, int index)
         {
-            SetItemData(itemSprite, number, index);
+            SetSlotData(itemSprite, number, index);
         }
 
-        public void TryToSwap(IDragDestination destination)
+        public void AddItems(Sprite itemSprite, int number)
         {
-            var destinationSlot = destination as InventorySlotUI;
-            var sourceSlot = this;
+            SetItemData(itemSprite, number);
+        }
 
-            destinationSlot = this;
-            sourceSlot = destination as InventorySlotUI;
+        public void TryToSwap(IDragDestination destination, Sprite imageSprite)
+        {
+            destination.AddItems(imageSprite, _currentAmount);
+            RemoveItems(0);
         }
 
         public Sprite GetIcon()
@@ -82,10 +88,17 @@ namespace UI.Inventory.Core
             _itemAmount.text = "";
         }
 
-        public void SetItemData(Sprite itemSprite, int itemAmount, int index)
+        public void SetSlotData(Sprite itemSprite, int itemAmount, int index)
         {
             _itemIcon.SetIcon(itemSprite);
             _slotIndex = index;
+            _currentAmount = itemAmount;
+            _itemAmount.text = itemAmount is 1 or 0 ? string.Empty : itemAmount.ToString();
+        }
+
+        public void SetItemData(Sprite itemSprite, int itemAmount)
+        {
+            _itemIcon.SetIcon(itemSprite);
             _currentAmount = itemAmount;
             _itemAmount.text = itemAmount is 1 or 0 ? string.Empty : itemAmount.ToString();
         }
