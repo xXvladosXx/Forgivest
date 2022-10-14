@@ -9,11 +9,11 @@ namespace InventorySystem.Core
         bool IsFull { get; }
         bool IsEmpty { get; }
         Item Item { get; }
-        Type ItemType { get; }
+        Type ItemGetType { get; }
         int Amount { get; set; }
         int Capacity { get; }
         bool IsEquipped { get; set; }
         void Clear();
-        void SetItem(IItemContainer itemContainer, int amount);
+        void SetItem(IItem item, int amount);
     }
 }

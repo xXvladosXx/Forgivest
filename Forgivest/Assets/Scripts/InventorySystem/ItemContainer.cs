@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using InventorySystem.Core;
 using InventorySystem.Items;
+using InventorySystem.Items.Core;
 using UnityEngine;
 
 namespace InventorySystem
@@ -14,7 +15,7 @@ namespace InventorySystem
         public int Capacity { get; set; }
         public bool IsFull => Slots.All(slot => slot.IsFull);
 
-        public event Action<object, IItemContainer, int> OnItemAdded;
+        public event Action<object, IItem, int> OnItemAdded;
         public event Action<object, Type, int> OnItemRemoved;
 
         
@@ -37,27 +38,35 @@ namespace InventorySystem
                 }
             }
         }
-       
-        public IItemContainer GetItem(Type itemType) => Slots.Find(slot => slot.ItemType == itemType).Item;
 
-        public IItemContainer[] GetAllItems() =>
+        public void InitSlots()
+        {
+            foreach (var itemSlot in Slots)
+            {
+                itemSlot.Capacity = 64;
+            }
+        }
+       
+        public IItem GetItem(Type itemType) => Slots.Find(slot => slot.ItemGetType == itemType).Item;
+
+        public Item[] GetAllItems() =>
             (Slots.Where(slot => !slot.IsEmpty).Select(slot => slot.Item)).ToArray();
 
-        public IItemContainer[] GetAllItems(Type itemType) => (Slots
-            .Where(slot => !slot.IsEmpty && slot.ItemType == itemType)
+        public Item[] GetAllItems(Type itemType) => (Slots
+            .Where(slot => !slot.IsEmpty && slot.ItemGetType == itemType)
             .Select(slot => slot.Item)).ToArray();
 
-        public IItemContainer[] GetEquippedItems() => (Slots.Where(slot => !slot.IsEmpty && slot.IsEquipped)
+        public Item[] GetEquippedItems() => (Slots.Where(slot => !slot.IsEmpty && slot.IsEquipped)
             .Select(slot => slot.Item)).ToArray();
 
         public int GetItemAmount(Type itemType)
         {
-            var allItemSlots = Slots.FindAll(slot => !slot.IsEmpty && slot.ItemType == itemType);
+            var allItemSlots = Slots.FindAll(slot => !slot.IsEmpty && slot.ItemGetType == itemType);
 
             return allItemSlots.Sum(itemSlot => itemSlot.Amount);
         }
 
-        public bool TryToAdd(object sender, IItemContainer item, int amount)
+        public bool TryToAdd(object sender, IItem item, int amount)
         {
             var slotWithSameItemButNotEmpty = Slots
                 .Find(slot => !slot.IsEmpty && slot.Item.ItemID.Id == item.ItemID.Id && !slot.IsFull);
@@ -76,7 +85,7 @@ namespace InventorySystem
             return false;
         }
 
-        private bool TryToAddToSlot(object sender, ISlotContainer slot, IItemContainer item, int amount)
+        private bool TryToAddToSlot(object sender, ISlotContainer slot, IItem item, int amount)
         {
             var fits = slot.Amount + amount <= item.MaxItemsInStack;
             var amountToAdd = fits ? amount : item.MaxItemsInStack - slot.Amount;
@@ -100,37 +109,28 @@ namespace InventorySystem
 
             return TryToAdd(sender, item, amountLeft);
         }
-
-        public void Remove(object sender, Type itemType, int amount = 1)
+        
+        public bool Remove(object sender, int index, int amount = 1)
         {
-            var slotsWithItem = GetAllSlots(itemType);
-            if (slotsWithItem.Length == 0)
-                return;
-
+            var slot = Slots[index];
+            if (slot.IsEmpty)
+                return false;
+            
             var amountToRemove = amount;
-            var count = slotsWithItem.Length;
-
-            for (int i = count - 1; i >= 0; i--)
+            if (slot.Amount < amountToRemove)
             {
-                var slot = slotsWithItem[i];
-                if (slot.Amount >= amountToRemove)
-                {
-                    slot.Amount -= amountToRemove;
-
-                    if (slot.Amount <= 0)
-                        slot.Clear();
-
-                    OnItemRemoved?.Invoke(sender, itemType, amountToRemove);
-
-                    break;
-                }
-
-                var amountRemoved = slot.Amount;
-                amountToRemove -= slot.Amount;
-                slot.Clear();
-
-                OnItemRemoved?.Invoke(sender, itemType, amountRemoved);
+                return false;
             }
+            
+            slot.Amount -= amountToRemove;
+
+            if (slot.Amount == 0)
+            {
+                slot.SetItem(null, 0);
+            }
+            
+            OnItemRemoved?.Invoke(sender, slot.ItemGetType, amountToRemove);
+            return true;
         }
 
 
@@ -140,11 +140,181 @@ namespace InventorySystem
             return containerItem != null;
         }
 
-        private ISlotContainer[] GetAllSlots(Type itemType) =>
-            Slots.FindAll(slot => !slot.IsEmpty && slot.ItemType == itemType).ToArray();
+        public void DropItemIntoContainer(int source, int destination, ItemContainer destinationContainer = null)
+        {
+            var sourceSlot = Slots[source]; 
+            var destinationSlot = destinationContainer?.Slots[destination] ?? Slots[destination];
+            
+            if (sourceSlot == null || destinationSlot == null
+                || sourceSlot.Item == null|| destinationSlot.Item == null)
+            {
+                AttemptSimpleTransfer(source, destination, destinationContainer);
+                
+                //OnItemSlotChanged?.Invoke(destination.Index );
+                //print($"item swapped {destination.Index }");
+                return;
+            }
 
-        private ISlotContainer[] GetAllSlots() => Slots.ToArray();
+            if(sourceSlot.Item == destinationSlot.Item)
+            {
+                AttemptStackTransfer(source, destination, destinationContainer);
+                
+                //OnItemSlotChanged?.Invoke(destination.Index );
+                //print($"item stacked {destination.Index }");
+                return;
+            }
+            
+            
+            AttemptSwap(source, destination, destinationContainer);
+        }
+
+        private bool AttemptStackTransfer(int source, int destination, ItemContainer destinationContainer)
+        {
+            var draggingItem = Slots[source].Item;
+            var draggingNumber = Slots[source].Amount;
+            var destinationSlot = destinationContainer?.Slots[destination] ?? Slots[destination];
+            
+            var sourceTakeBackNumber = CalculateTakeBack(Slots[source], destinationSlot);
+            var amountToAddToSlot = destinationSlot.Item.MaxItemsInStack - destinationSlot.Amount;
+            
+            if (sourceTakeBackNumber > 0)
+            {
+                Remove(this, source, amountToAddToSlot);
+
+                destinationSlot.AddAmount(amountToAddToSlot);
+                
+                return true;
+            }
+            
+            if (destinationSlot.AllRequirementsChecked(draggingItem, draggingNumber))
+            {
+                Remove(this, source, draggingNumber);
+                destinationSlot.AddAmount(draggingNumber);
+                
+//              OnItemSwapped?.Invoke(_source.SourceIndex, destination.Index );
+                return true;
+            }
+
+            return false;
+        }
 
         
+
+        public void AttemptSwap(int source, int destination, ItemContainer destinationContainer = null)
+        {
+            var sourceSlot = Slots[source]; 
+            var destinationSlot = destinationContainer?.Slots[destination] ?? Slots[destination];
+            
+            var sourceItem = sourceSlot.Item;
+            var destinationItem = destinationSlot.Item;
+            
+            int removedSourceNumber = sourceSlot.Amount;
+            int removedDestinationNumber = destinationSlot.Amount;
+
+            Remove(this, source, sourceSlot.Amount);
+            Remove(this, destination, destinationSlot.Amount);
+
+            var sourceTakeBackNumber = CalculateTakeBack(sourceSlot, sourceSlot.Amount);
+            var destinationTakeBackNumber = CalculateTakeBack(destinationSlot, destinationSlot.Amount);
+
+            if (sourceTakeBackNumber > 0)
+            {
+                TryToAddToSlot(this, sourceSlot, sourceSlot.Item, sourceSlot.Amount);
+                removedSourceNumber -= sourceTakeBackNumber;
+            }
+            if (destinationTakeBackNumber > 0)
+            {
+                TryToAddToSlot(this, destinationSlot, destinationSlot.Item, destinationSlot.Amount);
+                removedDestinationNumber -= destinationTakeBackNumber;
+            }
+
+            if (sourceSlot.Capacity < removedDestinationNumber || destinationSlot.Capacity < removedSourceNumber)
+            {
+                TryToAddToSlot(this, destinationSlot, destinationSlot.Item, removedDestinationNumber);
+                TryToAddToSlot(this, sourceSlot, sourceSlot.Item, removedSourceNumber);
+
+                //OnItemSwapped?.Invoke(source.Index , destination.Index );
+                //print($"item swapped {source.Index }, {destination.Index }");
+                return;
+            }
+
+            if (removedDestinationNumber > 0)
+            {
+                TryToAddToSlot(this, destinationSlot, sourceItem, removedSourceNumber);
+            }
+            if (removedSourceNumber > 0)
+            {
+                TryToAddToSlot(this, sourceSlot, destinationItem, removedDestinationNumber);
+            }
+            
+            //OnItemSwapped?.Invoke(source.Index, destination.Index );
+            //print($"item swapped {source.SourceIndex }, {destination.Index }");
+        }
+        
+        private bool AttemptSimpleTransfer(int source, int destination, ItemContainer destinationContainer)
+        {
+            var draggingItem = Slots[source].Item;
+            var draggingNumber = Slots[source].Amount;
+            var destinationSlot = destinationContainer?.Slots[destination] ?? Slots[destination];
+            
+            var acceptable = destinationSlot.Capacity;
+            var toTransfer = Mathf.Min(acceptable, draggingNumber);
+
+            if (toTransfer > 0)
+            {
+                Remove(this, source, toTransfer);
+                
+                destinationSlot.SetItem(draggingItem, toTransfer);
+                
+//                OnItemSwapped?.Invoke(_source.SourceIndex, destination.Index );
+
+                return false;
+            }
+
+            return true;
+        }
+
+        private int CalculateTakeBack(ItemSlot sourceItem,int removedNumber)
+        {
+            var takeBackNumber = 0;
+            var destinationMaxAcceptable = sourceItem.Capacity;
+
+            if (destinationMaxAcceptable < removedNumber)
+            {
+                takeBackNumber = removedNumber - destinationMaxAcceptable;
+
+                var sourceTakeBackAcceptable = sourceItem.Capacity;
+
+                // Abort and reset
+                if (sourceTakeBackAcceptable < takeBackNumber)
+                {
+                    return 0;
+                }
+            }
+            return takeBackNumber;
+        }
+        
+        
+        private int CalculateTakeBack(ItemSlot sourceSlot, ItemSlot destinationSlot)
+        {
+            var takeBackValue = 0;
+            var sourceSlotAmount = sourceSlot.Amount;
+            var destinationSlotAmount = destinationSlot.Amount;
+
+            var maxInStack = destinationSlot.Item.MaxItemsInStack;
+            var finalAmount = destinationSlotAmount + sourceSlotAmount;
+                
+            if(finalAmount > maxInStack)
+            {
+                takeBackValue = finalAmount - maxInStack;
+            }
+
+            return takeBackValue;
+        }
+
+        private ItemSlot[] GetAllSlots(Type itemType) =>
+            Slots.FindAll(slot => !slot.IsEmpty && slot.ItemGetType == itemType).ToArray();
+
+        private ItemSlot[] GetAllSlots() => Slots.ToArray();
     }
 }

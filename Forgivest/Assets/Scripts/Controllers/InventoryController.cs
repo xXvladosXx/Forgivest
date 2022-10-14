@@ -54,8 +54,7 @@ namespace Controllers
 
         private void ChangeSlotsInInventory(int source, int destination)
         {
-            //TO DO swap
-            //_inventory.ItemContainer.(source, destination);
+            //_inventory.ItemContainer.ChangeSlot(source, destination);
         }
     }
 }

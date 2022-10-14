@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Utilities.UI.Dragging;
+﻿using UI.Inventory.Dragging;
 
-namespace GameDevTV.UI.Inventories
+namespace UI.Inventory.Core
 {
     
     public class InventoryDragItem : DragItem 
