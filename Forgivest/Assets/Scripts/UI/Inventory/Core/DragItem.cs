@@ -1,40 +1,63 @@
 ﻿using System;
 using System.Linq;
-using UI.Inventory.Dragging;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI.Inventory.Core
 {
-    public class DragItem : MonoBehaviour, IBeginDragHandler, IEventSystemHandler, IDragHandler, IEndDragHandler
+    public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         [SerializeField] private Image _image;
         private InventorySlotUI _inventorySlotUI;
+        private Vector3 _startPosition;
+        private Transform _originalParent;
+        private Canvas _parentCanvas;
 
-        public void Init(InventorySlotUI inventorySlotUI) => this._inventorySlotUI = inventorySlotUI;
+        public void Init(InventorySlotUI inventorySlotUI, Canvas parentCanvas)
+        {
+            _inventorySlotUI = inventorySlotUI;
+            _parentCanvas = parentCanvas;
+        }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if ((UnityEngine.Object) this._inventorySlotUI == (UnityEngine.Object) null)
+            if (_inventorySlotUI == null)
                 return;
-            this._inventorySlotUI.StopRenderingItem();
-            this._image.sprite = this._inventorySlotUI.GetIcon();
+            
+            _startPosition = transform.position;
+            _originalParent = transform.parent;
+            GetComponent<CanvasGroup>().blocksRaycasts = false;
+            transform.SetParent(_parentCanvas.transform, true);
         }
 
         public void OnDrag(PointerEventData eventData)
         {
-            if ((UnityEngine.Object) this._inventorySlotUI == (UnityEngine.Object) null)
+            if (_inventorySlotUI == null)
                 return;
-            this._image.transform.position = (Vector3) eventData.position;
+            _image.transform.position = eventData.position;
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            GameObject gameObject = eventData.hovered.FirstOrDefault(destination => destination.TryGetComponent<IDragDestination>(out var _));
-            if (! gameObject != null)
-                return;
-            gameObject.GetComponent<IDragDestination>().TryToSwap((IDragDestination) this._inventorySlotUI);
+            transform.position = _startPosition;
+            GetComponent<CanvasGroup>().blocksRaycasts = false;
+            transform.SetParent(_originalParent, true);
+
+            var container = GetContainer(eventData);
+
+            container?.TryToSwap(_inventorySlotUI, _image.sprite);
+        }
+        
+        private IDragDestination GetContainer(PointerEventData eventData)
+        {
+            if (eventData.pointerEnter)
+            {
+                var container = eventData.pointerEnter.GetComponentInParent<IDragDestination>();
+
+                return container;
+            }
+            return null;
         }
     }
     
