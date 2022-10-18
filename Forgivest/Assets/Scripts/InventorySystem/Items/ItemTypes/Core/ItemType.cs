@@ -10,5 +10,10 @@
         Ring,
         Amulet,
         Potion,
+        Shoulder,
+        Pants,
+        Bracer,
+        Back,
+        Gloves,
     }
 }
