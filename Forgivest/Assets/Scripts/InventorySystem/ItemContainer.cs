@@ -16,10 +16,10 @@ namespace InventorySystem
         public bool IsFull => Slots.All(slot => slot.IsFull);
 
         public event Action<object, IItem, int, ItemContainer> OnItemAdded;
-        public event Action<object, IItem, int> OnItemRemoved;
+        public event Action<object, IItem, int, ItemContainer> OnItemRemoved;
         public event Action<int, int, ItemContainer> OnItemSwapped;
 
-        
+
         public void Init(int capacity)
         {
             Capacity = capacity;
@@ -30,7 +30,7 @@ namespace InventorySystem
                     Slots.Add(new ItemSlot());
                 }
             }
-            
+
             for (int i = 0; i < capacity; i++)
             {
                 if (Slots[i] == null)
@@ -47,7 +47,7 @@ namespace InventorySystem
                 itemSlot.Capacity = 64;
             }
         }
-       
+
         public IItem GetItem(Type itemType) => Slots.Find(slot => slot.ItemGetType == itemType).Item;
 
         public Item[] GetAllItems() =>
@@ -71,8 +71,8 @@ namespace InventorySystem
         {
             var slotWithSameItemButNotEmpty = Slots
                 .Find(slot => !slot.IsEmpty && slot.Item.ItemID.Id == item.ItemID.Id && !slot.IsFull);
-            
-            if (slotWithSameItemButNotEmpty is {IsFull: false})
+
+            if (slotWithSameItemButNotEmpty is { IsFullWithMaxStack: false })
             {
                 return TryToAddToSlot(sender, slotWithSameItemButNotEmpty, item, amount, destinationContainer);
             }
@@ -91,12 +91,19 @@ namespace InventorySystem
         {
             if (destinationContainer != null)
             {
-                if (slot.Item != (Item) item)
+                if (slot.Item != (Item)item)
                 {
+                    OnItemAdded?.Invoke(sender, item, amount, this);
+
                     slot.SetItem(item, amount);
                 }
 
                 return true;
+            }
+
+            if (!slot.AllRequirementsChecked((Item)item, amount))
+            {
+                return false;
             }
             
             var fits = slot.Amount + amount <= item.MaxItemsInStack;
@@ -122,34 +129,37 @@ namespace InventorySystem
 
             return TryToAdd(sender, item, amountLeft);
         }
-        
+
         public bool Remove(object sender, int index, bool max = false, int amount = 1)
         {
             var slot = Slots[index];
             if (slot.IsEmpty)
                 return false;
-            
+
             if (max)
             {
+                OnItemRemoved?.Invoke(sender, slot.Item, slot.Amount, this);
+
                 slot.SetItem(null, 0);
-                OnItemRemoved?.Invoke(sender, slot.Item, slot.Amount);
+                
                 return true;
             }
-            
+
             var amountToRemove = amount;
             if (slot.Amount < amountToRemove)
             {
                 return false;
             }
-            
+
             slot.Amount -= amountToRemove;
 
             if (slot.Amount == 0)
             {
+                OnItemRemoved?.Invoke(sender, slot.Item, amountToRemove, this);
+
                 slot.SetItem(null, 0);
             }
-            
-            OnItemRemoved?.Invoke(sender, slot.Item, amountToRemove);
+
             return true;
         }
 
@@ -159,24 +169,24 @@ namespace InventorySystem
             var containerItem = GetItem(type);
             return containerItem != null;
         }
-        
+
 
         public void DropItemIntoContainer(int source, int destination, ItemContainer destinationContainer = null)
         {
-            var sourceSlot = Slots[source]; 
+            var sourceSlot = Slots[source];
             var destinationSlot = destinationContainer?.Slots[destination] ?? Slots[destination];
-            
+
             if (sourceSlot == null || destinationSlot == null
-                || sourceSlot.Item == null|| destinationSlot.Item == null)
+                                   || sourceSlot.Item == null || destinationSlot.Item == null)
             {
                 AttemptSimpleTransfer(source, destination, destinationContainer);
                 OnItemSwapped?.Invoke(source, destination, this);
                 destinationContainer?.OnItemSwapped?.Invoke(source, destination, destinationContainer);
-                
+
                 return;
             }
 
-            if(sourceSlot.Item == destinationSlot.Item)
+            if (sourceSlot.Item == destinationSlot.Item)
             {
                 AttemptStackTransfer(source, destination, destinationContainer);
                 OnItemSwapped?.Invoke(source, destination, this);
@@ -184,7 +194,7 @@ namespace InventorySystem
 
                 return;
             }
-            
+
             AttemptSwap(source, destination, destinationContainer);
             OnItemSwapped?.Invoke(source, destination, this);
             destinationContainer?.OnItemSwapped?.Invoke(source, destination, destinationContainer);
@@ -195,7 +205,7 @@ namespace InventorySystem
             var draggingItem = Slots[source].Item;
             var draggingNumber = Slots[source].Amount;
             var destinationSlot = destinationContainer?.Slots[destination] ?? Slots[destination];
-            
+
             var acceptable = destinationSlot.Capacity;
             var toTransfer = Mathf.Min(64, draggingNumber);
 
@@ -206,57 +216,58 @@ namespace InventorySystem
                     Remove(this, source, false, toTransfer);
 
                     destinationSlot.SetItem(draggingItem, toTransfer);
+
+                    destinationContainer?.OnItemAdded?.Invoke(this, draggingItem, draggingNumber, destinationContainer);
                     return false;
                 }
             }
 
             return true;
         }
-        
+
         private bool AttemptStackTransfer(int source, int destination, ItemContainer destinationContainer)
         {
             var draggingItem = Slots[source].Item;
             var draggingNumber = Slots[source].Amount;
             var destinationSlot = destinationContainer?.Slots[destination] ?? Slots[destination];
-            
+
             var sourceTakeBackNumber = CalculateTakeBack(Slots[source], destinationSlot);
             var amountToAddToSlot = destinationSlot.Item.MaxItemsInStack - destinationSlot.Amount;
-            
+
             if (sourceTakeBackNumber > 0)
             {
                 Remove(this, source, false, amountToAddToSlot);
 
                 destinationSlot.AddAmount(amountToAddToSlot);
-                
+
                 return true;
             }
-            
+
             if (destinationSlot.AllRequirementsChecked(draggingItem, draggingNumber))
             {
                 Remove(this, source, false, draggingNumber);
                 destinationSlot.AddAmount(draggingNumber);
-                
+
                 return true;
             }
 
             return false;
         }
 
-        
 
         public void AttemptSwap(int source, int destination, ItemContainer destinationContainer = null)
         {
-            var sourceSlot = Slots[source]; 
+            var sourceSlot = Slots[source];
             var destinationSlot = destinationContainer?.Slots[destination] ?? Slots[destination];
-            
+
             var sourceItem = sourceSlot.Item;
             var destinationItem = destinationSlot.Item;
-            
+
             int removedSourceNumber = sourceSlot.Amount;
             int removedDestinationNumber = destinationSlot.Amount;
-            
-            if(!sourceSlot.AllRequirementsChecked(destinationItem, removedDestinationNumber))return;
-            if(!destinationSlot.AllRequirementsChecked(sourceItem, removedDestinationNumber))return;
+
+            if (!sourceSlot.AllRequirementsChecked(destinationItem, removedDestinationNumber)) return;
+            if (!destinationSlot.AllRequirementsChecked(sourceItem, removedDestinationNumber)) return;
 
             Remove(this, source, false, sourceSlot.Amount);
             Remove(this, destination, false, destinationSlot.Amount);
@@ -269,6 +280,7 @@ namespace InventorySystem
                 TryToAddToSlot(this, sourceSlot, sourceItem, removedSourceNumber, destinationContainer);
                 removedSourceNumber -= sourceTakeBackNumber;
             }
+
             if (destinationTakeBackNumber > 0)
             {
                 TryToAddToSlot(this, destinationSlot, destinationItem, removedDestinationNumber, destinationContainer);
@@ -287,15 +299,15 @@ namespace InventorySystem
             {
                 TryToAddToSlot(this, destinationSlot, sourceItem, removedSourceNumber, destinationContainer);
             }
+
             if (removedSourceNumber > 0)
             {
                 TryToAddToSlot(this, sourceSlot, destinationItem, removedDestinationNumber, destinationContainer);
             }
         }
-        
-      
 
-        private int CalculateTakeBack(ItemSlot sourceItem,int removedNumber)
+
+        private int CalculateTakeBack(ItemSlot sourceItem, int removedNumber)
         {
             var takeBackNumber = 0;
             var destinationMaxAcceptable = sourceItem.Capacity;
@@ -311,10 +323,11 @@ namespace InventorySystem
                     return 0;
                 }
             }
+
             return takeBackNumber;
         }
-        
-        
+
+
         private int CalculateTakeBack(ItemSlot sourceSlot, ItemSlot destinationSlot)
         {
             var takeBackValue = 0;
@@ -323,8 +336,8 @@ namespace InventorySystem
 
             var maxInStack = destinationSlot.Item.MaxItemsInStack;
             var finalAmount = destinationSlotAmount + sourceSlotAmount;
-                
-            if(finalAmount > maxInStack)
+
+            if (finalAmount > maxInStack)
             {
                 takeBackValue = finalAmount - maxInStack;
             }
