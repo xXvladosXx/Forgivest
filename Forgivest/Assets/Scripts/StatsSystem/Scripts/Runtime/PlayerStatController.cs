@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using LevelSystem;
 using LevelSystem.Nodes;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 
 namespace StatSystem
@@ -83,7 +84,7 @@ namespace StatSystem
                     foreach (LevelNode levelNode in levelNodes)
                     {
                         levelNode.Levelable = m_Levelable;
-                        m_Levelable.OnLevelChanged += currentStat.CalculateValue;
+                        m_Levelable.OnLevelChanged += currentStat.CalculateOnValue;
                     }
                 }
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using SaveSystem.Scripts.Runtime;
+using StatsSystem.Scripts.Runtime;
 
 [assembly: InternalsVisibleTo("StatSystem.Tests")]
 namespace StatSystem
@@ -23,13 +24,13 @@ namespace StatSystem
         internal void Add(int amount)
         {
             m_BaseValue += amount;
-            CalculateValue();
+            CalculateOnValue();
         }
 
         internal void Subtract(int amount)
         {
             m_BaseValue -= amount;
-            CalculateValue();
+            CalculateOnValue();
         }
 
         #region Stat System
@@ -42,7 +43,7 @@ namespace StatSystem
         {
             PrimaryStatData primaryStatData = (PrimaryStatData)data;
             m_BaseValue = primaryStatData.baseValue;
-            CalculateValue();
+            CalculateOnValue();
         }
 
         [Serializable]

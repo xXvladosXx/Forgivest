@@ -4,17 +4,20 @@ using UI.Inventory.Core;
 using UI.Inventory.DragDrop;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 namespace UI.Inventory.Slot
 {
-    public class InventorySlotUI : MonoBehaviour, IDragContainer, IPointerDownHandler, IPointerUpHandler,
+    public class InventorySlotUI : MonoBehaviour, IDragContainer, IPointerExitHandler,
+        IPointerEnterHandler, IPointerDownHandler, IPointerUpHandler,
         IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         [SerializeField] private ItemIcon _itemIcon = null;
         [SerializeField] private TextMeshProUGUI _itemAmount;
         [SerializeField] private DraggableObject _draggableObject;
         [SerializeField] private RectTransform _rectTransform;
-
+        [SerializeField] private CanvasGroup _canvasGroup;
+        
         private int CurrentAmount { get; set; }
 
         private Vector3 _startPosition;
@@ -27,12 +30,11 @@ namespace UI.Inventory.Slot
 
         
         public int Index { get; private set; }
-
+        
         private void Awake()
         {
             _parentCanvas = GetComponentInParent<Canvas>();
         }
-
         
         public void AddItems(Sprite itemSprite, int number, int index)
         {
@@ -94,6 +96,10 @@ namespace UI.Inventory.Slot
         public void OnBeginDrag(PointerEventData eventData)
         {
             Debug.Log("Dragged");
+            if (GetIcon() == null)
+            {
+                _canvasGroup.blocksRaycasts = false;
+            }
         }
 
         public void OnEndDrag(PointerEventData eventData)
@@ -102,6 +108,15 @@ namespace UI.Inventory.Slot
 
             _currentDraggableObject.DestroyObject(eventData);
             _currentDraggableObject.OnDestinationFound += TryToSwap;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
         }
     }
 }

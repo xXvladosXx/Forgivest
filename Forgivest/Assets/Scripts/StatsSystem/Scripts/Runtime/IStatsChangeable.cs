@@ -6,6 +6,7 @@ namespace InventorySystem
 {
     public interface IStatsChangeable
     {
-        event Action<List<StatModifier>> OnStatChanged;
+        event Action<List<StatModifier>> OnStatAdded;
+        event Action<List<StatModifier>> OnStatRemoved;
     }
 }

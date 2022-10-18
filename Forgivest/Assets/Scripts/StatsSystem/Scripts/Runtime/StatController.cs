@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AbilitySystem.AbilitySystem.Runtime;
 using SaveSystem.Scripts.Runtime;
+using StatsSystem.Scripts.Runtime;
 using StatSystem.Nodes;
 using UnityEngine;
 
@@ -14,9 +15,12 @@ namespace StatSystem
         protected Dictionary<string, Stat> _stats = new Dictionary<string, Stat>(StringComparer.OrdinalIgnoreCase);
         public Dictionary<string, Stat> Stats => _stats;
         private TagController _tagController;
+        public Health Health { get; private set; }
         public bool IsInitialized { get; private set; }
         public event Action OnInitialized;
-        public event Action willUninitialize;
+        public event Action WillUninitialize;
+
+        public event Action<Attribute> OnStatChanged;
 
         protected virtual void Awake()
         {
@@ -30,7 +34,7 @@ namespace StatSystem
 
         private void OnDestroy()
         {
-            willUninitialize?.Invoke();
+            WillUninitialize?.Invoke();
         }
 
         protected void Initialize()
@@ -44,7 +48,8 @@ namespace StatSystem
             {
                 if (definition.name.Equals("Health", StringComparison.OrdinalIgnoreCase))
                 {
-                    _stats.Add(definition.name, new Health(definition, this, _tagController));
+                    Health = new Health(definition, this, _tagController);
+                    _stats.Add(definition.name, Health);
                 }
                 else
                 {
@@ -114,7 +119,7 @@ namespace StatSystem
                         if (_stats.TryGetValue(statNode.statName.Trim(), out Stat stat))
                         {
                             statNode.stat = stat;
-                            stat.valueChanged += currentStat.CalculateValue;
+                            stat.OnValueChanged += currentStat.CalculateOnValue;
                         }
                         else
                         {

@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using StatSystem;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-namespace StatSystem
+namespace StatsSystem.Scripts.Runtime
 {
     public class Stat
     {
@@ -14,7 +13,7 @@ namespace StatSystem
         protected float m_Value;
         public float value => m_Value;
         public virtual float baseValue => m_Definition.BaseValue;
-        public event Action valueChanged;
+        public event Action OnValueChanged;
         protected List<StatModifier> m_Modifiers = new List<StatModifier>();
 
         public Stat(StatDefinition definition, StatController controller)
@@ -25,19 +24,19 @@ namespace StatSystem
 
         public virtual void Initialize()
         {
-            CalculateValue();
+            CalculateOnValue();
         }
 
         public void AddModifier(StatModifier modifier)
         {
             m_Modifiers.Add(modifier);
-            CalculateValue();
+            CalculateOnValue();
         }
         
         public void RemoveModifier(StatModifier modifier)
         {
             m_Modifiers.Remove(modifier);
-            CalculateValue();
+            CalculateOnValue();
         }
 
         public void RemoveModifierFromSource(object source)
@@ -45,11 +44,11 @@ namespace StatSystem
             int num = m_Modifiers.RemoveAll(modifier => modifier.Source == source);
             if (num > 0)
             {
-                CalculateValue();
+                CalculateOnValue();
             }
         }
 
-        internal void CalculateValue()
+        internal void CalculateOnValue()
         {
             float newValue = baseValue;
 
@@ -81,7 +80,7 @@ namespace StatSystem
             if (m_Value != newValue)
             {
                 m_Value = newValue;
-                valueChanged?.Invoke();
+                OnValueChanged?.Invoke();
             }
         }
     }

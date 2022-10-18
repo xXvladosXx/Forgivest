@@ -37,10 +37,10 @@ namespace StatSystem.UI
             OnManaChangedInternal();
             OnHealthChangedInternal();
             OnLevelChanged();
-            mana.valueChanged += OnMaxManaChanged;
-            mana.currentValueChanged += OnManaChanged;
-            health.valueChanged += OnMaxHealthChanged;
-            health.currentValueChanged += OnHealthChanged;
+            mana.OnValueChanged += OnMaxManaChanged;
+            mana.OnCurrentValueChanged += OnManaChanged;
+            health.OnValueChanged += OnMaxHealthChanged;
+            health.OnCurrentValueChanged += OnHealthChanged;
             m_Levelable.OnLevelChanged += OnLevelChanged;
             m_Levelable.OnCurrentExperienceChanged += OnCurrentExperienceChanged;
         }
@@ -49,10 +49,10 @@ namespace StatSystem.UI
         {
             Attribute mana = m_Controller.Stats["Mana"] as Attribute;
             Attribute health = m_Controller.Stats["Health"] as Attribute;
-            mana.valueChanged -= OnMaxManaChanged;
-            mana.currentValueChanged -= OnManaChanged;
-            health.valueChanged -= OnMaxHealthChanged;
-            health.currentValueChanged -= OnHealthChanged;
+            mana.OnValueChanged -= OnMaxManaChanged;
+            mana.OnCurrentValueChanged -= OnManaChanged;
+            health.OnValueChanged -= OnMaxHealthChanged;
+            health.OnCurrentValueChanged -= OnHealthChanged;
             m_Levelable.OnLevelChanged -= OnLevelChanged;
             m_Levelable.OnCurrentExperienceChanged -= OnCurrentExperienceChanged;
         }

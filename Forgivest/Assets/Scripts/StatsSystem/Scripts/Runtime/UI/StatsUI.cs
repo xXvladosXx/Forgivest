@@ -1,4 +1,5 @@
 ﻿using LevelSystem;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -44,7 +45,7 @@ namespace StatSystem.UI
                 Stat stat = m_Controller.Stats[primaryStats[i].name];
                 Label label = primaryStats[i].Q<Label>("value");
                 label.text = stat.value.ToString();
-                stat.valueChanged += () =>
+                stat.OnValueChanged += () =>
                 {
                     label.text = stat.value.ToString();
                 };
@@ -65,7 +66,7 @@ namespace StatSystem.UI
                 Stat stat = m_Controller.Stats[stats[i].name.Replace("-", "")];
                 Label label = stats[i].Q<Label>("value");
                 label.text = stat.value.ToString();
-                stat.valueChanged += () =>
+                stat.OnValueChanged += () =>
                 {
                     label.text = stat.value.ToString();
                 };

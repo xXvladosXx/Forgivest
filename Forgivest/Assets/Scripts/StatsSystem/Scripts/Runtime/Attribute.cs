@@ -1,5 +1,6 @@
 ﻿using System;
 using SaveSystem.Scripts.Runtime;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 
 namespace StatSystem
@@ -8,8 +9,8 @@ namespace StatSystem
     {
         protected float m_CurrentValue;
         public float currentValue => m_CurrentValue;
-        public event Action currentValueChanged;
-        public event Action<StatModifier> appliedModifier;
+        public event Action OnCurrentValueChanged;
+        public event Action<StatModifier> OnAppliedModifier;
         
         public Attribute(StatDefinition definition, StatController controller) : base(definition, controller)
         {
@@ -42,9 +43,9 @@ namespace StatSystem
             if (currentValue != newValue)
             {
                 m_CurrentValue = newValue;
-                currentValueChanged?.Invoke();
+                OnCurrentValueChanged?.Invoke();
             }
-            appliedModifier?.Invoke(modifier);
+            OnAppliedModifier?.Invoke(modifier);
         }
 
         #region Save System
@@ -57,7 +58,7 @@ namespace StatSystem
         {
             AttributeData attributeData = (AttributeData)data;
             m_CurrentValue = attributeData.currentValue;
-            currentValueChanged?.Invoke();
+            OnCurrentValueChanged?.Invoke();
         }
 
         [Serializable]

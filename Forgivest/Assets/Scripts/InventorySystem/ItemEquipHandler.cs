@@ -17,7 +17,8 @@ namespace InventorySystem
         public GameObject CurrentColliderWeapon { get; private set; }
         public Weapon CurrentWeapon { get; private set; }
 
-        public event Action<StatsableItem> OnItemEquipped;
+        public event Action<StatsableItem, bool> OnItemEquipped;
+        public event Action<StatsableItem, bool> OnItemUnquipped;
 
         public bool TryToEquip(StatsableItem statsableItem)
         {
@@ -51,7 +52,7 @@ namespace InventorySystem
             CurrentWeapon = weapon;
             CurrentColliderWeapon =
                 Object.Instantiate(weapon.Prefab, weapon.RightHanded ? RightHand : LeftHand);
-            OnItemEquipped?.Invoke(weapon);
+            OnItemEquipped?.Invoke(weapon, true);
             return true;
         }
 
@@ -63,7 +64,7 @@ namespace InventorySystem
             Object.Destroy(CurrentColliderWeapon.gameObject);
             CurrentWeapon = null;
 
-            OnItemEquipped?.Invoke(null);
+            OnItemUnquipped?.Invoke(weapon, false);
         }
     }
 }
