@@ -70,7 +70,7 @@ namespace InventorySystem
                 }
             }
 
-            return !IsFullWithMaxStack;
+            return true;
         }
 
         public void Clear()

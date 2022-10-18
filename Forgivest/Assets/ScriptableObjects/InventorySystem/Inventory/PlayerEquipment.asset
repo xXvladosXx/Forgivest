@@ -17,43 +17,41 @@ MonoBehaviour:
     - <Item>k__BackingField: {fileID: 0}
       <Amount>k__BackingField: 0
       <IsEquipped>k__BackingField: 0
-      <ItemTypes>k__BackingField: 
-    - <Item>k__BackingField: {fileID: 0}
-      <Amount>k__BackingField: 0
-      <IsEquipped>k__BackingField: 0
       <ItemTypes>k__BackingField: 01000000
     - <Item>k__BackingField: {fileID: 0}
       <Amount>k__BackingField: 0
       <IsEquipped>k__BackingField: 0
-      <ItemTypes>k__BackingField: 
-    - <Item>k__BackingField: {fileID: 11400000, guid: 4e1c5ec5b1493d34f9398c383dd5882c,
-        type: 2}
-      <Amount>k__BackingField: 4
-      <IsEquipped>k__BackingField: 0
-      <ItemTypes>k__BackingField: 
+      <ItemTypes>k__BackingField: 08000000
     - <Item>k__BackingField: {fileID: 0}
       <Amount>k__BackingField: 0
       <IsEquipped>k__BackingField: 0
-      <ItemTypes>k__BackingField: 
+      <ItemTypes>k__BackingField: 02000000
     - <Item>k__BackingField: {fileID: 0}
       <Amount>k__BackingField: 0
       <IsEquipped>k__BackingField: 0
-      <ItemTypes>k__BackingField: 
+      <ItemTypes>k__BackingField: 09000000
     - <Item>k__BackingField: {fileID: 0}
       <Amount>k__BackingField: 0
       <IsEquipped>k__BackingField: 0
-      <ItemTypes>k__BackingField: 
+      <ItemTypes>k__BackingField: 03000000
     - <Item>k__BackingField: {fileID: 0}
       <Amount>k__BackingField: 0
       <IsEquipped>k__BackingField: 0
-      <ItemTypes>k__BackingField: 
-    - <Item>k__BackingField: {fileID: 11400000, guid: 4e1c5ec5b1493d34f9398c383dd5882c,
-        type: 2}
-      <Amount>k__BackingField: 5
-      <IsEquipped>k__BackingField: 0
-      <ItemTypes>k__BackingField: 
+      <ItemTypes>k__BackingField: 06000000
     - <Item>k__BackingField: {fileID: 0}
       <Amount>k__BackingField: 0
       <IsEquipped>k__BackingField: 0
-      <ItemTypes>k__BackingField: 
-  <Capacity>k__BackingField: 10
+      <ItemTypes>k__BackingField: 0b000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <IsEquipped>k__BackingField: 0
+      <ItemTypes>k__BackingField: 0a000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <IsEquipped>k__BackingField: 0
+      <ItemTypes>k__BackingField: 0c000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <IsEquipped>k__BackingField: 0
+      <ItemTypes>k__BackingField: 05000000
+  <Capacity>k__BackingField: 9
