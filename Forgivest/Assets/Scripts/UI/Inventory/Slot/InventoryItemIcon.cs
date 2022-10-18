@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI.Inventory.Core
+namespace UI.Inventory.Slot
 {
     [RequireComponent(typeof(Image))]
-    public class InventoryItemIcon : MonoBehaviour
+    public class InventoryItemIcon : ItemIcon
     {
-        public void SetIcon(Sprite item)
+        public override void SetIcon(Sprite item)
         {
             var iconImage = GetComponent<Image>();
             if (item == null)
@@ -18,16 +18,6 @@ namespace UI.Inventory.Core
                 iconImage.enabled = true;
                 iconImage.sprite = item;
             }
-        }
-
-        public Sprite GetItem()
-        {
-            var iconImage = GetComponent<Image>();
-            if (!iconImage.enabled)
-            {
-                return null;
-            }
-            return iconImage.sprite;
         }
     }
 }

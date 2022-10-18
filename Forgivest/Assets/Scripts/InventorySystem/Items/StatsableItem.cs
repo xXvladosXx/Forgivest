@@ -9,9 +9,6 @@ namespace InventorySystem.Items
 {
     public abstract class StatsableItem : Item, IStatsable
     {
-        //[field: SerializeField] public List<CharacteristicBonus> CharacteristicBonuses { get; private set; }
-        //[field: SerializeField] public List<StatBonus> StatsBonuses { get; private set; }
-        
         [field: SerializeField] public List<StatModifier> StatModifier { get; private set; }
     }
 }

@@ -70,19 +70,6 @@ namespace StatSystem
 
         private void Update()
         {
-            foreach (var stat in _stats.Values)
-            {
-                if (stat.definition.name == "Health")
-                {
-                    print(stat.value);
-                }
-                
-                if(stat.definition.name == "Strength")
-                {
-                    print(stat.value);
-                }
-            }
-
             if (Input.GetKeyDown(KeyCode.I))
             {
                 _stats["Health"].AddModifier(new StatModifier

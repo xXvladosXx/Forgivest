@@ -11,10 +11,13 @@ namespace InventorySystem.Interaction
     public class ObjectPicker : SerializedMonoBehaviour, IStatsChangeable
     {
         [field: SerializeField] public Inventory Inventory { get; private set; }
+        [field: SerializeField] public Inventory Equipment { get; private set; }
+        [field: SerializeField] public Inventory Hotbar { get; private set; }
+
         [field: SerializeField] public ItemEquipHandler ItemEquipHandler { get; private set; }
         [field: SerializeField] public PickableItem PickableItem { get; private set; }
         [field: SerializeField] public PickableItem PickableItem1 { get; private set; }
-        
+
         private RaycastUser _raycastUser;
         public event Action<List<StatModifier>> OnStatChanged;
 
@@ -26,6 +29,8 @@ namespace InventorySystem.Interaction
         private void Awake()
         {
             Inventory.Init();
+            Equipment.Init();
+            Hotbar.Init();
         }
 
         private void OnEnable()
@@ -51,8 +56,15 @@ namespace InventorySystem.Interaction
             switch (pickable)
             {
                 case PickableItem pickableItem:
-                    Inventory.ItemContainer.TryToAdd(this, pickableItem.Item, pickableItem.Amount);
-                    ItemEquipHandler.TryToEquip(pickableItem.Item as StatsableItem);
+                    var equipped = Equipment.ItemContainer.TryToAdd(this, pickableItem.Item, pickableItem.Amount);
+                    if (equipped)
+                    {
+                        ItemEquipHandler.TryToEquip(pickableItem.Item as StatsableItem);
+                    }
+                    else
+                    {
+                        Inventory.ItemContainer.TryToAdd(this, pickableItem.Item, pickableItem.Amount);
+                    }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(pickable));
@@ -73,24 +85,5 @@ namespace InventorySystem.Interaction
             
             OnStatChanged?.Invoke(modifiers);
         }
-
-
-        /*public event Action<List<IBonus>> OnBonusAdded;
-        public event Action<List<IBonus>> OnBonusRemoved;
-        public List<IBonus> GetBonus()
-        {
-            var bonuses = new List<IBonus>();
-
-            foreach (var weapon in Inventory.ItemContainer.GetAllItems())
-            {
-                if (weapon is IStatsable statsable)
-                {
-                    //bonuses.AddRange(statsable.StatsBonuses);
-                    //bonuses.AddRange(statsable.CharacteristicBonuses);
-                }
-            }
-
-            return bonuses;
-        }*/
     }
 }

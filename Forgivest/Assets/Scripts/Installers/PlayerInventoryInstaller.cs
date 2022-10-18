@@ -1,5 +1,6 @@
 ﻿using Controllers;
 using InventorySystem;
+using InventorySystem.Interaction;
 using UnityEngine;
 using Zenject;
 
@@ -7,12 +8,12 @@ namespace Installers
 {
     public class PlayerInventoryInstaller : MonoInstaller
     {
-        [SerializeField] private Inventory _playerInventory;
+        [SerializeField] private ObjectPicker _playerInventory;
 
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<InventoryController>().AsSingle();
-            Container.Bind<Inventory>().FromInstance(_playerInventory).AsSingle();
+            Container.Bind<ObjectPicker>().FromInstance(_playerInventory).AsSingle();
         }
     }
 }

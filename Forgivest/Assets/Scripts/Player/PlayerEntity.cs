@@ -85,8 +85,6 @@ namespace Player
 
         private void Update()
         {
-            Debug.Log(RaycastUser.RaycastHit.HasValue);
-            
             RaycastUser.Tick();
             _playerStateMachine.Update();
         }
