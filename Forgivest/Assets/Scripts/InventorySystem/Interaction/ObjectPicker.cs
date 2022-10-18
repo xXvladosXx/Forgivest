@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using InventorySystem.Core;
 using InventorySystem.Items;
 using RaycastSystem.Core;
 using Sirenix.OdinInspector;
@@ -36,7 +37,10 @@ namespace InventorySystem.Interaction
         private void OnEnable()
         {
             ItemEquipHandler.OnItemEquipped += RecalculateStats;
+            Equipment.ItemContainer.OnItemAdded += OnItemEquipped;
+            Equipment.ItemContainer.OnItemRemoved += OnItemRemoved;
         }
+        
 
         private void OnDisable()
         {
@@ -57,11 +61,7 @@ namespace InventorySystem.Interaction
             {
                 case PickableItem pickableItem:
                     var equipped = Equipment.ItemContainer.TryToAdd(this, pickableItem.Item, pickableItem.Amount);
-                    if (equipped)
-                    {
-                        ItemEquipHandler.TryToEquip(pickableItem.Item as StatsableItem);
-                    }
-                    else
+                    if (!equipped)
                     {
                         Inventory.ItemContainer.TryToAdd(this, pickableItem.Item, pickableItem.Amount);
                     }
@@ -84,6 +84,16 @@ namespace InventorySystem.Interaction
             }
             
             OnStatChanged?.Invoke(modifiers);
+        }
+        
+        private void OnItemRemoved(object arg1, IItem arg2, int arg3, ItemContainer arg4)
+        {
+            ItemEquipHandler.Unequip((StatsableItem)arg2);
+        }
+
+        private void OnItemEquipped(object arg1, IItem arg2, int arg3, ItemContainer arg4)
+        {
+            ItemEquipHandler.TryToEquip((StatsableItem)arg2);
         }
     }
 }

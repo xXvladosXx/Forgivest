@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 namespace InventorySystem
 {
     [Serializable]
-    public class ItemEquipHandler 
+    public class ItemEquipHandler
     {
         [field: SerializeField] public Transform RightHand { get; private set; }
         [field: SerializeField] public Transform LeftHand { get; private set; }
@@ -18,6 +18,7 @@ namespace InventorySystem
         public Weapon CurrentWeapon { get; private set; }
 
         public event Action<StatsableItem> OnItemEquipped;
+
         public bool TryToEquip(StatsableItem statsableItem)
         {
             switch (statsableItem)
@@ -31,20 +32,38 @@ namespace InventorySystem
             }
         }
 
-        private bool TryToEquipWeapon(Weapon weapon)
+        public void Unequip(StatsableItem statsableItem)
         {
-            if (CurrentColliderWeapon == null)
+            switch (statsableItem)
             {
-                CurrentWeapon = weapon;
-                CurrentColliderWeapon = Object.Instantiate(weapon.Prefab, weapon.RightHanded ? RightHand : LeftHand);
-                OnItemEquipped?.Invoke(weapon);
-                return true;
+                case Armor armor:
+                    return;
+                case Weapon weapon:
+                    DeequipWeapon(weapon);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(statsableItem));
             }
-
-            Debug.Log("You have a weapon");
-
-            return false;
         }
 
+        private bool TryToEquipWeapon(Weapon weapon)
+        {
+            CurrentWeapon = weapon;
+            CurrentColliderWeapon =
+                Object.Instantiate(weapon.Prefab, weapon.RightHanded ? RightHand : LeftHand);
+            OnItemEquipped?.Invoke(weapon);
+            return true;
+        }
+
+        private void DeequipWeapon(Weapon weapon)
+        {
+            if (CurrentWeapon == null) return;
+            if (CurrentWeapon != weapon) return;
+
+            Object.Destroy(CurrentColliderWeapon.gameObject);
+            CurrentWeapon = null;
+
+            OnItemEquipped?.Invoke(null);
+        }
     }
 }
