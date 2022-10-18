@@ -51,8 +51,8 @@ namespace MyGame
             m_StatController.OnInitialized -= OnStatControllerOnInitialized;
             if (m_StatController.IsInitialized)
             {
-                m_StatController.Stats["MovementSpeed"].valueChanged -= OnMovementSpeedChanged;
-                m_StatController.Stats["AttackSpeed"].valueChanged -= OnAttackSpeedChanged;
+                m_StatController.Stats["MovementSpeed"].OnValueChanged -= OnMovementSpeedChanged;
+                m_StatController.Stats["AttackSpeed"].OnValueChanged -= OnAttackSpeedChanged;
             }
 
             _abilityController.OnAbilityActivated -= ActivateAbility;
@@ -83,8 +83,8 @@ namespace MyGame
         {
             OnMovementSpeedChanged();
             OnAttackSpeedChanged();
-            m_StatController.Stats["MovementSpeed"].valueChanged += OnMovementSpeedChanged;
-            m_StatController.Stats["AttackSpeed"].valueChanged += OnAttackSpeedChanged;
+            m_StatController.Stats["MovementSpeed"].OnValueChanged += OnMovementSpeedChanged;
+            m_StatController.Stats["AttackSpeed"].OnValueChanged += OnAttackSpeedChanged;
         }
         
         private void OnAttackSpeedChanged()

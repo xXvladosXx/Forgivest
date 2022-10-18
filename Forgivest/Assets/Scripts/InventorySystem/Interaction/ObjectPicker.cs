@@ -20,7 +20,8 @@ namespace InventorySystem.Interaction
         [field: SerializeField] public PickableItem PickableItem1 { get; private set; }
 
         private RaycastUser _raycastUser;
-        public event Action<List<StatModifier>> OnStatChanged;
+        public event Action<List<StatModifier>> OnStatAdded;
+        public event Action<List<StatModifier>> OnStatRemoved;
 
         public void Init(RaycastUser raycastUser)
         {
@@ -37,14 +38,19 @@ namespace InventorySystem.Interaction
         private void OnEnable()
         {
             ItemEquipHandler.OnItemEquipped += RecalculateStats;
+            ItemEquipHandler.OnItemUnquipped += RecalculateStats;
             Equipment.ItemContainer.OnItemAdded += OnItemEquipped;
             Equipment.ItemContainer.OnItemRemoved += OnItemRemoved;
         }
+
         
 
         private void OnDisable()
         {
             ItemEquipHandler.OnItemEquipped -= RecalculateStats;
+            ItemEquipHandler.OnItemUnquipped -= RecalculateStats;
+            Equipment.ItemContainer.OnItemAdded -= OnItemEquipped;
+            Equipment.ItemContainer.OnItemRemoved -= OnItemRemoved;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -55,7 +61,7 @@ namespace InventorySystem.Interaction
             }
         }
 
-        public void CollectObject(IPickable pickable)
+        private void CollectObject(IPickable pickable)
         {
             switch (pickable)
             {
@@ -71,29 +77,27 @@ namespace InventorySystem.Interaction
             }
         }
         
-        private void RecalculateStats(StatsableItem statsableItem)
+        private void RecalculateStats(StatsableItem statsableItem, bool adding)
         {
-            var modifiers = new List<StatModifier>();
-            
-            foreach (var weapon in Inventory.ItemContainer.GetAllItems())
+            if (adding)
             {
-                if (weapon is IStatsable statsable)
-                {
-                    modifiers.AddRange(statsable.StatModifier);
-                }
+                OnStatAdded?.Invoke(statsableItem.StatModifier);
             }
-            
-            OnStatChanged?.Invoke(modifiers);
+            else
+            {
+                OnStatRemoved?.Invoke(statsableItem.StatModifier);
+            }
         }
         
-        private void OnItemRemoved(object arg1, IItem arg2, int arg3, ItemContainer arg4)
+        
+        private void OnItemRemoved(object sender, IItem item, int amount, ItemContainer itemContainer)
         {
-            ItemEquipHandler.Unequip((StatsableItem)arg2);
+            ItemEquipHandler.Unequip((StatsableItem)item);
         }
 
-        private void OnItemEquipped(object arg1, IItem arg2, int arg3, ItemContainer arg4)
+        private void OnItemEquipped(object sender, IItem item, int amount, ItemContainer itemContainer)
         {
-            ItemEquipHandler.TryToEquip((StatsableItem)arg2);
+            ItemEquipHandler.TryToEquip((StatsableItem)item);
         }
     }
 }

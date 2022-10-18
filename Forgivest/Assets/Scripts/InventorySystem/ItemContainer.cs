@@ -70,14 +70,15 @@ namespace InventorySystem
         public bool TryToAdd(object sender, IItem item, int amount, ItemContainer destinationContainer = null)
         {
             var slotWithSameItemButNotEmpty = Slots
-                .Find(slot => !slot.IsEmpty && slot.Item.ItemID.Id == item.ItemID.Id && !slot.IsFull);
+                .Find(slot => !slot.IsEmpty && slot.Item.ItemID.Id == item.ItemID.Id && !slot.IsFullWithMaxStack
+                              && !slot.IsFull && slot.AllRequirementsChecked((Item)item, amount));
 
             if (slotWithSameItemButNotEmpty is { IsFullWithMaxStack: false })
             {
                 return TryToAddToSlot(sender, slotWithSameItemButNotEmpty, item, amount, destinationContainer);
             }
 
-            var emptySlot = Slots.Find(slot => slot.IsEmpty);
+            var emptySlot = Slots.Find(slot => slot.IsEmpty && slot.AllRequirementsChecked((Item)item, amount));
             if (emptySlot != null)
             {
                 return TryToAddToSlot(sender, emptySlot, item, amount, destinationContainer);
@@ -100,11 +101,6 @@ namespace InventorySystem
 
                 return true;
             }
-
-            if (!slot.AllRequirementsChecked((Item)item, amount))
-            {
-                return false;
-            }
             
             var fits = slot.Amount + amount <= item.MaxItemsInStack;
             var amountToAdd = fits ? amount : item.MaxItemsInStack - slot.Amount;
@@ -117,6 +113,7 @@ namespace InventorySystem
             else
             {
                 slot.Amount += amountToAdd;
+                OnItemAdded?.Invoke(sender, item, amountToAdd, this);
                 return false;
             }
 

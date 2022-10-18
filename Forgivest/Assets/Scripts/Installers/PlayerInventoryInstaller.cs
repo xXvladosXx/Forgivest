@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using Controllers.Player;
 using InventorySystem;
 using InventorySystem.Interaction;
 using UnityEngine;

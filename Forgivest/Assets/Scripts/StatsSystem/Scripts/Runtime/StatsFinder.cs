@@ -11,6 +11,7 @@ namespace StatSystem.Scripts.Runtime
     {
         private StatController _statController;
         private List<IStatsChangeable> _statsChangeables = new List<IStatsChangeable>();
+        private List<StatModifier> _statModifiers = new List<StatModifier>();
         private void Awake()
         {
             _statController = GetComponent<StatController>();
@@ -21,23 +22,34 @@ namespace StatSystem.Scripts.Runtime
         {
             foreach (var statsChangeable in _statsChangeables)
             {
-                statsChangeable.OnStatChanged += OnStatChanged;
+                statsChangeable.OnStatAdded += OnStatAdded;
+                statsChangeable.OnStatRemoved += OnStatRemoved;
             }
         }
 
+       
         private void OnDisable()
         {
             foreach (var statsChangeable in _statsChangeables)
             {
-                statsChangeable.OnStatChanged -= OnStatChanged;
+                statsChangeable.OnStatAdded -= OnStatAdded;
+                statsChangeable.OnStatRemoved -= OnStatRemoved;
             }
         }
 
-        private void OnStatChanged(List<StatModifier> modifiers)
+        private void OnStatAdded(List<StatModifier> modifiers)
         {
-            foreach (var modifier in modifiers)
+            foreach (var statModifier in modifiers)
             {
-                _statController.AddStat(modifier);
+                _statController.AddStat(statModifier);
+            }
+        }
+        
+        private void OnStatRemoved(List<StatModifier> modifiers)
+        {
+            foreach (var statModifier in modifiers)
+            {
+                _statController.RemoveStat(statModifier);
             }
         }
 

@@ -34,7 +34,7 @@ namespace MyGame
         protected virtual void OnEnable()
         {
             m_StatController.OnInitialized += OnStatControllerOnInitialized;
-            m_StatController.willUninitialize += OnStatControllerWillUninitialize;
+            m_StatController.WillUninitialize += OnStatControllerWillUninitialize;
             if (m_StatController.IsInitialized)
                 OnStatControllerOnInitialized();
         }
@@ -42,7 +42,7 @@ namespace MyGame
         protected virtual void OnDisable()
         {
             m_StatController.OnInitialized -= OnStatControllerOnInitialized;
-            m_StatController.willUninitialize -= OnStatControllerWillUninitialize;
+            m_StatController.WillUninitialize -= OnStatControllerWillUninitialize;
             if (m_StatController.IsInitialized)
                 OnStatControllerWillUninitialize();
         }
@@ -50,16 +50,16 @@ namespace MyGame
         private void OnStatControllerWillUninitialize()
         {
             OnWillUninitialized?.Invoke();
-            m_StatController.Stats[k_Health].valueChanged -= MaxHealthChanged;
-            (m_StatController.Stats[k_Health] as Attribute).currentValueChanged -= HealthChanged;
-            (m_StatController.Stats[k_Health] as Attribute).appliedModifier -= OnAppliedModifier;
+            m_StatController.Stats[k_Health].OnValueChanged -= MaxHealthChanged;
+            (m_StatController.Stats[k_Health] as Attribute).OnCurrentValueChanged -= HealthChanged;
+            (m_StatController.Stats[k_Health] as Attribute).OnAppliedModifier -= OnAppliedModifier;
         }
 
         private void OnStatControllerOnInitialized()
         {
-            m_StatController.Stats[k_Health].valueChanged += MaxHealthChanged;
-            (m_StatController.Stats[k_Health] as Attribute).currentValueChanged += HealthChanged;
-            (m_StatController.Stats[k_Health] as Attribute).appliedModifier += OnAppliedModifier;
+            m_StatController.Stats[k_Health].OnValueChanged += MaxHealthChanged;
+            (m_StatController.Stats[k_Health] as Attribute).OnCurrentValueChanged += HealthChanged;
+            (m_StatController.Stats[k_Health] as Attribute).OnAppliedModifier += OnAppliedModifier;
             m_IsInitialized = true;
             OnInitialized?.Invoke();
         }

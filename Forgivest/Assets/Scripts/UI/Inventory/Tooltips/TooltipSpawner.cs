@@ -1,21 +1,32 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace GameDevTV.Core.UI.Tooltips
+namespace UI.Inventory.Tooltips
 {
+    [RequireComponent(typeof(RectTransform))]
     public abstract class TooltipSpawner : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [Tooltip("The prefab of the tooltip to spawn.")]
-        [SerializeField] GameObject tooltipPrefab = null;
-
-        GameObject tooltip = null;
+        [SerializeField] private GameObject _tooltipPrefab = null;
+        [SerializeField] private RectTransform _rectTransform;
+        
+        private GameObject _tooltip = null;
+        private Canvas _canvas;
+        private RectTransform _tooltipRectTransform;
 
         public abstract void UpdateTooltip(GameObject tooltip);
         public abstract bool CanCreateTooltip();
 
-        private void OnDestroy()
+        private void Awake()
         {
-            ClearTooltip();
+            _canvas = GetComponentInParent<Canvas>();
+            _tooltip = Instantiate(_tooltipPrefab, _canvas.transform);
+            _tooltipRectTransform = _tooltip.GetComponent<RectTransform>();
+        }
+
+        private void Start()
+        {
+            _tooltip.SetActive(false);
         }
 
         private void OnDisable()
@@ -25,23 +36,20 @@ namespace GameDevTV.Core.UI.Tooltips
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            var parentCanvas = GetComponentInParent<Canvas>();
-
-            if (tooltip && !CanCreateTooltip())
+            if (_tooltip.activeSelf && !CanCreateTooltip())
             {
                 ClearTooltip();
             }
 
-            if (!tooltip && CanCreateTooltip())
+            if (!_tooltip.activeSelf && CanCreateTooltip())
             {
-                tooltip = Instantiate(tooltipPrefab, parentCanvas.transform);
+                _tooltip.SetActive(true);
             }
 
-            if (tooltip)
-            {
-                UpdateTooltip(tooltip);
-                PositionTooltip();
-            }
+            if (!_tooltip.activeSelf) return;
+            
+            UpdateTooltip(_tooltip);
+            PositionTooltip();
         }
 
         private void PositionTooltip()
@@ -49,26 +57,28 @@ namespace GameDevTV.Core.UI.Tooltips
             Canvas.ForceUpdateCanvases();
 
             var tooltipCorners = new Vector3[4];
-            tooltip.GetComponent<RectTransform>().GetWorldCorners(tooltipCorners);
+            _tooltipRectTransform.GetWorldCorners(tooltipCorners);
             var slotCorners = new Vector3[4];
-            GetComponent<RectTransform>().GetWorldCorners(slotCorners);
+            _rectTransform.GetWorldCorners(slotCorners);
 
-            bool below = transform.position.y > Screen.height / 2;
-            bool right = transform.position.x < Screen.width / 2;
+            bool below = transform.position.y > Screen.height / 2f;
+            bool right = transform.position.x < Screen.width / 2f;
 
             int slotCorner = GetCornerIndex(below, right);
             int tooltipCorner = GetCornerIndex(!below, !right);
 
-            tooltip.transform.position = slotCorners[slotCorner] - tooltipCorners[tooltipCorner] + tooltip.transform.position;
+            _tooltip.transform.position = slotCorners[slotCorner] - tooltipCorners[tooltipCorner] + _tooltip.transform.position;
         }
 
         private int GetCornerIndex(bool below, bool right)
         {
-            if (below && !right) return 0;
-            else if (!below && !right) return 1;
-            else if (!below && right) return 2;
-            else return 3;
-
+            return below switch
+            {
+                true when !right => 0,
+                false when !right => 1,
+                false when right => 2,
+                _ => 3
+            };
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
@@ -78,9 +88,9 @@ namespace GameDevTV.Core.UI.Tooltips
 
         private void ClearTooltip()
         {
-            if (tooltip)
+            if (_tooltip)
             {
-                Destroy(tooltip.gameObject);
+                _tooltip.SetActive(false);
             }
         }
     }

@@ -24,7 +24,7 @@ MonoBehaviour:
   <Name>k__BackingField: 
   <Prefab>k__BackingField: {fileID: 3480261504482581523, guid: 07c0e4883cf5f7542897b81ebdb96b35,
     type: 3}
-  <MaxItemsInStack>k__BackingField: 4
+  <MaxItemsInStack>k__BackingField: 1
   <Sprite>k__BackingField: {fileID: 21300000, guid: 9415af11d73bb804c8d24343e1351132,
     type: 3}
   <ItemID>k__BackingField:
@@ -35,7 +35,10 @@ MonoBehaviour:
     <Magnitude>k__BackingField: 12
     <Type>k__BackingField: 0
   - <StatName>k__BackingField: PhysicalAttack
-    <Magnitude>k__BackingField: 150
+    <Magnitude>k__BackingField: 40
+    <Type>k__BackingField: 0
+  - <StatName>k__BackingField: Strength
+    <Magnitude>k__BackingField: 12
     <Type>k__BackingField: 0
   <RightHanded>k__BackingField: 1
   <AttackRate>k__BackingField: 2
