@@ -14,6 +14,7 @@ namespace InventorySystem.Core
         int Capacity { get; }
         bool IsEquipped { get; set; }
         void Clear();
+        bool AllRequirementsChecked(Item item, int amount);
         void SetItem(IItem item, int amount);
     }
 }

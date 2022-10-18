@@ -1,4 +1,5 @@
 ﻿using UI.Inventory;
+using UI.Inventory.Core;
 using UnityEngine;
 using Zenject;
 

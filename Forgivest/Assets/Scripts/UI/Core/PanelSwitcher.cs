@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using InventoryExample.UI.Skill;
 using UI.Inventory;
+using UI.Inventory.Core;
 using UnityEngine;
 
 namespace UI.Core

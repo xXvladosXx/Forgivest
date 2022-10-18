@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using InventorySystem.Core;
 using InventorySystem.Items;
 using InventorySystem.Items.Core;
@@ -14,11 +15,24 @@ namespace InventorySystem
         [field: SerializeField] public Item Item { get; private set; }
         [field: SerializeField] public int Amount { get; set; }
         [field: SerializeField] public bool IsEquipped { get; set; }
-        
+
         [field: SerializeField] public List<ItemType> ItemTypes { get; set; }
-        
+
         public bool IsFull => Amount == Capacity;
-        public bool IsFullWithMaxStack => Amount == Item.MaxItemsInStack;
+
+        public bool IsFullWithMaxStack
+        {
+            get
+            {
+                if (Item != null)
+                {
+                    return Amount == Item.MaxItemsInStack;
+                }
+
+                return false;
+            }
+        }
+
         public bool IsEmpty => (Item == null || Amount == 0);
         public Type ItemGetType => Item.Type;
         public int Capacity { get; set; }
@@ -28,13 +42,13 @@ namespace InventorySystem
             Item = null;
             Amount = 0;
         }
-        
+
         public ItemSlot(Item item, int amount)
         {
             Item = item;
             Amount = amount;
         }
-        
+
         public void SetItem(IItem item, int amount)
         {
             Item = item as Item;
@@ -48,27 +62,20 @@ namespace InventorySystem
 
         public bool AllRequirementsChecked(Item item, int amount)
         {
-            foreach (var itemType in ItemTypes)
+            if (ItemTypes.Count != 0)
             {
-                if (itemType != item.ItemType)
+                if (ItemTypes.Any(itemType => itemType != item.ItemType))
+                {
                     return false;
+                }
             }
 
-            if (IsFullWithMaxStack)
-                return false;
-            
-            if (amount + Amount > Capacity)
-                return false;
-
-            if (amount + Amount > Item.MaxItemsInStack)
-                return false;
-            
-            return true;
+            return !IsFullWithMaxStack;
         }
 
         public void Clear()
         {
-            if(IsEmpty)
+            if (IsEmpty)
                 return;
 
             Amount = 0;

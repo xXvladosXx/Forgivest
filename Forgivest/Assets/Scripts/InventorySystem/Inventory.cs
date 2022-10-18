@@ -14,7 +14,7 @@ namespace InventorySystem
         {
             ItemContainer.InitSlots();
 
-            ItemContainer.DropItemIntoContainer(0, 1);
+            ItemContainer.DropItemIntoContainer(1, 0);
         }
 
         private void OnValidate()

@@ -15,7 +15,7 @@ namespace InventorySystem.Core
         Item[] GetEquippedItems();
 
         int GetItemAmount(Type itemType);
-        bool TryToAdd(object sender, IItem item, int amount = 1);
+        bool TryToAdd(object sender, IItem item, int amount = 1, ItemContainer itemContainer = null);
         bool HasItem(Type type);
     }
 }

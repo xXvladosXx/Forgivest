@@ -20,20 +20,15 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes:
-    - Name: <ItemType>k__BackingField
-      Entry: 7
-      Data: 0|InventorySystem.Items.ItemTypes.SwordType, Inventory
-    - Name: 
-      Entry: 8
-      Data: 
+    SerializationNodes: []
   <Name>k__BackingField: Sword
   <Prefab>k__BackingField: {fileID: 0}
-  <MaxItemsInStack>k__BackingField: 4
+  <MaxItemsInStack>k__BackingField: 5
   <Sprite>k__BackingField: {fileID: 21300000, guid: aa6156860ed77af4b828c1a7e9388f5d,
     type: 3}
   <ItemID>k__BackingField:
-    Id: -1
+    Id: 2
+  <ItemType>k__BackingField: 3
   <StatModifier>k__BackingField:
   - <StatName>k__BackingField: Health
     <Magnitude>k__BackingField: 100
