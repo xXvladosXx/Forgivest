@@ -4,6 +4,7 @@ using System.Linq;
 using InventorySystem.Core;
 using InventorySystem.Items;
 using InventorySystem.Items.Core;
+using InventorySystem.Items.ItemTypes.Core;
 using UnityEngine;
 
 namespace InventorySystem
@@ -48,7 +49,8 @@ namespace InventorySystem
             }
         }
 
-        public IItem GetItem(Type itemType) => Slots.Find(slot => slot.ItemGetType == itemType).Item;
+        public IItem GetItem(Type itemType) => Slots.Find(slot => slot != null && slot.ItemGetType == itemType && slot.Item != null).Item;
+        public IItem GetItem(ItemType itemType) => Slots.Find(slot => slot != null && slot.Item.ItemType == itemType && slot.Item != null).Item;
 
         public Item[] GetAllItems() =>
             (Slots.Where(slot => !slot.IsEmpty).Select(slot => slot.Item)).ToArray();

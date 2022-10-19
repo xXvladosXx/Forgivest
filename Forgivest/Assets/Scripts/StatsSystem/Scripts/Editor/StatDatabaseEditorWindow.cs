@@ -41,9 +41,9 @@ namespace StatSystem.Editor
             
             VisualElement root = rootVisualElement;
             
-            var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/StatSystem/Scripts/Editor/StatDatabaseEditorWindow.uxml");
+            var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Scripts/StatsSystem/Scripts/Editor/StatDatabaseEditorWindow.uxml");
             visualTree.CloneTree(root);
-            var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/StatSystem/Scripts/Editor/StatDatabaseEditorWindow.uss");
+            var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Scripts/StatsSystem/Scripts/Editor/StatDatabaseEditorWindow.uss");
             root.styleSheets.Add(styleSheet);
 
             StatCollectionEditor stats = root.Q<StatCollectionEditor>("stats");

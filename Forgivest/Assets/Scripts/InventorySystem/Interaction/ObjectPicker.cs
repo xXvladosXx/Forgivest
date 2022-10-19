@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using InventorySystem.Core;
 using InventorySystem.Items;
+using InventorySystem.Items.ItemTypes.Core;
+using InventorySystem.Items.Weapon;
 using RaycastSystem.Core;
 using Sirenix.OdinInspector;
+using StatsSystem.Scripts.Runtime;
 using StatSystem;
 using UnityEngine;
 
@@ -26,13 +29,14 @@ namespace InventorySystem.Interaction
         public void Init(RaycastUser raycastUser)
         {
             _raycastUser = raycastUser;
-        }
-
-        private void Awake()
-        {
             Inventory.Init();
             Equipment.Init();
             Hotbar.Init();
+        }
+
+        private void Start()
+        {
+            ItemEquipHandler.TryToEquip(Equipment.ItemContainer.GetItem(ItemType.Sword) as StatsableItem);
         }
 
         private void OnEnable()
@@ -42,8 +46,6 @@ namespace InventorySystem.Interaction
             Equipment.ItemContainer.OnItemAdded += OnItemEquipped;
             Equipment.ItemContainer.OnItemRemoved += OnItemRemoved;
         }
-
-        
 
         private void OnDisable()
         {
@@ -72,8 +74,6 @@ namespace InventorySystem.Interaction
                         Inventory.ItemContainer.TryToAdd(this, pickableItem.Item, pickableItem.Amount);
                     }
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(pickable));
             }
         }
         

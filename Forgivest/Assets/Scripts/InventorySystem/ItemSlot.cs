@@ -34,7 +34,9 @@ namespace InventorySystem
         }
 
         public bool IsEmpty => (Item == null || Amount == 0);
-        public Type ItemGetType => Item.Type;
+
+        public Type ItemGetType => Item == null ? null : Item.Type;
+
         public int Capacity { get; set; }
 
         public ItemSlot()
@@ -80,6 +82,11 @@ namespace InventorySystem
 
             Amount = 0;
             Item = null;
+        }
+
+        public string GetDescription()
+        {
+            return Item == null ? "" : Item.ItemDescription;
         }
     }
 }

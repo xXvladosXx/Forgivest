@@ -7,23 +7,23 @@ namespace Controllers.Player
 {
     public class PlayerHealthController : IInitializable, ITickable, IDisposable
     {
-        private readonly Health _health;
+        private readonly StatController _statController;
         private readonly HealthBarUI _healthBarUI;
+        private Health _health;
 
-        public PlayerHealthController(Health health, HealthBarUI healthBarUI)
+            public PlayerHealthController(StatController statController, HealthBarUI healthBarUI)
         {
-            _health = health;
+            _statController = statController;
             _healthBarUI = healthBarUI;
         }
         
         public void Initialize()
         {
-            _health.OnCurrentValueChanged += RecalculateHealthOnBar; 
-        }
-
-        private void RecalculateHealthOnBar()
-        {
-            _healthBarUI.RecalculateHealth(_health.value);
+            _health = _statController.Health;
+            _health.OnCurrentValueChanged += RecalculateHealthOnBar;
+            _health.OnValueChanged += RecalculateHealthOnBar;
+            
+            RecalculateHealthOnBar(_health.currentValue, _health.Value);
         }
 
         public void Tick()
@@ -32,6 +32,19 @@ namespace Controllers.Player
 
         public void Dispose()
         {
+            _health.OnCurrentValueChanged -= RecalculateHealthOnBar;
+            _health.OnValueChanged -= RecalculateHealthOnBar;
+
+        }
+        
+        private void RecalculateHealthOnBar(float maxHealth)
+        {
+            _healthBarUI.RecalculateHealth(maxHealth);
+        }
+        
+        private void RecalculateHealthOnBar(float currentHealth, float maxHealth)
+        {
+            _healthBarUI.RecalculateHealth(currentHealth, maxHealth);
         }
     }
 }

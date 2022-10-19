@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using LevelSystem;
 using NUnit.Framework;
+using StatsSystem.Scripts.Runtime;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,7 +23,7 @@ namespace StatSystem.Tests
         {
             yield return null;
             PlayerStatController playerStatController = GameObject.FindObjectOfType<PlayerStatController>();
-            Assert.AreEqual(1, playerStatController.Stats["Strength"].value);
+            Assert.AreEqual(1, playerStatController.Stats["Strength"].Value);
             UIDocument uiDocument = GameObject.FindObjectOfType<UIDocument>();
             VisualElement strengthElement = uiDocument.rootVisualElement.Q("strength");
             Button incrementButton = strengthElement.Q<Button>("increment-button");
@@ -30,7 +31,7 @@ namespace StatSystem.Tests
             {
                 incrementButton.SendEvent(e);
             }
-            Assert.AreEqual(2, playerStatController.Stats["Strength"].value);
+            Assert.AreEqual(2, playerStatController.Stats["Strength"].Value);
         }
         
         [UnityTest]

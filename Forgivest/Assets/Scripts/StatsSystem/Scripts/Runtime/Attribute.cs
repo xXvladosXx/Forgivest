@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace StatSystem
 {
-    public class Attribute : Stat, ISavable
+    public class Attribute : Stat
     {
         protected float m_CurrentValue;
         public float currentValue => m_CurrentValue;
-        public event Action OnCurrentValueChanged;
+        public event Action<float, float> OnCurrentValueChanged;
         public event Action<StatModifier> OnAppliedModifier;
         
         public Attribute(StatDefinition definition, StatController controller) : base(definition, controller)
@@ -19,7 +19,7 @@ namespace StatSystem
         public override void Initialize()
         {
             base.Initialize();
-            m_CurrentValue = value;
+            m_CurrentValue = Value;
         }
 
         public virtual void ApplyModifier(StatModifier modifier)
@@ -43,31 +43,10 @@ namespace StatSystem
             if (currentValue != newValue)
             {
                 m_CurrentValue = newValue;
-                OnCurrentValueChanged?.Invoke();
+                OnCurrentValueChanged?.Invoke(m_CurrentValue, Value);
             }
             OnAppliedModifier?.Invoke(modifier);
         }
-
-        #region Save System
-
-        public object Data => new AttributeData
-        {
-            currentValue = currentValue
-        };
-        public void Load(object data)
-        {
-            AttributeData attributeData = (AttributeData)data;
-            m_CurrentValue = attributeData.currentValue;
-            OnCurrentValueChanged?.Invoke();
-        }
-
-        [Serializable]
-        protected class AttributeData
-        {
-            public float currentValue;
-        }
-
-        #endregion
         
     }
 }

@@ -9,11 +9,11 @@ namespace StatsSystem.Scripts.Runtime
     {
         protected StatDefinition m_Definition;
         protected StatController m_Controller;
-        public StatDefinition definition => m_Definition;
+        public StatDefinition Definition => m_Definition;
         protected float m_Value;
-        public float value => m_Value;
+        public float Value => m_Value;
         public virtual float baseValue => m_Definition.BaseValue;
-        public event Action OnValueChanged;
+        public event Action<float> OnValueChanged;
         protected List<StatModifier> m_Modifiers = new List<StatModifier>();
 
         public Stat(StatDefinition definition, StatController controller)
@@ -24,19 +24,19 @@ namespace StatsSystem.Scripts.Runtime
 
         public virtual void Initialize()
         {
-            CalculateOnValue();
+            CalculateOnValue(0);
         }
 
         public void AddModifier(StatModifier modifier)
         {
             m_Modifiers.Add(modifier);
-            CalculateOnValue();
+            CalculateOnValue(0);
         }
         
         public void RemoveModifier(StatModifier modifier)
         {
             m_Modifiers.Remove(modifier);
-            CalculateOnValue();
+            CalculateOnValue(0);
         }
 
         public void RemoveModifierFromSource(object source)
@@ -44,11 +44,11 @@ namespace StatsSystem.Scripts.Runtime
             int num = m_Modifiers.RemoveAll(modifier => modifier.Source == source);
             if (num > 0)
             {
-                CalculateOnValue();
+                CalculateOnValue(0);
             }
         }
 
-        internal void CalculateOnValue()
+        internal void CalculateOnValue(float maxValue)
         {
             float newValue = baseValue;
 
@@ -80,7 +80,7 @@ namespace StatsSystem.Scripts.Runtime
             if (m_Value != newValue)
             {
                 m_Value = newValue;
-                OnValueChanged?.Invoke();
+                OnValueChanged?.Invoke(m_Value);
             }
         }
     }

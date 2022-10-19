@@ -38,7 +38,7 @@ namespace AbilitySystem.Tests
             yield return null;
             var statController = _player.GetComponent<StatController>();
             var wisdom = statController.Stats["Wisdom"];
-            wisdom.value.Should().Be(11);
+            wisdom.Value.Should().Be(11);
         }
         
         [UnityTest]

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Core;
 using JetBrains.Annotations;
 using NUnit.Framework;
+using StatsSystem.Scripts.Runtime;
 using UnityEditor.SceneManagement;
 using UnityEditor.VersionControl;
 using UnityEngine;
@@ -27,7 +28,7 @@ namespace StatSystem.Tests
             StatController statController = GameObject.FindObjectOfType<StatController>();
             Attribute health = statController.Stats["Health"] as Attribute;
             Assert.AreEqual(100, health.currentValue);
-            Assert.AreEqual(100, health.value);
+            Assert.AreEqual(100, health.Value);
             health.ApplyModifier(new StatModifier
             {
                 Magnitude = 20,

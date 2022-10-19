@@ -44,18 +44,18 @@ namespace StatSystem.UI
             {
                 Stat stat = m_Controller.Stats[primaryStats[i].name];
                 Label label = primaryStats[i].Q<Label>("value");
-                label.text = stat.value.ToString();
-                stat.OnValueChanged += () =>
+                label.text = stat.Value.ToString();
+                stat.OnValueChanged += (max) =>
                 {
-                    label.text = stat.value.ToString();
+                    label.text = stat.Value.ToString();
                 };
                 Button incrementButton = primaryStats[i].Q<Button>("increment-button");
-                incrementButton.SetEnabled(m_Controller.StatPoints > 0 && stat.baseValue != stat.definition.Cap);
+                incrementButton.SetEnabled(m_Controller.StatPoints > 0 && stat.baseValue != stat.Definition.Cap);
                 incrementButton.clicked += () =>
                 {
                     (stat as PrimaryStat).Add(1);
-                    label.text = stat.value.ToString();
-                    incrementButton.SetEnabled(stat.baseValue != stat.definition.Cap);
+                    label.text = stat.Value.ToString();
+                    incrementButton.SetEnabled(stat.baseValue != stat.Definition.Cap);
                     m_Controller.StatPoints--;
                 };
             }
@@ -65,10 +65,10 @@ namespace StatSystem.UI
             {
                 Stat stat = m_Controller.Stats[stats[i].name.Replace("-", "")];
                 Label label = stats[i].Q<Label>("value");
-                label.text = stat.value.ToString();
-                stat.OnValueChanged += () =>
+                label.text = stat.Value.ToString();
+                stat.OnValueChanged += (max) =>
                 {
-                    label.text = stat.value.ToString();
+                    label.text = stat.Value.ToString();
                 };
             }
 

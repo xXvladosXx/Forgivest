@@ -1,6 +1,7 @@
 ﻿using System;
 using AbilitySystem.AbilitySystem.Runtime;
 using Core;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 
 namespace StatSystem
@@ -13,6 +14,7 @@ namespace StatSystem
         {
             _tagController = tagController;
         }
+
 
         public override void ApplyModifier(StatModifier modifier)
         {
@@ -54,7 +56,7 @@ namespace StatSystem
 
         private float FindResistance(StatModifier modifier, string stat)
         {
-            float resistance = Mathf.Clamp(m_Controller.Stats[stat].value, 1, 100);
+            float resistance = Mathf.Clamp(m_Controller.Stats[stat].Value, 1, 100);
             var possibleDamage = modifier.Magnitude;
             possibleDamage =  (possibleDamage * 100) / resistance;
             return possibleDamage;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using InventorySystem;
 using Sirenix.OdinInspector;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 
 namespace StatSystem.Scripts.Runtime
@@ -57,7 +58,7 @@ namespace StatSystem.Scripts.Runtime
         {
             _statController.Stats.TryGetValue(stat, out var statValue);
 
-            if (statValue != null) return statValue.value;
+            if (statValue != null) return statValue.Value;
 
             return 0;
         }

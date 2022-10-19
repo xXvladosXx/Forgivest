@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+﻿using UI.Inventory.Core;
 
-namespace UI.Inventory.Core
+namespace UI.Inventory.DragDrop
 {
     public interface IDragDestination
     {
         int Index { get; }
-        public void AddItems(Sprite itemSprite, int number, int index);
         void TryToSwap(IDragDestination inventorySlotUI, IInventoryHolder inventoryHolder);
     }
 }

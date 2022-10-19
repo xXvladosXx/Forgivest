@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Core;
+using StatsSystem.Scripts.Runtime;
 using StatSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -44,10 +45,10 @@ namespace AbilitySystem.AbilitySystem.Runtime
 
                     if (effectDamage.CanCauseCriticalHit)
                     {
-                        if (statController.Stats["CriticalHitChance"].value / 100f >= Random.value)
+                        if (statController.Stats["CriticalHitChance"].Value / 100f >= Random.value)
                         {
                             healthModifier.Magnitude = Mathf.RoundToInt(healthModifier.Magnitude *
-                                statController.Stats["CriticalHitMultiplier"].value / 100f);
+                                statController.Stats["CriticalHitMultiplier"].Value / 100f);
                             healthModifier.IsCriticalHit = true;
                         }
                     }

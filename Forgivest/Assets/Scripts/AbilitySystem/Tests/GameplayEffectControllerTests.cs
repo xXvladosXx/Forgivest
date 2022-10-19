@@ -59,9 +59,9 @@ namespace AbilitySystem.Tests
 
             var testEffect = new GameplayPersistentEffect(testEffectDefinition, null, _player);
             var intelligence = statController.Stats["Intelligence"];
-            intelligence.value.Should().Be(1);
+            intelligence.Value.Should().Be(1);
             effectController.ApplyGameplayEffectToSelf(testEffect);
-            intelligence.value.Should().Be(4);
+            intelligence.Value.Should().Be(4);
         }
 
         [UnityTest]
@@ -76,11 +76,11 @@ namespace AbilitySystem.Tests
 
             var testEffect = new GameplayPersistentEffect(testEffectDefinition, null, _player);
             var intelligence = statController.Stats["Intelligence"];
-            intelligence.value.Should().Be(1);
+            intelligence.Value.Should().Be(1);
             effectController.ApplyGameplayEffectToSelf(testEffect);
-            intelligence.value.Should().Be(4);
+            intelligence.Value.Should().Be(4);
             yield return new WaitForSeconds(4);
-            intelligence.value.Should().Be(1);
+            intelligence.Value.Should().Be(1);
         }
 
         [UnityTest]
@@ -89,7 +89,7 @@ namespace AbilitySystem.Tests
             yield return null;
             var statController = _player.GetComponent<StatController>();
             var dexterity = statController.Stats["Dexterity"];
-            dexterity.value.Should().Be(4);
+            dexterity.Value.Should().Be(4);
         }
         
         [UnityTest]

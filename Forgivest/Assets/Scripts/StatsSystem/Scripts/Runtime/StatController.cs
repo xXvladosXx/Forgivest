@@ -75,9 +75,10 @@ namespace StatSystem
 
         private void Update()
         {
+            print(_stats["Health"].Value);
             if (Input.GetKeyDown(KeyCode.I))
             {
-                _stats["Health"].AddModifier(new StatModifier
+                (_stats["Health"] as Health).ApplyModifier(new StatModifier
                 {
                     Magnitude = 10,
                     Type = ModifierOperationType.Additive,
@@ -98,21 +99,37 @@ namespace StatSystem
 
         public void AddStat(StatModifier statModifier)
         {
-            _stats[statModifier.StatName].AddModifier(statModifier);
+            switch (_stats[statModifier.StatName])
+            {
+                case Attribute attribute:
+                    attribute.ApplyModifier(statModifier);
+                    break;
+                case PrimaryStat primaryStat:
+                    primaryStat.AddModifier(statModifier);
+                    break;
+            }
         }
 
         public void RemoveStat(StatModifier statModifier)
         {
-            _stats[statModifier.StatName].RemoveModifier(statModifier);
+            switch (_stats[statModifier.StatName])
+            {
+                case Attribute attribute:
+                    attribute.RemoveModifier(statModifier);
+                    break;
+                case PrimaryStat primaryStat:
+                    primaryStat.RemoveModifier(statModifier);
+                    break;
+            }
         }
         
         protected virtual void InitializeStatFormulas()
         {
             foreach (Stat currentStat in _stats.Values)
             {
-                if (currentStat.definition.Formula != null && currentStat.definition.Formula.rootNode != null)
+                if (currentStat.Definition.Formula != null && currentStat.Definition.Formula.rootNode != null)
                 {
-                    List<StatNode> statNodes = currentStat.definition.Formula.FindNodesOfType<StatNode>();
+                    List<StatNode> statNodes = currentStat.Definition.Formula.FindNodesOfType<StatNode>();
 
                     foreach (StatNode statNode in statNodes)
                     {

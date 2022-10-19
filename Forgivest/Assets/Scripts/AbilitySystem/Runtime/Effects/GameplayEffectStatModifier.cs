@@ -1,4 +1,5 @@
-﻿using StatSystem;
+﻿using StatsSystem.Scripts.Runtime;
+using StatSystem;
 using UnityEngine;
 
 namespace AbilitySystem.AbilitySystem.Runtime

@@ -40,9 +40,9 @@ namespace InventorySystem.Tests
             var objectPicker = _player.GetComponent<ObjectPicker>();
             var statsFinder = _player.GetComponent<StatsFinder>();
             var health = statController.Stats["Health"];
-            health.value.Should().Be(200);
+            health.Value.Should().Be(200);
             objectPicker.ItemEquipHandler.TryToEquip(objectPicker.PickableItem.Item as StatsableItem);
-            health.value.Should().Be(320);
+            health.Value.Should().Be(320);
         }
         
         [UnityTest]
@@ -53,9 +53,9 @@ namespace InventorySystem.Tests
             var objectPicker = _player.GetComponent<ObjectPicker>();
             var statsFinder = _player.GetComponent<StatsFinder>();
             var health = statController.Stats["Strength"];
-            health.value.Should().Be(10);
+            health.Value.Should().Be(10);
             objectPicker.ItemEquipHandler.TryToEquip(objectPicker.PickableItem.Item as StatsableItem);
-            health.value.Should().Be(22);
+            health.Value.Should().Be(22);
         }
         
         [UnityTest]
@@ -66,7 +66,7 @@ namespace InventorySystem.Tests
             var objectPicker = _player.GetComponent<ObjectPicker>();
             var statsFinder = _player.GetComponent<StatsFinder>();
             var health = statController.Stats["Health"];
-            health.value.Should().Be(200);
+            health.Value.Should().Be(200);
             objectPicker.ItemEquipHandler.TryToEquip(objectPicker.PickableItem.Item as StatsableItem);
             statsFinder.FindStat("Health").Should().Be(320);
         }
