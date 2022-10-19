@@ -21,6 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  <Rarity>k__BackingField: {fileID: 0}
   <Name>k__BackingField: Sword
   <Prefab>k__BackingField: {fileID: 0}
   <MaxItemsInStack>k__BackingField: 5
@@ -30,12 +31,15 @@ MonoBehaviour:
     Id: 2
   <ItemType>k__BackingField: 3
   <StatModifier>k__BackingField:
-  - <StatName>k__BackingField: Health
+  - <Name>k__BackingField: 
+    <StatName>k__BackingField: Health
     <Magnitude>k__BackingField: 100
     <Type>k__BackingField: 0
-  - <StatName>k__BackingField: PhysicalAttack
+  - <Name>k__BackingField: 
+    <StatName>k__BackingField: PhysicalAttack
     <Magnitude>k__BackingField: 35
     <Type>k__BackingField: 0
   <RightHanded>k__BackingField: 0
   <AttackRate>k__BackingField: 0
-  <AnimatorController>k__BackingField: {fileID: 0}
+  <AnimatorController>k__BackingField: {fileID: 9100000, guid: 18c8a88b145119745a307ce1c3dda53a,
+    type: 2}

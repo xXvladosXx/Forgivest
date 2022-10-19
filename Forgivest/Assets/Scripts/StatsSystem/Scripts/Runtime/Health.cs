@@ -8,11 +8,11 @@ namespace StatSystem
 {
     public class Health : Attribute
     {
-        private readonly TagController _tagController;
+        private readonly TagRegister _tagRegister;
 
-        public Health(StatDefinition definition, StatController controller, TagController tagController) : base(definition, controller)
+        public Health(StatDefinition definition, StatController controller, TagRegister tagRegister) : base(definition, controller)
         {
-            _tagController = tagController;
+            _tagRegister = tagRegister;
         }
 
 
@@ -20,8 +20,8 @@ namespace StatSystem
         {
             ITaggable source = modifier.Source as ITaggable;
 
-            if(_tagController != null)
-            {if (_tagController.Contains("zombify"))
+            if(_tagRegister != null)
+            {if (_tagRegister.Contains("zombify"))
             {
                 if (source.Tags.Contains("healing"))
                 {

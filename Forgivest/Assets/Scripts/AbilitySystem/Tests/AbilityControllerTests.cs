@@ -84,7 +84,7 @@ namespace AbilitySystem.Tests
         [UnityTest]
         public IEnumerator AbilityController_WhenAbilityOnCooldown_BlockAbilityActivation()
         {
-            var tagController = _player.GetComponent<TagController>();
+            var tagController = _player.GetComponent<TagRegister>();
             var abilityController = _player.GetComponent<AbilityController>();
             abilityController.TryActiveAbility("CooldownAbility", _enemy);
             tagController.Tags.Should().Contain("test_cooldown");

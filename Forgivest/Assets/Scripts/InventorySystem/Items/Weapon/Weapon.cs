@@ -7,7 +7,6 @@ namespace InventorySystem.Items.Weapon
     {
         [field: SerializeField] public bool RightHanded { get; private set; }
         [field: SerializeField] public float AttackRate { get; private set; }
-
-        [field: SerializeField] public AnimatorController AnimatorController { get; private set; }
+        [field: SerializeField] public RuntimeAnimatorController AnimatorController { get; private set; }
     }
 }

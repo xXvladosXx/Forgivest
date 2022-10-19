@@ -96,7 +96,7 @@ namespace AbilitySystem.Tests
         public IEnumerator GameplayEffectController_WhenEffectApplied_AddGrantedTags()
         {
             yield return null;
-            var tagController = _player.GetComponent<TagController>();
+            var tagController = _player.GetComponent<TagRegister>();
             var effectController = _player.GetComponent<GameplayEffectHandler>();
             var persistentEffectDefinition = AssetDatabase
                 .LoadAssetAtPath<GameplayPersistentEffectDefinition>(
@@ -110,7 +110,7 @@ namespace AbilitySystem.Tests
         public IEnumerator GameplayEffectController_WhenPersistentEffectExpires_RemoveGrantedTags()
         {
             yield return null;
-            var tagController = _player.GetComponent<TagController>();
+            var tagController = _player.GetComponent<TagRegister>();
             var effectController = _player.GetComponent<GameplayEffectHandler>();
             var persistentEffectDefinition = AssetDatabase
                 .LoadAssetAtPath<GameplayPersistentEffectDefinition>(
