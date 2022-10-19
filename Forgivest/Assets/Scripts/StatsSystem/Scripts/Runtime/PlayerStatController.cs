@@ -12,18 +12,7 @@ namespace StatSystem
     {
         protected ILevelable m_Levelable;
 
-        protected int m_StatPoints = 5;
         public event Action OnStatPointsChanged;
-
-        public int StatPoints
-        {
-            get => m_StatPoints;
-            internal set
-            {
-                m_StatPoints = value;
-                OnStatPointsChanged?.Invoke();
-            }
-        }
 
         protected override void Awake()
         {
@@ -39,8 +28,6 @@ namespace StatSystem
                 OnLevelableOnInitialized();
             }
         }
-    
-           
 
         private void OnDisable()
         {
@@ -70,7 +57,6 @@ namespace StatSystem
 
         private void OnLevelChanged()
         {
-            StatPoints += 5;
         }
 
         protected override void InitializeStatFormulas()

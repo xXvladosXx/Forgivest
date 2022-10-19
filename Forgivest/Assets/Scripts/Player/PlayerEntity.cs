@@ -4,6 +4,7 @@ using AttackSystem;
 using AttackSystem.Core;
 using Data.Player;
 using InventorySystem.Interaction;
+using InventorySystem.Items.Weapon;
 using MovementSystem;
 using RaycastSystem;
 using RaycastSystem.Core;
@@ -66,8 +67,6 @@ namespace Player
             Movement = new Movement(NavMeshAgent, Rigidbody, transform);
             Rotator = new Rotator(Rigidbody);
             RaycastUser = new PlayerRaycastUser(Camera, PlayerInputProvider, PlayerRaycastSettings, Movement);
-
-            _objectPicker.Init(RaycastUser);
             
             AttackApplier = new AttackApplier(_objectPicker.ItemEquipHandler);
             
@@ -76,16 +75,27 @@ namespace Player
                 RaycastUser, AliveEntityAnimationData, 
                 AttackApplier);
         }
-
+        
+        private void OnEnable()
+        {
+            _objectPicker.ItemEquipHandler.OnWeaponEquipped += OnWeaponEquipped;
+        }
+        
         private void Start()
         {
             _playerStateMachine.ChangeState(_playerStateMachine.IdlingState);
+            _objectPicker.Init(RaycastUser);
         }
 
         private void Update()
         {
             RaycastUser.Tick();
             _playerStateMachine.Update();
+        }
+
+        private void OnDisable()
+        {
+            _objectPicker.ItemEquipHandler.OnWeaponEquipped -= OnWeaponEquipped;
         }
 
         public void OnAnimationStarted()
@@ -119,6 +129,9 @@ namespace Player
             
         }
 
-        
+        private void OnWeaponEquipped(Weapon weapon)
+        {
+            AnimationChanger.ChangeRuntimeAnimatorController(weapon.AnimatorController);
+        }
     }
 }

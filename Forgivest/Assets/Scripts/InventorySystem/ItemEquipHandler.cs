@@ -14,11 +14,20 @@ namespace InventorySystem
         [field: SerializeField] public Transform RightHand { get; private set; }
         [field: SerializeField] public Transform LeftHand { get; private set; }
 
+        [field: SerializeField] public Weapon StartWeapon { get; private set; }
+
         public GameObject CurrentColliderWeapon { get; private set; }
         public Weapon CurrentWeapon { get; private set; }
-
         public event Action<StatsableItem, bool> OnItemEquipped;
         public event Action<StatsableItem, bool> OnItemUnquipped;
+        
+        public event Action<Weapon> OnWeaponEquipped;
+
+
+        public void Init()
+        {
+            TryToEquipWeapon(null);
+        }
 
         public bool TryToEquip(StatsableItem statsableItem)
         {
@@ -49,22 +58,43 @@ namespace InventorySystem
 
         private bool TryToEquipWeapon(Weapon weapon)
         {
+            if (weapon == null)
+                return EquipStartWeapon();
+
             CurrentWeapon = weapon;
             CurrentColliderWeapon =
                 Object.Instantiate(weapon.Prefab, weapon.RightHanded ? RightHand : LeftHand);
+            
             OnItemEquipped?.Invoke(weapon, true);
+            OnWeaponEquipped?.Invoke(weapon);
+            
+            return true;
+        }
+
+        private bool EquipStartWeapon()
+        {
+            CurrentWeapon = StartWeapon;
+            CurrentColliderWeapon =
+                Object.Instantiate(StartWeapon.Prefab, StartWeapon.RightHanded ? RightHand : LeftHand);
+
+            OnItemEquipped?.Invoke(StartWeapon, true);
+            OnWeaponEquipped?.Invoke(StartWeapon);
+
             return true;
         }
 
         private void DeequipWeapon(Weapon weapon)
         {
             if (CurrentWeapon == null) return;
+            if (CurrentWeapon == StartWeapon) return;
             if (CurrentWeapon != weapon) return;
 
             Object.Destroy(CurrentColliderWeapon.gameObject);
             CurrentWeapon = null;
 
             OnItemUnquipped?.Invoke(weapon, false);
+
+            EquipStartWeapon();
         }
     }
 }

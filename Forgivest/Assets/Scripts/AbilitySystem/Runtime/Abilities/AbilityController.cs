@@ -10,7 +10,7 @@ using UnityEngine;
 namespace AbilitySystem.AbilitySystem.Runtime.Abilities
 {
     [RequireComponent(typeof(GameplayEffectHandler),
-        typeof(TagController))]
+        typeof(TagRegister))]
     public class AbilityController : MonoBehaviour
     {
         [SerializeField] private List<AbilityDefinition> _abilityDefinitions;
@@ -19,14 +19,14 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
         public ActiveAbility CurrentAbility { get; private set; }
 
         private GameplayEffectHandler _gameplayEffectHandler;
-        private TagController _tagController;
+        private TagRegister _tagRegister;
         
         public event Action<ActiveAbility> OnAbilityActivated; 
 
         protected virtual void Awake()
         {
             _gameplayEffectHandler = GetComponent<GameplayEffectHandler>();
-            _tagController = GetComponent<TagController>();
+            _tagRegister = GetComponent<TagRegister>();
         }
 
         private void OnEnable()
@@ -97,7 +97,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
         {
             if (ability.ActiveAbilityDefinition.Cooldown != null)
             {
-                if (_tagController.ContainsAny(ability.ActiveAbilityDefinition.Cooldown.GrantedTags))
+                if (_tagRegister.ContainsAny(ability.ActiveAbilityDefinition.Cooldown.GrantedTags))
                 {
                     Debug.Log("Ability in cooldown");
                     return false;

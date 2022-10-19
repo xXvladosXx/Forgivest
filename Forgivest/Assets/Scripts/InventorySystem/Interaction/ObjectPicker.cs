@@ -32,27 +32,40 @@ namespace InventorySystem.Interaction
             Inventory.Init();
             Equipment.Init();
             Hotbar.Init();
+            
+            ItemEquipHandler.Init();
         }
 
         private void Start()
-        {
-            ItemEquipHandler.TryToEquip(Equipment.ItemContainer.GetItem(ItemType.Sword) as StatsableItem);
+        { 
+            // var weapon = Equipment.ItemContainer.GetItem(ItemType.Sword);
+            // if (weapon != null)
+            // {
+            //     ItemEquipHandler.TryToEquip(weapon as StatsableItem);
+            // }
         }
 
         private void OnEnable()
         {
             ItemEquipHandler.OnItemEquipped += RecalculateStats;
             ItemEquipHandler.OnItemUnquipped += RecalculateStats;
-            Equipment.ItemContainer.OnItemAdded += OnItemEquipped;
-            Equipment.ItemContainer.OnItemRemoved += OnItemRemoved;
+            if (Equipment != null)
+            {
+                Equipment.ItemContainer.OnItemAdded += OnItemEquipped;
+                Equipment.ItemContainer.OnItemRemoved += OnItemRemoved;
+            }
         }
 
         private void OnDisable()
         {
             ItemEquipHandler.OnItemEquipped -= RecalculateStats;
             ItemEquipHandler.OnItemUnquipped -= RecalculateStats;
-            Equipment.ItemContainer.OnItemAdded -= OnItemEquipped;
-            Equipment.ItemContainer.OnItemRemoved -= OnItemRemoved;
+
+            if (Equipment != null)
+            {
+                Equipment.ItemContainer.OnItemAdded -= OnItemEquipped;
+                Equipment.ItemContainer.OnItemRemoved -= OnItemRemoved;
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -68,7 +81,8 @@ namespace InventorySystem.Interaction
             switch (pickable)
             {
                 case PickableItem pickableItem:
-                    var equipped = Equipment.ItemContainer.TryToAdd(this, pickableItem.Item, pickableItem.Amount);
+                    var equipped = Equipment.ItemContainer.TryToAdd(this, pickableItem.Item, pickableItem.Amount) &&
+                                   ItemEquipHandler.CurrentWeapon != ItemEquipHandler.StartWeapon;
                     if (!equipped)
                     {
                         Inventory.ItemContainer.TryToAdd(this, pickableItem.Item, pickableItem.Amount);

@@ -13,14 +13,14 @@ using Attribute = StatSystem.Attribute;
 namespace AbilitySystem
 {
     [RequireComponent(typeof(StatController),
-        typeof(TagController))]
+        typeof(TagRegister))]
     public partial class GameplayEffectHandler : MonoBehaviour
     {
         [SerializeField] private List<GameplayEffectDefinition> _startEffectDefinitions;
 
         
         protected StatController StatController;
-        protected TagController TagController;
+        protected TagRegister TagRegister;
         protected List<GameplayPersistentEffect> ActiveEffects = new List<GameplayPersistentEffect>();
         public ReadOnlyCollection<GameplayPersistentEffect> GetActiveEffects => ActiveEffects.AsReadOnly();
 
@@ -31,14 +31,14 @@ namespace AbilitySystem
         private void Awake()
         {
             StatController = GetComponent<StatController>();
-            TagController = GetComponent<TagController>();
+            TagRegister = GetComponent<TagRegister>();
         }
 
         private void OnEnable()
         {
             StatController.OnInitialized += OnStatControllerInitialized;
-            TagController.OnTagAdded += CheckRemovalTagRequirements;
-            TagController.OnTagRemoved += CheckRemovalTagRequirements;
+            TagRegister.OnTagAdded += CheckRemovalTagRequirements;
+            TagRegister.OnTagRemoved += CheckRemovalTagRequirements;
             
             if (StatController.IsInitialized)
             {
@@ -49,8 +49,8 @@ namespace AbilitySystem
         private void OnDisable()
         {
             StatController.OnInitialized -= OnStatControllerInitialized;
-            TagController.OnTagAdded -= CheckRemovalTagRequirements;
-            TagController.OnTagRemoved -= CheckRemovalTagRequirements;
+            TagRegister.OnTagAdded -= CheckRemovalTagRequirements;
+            TagRegister.OnTagRemoved -= CheckRemovalTagRequirements;
         }
 
         private void OnStatControllerInitialized()
@@ -99,7 +99,7 @@ namespace AbilitySystem
                 }
             }
 
-            if (!TagController.SatisfiesRequirements(effectToApply.Definition.ApplicationMustBePresentTags,
+            if (!TagRegister.SatisfiesRequirements(effectToApply.Definition.ApplicationMustBePresentTags,
                     effectToApply.Definition.ApplicationMustBeAbsentTags))
             {
                 Debug.Log("Not satisfies");
@@ -108,7 +108,7 @@ namespace AbilitySystem
             
             if(effectToApply is GameplayPersistentEffect persistentEffectToApply)
             {
-                if(!TagController.SatisfiesRequirements(persistentEffectToApply.Definition.PersistMustBePresentTags,
+                if(!TagRegister.SatisfiesRequirements(persistentEffectToApply.Definition.PersistMustBePresentTags,
                     persistentEffectToApply.Definition.PersistMustBeAbsentTags))
                 {
                     Debug.Log("Not satisfies");
@@ -231,7 +231,7 @@ namespace AbilitySystem
         private void CheckRemovalTagRequirements(string tag)
         {
             ActiveEffects
-                .Where(effect => !TagController
+                .Where(effect => !TagRegister
                 .SatisfiesRequirements(effect.Definition.PersistMustBePresentTags, effect.Definition.PersistMustBeAbsentTags))
                 .ToList()
                 .ForEach(effect => RemoveActiveGameplayEffect(effect, true));
@@ -269,7 +269,7 @@ namespace AbilitySystem
 
             foreach (var grantedTag in persistentEffect.Definition.GrantedTags)
             {
-                TagController.AddTag(grantedTag);
+                TagRegister.AddTag(grantedTag);
             }
 
             if (persistentEffect.Definition.SpecialPersistentEffectDefinition != null)
@@ -290,7 +290,7 @@ namespace AbilitySystem
             
             foreach (var grantedTag in persistentEffect.Definition.GrantedTags)
             {
-                TagController.RemoveTag(grantedTag);
+                TagRegister.RemoveTag(grantedTag);
             }
 
             if (persistentEffect.Definition.SpecialPersistentEffectDefinition != null)

@@ -8,13 +8,13 @@ using UnityEngine;
 
 namespace StatSystem
 {
-    [RequireComponent(typeof(TagController))]
+    [RequireComponent(typeof(TagRegister))]
     public class StatController : MonoBehaviour
     {
         [SerializeField] private StatDatabase _statDatabase;
         protected Dictionary<string, Stat> _stats = new Dictionary<string, Stat>(StringComparer.OrdinalIgnoreCase);
         public Dictionary<string, Stat> Stats => _stats;
-        private TagController _tagController;
+        private TagRegister _tagRegister;
         public Health Health { get; private set; }
         public bool IsInitialized { get; private set; }
         public event Action OnInitialized;
@@ -24,7 +24,7 @@ namespace StatSystem
 
         protected virtual void Awake()
         {
-            _tagController = GetComponent<TagController>();
+            _tagRegister = GetComponent<TagRegister>();
             
             if (!IsInitialized)
             {
@@ -48,7 +48,7 @@ namespace StatSystem
             {
                 if (definition.name.Equals("Health", StringComparison.OrdinalIgnoreCase))
                 {
-                    Health = new Health(definition, this, _tagController);
+                    Health = new Health(definition, this, _tagRegister);
                     _stats.Add(definition.name, Health);
                 }
                 else
