@@ -21,7 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  <Name>k__BackingField: 
+  <Rarity>k__BackingField: {fileID: 11400000, guid: 3721210cfbc75d340842b6bb87a8e1e1,
+    type: 2}
+  <Name>k__BackingField: Powerful sword
   <Prefab>k__BackingField: {fileID: 3480261504482581523, guid: 07c0e4883cf5f7542897b81ebdb96b35,
     type: 3}
   <MaxItemsInStack>k__BackingField: 1
@@ -31,13 +33,16 @@ MonoBehaviour:
     Id: 1
   <ItemType>k__BackingField: 0
   <StatModifier>k__BackingField:
-  - <StatName>k__BackingField: Strength
+  - <Name>k__BackingField: Strength
+    <StatName>k__BackingField: Strength
     <Magnitude>k__BackingField: 12
     <Type>k__BackingField: 0
-  - <StatName>k__BackingField: PhysicalAttack
+  - <Name>k__BackingField: Physical attack
+    <StatName>k__BackingField: PhysicalAttack
     <Magnitude>k__BackingField: 40
     <Type>k__BackingField: 0
-  - <StatName>k__BackingField: Strength
+  - <Name>k__BackingField: Strength
+    <StatName>k__BackingField: Strength
     <Magnitude>k__BackingField: 12
     <Type>k__BackingField: 0
   <RightHanded>k__BackingField: 1

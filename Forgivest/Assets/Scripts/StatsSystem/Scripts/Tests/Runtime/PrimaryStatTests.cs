@@ -21,9 +21,9 @@ namespace StatSystem.Tests
             yield return null;
             StatController statController = GameObject.FindObjectOfType<StatController>();
             PrimaryStat strength = statController.Stats["Strength"] as PrimaryStat;
-            Assert.AreEqual(1, strength.value);
+            Assert.AreEqual(1, strength.Value);
             strength.Add(1);
-            Assert.AreEqual(2, strength.value);
+            Assert.AreEqual(2, strength.Value);
         }
     }
 }

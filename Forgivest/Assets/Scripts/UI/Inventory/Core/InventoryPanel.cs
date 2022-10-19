@@ -63,9 +63,9 @@ namespace UI.Inventory.Core
             _hotbarContainerUI.InitializeSlots(hotbarCapacity);
         }
         
-        public void CreateSlotsWithItemInInventory(Sprite sprite, int amount, int index, ItemContainerUI itemContainerUI)
+        public void CreateSlotsWithItemInInventory(Sprite sprite, int amount, int index, ItemContainerUI itemContainerUI, string description)
         {
-            itemContainerUI.RefreshSlotData(sprite, amount, index);
+            itemContainerUI.RefreshSlotData(sprite, amount, index, description);
         }
         
         private void ChangeHolder(IInventoryHolder inventoryHolder)

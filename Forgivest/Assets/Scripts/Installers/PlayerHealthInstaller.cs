@@ -11,7 +11,7 @@ namespace Installers
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<PlayerHealthController>().AsSingle();
-            Container.Bind<Health>().FromInstance(_statController.Health).AsSingle();
+            Container.Bind<StatController>().FromInstance(_statController).AsSingle();
         }
     }
 }

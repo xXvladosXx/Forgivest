@@ -78,13 +78,13 @@ namespace StatSystem
             base.InitializeStatFormulas();
             foreach (Stat currentStat in _stats.Values)
             {
-                if (currentStat.definition.Formula != null && currentStat.definition.Formula.rootNode != null)
+                if (currentStat.Definition.Formula != null && currentStat.Definition.Formula.rootNode != null)
                 {
-                    List<LevelNode> levelNodes = currentStat.definition.Formula.FindNodesOfType<LevelNode>();
+                    List<LevelNode> levelNodes = currentStat.Definition.Formula.FindNodesOfType<LevelNode>();
                     foreach (LevelNode levelNode in levelNodes)
                     {
                         levelNode.Levelable = m_Levelable;
-                        m_Levelable.OnLevelChanged += currentStat.CalculateOnValue;
+                        m_Levelable.OnLevelChanged += () => currentStat.CalculateOnValue(0);
                     }
                 }
             }

@@ -17,17 +17,17 @@ namespace UI.Inventory.Slot
         [SerializeField] private DraggableObject _draggableObject;
         [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private CanvasGroup _canvasGroup;
-        
-        private int CurrentAmount { get; set; }
 
+        public string ItemDescription { get; set; } 
+        
         private Vector3 _startPosition;
         private Transform _originalParent;
         private DraggableObject _currentDraggableObject;
+        private int _currentAmount;
 
         private Canvas _parentCanvas;
 
         public event Action<int, int, Sprite, int, IInventoryHolder> OnItemTryToSwap;
-
         
         public int Index { get; private set; }
         
@@ -36,14 +36,9 @@ namespace UI.Inventory.Slot
             _parentCanvas = GetComponentInParent<Canvas>();
         }
         
-        public void AddItems(Sprite itemSprite, int number, int index)
-        {
-            SetSlotData(itemSprite, number, index);
-        }
-
         public void TryToSwap(IDragDestination destination, IInventoryHolder inventoryHolder)
         {
-            OnItemTryToSwap?.Invoke(Index, destination.Index, _itemIcon.GetIcon(), CurrentAmount, inventoryHolder);
+            OnItemTryToSwap?.Invoke(Index, destination.Index, _itemIcon.GetIcon(), _currentAmount, inventoryHolder);
         }
 
         public Sprite GetIcon()
@@ -51,12 +46,13 @@ namespace UI.Inventory.Slot
             return _itemIcon.GetIcon();
         }
 
-        public virtual void SetSlotData(Sprite itemSprite, int itemAmount, int index)
+        public virtual void SetSlotData(Sprite itemSprite, int itemAmount, int index, string description)
         {
             _itemIcon.SetIcon(itemSprite);
             Index = index;
-            CurrentAmount = itemAmount;
+            _currentAmount = itemAmount;
             _itemAmount.text = itemAmount is 1 or 0 ? string.Empty : itemAmount.ToString();
+            ItemDescription = description;
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -68,7 +64,7 @@ namespace UI.Inventory.Slot
                 Quaternion.identity,
                 _parentCanvas.transform);
             
-            draggableObject.Init(GetIcon(), CurrentAmount,
+            draggableObject.Init(GetIcon(), _currentAmount,
                 _parentCanvas, 
                 transform, 
                 _rectTransform.sizeDelta.x,

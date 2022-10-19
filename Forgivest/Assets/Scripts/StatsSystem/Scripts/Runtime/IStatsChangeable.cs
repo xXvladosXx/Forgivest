@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using StatsSystem.Scripts.Runtime;
 using StatSystem;
 
 namespace InventorySystem

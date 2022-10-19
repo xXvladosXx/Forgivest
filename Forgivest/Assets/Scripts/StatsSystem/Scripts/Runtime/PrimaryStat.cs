@@ -17,20 +17,20 @@ namespace StatSystem
         
         public override void Initialize()
         {
-            m_BaseValue = definition.BaseValue;
+            m_BaseValue = Definition.BaseValue;
             base.Initialize();
         }
 
         internal void Add(int amount)
         {
             m_BaseValue += amount;
-            CalculateOnValue();
+            CalculateOnValue(0);
         }
 
         internal void Subtract(int amount)
         {
             m_BaseValue -= amount;
-            CalculateOnValue();
+            CalculateOnValue(0);
         }
 
         #region Stat System
@@ -43,7 +43,7 @@ namespace StatSystem
         {
             PrimaryStatData primaryStatData = (PrimaryStatData)data;
             m_BaseValue = primaryStatData.baseValue;
-            CalculateOnValue();
+            CalculateOnValue(0);
         }
 
         [Serializable]

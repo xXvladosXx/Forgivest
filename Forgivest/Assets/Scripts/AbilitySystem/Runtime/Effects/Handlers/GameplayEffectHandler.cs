@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using AbilitySystem.AbilitySystem.Runtime;
 using AbilitySystem.AbilitySystem.Runtime.Effects.Stackable;
+using StatsSystem.Scripts.Runtime;
 using StatSystem;
 using UnityEngine;
 using Attribute = StatSystem.Attribute;

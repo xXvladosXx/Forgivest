@@ -1,4 +1,4 @@
-﻿using LevelSystem;
+﻿/*using LevelSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -38,9 +38,7 @@ namespace StatSystem.UI
             OnHealthChangedInternal();
             OnLevelChanged();
             mana.OnValueChanged += OnMaxManaChanged;
-            mana.OnCurrentValueChanged += OnManaChanged;
             health.OnValueChanged += OnMaxHealthChanged;
-            health.OnCurrentValueChanged += OnHealthChanged;
             m_Levelable.OnLevelChanged += OnLevelChanged;
             m_Levelable.OnCurrentExperienceChanged += OnCurrentExperienceChanged;
         }
@@ -50,9 +48,7 @@ namespace StatSystem.UI
             Attribute mana = m_Controller.Stats["Mana"] as Attribute;
             Attribute health = m_Controller.Stats["Health"] as Attribute;
             mana.OnValueChanged -= OnMaxManaChanged;
-            mana.OnCurrentValueChanged -= OnManaChanged;
             health.OnValueChanged -= OnMaxHealthChanged;
-            health.OnCurrentValueChanged -= OnHealthChanged;
             m_Levelable.OnLevelChanged -= OnLevelChanged;
             m_Levelable.OnCurrentExperienceChanged -= OnCurrentExperienceChanged;
         }
@@ -108,4 +104,4 @@ namespace StatSystem.UI
             m_ManaBar.title = $"{mana.currentValue} / {mana.value}";
         }
     }
-}
+}*/

@@ -113,12 +113,14 @@ namespace Controllers.Player
             {
                 if (slot.Item == null)
                 {
-                    _inventoryPanel.CreateSlotsWithItemInInventory(null, 0, index, _itemHolders[itemContainer]);
+                    _inventoryPanel.CreateSlotsWithItemInInventory(null, 0, index,
+                        _itemHolders[itemContainer], itemContainer.Slots[index].GetDescription());
                     index++;
                     continue;
                 }
 
-                _inventoryPanel.CreateSlotsWithItemInInventory(slot.Item.Sprite, slot.Amount, index, _itemHolders[itemContainer]);
+                _inventoryPanel.CreateSlotsWithItemInInventory(slot.Item.Sprite, slot.Amount, index,
+                    _itemHolders[itemContainer], itemContainer.Slots[index].GetDescription());
                 index++;
             }
         }

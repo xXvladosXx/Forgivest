@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using LevelSystem;
 using NUnit.Framework;
 using StatSystem.UI;
@@ -82,4 +82,4 @@ namespace StatSystem.Tests
             UnityEngine.Assertions.Assert.AreEqual(90, healthBar.value);
         }
     }
-}
+}*/

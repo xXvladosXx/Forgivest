@@ -1,4 +1,5 @@
 ﻿using Core;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 
 namespace StatSystem

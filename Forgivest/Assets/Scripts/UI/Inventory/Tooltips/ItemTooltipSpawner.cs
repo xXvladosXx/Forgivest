@@ -3,9 +3,7 @@ using UnityEngine;
 
 namespace UI.Inventory.Tooltips
 {
-    /// <summary>
-    /// To be placed on a UI slot to spawn and show the correct item tooltip.
-    /// </summary>
+   
     [RequireComponent(typeof(InventorySlotUI))]
     public class ItemTooltipSpawner : TooltipSpawner
     {
@@ -18,11 +16,10 @@ namespace UI.Inventory.Tooltips
         public override void UpdateTooltip(GameObject tooltip)
         {
             var itemTooltip = tooltip.GetComponent<ItemTooltip>();
+            var item = GetComponent<InventorySlotUI>();
             if (!itemTooltip) return;
 
-            //var item = GetComponent<InventorySlotUI>().GetItem();
-
-            //itemTooltip.Setup(item);
+            itemTooltip.Setup(item.ItemDescription);
         }
     }
 }
