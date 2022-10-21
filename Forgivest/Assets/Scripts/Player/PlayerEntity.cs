@@ -31,7 +31,7 @@ namespace Player
     
     [RequireComponent(typeof(AbilityController),
         typeof(GameplayEffectHandler))]
-    public class PlayerEntity : MonoBehaviour, IAnimationEventUser, IDamageReceiver
+    public class PlayerEntity : MonoBehaviour, IAnimationEventUser, IDamageReceiver, IDamageApplier
     {
         [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
         [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
@@ -55,8 +55,6 @@ namespace Player
         public Rotator Rotator { get; private set; }
         public PlayerRaycastUser RaycastUser { get; private set; }
         
-        public AttackApplier AttackApplier { get; private set; }
-        
         private PlayerStateMachine _playerStateMachine;
         
         public event Action<AttackData> OnDamageReceived;
@@ -75,14 +73,12 @@ namespace Player
             AnimationChanger = new AnimationChanger(Animator);
             Movement = new Movement(NavMeshAgent, Rigidbody, transform);
             Rotator = new Rotator(Rigidbody);
-            RaycastUser = new PlayerRaycastUser(Camera, PlayerInputProvider, PlayerRaycastSettings, Movement);
-            
-            AttackApplier = new AttackApplier(_objectPicker.ItemEquipHandler);
+            RaycastUser = new PlayerRaycastUser(Camera, PlayerInputProvider, PlayerRaycastSettings);
             
             _playerStateMachine = new PlayerStateMachine(AnimationChanger,
                 Movement, Rotator, PlayerInputProvider, StateData,
                 RaycastUser, AliveEntityAnimationData, 
-                AttackApplier, AbilityController);
+                this, AbilityController);
         }
         
         private void OnEnable()
@@ -93,7 +89,7 @@ namespace Player
         private void Start()
         {
             _playerStateMachine.ChangeState(_playerStateMachine.IdlingState);
-            _objectPicker.Init(RaycastUser);
+            _objectPicker.Init();
         }
 
         private void Update()
@@ -135,7 +131,7 @@ namespace Player
             Debug.Log(StatsHandler.CalculateStat(StatsEnum.Damage) + " Dam ");
             */
             
-            AttackApplier.ApplyDamage(new AttackData
+            ApplyDamage(new AttackData
             {
                 Damage = StatsFinder.FindStat("PhysicalAttack"),
                 DamageApplierLayerMask = LayerMask
@@ -162,6 +158,13 @@ namespace Player
         private void OnWeaponEquipped(Weapon weapon)
         {
             AnimationChanger.ChangeRuntimeAnimatorController(weapon.AnimatorController);
+        }
+
+        public Weapon Weapon => _objectPicker.ItemEquipHandler.CurrentWeapon;
+        public event Action<AttackData> OnDamageApplied;
+        public void ApplyDamage(AttackData attackData, float timeOfActivation)
+        {
+            
         }
     }
 }

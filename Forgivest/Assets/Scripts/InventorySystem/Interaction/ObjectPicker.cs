@@ -4,7 +4,6 @@ using InventorySystem.Core;
 using InventorySystem.Items;
 using InventorySystem.Items.ItemTypes.Core;
 using InventorySystem.Items.Weapon;
-using RaycastSystem.Core;
 using Sirenix.OdinInspector;
 using StatsSystem.Scripts.Runtime;
 using StatSystem;
@@ -22,13 +21,11 @@ namespace InventorySystem.Interaction
         [field: SerializeField] public PickableItem PickableItem { get; private set; }
         [field: SerializeField] public PickableItem PickableItem1 { get; private set; }
 
-        private RaycastUser _raycastUser;
         public event Action<List<StatModifier>> OnStatAdded;
         public event Action<List<StatModifier>> OnStatRemoved;
 
-        public void Init(RaycastUser raycastUser)
+        public void Init()
         {
-            _raycastUser = raycastUser;
             Inventory.Init();
             Equipment.Init();
             Hotbar.Init();
