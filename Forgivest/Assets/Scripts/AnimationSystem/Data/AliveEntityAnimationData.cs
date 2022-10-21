@@ -5,22 +5,21 @@ namespace Data.Player
     [CreateAssetMenu(menuName = "StateMachine/AnimationData")]
     public class AliveEntityAnimationData : ScriptableObject
     {
-        [field: Header(" Movement")] [SerializeField]
-        private string HorizontalParameterName = "Horizontal";
+        [field: Header(" Movement")]
+        [SerializeField] private string HorizontalParameterName = "Horizontal";
 
         [SerializeField] private string VerticalParameterName = "Vertical";
 
-        [Header("State Group Parameter Names")] [SerializeField]
-        private string _groundedParameterName = "Grounded";
+        [Header("State Group Parameter Names")] 
+        [SerializeField] private string _groundedParameterName = "Grounded";
 
         [SerializeField] private string _movingParameterName = "Moving";
         [SerializeField] private string _stoppingParameterName = "Stopping";
         [SerializeField] private string _landingParameterName = "Landing";
         [SerializeField] private string _airborneParameterName = "Airborne";
 
-        [Header("Grounded Parameter Names")] [SerializeField]
-        private string _idleParameterName = "isIdling";
-
+        [Header("Grounded Parameter Names")] 
+        [SerializeField] private string _idleParameterName = "isIdling";
         [SerializeField] private string _dashParameterName = "isDashing";
         [SerializeField] private string _walkParameterName = "isWalking";
         [SerializeField] private string _runParameterName = "isRunning";
@@ -30,9 +29,8 @@ namespace Data.Player
         [SerializeField] private string _rollParameterName = "isRolling";
         [SerializeField] private string _hardLandParameterName = "isHardLanding";
 
-        [Header("Combat Parameter Names")] [SerializeField]
-        private string _aimingParameterName = "isAiming";
-
+        [Header("Combat Parameter Names")]
+        [SerializeField] private string _aimingParameterName = "isAiming";
         [SerializeField] private string _firingParameterName = "isFiring";
         [SerializeField] private string _equippingParameterName = "isEquipping";
         [SerializeField] private string _reloadingParameterName = "isReloading";
@@ -43,13 +41,24 @@ namespace Data.Player
         [SerializeField] private string _dashAttackParameterName = "DashAttack";
         [SerializeField] private string _sprintAttackParameterName = "SprintAttack";
         [SerializeField] private string _attackParameterName = "Attack";
+<<<<<<< HEAD
         [SerializeField] private string _skillParameterName = "Skill";
         [SerializeField] private string _skill2ParameterName = "Skill2";
 
+=======
+>>>>>>> b8b5eeb (Added skills for player)
         [SerializeField] private string _speedParameterName = "Speed";
 
-        [Header("Airborne Parameter Names")] [SerializeField]
-        private string _fallParameterName = "isFalling";
+        [Header("Airborne Parameter Names")] 
+        [SerializeField] private string _fallParameterName = "isFalling";
+        
+        [Header("Skill Parameter Names")]
+        [SerializeField] private string _skillParameterName = "CastSkill";
+        [SerializeField] private string _firstSkillParameterName = "FirstSkill";
+        [SerializeField] private string _secondSkillParameterName = "SecondSkill";
+        [SerializeField] private string _thirdSkillParameterName = "ThirdSkill";
+        [SerializeField] private string _fourthSkillParameterName = "FourthSkill";
+        [SerializeField] private string _fifthSkillParameterName = "FifthSkill";
 
         public int GroundedParameterHash { get; private set; }
         public int MovingParameterHash { get; private set; }
@@ -87,7 +96,13 @@ namespace Data.Player
         public int SecondSkillParameterHash { get; private set; }
         public int AirAttackDashParameterHash { get; private set; }
         public int AirAttackLandedParameterHash { get; private set; }
-
+        
+        public int FirstSkillParameterHash { get; private set; }
+        public int SecondSkillParameterHash { get; private set; }
+        public int ThirdSkillParameterHash { get; private set; }
+        public int FourthSkillParameterHash { get; private set; }
+        public int FifthSkillParameterHash { get; private set; }
+        public int SkillParameterHash { get; private set; }
         public void Init()
         {
             GroundedParameterHash = Animator.StringToHash(_groundedParameterName);
@@ -126,9 +141,19 @@ namespace Data.Player
             VerticalParameterHash = Animator.StringToHash(VerticalParameterName);
 
             AttackParameterHash = Animator.StringToHash(_attackParameterName);
+<<<<<<< HEAD
             FirstSkillParameterHash = Animator.StringToHash(_skillParameterName);
             SecondSkillParameterHash = Animator.StringToHash(_skill2ParameterName);
            
+=======
+            
+            SkillParameterHash = Animator.StringToHash(_skillParameterName);
+            FirstSkillParameterHash = Animator.StringToHash(_firstSkillParameterName);
+            SecondSkillParameterHash = Animator.StringToHash(_secondSkillParameterName);
+            ThirdSkillParameterHash = Animator.StringToHash(_thirdSkillParameterName);
+            FourthSkillParameterHash = Animator.StringToHash(_fourthSkillParameterName);
+            FifthSkillParameterHash = Animator.StringToHash(_fifthSkillParameterName);
+>>>>>>> b8b5eeb (Added skills for player)
         }
     }
 }

@@ -1,6 +1,8 @@
+using Player.States;
+
 namespace StateMachine.Player.States
 {
-    public class PlayerIdlingState : PlayerBaseState
+    public class PlayerIdlingState : PlayerAliveState
     {
         public override void Enter()
         {

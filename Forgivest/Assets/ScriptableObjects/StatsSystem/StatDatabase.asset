@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1c38672a6b454e8ed0e07b48a4296b, type: 3}
   m_Name: Intelligence
   m_EditorClassIdentifier: 
-  m_BaseValue: 99
+  m_BaseValue: 0
   m_Cap: -1
   m_Formula: {fileID: 0}
 --- !u!114 &-1248605680695438214
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1c38672a6b454e8ed0e07b48a4296b, type: 3}
   m_Name: Mana
   m_EditorClassIdentifier: 
-  m_BaseValue: 200
+  m_BaseValue: 100000
   m_Cap: -1
   m_Formula: {fileID: 0}
 --- !u!114 &2821024433959980759

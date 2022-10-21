@@ -34,20 +34,12 @@ namespace StatSystem
                 if (source.Tags.Contains("physical"))
                 {
                     var possibleDamage = FindResistance(modifier, "PhysicalDefense");
-
-                    possibleDamage -= modifier.Magnitude;
                     modifier.Magnitude = possibleDamage;
                 }
                 else if (source.Tags.Contains("magical"))
                 {
                     var possibleDamage = FindResistance(modifier, "MagicalDefense");
-                    
-                        possibleDamage -= modifier.Magnitude;
-                        modifier.Magnitude = possibleDamage;
-                }
-                else if (source.Tags.Contains("pure"))
-                {
-                    // do nothing
+                    modifier.Magnitude = possibleDamage;
                 }
             }
             
@@ -57,8 +49,11 @@ namespace StatSystem
         private float FindResistance(StatModifier modifier, string stat)
         {
             float resistance = Mathf.Clamp(m_Controller.Stats[stat].Value, 1, 100);
-            var possibleDamage = modifier.Magnitude;
-            possibleDamage =  (possibleDamage * 100) / resistance;
+            float possibleDamage = modifier.Magnitude;
+
+            resistance = (resistance * possibleDamage) / 100;
+            resistance = (float) Math.Round(resistance, 2); 
+            possibleDamage -= resistance;
             return possibleDamage;
         }
     }

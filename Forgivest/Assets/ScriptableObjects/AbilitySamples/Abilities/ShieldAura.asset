@@ -16,7 +16,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 815214685f9f82041bafe8d82a46c075, type: 2}
   _maxLevel: 0
   _level: 5
-  <AnimationName>k__BackingField: Cast
+  <AnimationName>k__BackingField: FirstSkill
   <Cost>k__BackingField: {fileID: 11400000, guid: 35734d245e364124592a4393fad41bb9,
     type: 2}
   <Cooldown>k__BackingField: {fileID: 11400000, guid: 994b4c5b98f343e45ab2df00f81a8742,

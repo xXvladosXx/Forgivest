@@ -1,4 +1,5 @@
-﻿using MovementSystem;
+﻿using System;
+using MovementSystem;
 using RaycastSystem.Core;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,7 +14,12 @@ namespace RaycastSystem
         private readonly PlayerRaycastSettings _playerRaycastSettings;
         private readonly Movement _movement;
         private readonly Camera _camera;
+
+        private RaycastHit[] _possibleRaycasts;
         
+        private const float RAYCAST_RADIUS = 1f;
+        private const int RAYCAST_ARRAY_SIZE = 100;
+
         public RaycastHit? RaycastHit { get; private set; }
 
         public PlayerRaycastUser(Camera camera,
@@ -32,6 +38,7 @@ namespace RaycastSystem
             RaycastHit = RaycastExcept(_playerInputProvider.ReadMousePosition(), LayerUtils.Player);
             
             if (InteractWithUI()) return;
+            if (InteractWithComponent()) return;
             if (InteractWithMovement()) return;
             
             SetCursor(CursorType.UI);
@@ -51,6 +58,37 @@ namespace RaycastSystem
             return false;
         }
 
+        private bool InteractWithComponent()
+        {
+            RaycastHit[] hits = RaycastAllSorted();
+            foreach (RaycastHit hit in hits)
+            {
+                IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
+                foreach (IRaycastable raycastable in raycastables)
+                {
+                    if (raycastable.HandleRaycast(this))
+                    {
+                        SetCursor(raycastable.GetCursorType());
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        
+        RaycastHit[] RaycastAllSorted()
+        {
+            var ray = _camera.ScreenPointToRay(_playerInputProvider.ReadMousePosition());
+            RaycastHit[] hits = Physics.SphereCastAll(ray, RAYCAST_RADIUS);
+            float[] distances = new float[hits.Length];
+            for (int i = 0; i < hits.Length; i++)
+            {
+                distances[i] = hits[i].distance;
+            }
+            Array.Sort(distances, hits);
+            return hits;
+        }
+        
         private bool InteractWithUI()
         {
             if (EventSystem.current.IsPointerOverGameObject())

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using RaycastSystem.Core;
 using UnityEngine.EventSystems;
 using UnityEngine.AI;
 
@@ -53,16 +54,16 @@ namespace InventoryExample.Control
                 IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
                 foreach (IRaycastable raycastable in raycastables)
                 {
-                    if (raycastable.HandleRaycast(this))
-                    {
-                        SetCursor(raycastable.GetCursorType());
-                        return true;
-                    }
+                    // if (raycastable.HandleRaycast(this))
+                    // {
+                    //     SetCursor(raycastable.GetCursorType());
+                    //     return true;
+                    // }
                 }
             }
             return false;
         }
-
+        
         RaycastHit[] RaycastAllSorted()
         {
             RaycastHit[] hits = Physics.SphereCastAll(GetMouseRay(), raycastRadius);
