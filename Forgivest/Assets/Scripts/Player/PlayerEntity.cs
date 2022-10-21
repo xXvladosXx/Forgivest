@@ -1,4 +1,8 @@
 using System;
+using AbilitySystem;
+using AbilitySystem.AbilitySystem.Runtime.Abilities;
+using AbilitySystem.AbilitySystem.Runtime.Abilities.Active;
+using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
 using AnimationSystem;
 using AttackSystem;
 using AttackSystem.Core;
@@ -24,6 +28,9 @@ namespace Player
     [RequireComponent(typeof(StatController),
         typeof(Animator),
         typeof(ObjectPicker))]
+    
+    [RequireComponent(typeof(AbilityController),
+        typeof(GameplayEffectHandler))]
     public class PlayerEntity : MonoBehaviour, IAnimationEventUser, IDamageReceiver
     {
         [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
@@ -35,7 +42,9 @@ namespace Player
         [field: SerializeField] public Animator Animator { get; private set; }
         [field: SerializeField] public StatController StatController { get; private set; }
         [field: SerializeField] public StatsFinder StatsFinder { get; private set; }
-
+        [field: SerializeField] public AbilityController AbilityController { get; private set; }
+        [field: SerializeField] public GameplayEffectHandler GameplayEffectHandler { get; private set; }
+        [field: SerializeField] public GameObject Target { get; private set; }
         [field: SerializeField] public PlayerRaycastSettings PlayerRaycastSettings { get; private set; }
         [SerializeField] private ObjectPicker _objectPicker;
 
@@ -73,14 +82,14 @@ namespace Player
             _playerStateMachine = new PlayerStateMachine(AnimationChanger,
                 Movement, Rotator, PlayerInputProvider, StateData,
                 RaycastUser, AliveEntityAnimationData, 
-                AttackApplier);
+                AttackApplier, AbilityController);
         }
         
         private void OnEnable()
         {
             _objectPicker.ItemEquipHandler.OnWeaponEquipped += OnWeaponEquipped;
         }
-        
+
         private void Start()
         {
             _playerStateMachine.ChangeState(_playerStateMachine.IdlingState);
@@ -91,6 +100,11 @@ namespace Player
         {
             RaycastUser.Tick();
             _playerStateMachine.Update();
+            
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                var actived = AbilityController.TryActiveAbility("Poison", Target.gameObject);
+            }
         }
 
         private void OnDisable()
@@ -127,6 +141,22 @@ namespace Player
                 DamageApplierLayerMask = LayerMask
             }, timeOfActiveCollider);
             
+        }
+
+        public void CastedSkill()
+        {
+            if (AbilityController.CurrentAbility is SingleTargetAbility singeTargetAbility)
+            {
+                singeTargetAbility.Cast(AbilityController.Target);
+            }
+        }
+
+        public void CastedProjectile()
+        {
+            if (AbilityController.CurrentAbility is ProjectileAbility projectileAbility)
+            {
+                projectileAbility.Shoot(AbilityController.Target);
+            }
         }
 
         private void OnWeaponEquipped(Weapon weapon)

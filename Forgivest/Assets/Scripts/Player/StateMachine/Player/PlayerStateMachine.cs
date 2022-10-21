@@ -1,12 +1,15 @@
-﻿using AnimationSystem;
+﻿using AbilitySystem.AbilitySystem.Runtime.Abilities;
+using AnimationSystem;
+using AnimatorStateMachine.StateMachine;
 using AttackSystem;
 using Data.Player;
 using MovementSystem;
+using Player.States.Moving;
+using Player.States.Skill.Skills;
 using RaycastSystem;
 using RaycastSystem.Core;
 using StateMachine.Player.States;
 using StateMachine.Player.States.Attack;
-using StateMachine.Player.States.Moving;
 using Utilities;
 
 namespace StateMachine.Player
@@ -20,7 +23,6 @@ namespace StateMachine.Player
         public AliveEntityStateData AliveEntityStateData { get; }
         public PlayerRaycastUser RaycastUser { get; }
         public AliveEntityAnimationData AnimationData { get; }
-
         public AliveEntityStateReusableData ReusableData { get; }
 
         public PlayerIdlingState IdlingState { get; }
@@ -28,14 +30,20 @@ namespace StateMachine.Player
         public PlayerCombatState PlayerCombatState { get; }
         public PlayerRunningState RunningState { get; }
         public AttackApplier AttackApplier { get; }
+        public AbilityController AbilityController { get; }
+        public PlayerFirstCastState PlayerFirstCastState { get; }
+        public PlayerSecondCastState PlayerSecondCastState { get; }
+        public PlayerThirdCastState PlayerThirdCastState { get; }
+        public PlayerFourthCastState PlayerFourthCastState { get; }
+        public PlayerFifthCastState PlayerFifthCastState { get; }
 
         public PlayerStateMachine(AnimationChanger animationChanger,
             Movement movement, Rotator rotator,
             PlayerInputProvider playerInputProvider,
             AliveEntityStateData aliveEntityStateData,
-            PlayerRaycastUser raycastUser, 
+            PlayerRaycastUser raycastUser,
             AliveEntityAnimationData animationData,
-            AttackApplier attackApplier)
+            AttackApplier attackApplier, AbilityController abilityController)
         {
             Rotator = rotator;
             AnimationChanger = animationChanger;
@@ -45,6 +53,7 @@ namespace StateMachine.Player
             RaycastUser = raycastUser;
             AnimationData = animationData;
             AttackApplier = attackApplier;
+            AbilityController = abilityController;
 
             ReusableData = new AliveEntityStateReusableData();
 
@@ -52,6 +61,12 @@ namespace StateMachine.Player
             RunningState = new PlayerRunningState(this);
             PlayerChasingState = new PlayerChasingState(this);
             PlayerCombatState = new PlayerCombatState(this);
+            
+            PlayerFirstCastState = new PlayerFirstCastState(this);
+            PlayerSecondCastState = new PlayerSecondCastState(this);
+            PlayerThirdCastState = new PlayerThirdCastState(this);
+            PlayerFourthCastState = new PlayerFourthCastState(this);
+            PlayerFifthCastState = new PlayerFifthCastState(this);
         }
     }
 }

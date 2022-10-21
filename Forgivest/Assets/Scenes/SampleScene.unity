@@ -2976,6 +2976,10 @@ GameObject:
   - component: {fileID: 800830064}
   - component: {fileID: 800830068}
   - component: {fileID: 800830069}
+  - component: {fileID: 800830070}
+  - component: {fileID: 800830073}
+  - component: {fileID: 800830072}
+  - component: {fileID: 800830071}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -3095,6 +3099,58 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
+--- !u!136 &800830070
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800830063}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.38
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &800830071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800830063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7778fd1f4f8e4135a0cc397fae2dfb81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startEffectDefinitions: []
+--- !u!114 &800830072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800830063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8203886a5fb4a43b260285a34eff86f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statDatabase: {fileID: 11400000, guid: 0150d0194a4ca3e4c8903e4aeb7857c3, type: 2}
+--- !u!114 &800830073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800830063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93cd15418e07438b85a6b5972ab6f924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &828859521
 GameObject:
   m_ObjectHideFlags: 0
@@ -3132,7 +3188,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.9100952, y: 13.143402}
+  m_AnchoredPosition: {x: 0.91015625, y: 13.143402}
   m_SizeDelta: {x: -26.0559, y: 17.3758}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &828859523
@@ -5163,7 +5219,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -34.2784, y: 0}
+  m_AnchoredPosition: {x: -34.278442, y: 0}
   m_SizeDelta: {x: -68.5568, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1589544092
@@ -5693,7 +5749,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1779829695
@@ -32326,7 +32382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00012207031, y: -633.9355}
+  m_AnchoredPosition: {x: -0.00012207031, y: -633.9351}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &4124739051537465947
@@ -32742,7 +32798,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4124300434036179511}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99917495
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -35083,6 +35139,8 @@ GameObject:
   - component: {fileID: 6702610202858371065}
   - component: {fileID: 6702610202858371067}
   - component: {fileID: 6702610202858371068}
+  - component: {fileID: 6702610202858371070}
+  - component: {fileID: 6702610202858371069}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -35113,6 +35171,9 @@ MonoBehaviour:
   <Animator>k__BackingField: {fileID: 6702610202858371054}
   <StatController>k__BackingField: {fileID: 6702610202858371065}
   <StatsFinder>k__BackingField: {fileID: 6702610202858371068}
+  <AbilityController>k__BackingField: {fileID: 6702610202858371069}
+  <GameplayEffectHandler>k__BackingField: {fileID: 6702610202858371070}
+  <Target>k__BackingField: {fileID: 800830063}
   <PlayerRaycastSettings>k__BackingField: {fileID: 11400000, guid: 7a259cd7e1a3a80468ad847f6b61f14a,
     type: 2}
   _objectPicker: {fileID: 6702610202858371063}
@@ -35301,6 +35362,42 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+--- !u!114 &6702610202858371069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6702610202858371055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e370cd927db14adf8baf611f009109ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _abilityDefinitions:
+  - {fileID: 11400000, guid: 828b1570142042846a3dd859a8ba48cd, type: 2}
+  - {fileID: 11400000, guid: 8411539cff47fdd48bfd9ade82bd4953, type: 2}
+  - {fileID: 11400000, guid: 24dd64d99db33334d9d28783a098845a, type: 2}
+  - {fileID: 11400000, guid: b6572b2b32ff3f84c803b00a23d06f06, type: 2}
+  - {fileID: 11400000, guid: df23ca3859e7a2249bfdf3ad10c7760c, type: 2}
+  - {fileID: 11400000, guid: 34806881ec1b94f4b97341537119e913, type: 2}
+  - {fileID: 11400000, guid: 264967b96a3d5c74fb931613ec0b262d, type: 2}
+  - {fileID: 11400000, guid: 368ece00066db9b4287ba64d3ec9dacc, type: 2}
+  - {fileID: 11400000, guid: 411d533306156554caf93c99fe8e6668, type: 2}
+  - {fileID: 11400000, guid: 0d218b7b6e33f9144a596d80e852ab3d, type: 2}
+--- !u!114 &6702610202858371070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6702610202858371055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7778fd1f4f8e4135a0cc397fae2dfb81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startEffectDefinitions: []
 --- !u!1 &6702610202861559724
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,17 +46,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _modifiers:
   - {fileID: -8098405406943731743}
-  _specialEffectDefinition: {fileID: 0}
+  _conditionalEffects: []
+  _specialEffectDefinition: {fileID: 11400000, guid: 2cd735b857afca14caa6d1b9e8deb549,
+    type: 2}
   _tags:
   - healing
+  _removeEffectsWithTags: []
+  _applicationMustBePresentTags: []
+  _applicationMustBeAbsentTags: []
   _isInfinite: 0
   _durationFormula: {fileID: 11400000, guid: 978b4eaa3d00f05448a2e43447b36701, type: 2}
   _isPeriodic: 1
   _period: 2
   _isExecutableEffectOnApply: 1
   _grantedTags: []
+  _grantedImmunityTags: []
   _specialPersistentEffectDefinition: {fileID: 11400000, guid: 2cd735b857afca14caa6d1b9e8deb549,
     type: 2}
+  _persistMustBePresentTags: []
+  _persistMustBeAbsentTags: []
 --- !u!114 &34117187312028808
 MonoBehaviour:
   m_ObjectHideFlags: 0

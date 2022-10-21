@@ -8,9 +8,6 @@ namespace Utilities
     {
         public PlayerControlls PlayerInput { get; private set; }
         public PlayerControlls.MainActions PlayerMainActions { get; private set; }
-        
-        public Vector2 Look { get; private set; }
-        public bool Fire { get; private set; }
 
         public void Awake()
         {

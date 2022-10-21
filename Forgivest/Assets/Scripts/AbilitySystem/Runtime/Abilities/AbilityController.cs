@@ -68,6 +68,15 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
             }
         }
 
+        public bool TryActiveAbility(int abilityIndex, GameObject target)
+        {
+            if(Abilities.Count <= abilityIndex)
+                return false;
+            
+            var abilityDefinition = Abilities.ElementAtOrDefault(abilityIndex).Key;
+            
+            return TryActiveAbility(abilityDefinition, target);
+        }
         public bool TryActiveAbility(string abilityName, GameObject target)
         {
             if (Abilities.TryGetValue(abilityName, out var ability))

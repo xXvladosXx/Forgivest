@@ -75,7 +75,7 @@ namespace StatSystem
 
         private void Update()
         {
-            print(_stats["Health"].Value);
+            print((_stats["Health"] as Health).currentValue);
             if (Input.GetKeyDown(KeyCode.I))
             {
                 (_stats["Health"] as Health).ApplyModifier(new StatModifier

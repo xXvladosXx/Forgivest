@@ -107,6 +107,51 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""FirstSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""10c06492-1fbe-4c50-a33d-c21531f04b08"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SecondSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""a4b88f37-75a7-4ef8-b6df-df4e2a5770c6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThirdSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3590c2b-1990-49c7-ad5f-8c292e4cb41f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FourthSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""d4577a8f-25c7-4370-87e1-1c0548d96dbc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FifthSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa7f793e-0abc-4fdc-8de2-98ee1c634b12"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -252,6 +297,61 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                     ""action"": ""Mouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""863762c1-8352-40d3-9a46-9130507dd3ef"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FirstSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f52ff8e-fb96-403b-b5ad-4cd80c55ffe0"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70cddbb8-62a8-48a1-ad12-05aaa6f75cbf"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThirdSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c5d7a4c-53cd-426d-b274-74818d0a948e"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FourthSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf0aef4c-d5d5-4ed4-bffb-e69c8b821c5a"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FifthSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -269,6 +369,11 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
         m_Main_PauseMenu = m_Main.FindAction("PauseMenu", throwIfNotFound: true);
         m_Main_Look = m_Main.FindAction("Look", throwIfNotFound: true);
         m_Main_Mouse = m_Main.FindAction("Mouse", throwIfNotFound: true);
+        m_Main_FirstSkill = m_Main.FindAction("FirstSkill", throwIfNotFound: true);
+        m_Main_SecondSkill = m_Main.FindAction("SecondSkill", throwIfNotFound: true);
+        m_Main_ThirdSkill = m_Main.FindAction("ThirdSkill", throwIfNotFound: true);
+        m_Main_FourthSkill = m_Main.FindAction("FourthSkill", throwIfNotFound: true);
+        m_Main_FifthSkill = m_Main.FindAction("FifthSkill", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -337,6 +442,11 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Main_PauseMenu;
     private readonly InputAction m_Main_Look;
     private readonly InputAction m_Main_Mouse;
+    private readonly InputAction m_Main_FirstSkill;
+    private readonly InputAction m_Main_SecondSkill;
+    private readonly InputAction m_Main_ThirdSkill;
+    private readonly InputAction m_Main_FourthSkill;
+    private readonly InputAction m_Main_FifthSkill;
     public struct MainActions
     {
         private @PlayerControlls m_Wrapper;
@@ -350,6 +460,11 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
         public InputAction @PauseMenu => m_Wrapper.m_Main_PauseMenu;
         public InputAction @Look => m_Wrapper.m_Main_Look;
         public InputAction @Mouse => m_Wrapper.m_Main_Mouse;
+        public InputAction @FirstSkill => m_Wrapper.m_Main_FirstSkill;
+        public InputAction @SecondSkill => m_Wrapper.m_Main_SecondSkill;
+        public InputAction @ThirdSkill => m_Wrapper.m_Main_ThirdSkill;
+        public InputAction @FourthSkill => m_Wrapper.m_Main_FourthSkill;
+        public InputAction @FifthSkill => m_Wrapper.m_Main_FifthSkill;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -386,6 +501,21 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                 @Mouse.started -= m_Wrapper.m_MainActionsCallbackInterface.OnMouse;
                 @Mouse.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnMouse;
                 @Mouse.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnMouse;
+                @FirstSkill.started -= m_Wrapper.m_MainActionsCallbackInterface.OnFirstSkill;
+                @FirstSkill.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnFirstSkill;
+                @FirstSkill.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnFirstSkill;
+                @SecondSkill.started -= m_Wrapper.m_MainActionsCallbackInterface.OnSecondSkill;
+                @SecondSkill.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnSecondSkill;
+                @SecondSkill.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnSecondSkill;
+                @ThirdSkill.started -= m_Wrapper.m_MainActionsCallbackInterface.OnThirdSkill;
+                @ThirdSkill.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnThirdSkill;
+                @ThirdSkill.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnThirdSkill;
+                @FourthSkill.started -= m_Wrapper.m_MainActionsCallbackInterface.OnFourthSkill;
+                @FourthSkill.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnFourthSkill;
+                @FourthSkill.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnFourthSkill;
+                @FifthSkill.started -= m_Wrapper.m_MainActionsCallbackInterface.OnFifthSkill;
+                @FifthSkill.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnFifthSkill;
+                @FifthSkill.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnFifthSkill;
             }
             m_Wrapper.m_MainActionsCallbackInterface = instance;
             if (instance != null)
@@ -417,6 +547,21 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                 @Mouse.started += instance.OnMouse;
                 @Mouse.performed += instance.OnMouse;
                 @Mouse.canceled += instance.OnMouse;
+                @FirstSkill.started += instance.OnFirstSkill;
+                @FirstSkill.performed += instance.OnFirstSkill;
+                @FirstSkill.canceled += instance.OnFirstSkill;
+                @SecondSkill.started += instance.OnSecondSkill;
+                @SecondSkill.performed += instance.OnSecondSkill;
+                @SecondSkill.canceled += instance.OnSecondSkill;
+                @ThirdSkill.started += instance.OnThirdSkill;
+                @ThirdSkill.performed += instance.OnThirdSkill;
+                @ThirdSkill.canceled += instance.OnThirdSkill;
+                @FourthSkill.started += instance.OnFourthSkill;
+                @FourthSkill.performed += instance.OnFourthSkill;
+                @FourthSkill.canceled += instance.OnFourthSkill;
+                @FifthSkill.started += instance.OnFifthSkill;
+                @FifthSkill.performed += instance.OnFifthSkill;
+                @FifthSkill.canceled += instance.OnFifthSkill;
             }
         }
     }
@@ -432,5 +577,10 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnMouse(InputAction.CallbackContext context);
+        void OnFirstSkill(InputAction.CallbackContext context);
+        void OnSecondSkill(InputAction.CallbackContext context);
+        void OnThirdSkill(InputAction.CallbackContext context);
+        void OnFourthSkill(InputAction.CallbackContext context);
+        void OnFifthSkill(InputAction.CallbackContext context);
     }
 }

@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using StateMachine.Player;
+using StateMachine.Player.States;
+using UnityEngine;
 
-namespace StateMachine.Player.States.Attack
+namespace Player.States.Attack
 {
-    public class PlayerAttackState : PlayerBaseState
+    public class PlayerAttackState : PlayerAliveState
     {
         public PlayerAttackState(PlayerStateMachine playerPlayerStateMachine) : base(playerPlayerStateMachine)
         {

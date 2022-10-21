@@ -30,5 +30,10 @@ namespace AnimationSystem
         {
             _animator.runtimeAnimatorController = weaponAnimatorController;
         }
+
+        public void StartAnimation(string animationName)
+        {
+            _animator.SetBool(animationName, true);
+        }
     }
 }

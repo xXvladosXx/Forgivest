@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameplayEffectDefinitions:
   - {fileID: 11400000, guid: ae42ee4d0faff834b9a832208822e206, type: 2}
-  <AnimationName>k__BackingField: Cast
+  _maxLevel: 0
+  _level: 5
+  <AnimationName>k__BackingField: FirstSkill
   <Cost>k__BackingField: {fileID: 11400000, guid: b7a57320141e57543a1431725a1c7785,
     type: 2}
   <Cooldown>k__BackingField: {fileID: 11400000, guid: 0678af73a9c5c3e4b8a623d9092f7394,

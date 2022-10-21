@@ -38,5 +38,12 @@ MonoBehaviour:
   _airAttackDashParameterName: AirAttackDash
   _dashAttackParameterName: DashAttack
   _sprintAttackParameterName: SprintAttack
+  _attackParameterName: Attack
   _speedParameterName: Speed
   _fallParameterName: isFalling
+  _skillParameterName: SkillCast
+  _firstSkillParameterName: FirstSkill
+  _secondSkillParameterName: SecondSkill
+  _thirdSkillParameterName: ThirdSkill
+  _fourthSkillParameterName: FourthSkill
+  _fifthSkillParameterName: FifthSkill

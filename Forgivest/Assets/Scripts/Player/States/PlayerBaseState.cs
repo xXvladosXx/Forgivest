@@ -2,6 +2,7 @@
 using Data.Player;
 using Enemy;
 using Interaction.Core;
+using RaycastSystem.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utilities;
@@ -33,6 +34,9 @@ namespace StateMachine.Player.States
 
         public virtual void Update()
         {
+            Debug.Log(PlayerStateMachine.ReusableData.InteractableObject);
+
+            CheckRaycastNonClicked();
             if (PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.IsPressed())
             {
                 if (CheckRaycast())
@@ -53,14 +57,34 @@ namespace StateMachine.Player.States
         {
             PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.performed += OnClickPerformed;
             PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.canceled += OnClickCanceled;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.FirstSkill.performed += OnFirstSkillPerformed;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.SecondSkill.performed += OnSecondSkillPerformed;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.ThirdSkill.performed += OnThirdSkillPerformed;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.FourthSkill.performed += OnFourthSkillPerformed;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.FifthSkill.performed += OnFifthSkillPerformed;
         }
 
         protected virtual void RemoveInputActionsCallbacks()
         {
             PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.performed -= OnClickPerformed;
             PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.canceled -= OnClickCanceled;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.FirstSkill.performed -= OnFirstSkillPerformed;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.SecondSkill.performed -= OnSecondSkillPerformed;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.ThirdSkill.performed -= OnThirdSkillPerformed;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.FourthSkill.performed -= OnFourthSkillPerformed;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.FifthSkill.performed -= OnFifthSkillPerformed;
         }
 
+        private bool CheckRaycastNonClicked()
+        {
+            if (!PlayerStateMachine.RaycastUser.RaycastHit.HasValue) return false;
+
+            PlayerStateMachine.RaycastUser.RaycastHit.Value.collider.TryGetComponent(out IRaycastable raycastable);
+            PlayerStateMachine.ReusableData.Raycastable = raycastable;
+
+            return true;
+        }
+        
         private bool CheckRaycast()
         {
             if (!PlayerStateMachine.RaycastUser.RaycastHit.HasValue) return false;
@@ -71,7 +95,7 @@ namespace StateMachine.Player.States
 
             return true;
         }
-
+        
         public virtual void OnAnimationEnterEvent()
         {
         }
@@ -109,7 +133,7 @@ namespace StateMachine.Player.States
              switch (PlayerStateMachine.ReusableData.InteractableObject)
             {
                 case EnemyEntity enemyEntity:
-                    PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerChasingState);
+                     PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerChasingState);
                     return;
             } 
         }
@@ -142,6 +166,30 @@ namespace StateMachine.Player.States
         private void Stop()
         {
             PlayerStateMachine.Movement.Stop();
+        }
+        
+        protected virtual void OnFifthSkillPerformed(InputAction.CallbackContext obj)
+        {
+            
+        }
+
+        protected virtual void OnFourthSkillPerformed(InputAction.CallbackContext obj)
+        {
+            
+        }
+
+        protected virtual void OnThirdSkillPerformed(InputAction.CallbackContext obj)
+        {
+            
+        }
+
+        protected virtual void OnSecondSkillPerformed(InputAction.CallbackContext obj)
+        {
+            
+        }
+        protected virtual void OnFirstSkillPerformed(InputAction.CallbackContext obj)
+        {
+            
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace StateMachine.Player.States.Attack
+﻿using Player.States.Attack;
+
+namespace StateMachine.Player.States.Attack
 {
     public class PlayerCombatState : PlayerAttackState
     {

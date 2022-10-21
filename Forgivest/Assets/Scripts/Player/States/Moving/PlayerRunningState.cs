@@ -1,6 +1,8 @@
-namespace StateMachine.Player.States.Moving
+using StateMachine.Player;
+
+namespace Player.States.Moving
 {
-    public class PlayerRunningState : PlayerBaseState
+    public class PlayerRunningState : PlayerAliveState
     {
         private float _startTime;
 
