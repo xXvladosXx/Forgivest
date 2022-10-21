@@ -1,5 +1,6 @@
 ﻿using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Core;
+using AttackSystem.Core;
 using CombatSystem.Scripts.Runtime;
 using StatSystem.Scripts.Runtime;
 using UnityEngine;

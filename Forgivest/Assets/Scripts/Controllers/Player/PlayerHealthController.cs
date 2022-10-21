@@ -11,7 +11,7 @@ namespace Controllers.Player
         private readonly HealthBarUI _healthBarUI;
         private Health _health;
 
-            public PlayerHealthController(StatController statController, HealthBarUI healthBarUI)
+        public PlayerHealthController(StatController statController, HealthBarUI healthBarUI)
         {
             _statController = statController;
             _healthBarUI = healthBarUI;

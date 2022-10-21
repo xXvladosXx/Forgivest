@@ -1,24 +1,20 @@
 ﻿using AbilitySystem.AbilitySystem.Runtime;
+using AttackSystem.Core;
+using ColliderSystem;
+using InventorySystem.Items.Weapon;
 using StatSystem.Scripts.Runtime;
 using UnityEngine;
 
-namespace CombatSystem.Scripts.Runtime
+namespace AttackSystem
 {
-    public enum ShotType
-    {
-        MOST_DIRECT,
-        HIGHEST_SHOT,
-        LOWEST_SPEED
-    }
-
-    public class RangedWeapon : Weapon
+    public class RangedWeapon : AttackColliderActivator
     {
         [SerializeField] private Transform _spawnPoint;
 
-        public void Shoot(Projectile projectile, Transform target, float projectileSpeed,
+        public void Shoot(Projectile projectile, Transform target, float projectileSpeed, LayerMask userLayerMask,
             ShotType shotType = ShotType.MOST_DIRECT, bool isSpinning = false)
         {
-            projectile.gameObject.layer = gameObject.layer;
+            projectile.gameObject.layer = userLayerMask;
             Vector3 position = _spawnPoint.position;
                 projectile.transform.SetPositionAndRotation(position, Quaternion.LookRotation(target.position - position));
             projectile.Rigidbody.velocity = GetVelocity(

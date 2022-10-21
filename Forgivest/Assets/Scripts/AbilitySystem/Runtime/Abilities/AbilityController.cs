@@ -13,6 +13,10 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
         typeof(TagRegister))]
     public class AbilityController : MonoBehaviour
     {
+        [field: SerializeField] public Transform LeftHand { get; private set; }
+        [field: SerializeField] public Transform RightHandHand { get; private set; }
+        [field: SerializeField] public Transform DefaultSpawnPoint { get; private set; }
+        
         [SerializeField] private List<AbilityDefinition> _abilityDefinitions;
         public Dictionary<string, Ability> Abilities { get; protected set; } = new Dictionary<string, Ability>();
         public GameObject Target { get; set; }
