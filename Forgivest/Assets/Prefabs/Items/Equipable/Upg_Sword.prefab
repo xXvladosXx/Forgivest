@@ -4837,7 +4837,7 @@ GameObject:
   - component: {fileID: 3475828447934364473}
   - component: {fileID: 3466740141194706151}
   - component: {fileID: -5238597190377150636}
-  - component: {fileID: -7196847633714104539}
+  - component: {fileID: 6287700937418676897}
   m_Layer: 6
   m_Name: Upg_Sword
   m_TagString: Untagged
@@ -4859,6 +4859,7 @@ Transform:
   m_Children:
   - {fileID: 3483854550165650137}
   - {fileID: 3478738366123604949}
+  - {fileID: 1303125420275956886}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4926,7 +4927,7 @@ CapsuleCollider:
   m_Height: 1.4
   m_Direction: 1
   m_Center: {x: 0, y: 0.84, z: 0.000000013038516}
---- !u!114 &-7196847633714104539
+--- !u!114 &6287700937418676897
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4935,10 +4936,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3480261504482581523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d166d5ba71124d0d8f6d174cbe448b55, type: 3}
+  m_Script: {fileID: 11500000, guid: 22768903fb044e40a759cabfdbb89d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Collider>k__BackingField: {fileID: -5238597190377150636}
+  _spawnPoint: {fileID: 1303125420275956886}
 --- !u!1 &3481088669354304979
 GameObject:
   m_ObjectHideFlags: 0
@@ -9773,3 +9775,34 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &6225066712846179434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1303125420275956886}
+  m_Layer: 6
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1303125420275956886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6225066712846179434}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3483818857011754335}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

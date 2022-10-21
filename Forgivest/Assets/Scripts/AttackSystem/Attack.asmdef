@@ -2,7 +2,8 @@
     "name": "Attack",
     "rootNamespace": "",
     "references": [
-        "GUID:7c8e291869ff18945bd9c5af27a37639"
+        "GUID:7c8e291869ff18945bd9c5af27a37639",
+        "GUID:6b346e52d321453438a4676f2cf60532"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

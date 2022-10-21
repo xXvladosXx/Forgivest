@@ -47,7 +47,15 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active
         public void Shoot(GameObject target)
         {
              Debug.Log(_damageApplier);
-            
+             var projectile = _objectPool.Get();
+             _damageApplier.ApplyShoot(
+                 projectile,
+                 target.transform,
+                 Definition.Speed,
+                 Definition.ShotType,
+                 Definition.IsSpin);
+             
+             
             /*if (CombatController.RangedWeapons.TryGetValue(Definition.WeaponID, out var weapon))
             {
                 var projectile = _objectPool.Get();

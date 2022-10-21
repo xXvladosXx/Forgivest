@@ -49,7 +49,7 @@ namespace InventorySystem
                 case Armor armor:
                     return;
                 case Weapon weapon:
-                    DeequipWeapon(weapon);
+                    UnequipWeapon(weapon);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(statsableItem));
@@ -64,6 +64,7 @@ namespace InventorySystem
             CurrentWeapon = weapon;
             CurrentColliderWeapon =
                 Object.Instantiate(weapon.Prefab, weapon.RightHanded ? RightHand : LeftHand);
+            CurrentColliderWeapon.layer = RightHand.gameObject.layer;
             
             OnItemEquipped?.Invoke(weapon, true);
             OnWeaponEquipped?.Invoke(weapon);
@@ -83,7 +84,7 @@ namespace InventorySystem
             return true;
         }
 
-        private void DeequipWeapon(Weapon weapon)
+        private void UnequipWeapon(Weapon weapon)
         {
             if (CurrentWeapon == null) return;
             if (CurrentWeapon == StartWeapon) return;

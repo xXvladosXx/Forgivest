@@ -10,7 +10,7 @@ namespace StateMachine.Player.States.Attack
 
         public override void Enter()
         {
-            PlayerStateMachine.ReusableData.AttackRate = PlayerStateMachine.AttackApplier.Weapon.AttackRate;
+            PlayerStateMachine.ReusableData.AttackRate = PlayerStateMachine.AttackApplier.CurrentWeapon.AttackRate;
 
             base.Enter();
             

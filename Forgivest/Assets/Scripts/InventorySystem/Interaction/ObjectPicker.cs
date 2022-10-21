@@ -35,11 +35,21 @@ namespace InventorySystem.Interaction
 
         private void Start()
         { 
-            // var weapon = Equipment.ItemContainer.GetItem(ItemType.Sword);
-            // if (weapon != null)
-            // {
-            //     ItemEquipHandler.TryToEquip(weapon as StatsableItem);
-            // }
+            IItem weapon = null;
+            foreach (var itemSlot in Equipment.ItemContainer.Slots)
+            {
+                if(itemSlot == null) continue;
+                if(itemSlot.Item == null) continue;
+                if(itemSlot.Item.ItemType != ItemType.Sword) continue;
+
+                weapon = itemSlot.Item;
+                break;
+            }
+            
+            if (weapon != null)
+            {
+                ItemEquipHandler.TryToEquip(weapon as StatsableItem);
+            }
         }
 
         private void OnEnable()

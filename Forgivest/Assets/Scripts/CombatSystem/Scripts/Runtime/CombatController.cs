@@ -15,15 +15,9 @@ namespace CombatSystem.Scripts.Runtime
         private Collider m_Collider;
         private IDamageable m_Damageable;
         
-        public Dictionary<string, RangedWeapon> RangedWeapons { get; } = new Dictionary<string, RangedWeapon>();
 
         private void Awake()
         {
-            foreach (var rangedWeapon in GetComponentsInChildren<RangedWeapon>())
-            {
-                RangedWeapons.Add(rangedWeapon.ID, rangedWeapon);
-            }
-            
             m_Collider = GetComponent<Collider>();
             m_Damageable = GetComponent<IDamageable>();
             m_Pool = new ObjectPool<FloatingText>(OnCreate, OnGet, OnRelease);

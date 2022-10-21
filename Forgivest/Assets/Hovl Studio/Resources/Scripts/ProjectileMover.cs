@@ -49,6 +49,8 @@ public class ProjectileMover : MonoBehaviour
     //https ://docs.unity3d.com/ScriptReference/Rigidbody.OnCollisionEnter.html
     void OnCollisionEnter(Collision collision)
     {
+        if(collision.gameObject.layer == gameObject.layer) return;
+
         //Lock all axes movement and rotation
         rb.constraints = RigidbodyConstraints.FreezeAll;
         speed = 0;

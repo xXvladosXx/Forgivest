@@ -46,6 +46,7 @@ namespace Player
         [field: SerializeField] public GameplayEffectHandler GameplayEffectHandler { get; private set; }
         [field: SerializeField] public GameObject Target { get; private set; }
         [field: SerializeField] public PlayerRaycastSettings PlayerRaycastSettings { get; private set; }
+        
         [SerializeField] private ObjectPicker _objectPicker;
 
         public Camera Camera { get; private set; }
@@ -131,7 +132,7 @@ namespace Player
             Debug.Log(StatsHandler.CalculateStat(StatsEnum.Damage) + " Dam ");
             */
             
-            ApplyDamage(new AttackData
+             var attack = (new AttackData
             {
                 Damage = StatsFinder.FindStat("PhysicalAttack"),
                 DamageApplierLayerMask = LayerMask
@@ -160,11 +161,19 @@ namespace Player
             AnimationChanger.ChangeRuntimeAnimatorController(weapon.AnimatorController);
         }
 
-        public Weapon Weapon => _objectPicker.ItemEquipHandler.CurrentWeapon;
+        public GameObject Weapon => _objectPicker.ItemEquipHandler.CurrentColliderWeapon;
+        public Weapon CurrentWeapon => _objectPicker.ItemEquipHandler.CurrentWeapon;
         public event Action<AttackData> OnDamageApplied;
-        public void ApplyDamage(AttackData attackData, float timeOfActivation)
+
+        public void ApplyShoot(Projectile projectile, Transform targetTransform,
+            float definitionSpeed, ShotType definitionShotType,
+            bool definitionIsSpin)
         {
-            
+            if (Weapon.TryGetComponent(out RangedWeapon rangedWeapon))
+            {
+                rangedWeapon.Shoot(projectile, targetTransform, definitionSpeed,
+                    gameObject.layer, definitionShotType, definitionIsSpin);
+            }
         }
     }
 }

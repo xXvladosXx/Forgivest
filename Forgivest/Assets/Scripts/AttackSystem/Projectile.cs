@@ -27,8 +27,9 @@ namespace StatSystem.Scripts.Runtime
             HandleCollision(collision.gameObject);
         }
 
-        protected void HandleCollision(GameObject gameObject)
+        protected void HandleCollision(GameObject target)
         {
+            if(target.layer == gameObject.layer) return;
             if(_visualEffect != null)
             {
                  var collisionVisualEffect = Instantiate(_visualEffect, transform.position, transform.rotation);
@@ -39,7 +40,7 @@ namespace StatSystem.Scripts.Runtime
             OnHit?.Invoke(new CollisionData
             {
                 Source = this,
-                Target = gameObject
+                Target = target
             });
         }
     }
