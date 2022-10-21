@@ -41,12 +41,7 @@ namespace Data.Player
         [SerializeField] private string _dashAttackParameterName = "DashAttack";
         [SerializeField] private string _sprintAttackParameterName = "SprintAttack";
         [SerializeField] private string _attackParameterName = "Attack";
-<<<<<<< HEAD
-        [SerializeField] private string _skillParameterName = "Skill";
-        [SerializeField] private string _skill2ParameterName = "Skill2";
-
-=======
->>>>>>> b8b5eeb (Added skills for player)
+        
         [SerializeField] private string _speedParameterName = "Speed";
 
         [Header("Airborne Parameter Names")] 
@@ -91,9 +86,6 @@ namespace Data.Player
         public int AirAttackParameterHash { get; private set; }
         public int AttackParameterHash { get; private set; }
         
-        public int FirstSkillParameterHash { get; private set; }
-
-        public int SecondSkillParameterHash { get; private set; }
         public int AirAttackDashParameterHash { get; private set; }
         public int AirAttackLandedParameterHash { get; private set; }
         
@@ -141,19 +133,13 @@ namespace Data.Player
             VerticalParameterHash = Animator.StringToHash(VerticalParameterName);
 
             AttackParameterHash = Animator.StringToHash(_attackParameterName);
-<<<<<<< HEAD
-            FirstSkillParameterHash = Animator.StringToHash(_skillParameterName);
-            SecondSkillParameterHash = Animator.StringToHash(_skill2ParameterName);
            
-=======
-            
             SkillParameterHash = Animator.StringToHash(_skillParameterName);
             FirstSkillParameterHash = Animator.StringToHash(_firstSkillParameterName);
             SecondSkillParameterHash = Animator.StringToHash(_secondSkillParameterName);
             ThirdSkillParameterHash = Animator.StringToHash(_thirdSkillParameterName);
             FourthSkillParameterHash = Animator.StringToHash(_fourthSkillParameterName);
             FifthSkillParameterHash = Animator.StringToHash(_fifthSkillParameterName);
->>>>>>> b8b5eeb (Added skills for player)
         }
     }
 }
