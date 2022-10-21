@@ -1,5 +1,4 @@
 ﻿using System;
-using MovementSystem;
 using RaycastSystem.Core;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,7 +11,6 @@ namespace RaycastSystem
     {
         private readonly PlayerInputProvider _playerInputProvider;
         private readonly PlayerRaycastSettings _playerRaycastSettings;
-        private readonly Movement _movement;
         private readonly Camera _camera;
 
         private RaycastHit[] _possibleRaycasts;
@@ -24,13 +22,11 @@ namespace RaycastSystem
 
         public PlayerRaycastUser(Camera camera,
             PlayerInputProvider playerInputProvider,
-            PlayerRaycastSettings playerRaycastSettings,
-            Movement movement)
+            PlayerRaycastSettings playerRaycastSettings)
         {
             _camera = camera;
             _playerInputProvider = playerInputProvider;
             _playerRaycastSettings = playerRaycastSettings;
-            _movement = movement;
         }
 
         public void Tick()
@@ -50,8 +46,6 @@ namespace RaycastSystem
             bool hasHit = RaycastNavMesh(out target);
             if (hasHit)
             {
-                if (!_movement.CanMoveTo(target)) return false;
-
                 SetCursor(CursorType.Movement);
                 return true;
             }

@@ -1,4 +1,6 @@
 ﻿using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
+using AttackSystem;
+using AttackSystem.Core;
 using CombatSystem.Scripts.Runtime;
 using CombatSystem.Scripts.Runtime.Core;
 using StatSystem.Scripts.Runtime;
@@ -11,12 +13,12 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active
     {
         public new ProjectileAbilityDefinition Definition => AbilityDefinition as ProjectileAbilityDefinition;
         private ObjectPool<Projectile> _objectPool;
-        protected CombatController CombatController;
+        private IDamageApplier _damageApplier;
 
         public ProjectileAbility(ProjectileAbilityDefinition definition, AbilityController abilityController) : base(definition, abilityController)
         {
             _objectPool = new ObjectPool<Projectile>(OnCreate, OnGet, OnRelease);
-            CombatController = abilityController.GetComponent<CombatController>();
+            _damageApplier = abilityController.GetComponent<IDamageApplier>();
         }
 
         private Projectile OnCreate()
@@ -44,7 +46,9 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active
 
         public void Shoot(GameObject target)
         {
-            if (CombatController.RangedWeapons.TryGetValue(Definition.WeaponID, out var weapon))
+             Debug.Log(_damageApplier);
+            
+            /*if (CombatController.RangedWeapons.TryGetValue(Definition.WeaponID, out var weapon))
             {
                 var projectile = _objectPool.Get();
                 weapon.Shoot(
@@ -53,7 +57,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active
                     Definition.Speed,
                     Definition.ShotType,
                     Definition.IsSpin);
-            }
+            }*/
         }
     }
 }

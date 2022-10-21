@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using AttackSystem.Core;
 using InventorySystem;
 using InventorySystem.Interaction;
@@ -28,4 +28,4 @@ namespace AttackSystem
             //_itemEquipHandler.CurrentColliderWeapon.ActivateCollider(attackData, timeOfActivation);
         }
     }
-}
+}*/

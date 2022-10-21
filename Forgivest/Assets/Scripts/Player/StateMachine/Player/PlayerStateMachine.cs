@@ -2,6 +2,7 @@
 using AnimationSystem;
 using AnimatorStateMachine.StateMachine;
 using AttackSystem;
+using AttackSystem.Core;
 using Data.Player;
 using MovementSystem;
 using Player.States.Moving;
@@ -30,7 +31,7 @@ namespace StateMachine.Player
         public PlayerChasingState PlayerChasingState { get; }
         public PlayerCombatState PlayerCombatState { get; }
         public PlayerRunningState RunningState { get; }
-        public AttackApplier AttackApplier { get; }
+        public IDamageApplier AttackApplier { get; }
         public AbilityController AbilityController { get; }
         public PlayerFirstCastState PlayerFirstCastState { get; }
         public PlayerSecondCastState PlayerSecondCastState { get; }
@@ -44,7 +45,7 @@ namespace StateMachine.Player
             AliveEntityStateData aliveEntityStateData,
             PlayerRaycastUser raycastUser,
             AliveEntityAnimationData animationData,
-            AttackApplier attackApplier, AbilityController abilityController)
+            IDamageApplier attackApplier, AbilityController abilityController)
         {
             Rotator = rotator;
             AnimationChanger = animationChanger;
