@@ -62,7 +62,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
                     .OfType<AbilityTypeAttribute>()
                     .FirstOrDefault();
 
-                var ability = Activator.CreateInstance(abilityAttributeType.Type, abilityDefinition, this) as Ability;
+                var ability = Activator.CreateInstance(abilityAttributeType.Type, abilityDefinition, this, null) as Ability;
                 Abilities.Add(abilityDefinition.name, ability);
 
                 if (ability is PassiveAbility passiveAbility)
@@ -128,9 +128,9 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
         private void CommitAbility(ActiveAbility ability)
         {
             _gameplayEffectHandler.ApplyGameplayEffectToSelf(
-                new GameplayEffect(ability.ActiveAbilityDefinition.Cost, ability, gameObject));
+                new GameplayEffect(ability.ActiveAbilityDefinition.Cost, ability, gameObject, ability.AttackData));
             _gameplayEffectHandler.ApplyGameplayEffectToSelf(
-                new GameplayPersistentEffect(ability.ActiveAbilityDefinition.Cooldown, ability, gameObject));
+                new GameplayPersistentEffect(ability.ActiveAbilityDefinition.Cooldown, ability, gameObject, ability.AttackData));
         }
     }
 }

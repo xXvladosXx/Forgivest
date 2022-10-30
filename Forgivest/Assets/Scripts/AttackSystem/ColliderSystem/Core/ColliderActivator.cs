@@ -8,7 +8,7 @@ namespace ColliderSystem.Core
     {
         [field: SerializeField] public Collider Collider { get; private set; }
 
-        private float _currentTime;
+        protected float _currentTime;
         
         public virtual void ActivateCollider(float time)
         {

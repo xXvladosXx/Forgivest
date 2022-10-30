@@ -10,10 +10,12 @@ namespace Installers
     {
         [SerializeField] private InventoryPanel _inventoryPanel;
         [SerializeField] private HealthBarUI _healthBarUI;
+        [SerializeField] private ManaBarUI _manaBarUI;
         public override void InstallBindings()
         {
             Container.Bind<InventoryPanel>().FromInstance(_inventoryPanel).AsSingle();
             Container.Bind<HealthBarUI>().FromInstance(_healthBarUI).AsSingle();
+            Container.Bind<ManaBarUI>().FromInstance(_manaBarUI).AsSingle();
         }
     }
 }

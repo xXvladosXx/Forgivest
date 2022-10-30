@@ -34,8 +34,6 @@ namespace StateMachine.Player.States
 
         public virtual void Update()
         {
-            Debug.Log(PlayerStateMachine.ReusableData.InteractableObject);
-
             CheckRaycastNonClicked();
             if (PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.IsPressed())
             {
@@ -149,6 +147,18 @@ namespace StateMachine.Player.States
                 PlayerStateMachine.AnimationData.SpeedParameterHash,
                 speed, .1f);
         }
+        
+        protected bool GetDistanceTo(Vector3 target)
+        {
+            if (PlayerStateMachine.Movement.GetDistanceToPoint(target) < PlayerStateMachine.ReusableData.StoppingDistance)
+            {
+                Stop();
+                return true;
+            }
+
+            return false;
+        }
+
 
         protected bool ShouldStop()
         {

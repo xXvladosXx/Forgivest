@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using AbilitySystem.AbilitySystem.Runtime;
 using AbilitySystem.AbilitySystem.Runtime.Effects.Stackable;
+using AttackSystem.Core;
 using StatsSystem.Scripts.Runtime;
 using StatSystem;
 using UnityEngine;
@@ -311,6 +312,13 @@ namespace AbilitySystem
                 {
                     attribute.ApplyModifier(gameplayEffect.Modifiers[i]);
                 }
+
+                if (gameplayEffect.AttackData != null)
+                {
+                    gameplayEffect.AttackData.DamageReceiver.ReceiveDamage(gameplayEffect.AttackData);
+                }
+                // if(attackData != null)
+                //     attackData.DamageReceiver.ReceiveDamage(attackData);
             }
         }
 

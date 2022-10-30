@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using InventorySystem.Core;
 using InventorySystem.Items;
+using InventorySystem.Items.Core;
 using InventorySystem.Items.ItemTypes.Core;
 using InventorySystem.Items.Weapon;
 using Sirenix.OdinInspector;
@@ -88,16 +89,23 @@ namespace InventorySystem.Interaction
             switch (pickable)
             {
                 case PickableItem pickableItem:
-                    var equipped = Equipment.ItemContainer.TryToAdd(this, pickableItem.Item, pickableItem.Amount) &&
-                                   ItemEquipHandler.CurrentWeapon != ItemEquipHandler.StartWeapon;
-                    if (!equipped)
-                    {
-                        Inventory.ItemContainer.TryToAdd(this, pickableItem.Item, pickableItem.Amount);
-                    }
+                    TryToEquipOrAddToInventory(pickableItem.Item, pickableItem.Amount);
                     break;
             }
         }
-        
+
+        public bool TryToEquipOrAddToInventory(Item item, int amount)
+        {
+            var equipped = Equipment.ItemContainer.TryToAdd(this, item, amount) &&
+                ItemEquipHandler.CurrentWeapon != ItemEquipHandler.StartWeapon;
+            if (!equipped)
+            {
+                return Inventory.ItemContainer.TryToAdd(this, item, amount);
+            }
+
+            return true;
+        }
+
         private void RecalculateStats(StatsableItem statsableItem, bool adding)
         {
             if (adding)

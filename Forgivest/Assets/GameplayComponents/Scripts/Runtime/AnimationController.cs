@@ -62,7 +62,7 @@ namespace MyGame
         {
             if (_abilityController.CurrentAbility is SingleTargetAbility singeTargetAbility)
             {
-                singeTargetAbility.Cast(_abilityController.Target);
+                //singeTargetAbility.Cast(_abilityController.Target);
             }
         }
 
@@ -70,7 +70,6 @@ namespace MyGame
         {
             if (_abilityController.CurrentAbility is ProjectileAbility projectileAbility)
             {
-                projectileAbility.Shoot(_abilityController.Target);
             }
         }
 

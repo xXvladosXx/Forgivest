@@ -1,5 +1,6 @@
-﻿/*using System;
+﻿using System;
 using AttackSystem.Core;
+using ColliderSystem;
 using InventorySystem;
 using InventorySystem.Interaction;
 using InventorySystem.Items.Weapon;
@@ -7,25 +8,16 @@ using UnityEngine;
 
 namespace AttackSystem
 {
-    public class AttackApplier : IDamageApplier
+    public class AttackApplier 
     {
-        private readonly ItemEquipHandler _itemEquipHandler;
-
-        public Weapon CurrentWeapon => _itemEquipHandler.CurrentWeapon;
-        public AttackApplier(ItemEquipHandler itemEquipHandler)
-        {
-            _itemEquipHandler = itemEquipHandler;
-        }
-
-        public event Action<AttackData> OnDamageApplied;
-        
-        //public 
-
-        public void ApplyDamage(AttackData attackData, float timeOfActivation)
+        public void ApplyAttack(AttackData attackData, float timeOfActiveCollider, GameObject weapon)
         {
             Debug.Log(attackData.Damage);
-            
-            //_itemEquipHandler.CurrentColliderWeapon.ActivateCollider(attackData, timeOfActivation);
+
+            if(weapon.TryGetComponent(out AttackColliderActivator attackColliderActivator))
+            {
+                attackColliderActivator.ActivateCollider(attackData, timeOfActiveCollider);
+            }
         }
     }
-}*/
+}

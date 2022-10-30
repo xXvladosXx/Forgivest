@@ -13,12 +13,12 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active
     {
         public new ProjectileAbilityDefinition Definition => AbilityDefinition as ProjectileAbilityDefinition;
         private ObjectPool<Projectile> _objectPool;
-        private IDamageApplier _damageApplier;
+        private AttackData _attackData;
 
-        public ProjectileAbility(ProjectileAbilityDefinition definition, AbilityController abilityController) : base(definition, abilityController)
+        public ProjectileAbility(ProjectileAbilityDefinition definition, AbilityController abilityController, AttackData attackData) : base(
+            definition, abilityController, attackData)
         {
             _objectPool = new ObjectPool<Projectile>(OnCreate, OnGet, OnRelease);
-            _damageApplier = abilityController.GetComponent<IDamageApplier>();
         }
 
         private Projectile OnCreate()
@@ -28,44 +28,43 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active
             return projectile;
         }
 
-        private void OnHit(CollisionData data)
+        private void OnHit(CollisionData collisionData)
         {
-            OnRelease(data.Source as Projectile);
-            ApplyEffects(data.Target);
+            _attackData.DamageReceiver = collisionData
+                .Target
+                .TryGetComponent(out IDamageReceiver damageReceiver) ? damageReceiver : null;
+
+            OnRelease(collisionData.Source as Projectile);
+            ApplyEffects(collisionData.Target);
+            
+            _attackData.DamageReceiver?.ReceiveDamage(_attackData);
         }
 
         private void OnGet(Projectile obj)
         {
             obj.gameObject.SetActive(true);
         }
+
         private void OnRelease(Projectile obj)
         {
             obj.Rigidbody.velocity = Vector3.zero;
             obj.gameObject.SetActive(false);
         }
 
-        public void Shoot(GameObject target)
+        public void Shoot(GameObject target, IDamageApplier damageApplier)
         {
-             Debug.Log(_damageApplier);
-             var projectile = _objectPool.Get();
-             _damageApplier.ApplyShoot(
-                 projectile,
-                 target.transform,
-                 Definition.Speed,
-                 Definition.ShotType,
-                 Definition.IsSpin);
-             
-             
-            /*if (CombatController.RangedWeapons.TryGetValue(Definition.WeaponID, out var weapon))
+            _attackData = new AttackData
             {
-                var projectile = _objectPool.Get();
-                weapon.Shoot(
-                    projectile,
-                    target.transform,
-                    Definition.Speed,
-                    Definition.ShotType,
-                    Definition.IsSpin);
-            }*/
+                DamageApplier = damageApplier,
+            };
+
+            var projectile = _objectPool.Get();
+            damageApplier.ApplyShoot(
+                projectile,
+                target.transform,
+                Definition.Speed,
+                Definition.ShotType,
+                Definition.IsSpin);
         }
     }
 }

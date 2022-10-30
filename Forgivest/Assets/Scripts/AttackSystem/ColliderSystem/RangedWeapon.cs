@@ -11,7 +11,8 @@ namespace AttackSystem
     {
         [SerializeField] private Transform _spawnPoint;
 
-        public void Shoot(Projectile projectile, Transform target, float projectileSpeed, LayerMask userLayerMask,
+        public void Shoot(Projectile projectile, Transform target, float projectileSpeed,
+            LayerMask userLayerMask,
             ShotType shotType = ShotType.MOST_DIRECT, bool isSpinning = false)
         {
             projectile.gameObject.layer = userLayerMask;

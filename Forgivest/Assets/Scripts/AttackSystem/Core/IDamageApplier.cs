@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using AttackSystem.Reward.Core;
 using ColliderSystem;
 using CombatSystem.Scripts.Runtime;
 using StatSystem.Scripts.Runtime;
@@ -11,8 +13,10 @@ namespace AttackSystem.Core
     {
         GameObject Weapon { get; }
         Weapon CurrentWeapon { get; }
-        event Action<AttackData> OnDamageApplied;
         void ApplyAttack(float timeOfActivation);
-        void ApplyShoot(Projectile projectile, Transform targetTransform, float definitionSpeed, ShotType definitionShotType, bool definitionIsSpin);
+        void ApplyShoot(Projectile projectile, Transform targetTransform, float definitionSpeed,
+            ShotType definitionShotType, bool definitionIsSpin);
+        void TakeRewards(List<IRewardable> damageReceiverRewards);
+        event Action<AttackData> OnDamageApplied;
     }
 }

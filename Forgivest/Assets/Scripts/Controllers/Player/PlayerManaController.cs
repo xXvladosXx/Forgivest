@@ -39,9 +39,9 @@ namespace Controllers.Player
             _mana.OnValueChanged -= RecalculateManaOnBar;
         }
 
-        private void RecalculateManaOnBar(float currentHealth, float maxHealth)
+        private void RecalculateManaOnBar(float currentMana, float maxMana)
         {
-            _manaBarUI.RecalculateMana(currentHealth, maxHealth);
+            _manaBarUI.RecalculateMana(currentMana, maxMana);
         }
 
         private void RecalculateManaOnBar(float maxValue)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using AbilitySystem;
 using AbilitySystem.AbilitySystem.Runtime.Abilities;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Active;
@@ -6,9 +7,12 @@ using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
 using AnimationSystem;
 using AttackSystem;
 using AttackSystem.Core;
+using AttackSystem.Reward;
+using AttackSystem.Reward.Core;
 using Data.Player;
 using InventorySystem.Interaction;
 using InventorySystem.Items.Weapon;
+using LevelSystem;
 using MovementSystem;
 using RaycastSystem;
 using RaycastSystem.Core;
@@ -48,24 +52,28 @@ namespace Player
         [field: SerializeField] public PlayerRaycastSettings PlayerRaycastSettings { get; private set; }
         
         [SerializeField] private ObjectPicker _objectPicker;
-
+        [SerializeField] private LevelController _levelController;
         public Camera Camera { get; private set; }
-        
+        public AttackApplier AttackApplier { get; private set; }
         public AnimationChanger AnimationChanger { get; private set; }
         public Movement Movement { get; private set; }
         public Rotator Rotator { get; private set; }
         public PlayerRaycastUser RaycastUser { get; private set; }
         
         private PlayerStateMachine _playerStateMachine;
-        
-        public event Action<AttackData> OnDamageReceived;
-        public LayerMask LayerMask => gameObject.layer;
+        private DamageHandler _damageHandler;
 
-        public void ReceiverDamage(AttackData attackData)
-        {
-            Debug.Log("Player recieved damage");
-        }
+        public GameObject Weapon => _objectPicker.ItemEquipHandler.CurrentColliderWeapon;
+        public Weapon CurrentWeapon => _objectPicker.ItemEquipHandler.CurrentWeapon;
+        public List<IRewardable> Rewards { get; }
+        public LayerMask LayerMask => gameObject.layer;
+        public GameObject GameObject => gameObject;
+
+        public event Action<AttackData> OnDamageReceived;
         
+
+        public event Action<AttackData> OnDamageApplied;
+
         private void Awake()
         {
             Camera = Camera.main;
@@ -75,6 +83,8 @@ namespace Player
             Movement = new Movement(NavMeshAgent, Rigidbody, transform);
             Rotator = new Rotator(Rigidbody);
             RaycastUser = new PlayerRaycastUser(Camera, PlayerInputProvider, PlayerRaycastSettings);
+            AttackApplier = new AttackApplier();
+            _damageHandler = new DamageHandler(StatController);
             
             _playerStateMachine = new PlayerStateMachine(AnimationChanger,
                 Movement, Rotator, PlayerInputProvider, StateData,
@@ -97,11 +107,6 @@ namespace Player
         {
             RaycastUser.Tick();
             _playerStateMachine.Update();
-            
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                var actived = AbilityController.TryActiveAbility("Poison", Target.gameObject);
-            }
         }
 
         private void OnDisable()
@@ -124,22 +129,6 @@ namespace Player
             _playerStateMachine.OnAnimationExitEvent();
         }
 
-        public void ApplyAttack(float timeOfActiveCollider)
-        {
-            Debug.Log(StatsFinder.FindStat("PhysicalAttack"));
-            
-            /*Debug.Log(StatsHandler.CalculateStat(StatsEnum.Health) + " Health ");
-            Debug.Log(StatsHandler.CalculateStat(StatsEnum.Damage) + " Dam ");
-            */
-            
-             var attack = (new AttackData
-            {
-                Damage = StatsFinder.FindStat("PhysicalAttack"),
-                DamageApplierLayerMask = LayerMask
-            }, timeOfActiveCollider);
-            
-        }
-
         public void CastedSkill()
         {
             if (AbilityController.CurrentAbility is SingleTargetAbility singeTargetAbility)
@@ -152,7 +141,15 @@ namespace Player
         {
             if (AbilityController.CurrentAbility is ProjectileAbility projectileAbility)
             {
-                projectileAbility.Shoot(AbilityController.Target);
+                var raycastable = _playerStateMachine.ReusableData.Raycastable;
+                switch (raycastable)
+                {
+                    case null:
+                        return;
+                    case IDamageReceiver damageReceiver:
+                        projectileAbility.Shoot(_playerStateMachine.ReusableData.Raycastable.GameObject, this);
+                        break;
+                }
             }
         }
 
@@ -161,10 +158,20 @@ namespace Player
             AnimationChanger.ChangeRuntimeAnimatorController(weapon.AnimatorController);
         }
 
-        public GameObject Weapon => _objectPicker.ItemEquipHandler.CurrentColliderWeapon;
-        public Weapon CurrentWeapon => _objectPicker.ItemEquipHandler.CurrentWeapon;
-        public event Action<AttackData> OnDamageApplied;
-
+        public void ReceiveDamage(AttackData attackData)
+        {
+            Debug.Log("Player recieved damage");
+            _damageHandler.TakeDamage(attackData);
+        }
+        
+        public void GetReward(object reward)
+        {
+            if (reward is ExperienceReward experienceReward)
+            {
+                _levelController.CurrentExperience += experienceReward.Amount;
+            }
+        }
+        
         public void ApplyShoot(Projectile projectile, Transform targetTransform,
             float definitionSpeed, ShotType definitionShotType,
             bool definitionIsSpin)
@@ -173,6 +180,40 @@ namespace Player
             {
                 rangedWeapon.Shoot(projectile, targetTransform, definitionSpeed,
                     gameObject.layer, definitionShotType, definitionIsSpin);
+                
+            }
+        }
+
+       
+
+        public void ApplyAttack(float timeOfActiveCollider)
+        {
+            var attackData = new AttackData
+            {
+                Damage = StatsFinder.FindStat("PhysicalAttack"),
+                DamageApplierLayerMask = LayerMask,
+                Weapon = CurrentWeapon,
+                DamageApplier = this
+            };
+                
+            AttackApplier.ApplyAttack(attackData, timeOfActiveCollider, Weapon);
+        }
+        
+        public void TakeRewards(List<IRewardable> damageReceiverRewards)
+        {
+            foreach (var rewardable in damageReceiverRewards)
+            {
+                switch (rewardable)
+                {
+                    case ExperienceReward experienceReward:
+                        _levelController.CurrentExperience += experienceReward.Amount;
+                        break;
+                    case ItemReward itemReward:
+                        _objectPicker.TryToEquipOrAddToInventory(itemReward.Item, itemReward.Amount);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(rewardable));
+                }
             }
         }
     }

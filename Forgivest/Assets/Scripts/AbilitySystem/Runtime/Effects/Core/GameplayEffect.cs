@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using AttackSystem.Core;
 using Core;
 using StatsSystem.Scripts.Runtime;
 using StatSystem;
@@ -15,6 +16,7 @@ namespace AbilitySystem.AbilitySystem.Runtime
         [field: SerializeField] public GameplayEffectDefinition Definition { get; protected set; }
         public object Source { get; private set; }
         public GameObject Instigator { get; private set; }
+        public AttackData AttackData { get; }
 
         private List<StatModifier> _modifiers = new List<StatModifier>();
         public ReadOnlyCollection<StatModifier> Modifiers => _modifiers.AsReadOnly();
@@ -24,11 +26,13 @@ namespace AbilitySystem.AbilitySystem.Runtime
         public GameplayEffect(
             GameplayEffectDefinition definition,
             object source,
-            GameObject instigator)
+            GameObject instigator,
+            AttackData attackData)
         {
             Definition = definition;
             Source = source;
             Instigator = instigator;
+            AttackData = attackData;
 
             var statController = instigator.GetComponent<StatController>();
             foreach (var modifier in definition.Modifiers)
