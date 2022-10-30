@@ -30,7 +30,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 82, y: 239}
   guid: 3bb6d3ae4ce9da547a6fa58b01276c9a
-  m_Value: 3
+  m_Value: 11
 --- !u!114 &4106168087685535325
 MonoBehaviour:
   m_ObjectHideFlags: 0

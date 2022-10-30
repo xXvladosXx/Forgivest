@@ -11,20 +11,25 @@ namespace ColliderSystem
         
         public void ActivateCollider(AttackData attackData, float time)
         {
+            Collider.enabled = true;
+            _currentTime = time;
             _currentAttackData = attackData;
-            ActivateCollider(time);
         }
-        
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            print("Entered collision");
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if(_currentAttackData == null) return;
             
             if (other.TryGetComponent(out IDamageReceiver damageReceiver))
             {
-                
                 if(damageReceiver.LayerMask == _currentAttackData.DamageApplierLayerMask) return;
                 
-                damageReceiver.ReceiverDamage(_currentAttackData);
+                damageReceiver.ReceiveDamage(_currentAttackData);
             }
         }
     }

@@ -6,15 +6,15 @@ namespace CombatSystem.Scripts.Runtime
 {
     public class MeleeWeapon : MonoBehaviour
     {
-        public event Action<CollisionData> hit;
+        //public event Action<CollisionData> hit;
 
         private void OnTriggerEnter(Collider other)
         {
-            hit?.Invoke(new CollisionData
-            {
-                Target = other.gameObject,
-                Source = this
-            });
+            //hit?.Invoke(new CollisionData
+           // {
+            //    Target = other.gameObject,
+           //     Source = this
+            //});
         }
     }
 }

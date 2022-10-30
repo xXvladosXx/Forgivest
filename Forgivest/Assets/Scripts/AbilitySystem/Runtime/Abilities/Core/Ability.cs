@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using AttackSystem.Core;
 using UnityEngine;
 
 namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
@@ -9,6 +10,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
     {
         public AbilityDefinition AbilityDefinition { get; protected set; }
         protected AbilityController AbilityController;
+        public AttackData AttackData { get; private set; }
 
         private int _level;
         public event Action OnLevelChanged;
@@ -35,10 +37,11 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
             }
         }
         
-        public Ability(AbilityDefinition definition, AbilityController abilityController)
+        public Ability(AbilityDefinition definition, AbilityController abilityController, AttackData attackData)
         {
             AbilityController = abilityController;
             AbilityDefinition = definition;
+            AttackData = attackData;
         }
 
         internal void ApplyEffects(GameObject other)
@@ -59,9 +62,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
                         .FirstOrDefault();
 
                     var effect =
-                        Activator
-                                .CreateInstance(attribute.Type, effectDefinition, this, AbilityController.gameObject)
-                            as GameplayEffect;
+                        Activator.CreateInstance(attribute.Type, effectDefinition, this, AbilityController.gameObject, AttackData) as GameplayEffect;
                     
                     gameplayEffectController.ApplyGameplayEffectToSelf(effect);
                 }

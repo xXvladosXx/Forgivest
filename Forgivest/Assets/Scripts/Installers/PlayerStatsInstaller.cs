@@ -5,12 +5,13 @@ using Zenject;
 
 namespace Installers
 {
-    public class PlayerHealthInstaller : MonoInstaller
+    public class PlayerStatsInstaller : MonoInstaller
     {
         [SerializeField] private StatController _statController;
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<PlayerHealthController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerManaController>().AsSingle();
             Container.Bind<StatController>().FromInstance(_statController).AsSingle();
         }
     }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using AttackSystem.Core;
+using UnityEngine;
 
 namespace AbilitySystem.AbilitySystem.Runtime.Effects.Stackable
 {
@@ -7,8 +8,8 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects.Stackable
         public int StackCount;
         public new GameplayStackableEffectDefinition Definition => (GameplayStackableEffectDefinition) base.Definition;
 
-        public GameplayStackableEffect(GameplayStackableEffectDefinition definition, object source, GameObject instigator) 
-            : base(definition, source, instigator)
+        public GameplayStackableEffect(GameplayStackableEffectDefinition definition, object source, GameObject instigator, AttackData attackData) 
+            : base(definition, source, instigator, attackData)
         {
             StackCount = 1;
         }

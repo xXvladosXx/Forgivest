@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CombatSystem.Scripts.Runtime.Core
+namespace AttackSystem.Core
 {
     public struct CollisionData
     {

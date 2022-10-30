@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Interaction.Core
 {
@@ -6,5 +7,6 @@ namespace Interaction.Core
     {
         public GameObject GameObject { get; }
         public void Interact();
+        public event Action OnDestroyed;
     }
 }

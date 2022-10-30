@@ -19,7 +19,6 @@ namespace StateMachine
 
         public void Update()
         {
-            Debug.Log(_currentState);
             _currentState?.Update();
             Debug.Log(_currentState);
         }
