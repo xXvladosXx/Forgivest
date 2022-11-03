@@ -12,6 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261b6b51df6a4703bc9b03ef2ecb8d0b, type: 3}
   m_Name: Projectile
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  <Rarity>k__BackingField: {fileID: 0}
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+  <MaxItemsInStack>k__BackingField: 0
+  <Sprite>k__BackingField: {fileID: 0}
+  <ItemID>k__BackingField:
+    Id: 10
+  <ItemType>k__BackingField: 13
+  <ItemDescription>k__BackingField: 
   _gameplayEffectDefinitions:
   - {fileID: 11400000, guid: c148608e5c7bd7d41815344dd0d11729, type: 2}
   - {fileID: 11400000, guid: 3ea4443d5d135874892b169c2bfe57dc, type: 2}
@@ -22,6 +40,7 @@ MonoBehaviour:
     type: 2}
   <Cooldown>k__BackingField: {fileID: 11400000, guid: 8666cabac30e46543b3cc81fa64798c3,
     type: 2}
+  <SelfCasted>k__BackingField: 0
   _speed: 10
   _shotType: 2
   _isSpin: 0

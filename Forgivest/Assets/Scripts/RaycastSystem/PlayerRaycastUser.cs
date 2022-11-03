@@ -1,4 +1,5 @@
 ﻿using System;
+using Interaction.Core;
 using RaycastSystem.Core;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,10 +16,12 @@ namespace RaycastSystem
 
         private RaycastHit[] _possibleRaycasts;
         
-        private const float RAYCAST_RADIUS = 1f;
+        private const float RAYCAST_RADIUS = .1f;
         private const int RAYCAST_ARRAY_SIZE = 100;
 
         public RaycastHit? RaycastHit { get; private set; }
+        public IInteractable Interactable { get; set; }
+        public IRaycastable Raycastable { get; set; }
 
         public PlayerRaycastUser(Camera camera,
             PlayerInputProvider playerInputProvider,
@@ -31,7 +34,7 @@ namespace RaycastSystem
 
         public void Tick()
         {
-            RaycastHit = RaycastExcept(_playerInputProvider.ReadMousePosition(), LayerUtils.Player);
+            RaycastHit = Raycast(_playerInputProvider.ReadMousePosition());
             
             if (InteractWithUI()) return;
             if (InteractWithComponent()) return;
@@ -46,6 +49,9 @@ namespace RaycastSystem
             bool hasHit = RaycastNavMesh(out target);
             if (hasHit)
             {
+                Interactable = null;
+                Raycastable = null;
+                
                 SetCursor(CursorType.Movement);
                 return true;
             }
@@ -62,6 +68,8 @@ namespace RaycastSystem
                 {
                     if (raycastable.HandleRaycast(this))
                     {
+                        Interactable = raycastable as IInteractable;
+                        Raycastable = raycastable;
                         SetCursor(raycastable.GetCursorType());
                         return true;
                     }
@@ -83,10 +91,13 @@ namespace RaycastSystem
             return hits;
         }
         
-        private bool InteractWithUI()
+        public bool InteractWithUI()
         {
             if (EventSystem.current.IsPointerOverGameObject())
             {
+                Interactable = null;
+                Raycastable = null;
+
                 SetCursor(CursorType.UI);
                 return true;
             }
@@ -125,7 +136,7 @@ namespace RaycastSystem
                 NavMesh.AllAreas);
             
             if (!hasCastToNavMesh) return false;
-
+            
             target = navMeshHit.position;
 
             return true;

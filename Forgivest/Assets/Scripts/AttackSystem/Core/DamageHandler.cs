@@ -10,6 +10,7 @@ namespace AttackSystem.Core
     {
         private readonly StatController _statController;
 
+        private bool _died;
         public event Action<AttackData> OnDied;
 
         public DamageHandler(StatController statController)
@@ -21,7 +22,8 @@ namespace AttackSystem.Core
         {
             var taggable = attackData.DamageApplier as ITaggable ?? attackData.Weapon;
 
-            (_statController.Stats["Health"] as Health)?.ApplyModifier(new HealthModifier
+            var health = (_statController.Stats["Health"] as Health);
+            health?.ApplyModifier(new HealthModifier
             {
                 Magnitude = -attackData.Damage,
                 Type = ModifierOperationType.Additive,
@@ -30,10 +32,11 @@ namespace AttackSystem.Core
                 Instigator = attackData.DamageReceiver.GameObject
             });
 
-            if ((_statController.Stats["Health"] as Health)?.currentValue <= 0)
+            if (health?.CurrentValue <= 0 && !_died)
             {
                 attackData.DamageApplier.TakeRewards(attackData.DamageReceiver.Rewards);
                 OnDied?.Invoke(attackData);
+                _died = true;
             }
         }
     }

@@ -1,4 +1,7 @@
-﻿using StateMachine.Player;
+﻿using System;
+using AbilitySystem.AbilitySystem.Runtime.Abilities.Active;
+using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
+using StateMachine.Player;
 using UnityEngine;
 
 namespace Player.States.Skill.Skills
@@ -13,24 +16,7 @@ namespace Player.States.Skill.Skills
         {
             base.Enter();
 
-            if (PlayerStateMachine.ReusableData.Raycastable != null)
-            {
-                PlayerStateMachine.AbilityController.TryActiveAbility(0,
-                    PlayerStateMachine.ReusableData.Raycastable.GameObject);    
-                Debug.Log("PlayerCastFirstState");
-                PlayerStateMachine.AnimationChanger.StartAnimation(PlayerStateMachine.AnimationData.FirstSkillParameterHash);
-            }
-            else
-            {
-                PlayerStateMachine.ChangeState(PlayerStateMachine.IdlingState);
-            }
-        }
-
-        public override void OnAnimationExitEvent()
-        {
-            base.OnAnimationExitEvent();
-            
-            PlayerStateMachine.AnimationChanger.StopAnimation(PlayerStateMachine.AnimationData.FirstSkillParameterHash); 
+            TryToActivateSkill(0);
         }
     }
 }

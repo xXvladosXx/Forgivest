@@ -12,7 +12,7 @@ namespace StateMachine.Player.States.Attack
         {
             base.Update();
 
-            //TO DO: Add logic for chasing the player
+            //TODO: Add logic for chasing the player
             if (PlayerStateMachine.ReusableData.InteractableObject != null)
             {
                 if (PlayerStateMachine.ReusableData.InteractableObject.GameObject == null)

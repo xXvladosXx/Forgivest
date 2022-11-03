@@ -23,7 +23,7 @@ namespace Controllers.Player
             _health.OnCurrentValueChanged += RecalculateHealthOnBar;
             _health.OnValueChanged += RecalculateHealthOnBar;
             
-            RecalculateHealthOnBar(_health.currentValue, _health.Value);
+            RecalculateHealthOnBar(_health.CurrentValue, _health.Value);
         }
 
         public void Tick()

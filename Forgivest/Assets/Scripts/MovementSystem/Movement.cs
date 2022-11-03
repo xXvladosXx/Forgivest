@@ -52,5 +52,7 @@ namespace MovementSystem
 
         public Vector3 GetRigidbodyVelocity() => _rigidbody.velocity;
         public Vector3 GetNavMeshVelocity() => _navMeshAgent.velocity;
+
+        public void EnableRotation(bool enable) => _navMeshAgent.updateRotation = enable;
     }
 }

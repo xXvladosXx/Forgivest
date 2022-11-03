@@ -12,12 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20d27560776543e98610f77408707042, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  <Rarity>k__BackingField: {fileID: 0}
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+  <MaxItemsInStack>k__BackingField: 0
+  <Sprite>k__BackingField: {fileID: 0}
+  <ItemID>k__BackingField:
+    Id: 7
+  <ItemType>k__BackingField: 13
+  <ItemDescription>k__BackingField: 
   _gameplayEffectDefinitions:
   - {fileID: 11400000, guid: d2886198fe57cff4794bac31b15343c6, type: 2}
   _maxLevel: 0
   _level: 5
-  <AnimationName>k__BackingField: FirstSkill
+  <AnimationName>k__BackingField: FourthSkill
   <Cost>k__BackingField: {fileID: 11400000, guid: 1cd723eaa3d334b4a8e6361077a47ea2,
     type: 2}
   <Cooldown>k__BackingField: {fileID: 11400000, guid: 864d2b206e9c1434285b6ef3d9bf4aec,
     type: 2}
+  <SelfCasted>k__BackingField: 1

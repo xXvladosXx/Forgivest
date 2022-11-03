@@ -5,6 +5,7 @@ using System.Reflection;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Active;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Core;
+using InventorySystem;
 using UnityEngine;
 
 namespace AbilitySystem.AbilitySystem.Runtime.Abilities
@@ -13,13 +14,11 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
         typeof(TagRegister))]
     public class AbilityController : MonoBehaviour
     {
-        [field: SerializeField] public Transform LeftHand { get; private set; }
-        [field: SerializeField] public Transform RightHandHand { get; private set; }
-        [field: SerializeField] public Transform DefaultSpawnPoint { get; private set; }
+        [field: SerializeField] public Inventory ItemContainer { get; private set; } 
         
         [SerializeField] private List<AbilityDefinition> _abilityDefinitions;
         public Dictionary<string, Ability> Abilities { get; protected set; } = new Dictionary<string, Ability>();
-        public GameObject Target { get; set; }
+        public Dictionary<int, Ability> AbilitiesIndex { get; protected set; } = new Dictionary<int, Ability>();
         public ActiveAbility CurrentAbility { get; private set; }
 
         private GameplayEffectHandler _gameplayEffectHandler;
@@ -54,6 +53,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
 
         protected virtual void Initialize()
         {
+            int index = 0;
             foreach (var abilityDefinition in _abilityDefinitions)
             {
                 var abilityAttributeType = abilityDefinition
@@ -62,26 +62,29 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
                     .OfType<AbilityTypeAttribute>()
                     .FirstOrDefault();
 
-                var ability = Activator.CreateInstance(abilityAttributeType.Type, abilityDefinition, this, null) as Ability;
+                var ability = Activator.CreateInstance(abilityAttributeType.Type, abilityDefinition, this) as Ability;
                 Abilities.Add(abilityDefinition.name, ability);
 
                 if (ability is PassiveAbility passiveAbility)
                 {
-                    passiveAbility.ApplyEffects(gameObject);
+                    passiveAbility.ApplyEffects(gameObject, null);
                 }
+                
+                AbilitiesIndex.Add(index, ability);
+                index++;
             }
         }
 
-        public bool TryActiveAbility(int abilityIndex, GameObject target)
+        public bool TryActiveAbility(int abilityIndex)
         {
             if(Abilities.Count <= abilityIndex)
                 return false;
             
             var abilityDefinition = Abilities.ElementAtOrDefault(abilityIndex).Key;
             
-            return TryActiveAbility(abilityDefinition, target);
+            return TryActiveAbility(abilityDefinition);
         }
-        public bool TryActiveAbility(string abilityName, GameObject target)
+        public bool TryActiveAbility(string abilityName)
         {
             if (Abilities.TryGetValue(abilityName, out var ability))
             {
@@ -92,7 +95,6 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
                         return false;
                     }
                     
-                    Target = target;
                     CurrentAbility = activeAbility;
                     CommitAbility(activeAbility);
                     

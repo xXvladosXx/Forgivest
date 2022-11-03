@@ -1,8 +1,5 @@
 ﻿using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
-using AttackSystem;
 using AttackSystem.Core;
-using CombatSystem.Scripts.Runtime;
-using CombatSystem.Scripts.Runtime.Core;
 using StatSystem.Scripts.Runtime;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -15,8 +12,8 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active
         private ObjectPool<Projectile> _objectPool;
         private AttackData _attackData;
 
-        public ProjectileAbility(ProjectileAbilityDefinition definition, AbilityController abilityController, AttackData attackData) : base(
-            definition, abilityController, attackData)
+        public ProjectileAbility(ProjectileAbilityDefinition definition, AbilityController abilityController) : base(
+            definition, abilityController)
         {
             _objectPool = new ObjectPool<Projectile>(OnCreate, OnGet, OnRelease);
         }
@@ -30,12 +27,8 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active
 
         private void OnHit(CollisionData collisionData)
         {
-            _attackData.DamageReceiver = collisionData
-                .Target
-                .TryGetComponent(out IDamageReceiver damageReceiver) ? damageReceiver : null;
-
             OnRelease(collisionData.Source as Projectile);
-            ApplyEffects(collisionData.Target);
+            ApplyEffects(collisionData.Target, _attackData);
             
             _attackData.DamageReceiver?.ReceiveDamage(_attackData);
         }
@@ -51,17 +44,14 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active
             obj.gameObject.SetActive(false);
         }
 
-        public void Shoot(GameObject target, IDamageApplier damageApplier)
+        public void Shoot(AttackData attackData)
         {
-            _attackData = new AttackData
-            {
-                DamageApplier = damageApplier,
-            };
-
             var projectile = _objectPool.Get();
-            damageApplier.ApplyShoot(
+
+            _attackData = attackData;
+            _attackData.DamageApplier.ApplyShoot(
                 projectile,
-                target.transform,
+                _attackData.DamageReceiver.GameObject.transform,
                 Definition.Speed,
                 Definition.ShotType,
                 Definition.IsSpin);

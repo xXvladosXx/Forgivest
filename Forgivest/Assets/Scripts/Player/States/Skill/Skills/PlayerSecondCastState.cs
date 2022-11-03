@@ -1,4 +1,8 @@
-﻿using StateMachine.Player;
+﻿using System;
+using AbilitySystem.AbilitySystem.Runtime.Abilities;
+using AbilitySystem.AbilitySystem.Runtime.Abilities.Active;
+using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
+using StateMachine.Player;
 using UnityEngine;
 
 namespace Player.States.Skill.Skills
@@ -8,13 +12,12 @@ namespace Player.States.Skill.Skills
         public PlayerSecondCastState(PlayerStateMachine playerPlayerStateMachine) : base(playerPlayerStateMachine)
         {
         }
-        
+
         public override void Enter()
         {
             base.Enter();
-            
-            Debug.Log("Second Cast");
-            PlayerStateMachine.AnimationChanger.StartAnimation(PlayerStateMachine.AnimationData.SecondSkillParameterHash); 
+
+            TryToActivateSkill(1);
         }
     }
 }

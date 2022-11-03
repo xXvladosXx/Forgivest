@@ -11,5 +11,6 @@ namespace AnimationSystem
         void ApplyAttack(float timeOfActiveCollider);
         void CastedSkill();
         void CastedProjectile();
+        void CastedSpawn();
     }
 }

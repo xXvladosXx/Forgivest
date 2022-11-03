@@ -13,8 +13,7 @@ namespace Player.States.Skill.Skills
         {
             base.Enter();
             
-            Debug.Log("Third Cast");
-            PlayerStateMachine.AnimationChanger.StartAnimation(PlayerStateMachine.AnimationData.ThirdSkillParameterHash); 
+            TryToActivateSkill(2);
         }
     }
 }

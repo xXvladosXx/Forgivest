@@ -15,12 +15,7 @@ namespace ColliderSystem
             _currentTime = time;
             _currentAttackData = attackData;
         }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            print("Entered collision");
-        }
-
+        
         private void OnTriggerEnter(Collider other)
         {
             if(_currentAttackData == null) return;

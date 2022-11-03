@@ -8,6 +8,7 @@ namespace AttackSystem.Core
     public interface IDamageReceiver
     {
         List<IRewardable> Rewards { get; }
+        float Health { get; }
         LayerMask LayerMask { get; }
         GameObject GameObject { get; }
         void ReceiveDamage(AttackData attackData);

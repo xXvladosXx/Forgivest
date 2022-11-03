@@ -13,8 +13,7 @@ namespace Player.States.Skill.Skills
         {
             base.Enter();
             
-            Debug.Log("Fifth Cast");
-            PlayerStateMachine.AnimationChanger.StartAnimation(PlayerStateMachine.AnimationData.FifthSkillParameterHash); 
+            TryToActivateSkill(4);
         }
     }
 }

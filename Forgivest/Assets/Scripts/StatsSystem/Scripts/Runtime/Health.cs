@@ -15,7 +15,6 @@ namespace StatSystem
             _tagRegister = tagRegister;
         }
 
-
         public override void ApplyModifier(StatModifier modifier)
         {
             ITaggable source = modifier.Source as ITaggable;

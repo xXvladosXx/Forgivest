@@ -6,13 +6,13 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active
 {
     public class SingleTargetAbility : ActiveAbility
     {
-        public SingleTargetAbility(SingleTargetAbilityDefinition definition, AbilityController abilityController, AttackData attackData) : base(definition, abilityController, attackData)
+        public SingleTargetAbility(SingleTargetAbilityDefinition definition, AbilityController abilityController) : base(definition, abilityController)
         {
         }
 
-        public void Cast(GameObject target)
+        public void Cast(GameObject target, AttackData attackData)
         {
-            ApplyEffects(target);
+            ApplyEffects(target, attackData);
         }
     }
 }

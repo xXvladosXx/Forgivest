@@ -18,6 +18,7 @@ namespace Enemy
         private DamageHandler _damageHandler;
         
         public List<IRewardable> Rewards => Rewardables;
+        public float Health => _statsHandler.Health.CurrentValue;
         public LayerMask LayerMask => gameObject.layer;
 
         public GameObject GameObject => gameObject == null ? null : gameObject;
@@ -52,6 +53,7 @@ namespace Enemy
             print("Damaged enemy");
             attackData.DamageReceiver = this;
             _damageHandler.TakeDamage(attackData);
+            OnDamageReceived?.Invoke(attackData);
         }
         
         public void Interact()

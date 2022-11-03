@@ -15,7 +15,7 @@ namespace AnimationSystem
         {
             _animator.SetBool(animationHash, true);
         }
-
+        
         public void UpdateBlendAnimation(int animationHash, float speed, float dampTime)
         {
             _animator.SetFloat(animationHash, speed, dampTime, Time.deltaTime);

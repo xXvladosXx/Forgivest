@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UI.Inventory.Core
+namespace UI.Inventory.DragDrop
 {
     public interface IDragSource 
     {
