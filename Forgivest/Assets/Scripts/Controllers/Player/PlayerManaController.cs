@@ -26,7 +26,7 @@ namespace Controllers.Player
             _mana.OnCurrentValueChanged += RecalculateManaOnBar;
             _mana.OnValueChanged += RecalculateManaOnBar;
 
-            RecalculateManaOnBar(_mana.currentValue, _mana.Value);
+            RecalculateManaOnBar(_mana.CurrentValue, _mana.Value);
         }
 
         public void Tick()

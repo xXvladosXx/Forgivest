@@ -39,8 +39,20 @@ namespace StateMachine.Player.States
             {
                 if (CheckRaycast())
                 {
-                    OnInteractableCheck();
-                    OnClickPressed();
+                    if (PlayerStateMachine.RaycastUser.RaycastHit.HasValue)
+                    {
+                        if (PlayerStateMachine.RaycastUser.InteractWithUI())
+                        {
+                            Stop();
+                            return;
+                        }
+                        
+                        if(PlayerStateMachine.RaycastUser.RaycastHit.Value.collider.gameObject.layer != LayerUtils.Player)
+                        {
+                            OnInteractableCheck();
+                            OnClickPressed();
+                        }
+                    }
                 }
             }
 
@@ -53,8 +65,6 @@ namespace StateMachine.Player.States
 
         protected virtual void AddInputActionsCallbacks()
         {
-            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.performed += OnClickPerformed;
-            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.canceled += OnClickCanceled;
             PlayerStateMachine.PlayerInputProvider.PlayerMainActions.FirstSkill.performed += OnFirstSkillPerformed;
             PlayerStateMachine.PlayerInputProvider.PlayerMainActions.SecondSkill.performed += OnSecondSkillPerformed;
             PlayerStateMachine.PlayerInputProvider.PlayerMainActions.ThirdSkill.performed += OnThirdSkillPerformed;
@@ -64,8 +74,6 @@ namespace StateMachine.Player.States
 
         protected virtual void RemoveInputActionsCallbacks()
         {
-            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.performed -= OnClickPerformed;
-            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.canceled -= OnClickCanceled;
             PlayerStateMachine.PlayerInputProvider.PlayerMainActions.FirstSkill.performed -= OnFirstSkillPerformed;
             PlayerStateMachine.PlayerInputProvider.PlayerMainActions.SecondSkill.performed -= OnSecondSkillPerformed;
             PlayerStateMachine.PlayerInputProvider.PlayerMainActions.ThirdSkill.performed -= OnThirdSkillPerformed;
@@ -77,8 +85,8 @@ namespace StateMachine.Player.States
         {
             if (!PlayerStateMachine.RaycastUser.RaycastHit.HasValue) return false;
 
-            PlayerStateMachine.RaycastUser.RaycastHit.Value.collider.TryGetComponent(out IRaycastable raycastable);
-            PlayerStateMachine.ReusableData.Raycastable = raycastable;
+            PlayerStateMachine.ReusableData.Raycastable = PlayerStateMachine.RaycastUser.Raycastable;
+            PlayerStateMachine.ReusableData.HoveredPoint = PlayerStateMachine.RaycastUser.RaycastHit.Value.point;
 
             return true;
         }
@@ -88,8 +96,7 @@ namespace StateMachine.Player.States
             if (!PlayerStateMachine.RaycastUser.RaycastHit.HasValue) return false;
 
             PlayerStateMachine.ReusableData.RaycastClickedPoint = PlayerStateMachine.RaycastUser.RaycastHit.Value.point;
-            PlayerStateMachine.RaycastUser.RaycastHit.Value.collider.TryGetComponent(out IInteractable interactable);
-            PlayerStateMachine.ReusableData.InteractableObject = interactable;
+            PlayerStateMachine.ReusableData.InteractableObject = PlayerStateMachine.RaycastUser.Interactable;
 
             return true;
         }
@@ -105,14 +112,6 @@ namespace StateMachine.Player.States
         public virtual void OnAnimationTransitionEvent()
         {
         }
-
-        protected virtual void OnClickCanceled(InputAction.CallbackContext obj)
-        {
-        }
-
-        protected virtual void OnClickPerformed(InputAction.CallbackContext obj)
-        {
-        }
         
         protected virtual void OnClickPressed()
         {
@@ -122,13 +121,9 @@ namespace StateMachine.Player.States
         protected float GetMovementSpeed() =>
             GroundedData.BaseSpeed * PlayerStateMachine.ReusableData.MovementSpeedModifier;
 
-        protected virtual void OnStop()
-        {
-        }
-        
         protected virtual void OnInteractableCheck()
         {
-             switch (PlayerStateMachine.ReusableData.InteractableObject)
+            switch (PlayerStateMachine.ReusableData.InteractableObject)
             {
                 case EnemyEntity enemyEntity:
                      PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerChasingState);
@@ -175,6 +170,10 @@ namespace StateMachine.Player.States
 
         private void Stop()
         {
+            PlayerStateMachine.AnimationChanger.UpdateBlendAnimation(
+                PlayerStateMachine.AnimationData.SpeedParameterHash,
+                0, .1f);
+            
             PlayerStateMachine.Movement.Stop();
         }
         

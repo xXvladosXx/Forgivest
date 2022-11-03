@@ -36,5 +36,10 @@ namespace AnimationSystem
         {
             AnimationEventUser.CastedProjectile();
         }
+
+        public void Spawn()
+        {
+            AnimationEventUser.CastedSpawn();
+        }
     }
 }

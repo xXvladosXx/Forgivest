@@ -15,5 +15,6 @@
         Bracer,
         Back,
         Gloves,
+        Skill
     }
 }

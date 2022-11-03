@@ -389,7 +389,7 @@ namespace AbilitySystem
                     {
                         if (modifier.Type == ModifierOperationType.Additive)
                         {
-                            if (!(attribute.currentValue < Mathf.Abs(modifier.Formula.CalculateValue(gameObject))))
+                            if (!(attribute.CurrentValue < Mathf.Abs(modifier.Formula.CalculateValue(gameObject))))
                                 continue;
 
                             Debug.Log("Cannot satisfy costs");

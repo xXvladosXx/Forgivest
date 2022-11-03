@@ -19,5 +19,12 @@ namespace MovementSystem
                 Quaternion.Slerp(_rigidbody.transform.rotation,
                     lookRotation, Time.deltaTime*speed));
         }
+
+        public void RotateToTargetPosition(Vector3 target)
+        {
+            Vector3 deltaVec = target - _rigidbody.transform.position;
+            Quaternion rotation = Quaternion.LookRotation(deltaVec);
+            _rigidbody.transform.rotation = rotation;
+        }
     }
 }

@@ -7,27 +7,21 @@ namespace UI.Inventory.Core
     public class InventoryPanel : Panel
     {
         [SerializeField] private List<UIElement> _uiElements;
-        [SerializeField] private InventoryItemContainerUI _inventoryItemContainerUI;
-        [SerializeField] private EquipmentItemContainerUI _equipmentItemContainerUI;
-        [SerializeField] private HotbarContainerUI _hotbarContainerUI;
-        
-        public IInventoryHolder LastRaycastedInventoryHolder { get; private set; } 
+        [SerializeField] private DynamicItemContainerUI _dynamicItemContainerUI;
+        [SerializeField] private StaticItemContainerUI _staticItemContainerUI;
 
-        public InventoryItemContainerUI InventoryItemContainerUI => _inventoryItemContainerUI;
-        public EquipmentItemContainerUI EquipmentItemContainerUI => _equipmentItemContainerUI;
-        public HotbarContainerUI HotbarContainerUI => _hotbarContainerUI;
+        public DynamicItemContainerUI DynamicItemContainerUI => _dynamicItemContainerUI;
+        public StaticItemContainerUI StaticItemContainerUI => _staticItemContainerUI;
         private void OnEnable()
         {
-            _inventoryItemContainerUI.OnInventoryHolderChanged += ChangeHolder;
-            _equipmentItemContainerUI.OnInventoryHolderChanged += ChangeHolder;
-            _hotbarContainerUI.OnInventoryHolderChanged += ChangeHolder;
+            _dynamicItemContainerUI.OnInventoryHolderChanged += ChangeHolder;
+            _staticItemContainerUI.OnInventoryHolderChanged += ChangeHolder;
         }
 
         private void OnDisable()
         {
-            _inventoryItemContainerUI.OnInventoryHolderChanged -= ChangeHolder;
-            _equipmentItemContainerUI.OnInventoryHolderChanged -= ChangeHolder;
-            _hotbarContainerUI.OnInventoryHolderChanged -= ChangeHolder;
+            _dynamicItemContainerUI.OnInventoryHolderChanged -= ChangeHolder;
+            _staticItemContainerUI.OnInventoryHolderChanged -= ChangeHolder;
         }
 
         public override void Show()
@@ -50,29 +44,12 @@ namespace UI.Inventory.Core
 
         public void InitializeInventory(int inventoryCapacity)
         {
-             _inventoryItemContainerUI.InitializeSlots(inventoryCapacity);
+             _dynamicItemContainerUI.InitializeSlots(inventoryCapacity);
         }
         
         public void InitializeEquipment(int equipmentCapacity)
         {
-            _equipmentItemContainerUI.InitializeSlots(equipmentCapacity);
+            _staticItemContainerUI.InitializeSlots(equipmentCapacity);
         }
-
-        public void InitializeHotbar(int hotbarCapacity)
-        {
-            _hotbarContainerUI.InitializeSlots(hotbarCapacity);
-        }
-        
-        public void CreateSlotsWithItemInInventory(Sprite sprite, int amount, int index, ItemContainerUI itemContainerUI, string description)
-        {
-            itemContainerUI.RefreshSlotData(sprite, amount, index, description);
-        }
-        
-        private void ChangeHolder(IInventoryHolder inventoryHolder)
-        {
-            LastRaycastedInventoryHolder = inventoryHolder;
-        }
-
-       
     }
 }

@@ -42,9 +42,9 @@ namespace AbilitySystem.Tests
             var damageEffectDefinition = AssetDatabase.LoadAssetAtPath<GameplayEffectDefinition>("Assets/Tests/SO/Test_GameplayEffect.asset");
             var damageEffect = new GameplayEffect(damageEffectDefinition, null, _enemy, null);
             Health health = statController.Stats["Health"] as Health;
-            health.currentValue.Should().Be(100);
+            health.CurrentValue.Should().Be(100);
             effectController.ApplyGameplayEffectToSelf(damageEffect);
-            health.currentValue.Should().Be(90);
+            health.CurrentValue.Should().Be(90);
         }
 
         [UnityTest]
@@ -136,9 +136,9 @@ namespace AbilitySystem.Tests
             var health = statController.Stats["Health"] as Health;
             var effect = new GameplayPersistentEffect(effectDefinition, null, _player, null);
             effectContrller.ApplyGameplayEffectToSelf(effect);
-            health.currentValue.Should().Be(100);
+            health.CurrentValue.Should().Be(100);
             yield return new WaitForSeconds(1);
-            health.currentValue.Should().Be(110);
+            health.CurrentValue.Should().Be(110);
         }
         
         [UnityTest]
@@ -152,9 +152,9 @@ namespace AbilitySystem.Tests
 
             var health = statController.Stats["Health"] as Health;
             var effect = new GameplayPersistentEffect(effectDefinition, null, _player, null);
-            health.currentValue.Should().Be(100);
+            health.CurrentValue.Should().Be(100);
             effectContrller.ApplyGameplayEffectToSelf(effect);
-            health.currentValue.Should().Be(110);
+            health.CurrentValue.Should().Be(110);
         }
         
         /*[UnityTest]

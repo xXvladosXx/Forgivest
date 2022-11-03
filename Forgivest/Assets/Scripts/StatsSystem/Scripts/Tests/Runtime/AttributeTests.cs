@@ -27,14 +27,14 @@ namespace StatSystem.Tests
             yield return null;
             StatController statController = GameObject.FindObjectOfType<StatController>();
             Attribute health = statController.Stats["Health"] as Attribute;
-            Assert.AreEqual(100, health.currentValue);
+            Assert.AreEqual(100, health.CurrentValue);
             Assert.AreEqual(100, health.Value);
             health.ApplyModifier(new StatModifier
             {
                 Magnitude = 20,
                 Type = ModifierOperationType.Additive
             });
-            Assert.AreEqual(100, health.currentValue);
+            Assert.AreEqual(100, health.CurrentValue);
         }
 
         [UnityTest]
@@ -43,13 +43,13 @@ namespace StatSystem.Tests
             yield return null;
             StatController statController = GameObject.FindObjectOfType<StatController>();
             Attribute health = statController.Stats["Health"] as Attribute;
-            Assert.AreEqual(100, health.currentValue);
+            Assert.AreEqual(100, health.CurrentValue);
             health.ApplyModifier(new StatModifier
             {
                 Magnitude = -150,
                 Type = ModifierOperationType.Additive
             });
-            Assert.AreEqual(0, health.currentValue);
+            Assert.AreEqual(0, health.CurrentValue);
         }
 
         [UnityTest]
@@ -58,7 +58,7 @@ namespace StatSystem.Tests
             yield return null;
             StatController statController = GameObject.FindObjectOfType<StatController>();
             Health health = statController.Stats["Health"] as Health;
-            Assert.AreEqual(100, health.currentValue);
+            Assert.AreEqual(100, health.CurrentValue);
             health.ApplyModifier(new HealthModifier
             {
                 Magnitude = -10,
@@ -66,7 +66,7 @@ namespace StatSystem.Tests
                 IsCriticalHit = false,
                 Source = ScriptableObject.CreateInstance<Ability>()
             });
-            Assert.AreEqual(95, health.currentValue);
+            Assert.AreEqual(95, health.CurrentValue);
         }
 
         private class Ability : ScriptableObject, ITaggable

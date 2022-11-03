@@ -30,7 +30,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 82, y: 239}
   guid: 3bb6d3ae4ce9da547a6fa58b01276c9a
-  m_Value: 11
+  m_Value: 3
 --- !u!114 &4106168087685535325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,6 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19ffb4285114742bc03537d53b2b4f2, type: 3}
   m_Name: ResultNode
   m_EditorClassIdentifier: 
-  position: {x: 311.4, y: 238.6}
+  position: {x: 310, y: 239}
   guid: 50808a292d8cdfc45ad90bc5223e3e81
   child: {fileID: 2881170871546638835}

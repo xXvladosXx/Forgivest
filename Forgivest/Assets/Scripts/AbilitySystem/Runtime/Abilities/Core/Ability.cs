@@ -37,19 +37,19 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
             }
         }
         
-        public Ability(AbilityDefinition definition, AbilityController abilityController, AttackData attackData)
+        public Ability(AbilityDefinition definition, AbilityController abilityController)
         {
             AbilityController = abilityController;
             AbilityDefinition = definition;
-            AttackData = attackData;
         }
 
-        internal void ApplyEffects(GameObject other)
+        internal void ApplyEffects(GameObject other, AttackData attackData)
         {
-            ApplyEffectsInternal(AbilityDefinition.GameplayEffectDefinitions, other);
+            ApplyEffectsInternal(AbilityDefinition.GameplayEffectDefinitions, other, attackData);
         }
 
-        private void ApplyEffectsInternal(ReadOnlyCollection<GameplayEffectDefinition> effectDefinitions, GameObject other)
+        private void ApplyEffectsInternal(ReadOnlyCollection<GameplayEffectDefinition> effectDefinitions,
+            GameObject other, AttackData attackData)
         {
             if (other.TryGetComponent(out GameplayEffectHandler gameplayEffectController))
             {
@@ -62,7 +62,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
                         .FirstOrDefault();
 
                     var effect =
-                        Activator.CreateInstance(attribute.Type, effectDefinition, this, AbilityController.gameObject, AttackData) as GameplayEffect;
+                        Activator.CreateInstance(attribute.Type, effectDefinition, this, AbilityController.gameObject, attackData) as GameplayEffect;
                     
                     gameplayEffectController.ApplyGameplayEffectToSelf(effect);
                 }

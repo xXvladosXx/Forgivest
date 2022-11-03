@@ -399,7 +399,7 @@ MonoBehaviour:
   _draggableObject: {fileID: 8088278518783693529, guid: 212b1e6a0c8a90d4db5d902d4ecaa002,
     type: 3}
   _rectTransform: {fileID: 8826187894965526657}
-  _canvasGroup: {fileID: 0}
+  _canvasGroup: {fileID: 5599203211109911296}
 --- !u!225 &5599203211109911296
 CanvasGroup:
   m_ObjectHideFlags: 0

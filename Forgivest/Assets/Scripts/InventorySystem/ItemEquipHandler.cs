@@ -59,12 +59,13 @@ namespace InventorySystem
         private bool TryToEquipWeapon(Weapon weapon)
         {
             if (weapon == null)
-                return EquipStartWeapon();
+                return TryToEquipWeapon(StartWeapon);
 
             CurrentWeapon = weapon;
             CurrentColliderWeapon =
                 Object.Instantiate(weapon.Prefab, weapon.RightHanded ? RightHand : LeftHand);
             CurrentColliderWeapon.layer = RightHand.gameObject.layer;
+            CurrentColliderWeapon.GetComponent<Collider>().enabled = false; 
             
             OnItemEquipped?.Invoke(weapon, true);
             OnWeaponEquipped?.Invoke(weapon);
@@ -72,17 +73,6 @@ namespace InventorySystem
             return true;
         }
 
-        private bool EquipStartWeapon()
-        {
-            CurrentWeapon = StartWeapon;
-            CurrentColliderWeapon =
-                Object.Instantiate(StartWeapon.Prefab, StartWeapon.RightHanded ? RightHand : LeftHand);
-
-            OnItemEquipped?.Invoke(StartWeapon, true);
-            OnWeaponEquipped?.Invoke(StartWeapon);
-
-            return true;
-        }
 
         private void UnequipWeapon(Weapon weapon)
         {
@@ -95,7 +85,7 @@ namespace InventorySystem
 
             OnItemUnquipped?.Invoke(weapon, false);
 
-            EquipStartWeapon();
+            TryToEquipWeapon(StartWeapon);
         }
     }
 }

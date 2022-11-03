@@ -35,7 +35,7 @@ namespace Player
     
     [RequireComponent(typeof(AbilityController),
         typeof(GameplayEffectHandler))]
-    public class PlayerEntity : MonoBehaviour, IAnimationEventUser, IDamageReceiver, IDamageApplier
+    public class PlayerEntity : MonoBehaviour, IAnimationEventUser, IDamageReceiver, IDamageApplier, IRaycastable
     {
         [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
         [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
@@ -66,12 +66,13 @@ namespace Player
         public GameObject Weapon => _objectPicker.ItemEquipHandler.CurrentColliderWeapon;
         public Weapon CurrentWeapon => _objectPicker.ItemEquipHandler.CurrentWeapon;
         public List<IRewardable> Rewards { get; }
+        public float Health => StatsFinder.FindStat("Health");
         public LayerMask LayerMask => gameObject.layer;
+      
+
         public GameObject GameObject => gameObject;
 
         public event Action<AttackData> OnDamageReceived;
-        
-
         public event Action<AttackData> OnDamageApplied;
 
         private void Awake()
@@ -114,6 +115,16 @@ namespace Player
             _objectPicker.ItemEquipHandler.OnWeaponEquipped -= OnWeaponEquipped;
         }
 
+        public CursorType GetCursorType()
+        {
+            return CursorType.Movement;
+        }
+
+        public bool HandleRaycast(RaycastUser raycastUser)
+        {
+            return true;
+        }
+        
         public void OnAnimationStarted()
         {
             _playerStateMachine.OnAnimationEnterEvent();
@@ -133,7 +144,23 @@ namespace Player
         {
             if (AbilityController.CurrentAbility is SingleTargetAbility singeTargetAbility)
             {
-                singeTargetAbility.Cast(AbilityController.Target);
+                var raycastable = _playerStateMachine.ReusableData.Raycastable;
+
+                switch (raycastable)
+                {
+                    case IDamageReceiver damageReceiver:
+                        var attackData = new AttackData
+                        {
+                            DamageApplierLayerMask = LayerMask,
+                            DamageApplier = this,
+                            DamageReceiver = damageReceiver,
+                        };
+
+                        singeTargetAbility.Cast(singeTargetAbility.ActiveAbilityDefinition.SelfCasted
+                            ? gameObject
+                            : _playerStateMachine.ReusableData.Raycastable.GameObject, attackData);
+                        break;
+                }
             }
         }
 
@@ -142,14 +169,35 @@ namespace Player
             if (AbilityController.CurrentAbility is ProjectileAbility projectileAbility)
             {
                 var raycastable = _playerStateMachine.ReusableData.Raycastable;
+
                 switch (raycastable)
                 {
-                    case null:
-                        return;
                     case IDamageReceiver damageReceiver:
-                        projectileAbility.Shoot(_playerStateMachine.ReusableData.Raycastable.GameObject, this);
+                        var attackData = new AttackData
+                        {
+                            DamageApplierLayerMask = LayerMask,
+                            DamageApplier = this,
+                            DamageReceiver = damageReceiver,
+                        };
+                        
+                        projectileAbility.Shoot(attackData);
                         break;
                 }
+            }
+        }
+
+        public void CastedSpawn()
+        {
+            if (AbilityController.CurrentAbility is RadiusDamageAbility radiusDamageAbility)
+            {
+                var attackData = new AttackData
+                {
+                    DamageApplier = this,
+                    DamageApplierLayerMask = gameObject.layer,
+                    Source = gameObject
+                };
+                
+                radiusDamageAbility.Spawn(_playerStateMachine.ReusableData.HoveredPoint, attackData);
             }
         }
 
@@ -164,14 +212,6 @@ namespace Player
             _damageHandler.TakeDamage(attackData);
         }
         
-        public void GetReward(object reward)
-        {
-            if (reward is ExperienceReward experienceReward)
-            {
-                _levelController.CurrentExperience += experienceReward.Amount;
-            }
-        }
-        
         public void ApplyShoot(Projectile projectile, Transform targetTransform,
             float definitionSpeed, ShotType definitionShotType,
             bool definitionIsSpin)
@@ -180,11 +220,8 @@ namespace Player
             {
                 rangedWeapon.Shoot(projectile, targetTransform, definitionSpeed,
                     gameObject.layer, definitionShotType, definitionIsSpin);
-                
             }
         }
-
-       
 
         public void ApplyAttack(float timeOfActiveCollider)
         {

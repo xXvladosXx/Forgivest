@@ -48,9 +48,9 @@ namespace AbilitySystem.Tests
             var abilityController = _player.GetComponent<AbilityController>();
             var statController = _enemy.GetComponent<StatController>();
             var health = statController.Stats["Health"] as Health;
-            health.currentValue.Should().Be(100);
-            abilityController.TryActiveAbility("SingleTargetAbility", _enemy);
-            health.currentValue.Should().Be(95);
+            health.CurrentValue.Should().Be(100);
+            abilityController.TryActiveAbility("SingleTargetAbility");
+            health.CurrentValue.Should().Be(95);
         }
         
         [UnityTest]
@@ -60,9 +60,9 @@ namespace AbilitySystem.Tests
             var abilityController = _player.GetComponent<AbilityController>();
             var statController = _player.GetComponent<StatController>();
             var mana = statController.Stats["Mana"] as Attribute;
-            mana.currentValue.Should().Be(100);
-            abilityController.TryActiveAbility("AbilityWithCost", _enemy);
-            mana.currentValue.Should().Be(50);
+            mana.CurrentValue.Should().Be(100);
+            abilityController.TryActiveAbility("AbilityWithCost");
+            mana.CurrentValue.Should().Be(50);
         }
         
         [UnityTest]
@@ -72,13 +72,13 @@ namespace AbilitySystem.Tests
             var abilityController = _player.GetComponent<AbilityController>();
             var statController = _player.GetComponent<StatController>();
             var mana = statController.Stats["Mana"] as Attribute;
-            mana.currentValue.Should().Be(100);
-            abilityController.TryActiveAbility("AbilityWithCost", _enemy);
-            abilityController.TryActiveAbility("AbilityWithCost", _enemy).Should().BeTrue();
+            mana.CurrentValue.Should().Be(100);
+            abilityController.TryActiveAbility("AbilityWithCost");
+            abilityController.TryActiveAbility("AbilityWithCost").Should().BeTrue();
             
-            abilityController.TryActiveAbility("AbilityWithCost", _enemy);
-            mana.currentValue.Should().Be(0);
-            abilityController.TryActiveAbility("AbilityWithCost", _enemy).Should().BeFalse();
+            abilityController.TryActiveAbility("AbilityWithCost");
+            mana.CurrentValue.Should().Be(0);
+            abilityController.TryActiveAbility("AbilityWithCost").Should().BeFalse();
         }
         
         [UnityTest]
@@ -86,12 +86,12 @@ namespace AbilitySystem.Tests
         {
             var tagController = _player.GetComponent<TagRegister>();
             var abilityController = _player.GetComponent<AbilityController>();
-            abilityController.TryActiveAbility("CooldownAbility", _enemy);
+            abilityController.TryActiveAbility("CooldownAbility");
             tagController.Tags.Should().Contain("test_cooldown");
-            bool canBeActivated = abilityController.TryActiveAbility("CooldownAbility", _player);
+            bool canBeActivated = abilityController.TryActiveAbility("CooldownAbility");
             canBeActivated.Should().BeFalse();
             yield return new WaitForSeconds(2f);
-            canBeActivated = abilityController.TryActiveAbility("CooldownAbility", _player);
+            canBeActivated = abilityController.TryActiveAbility("CooldownAbility");
             canBeActivated.Should().BeTrue();
         }
         

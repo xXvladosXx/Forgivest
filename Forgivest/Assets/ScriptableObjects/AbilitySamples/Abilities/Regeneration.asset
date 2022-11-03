@@ -12,6 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20d27560776543e98610f77408707042, type: 3}
   m_Name: Regeneration
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  <Rarity>k__BackingField: {fileID: 0}
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+  <MaxItemsInStack>k__BackingField: 0
+  <Sprite>k__BackingField: {fileID: 0}
+  <ItemID>k__BackingField:
+    Id: 11
+  <ItemType>k__BackingField: 13
+  <ItemDescription>k__BackingField: 
   _gameplayEffectDefinitions:
   - {fileID: 11400000, guid: 6814b61ac849d15459ba4a55f7657c0f, type: 2}
   _maxLevel: 0
@@ -21,3 +39,4 @@ MonoBehaviour:
     type: 2}
   <Cooldown>k__BackingField: {fileID: 11400000, guid: 2b868d6ddd6fe2245b75739572393a29,
     type: 2}
+  <SelfCasted>k__BackingField: 0

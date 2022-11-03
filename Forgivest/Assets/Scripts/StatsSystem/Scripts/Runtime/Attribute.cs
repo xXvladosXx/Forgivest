@@ -8,7 +8,7 @@ namespace StatSystem
     public class Attribute : Stat
     {
         protected float m_CurrentValue;
-        public float currentValue => m_CurrentValue;
+        public float CurrentValue => m_CurrentValue;
         public event Action<float, float> OnCurrentValueChanged;
         public event Action<StatModifier> OnAppliedModifier;
         
@@ -40,7 +40,7 @@ namespace StatSystem
 
             newValue = Mathf.Clamp(newValue, 0, m_Value);
 
-            if (currentValue != newValue)
+            if (CurrentValue != newValue)
             {
                 m_CurrentValue = newValue;
                 OnCurrentValueChanged?.Invoke(m_CurrentValue, Value);

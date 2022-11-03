@@ -12,6 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20d27560776543e98610f77408707042, type: 3}
   m_Name: ShieldAura
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  <Rarity>k__BackingField: {fileID: 0}
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+  <MaxItemsInStack>k__BackingField: 0
+  <Sprite>k__BackingField: {fileID: 0}
+  <ItemID>k__BackingField:
+    Id: 12
+  <ItemType>k__BackingField: 13
+  <ItemDescription>k__BackingField: 
   _gameplayEffectDefinitions:
   - {fileID: 11400000, guid: 815214685f9f82041bafe8d82a46c075, type: 2}
   _maxLevel: 0
@@ -21,3 +39,4 @@ MonoBehaviour:
     type: 2}
   <Cooldown>k__BackingField: {fileID: 11400000, guid: 994b4c5b98f343e45ab2df00f81a8742,
     type: 2}
+  <SelfCasted>k__BackingField: 0

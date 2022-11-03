@@ -15,7 +15,7 @@ namespace MyGame
     {
         private const string k_Health = "Health";
         private bool m_IsInitialized;
-        public float Health => (m_StatController.Stats[k_Health] as Attribute).currentValue;
+        public float Health => (m_StatController.Stats[k_Health] as Attribute).CurrentValue;
         public float MaxHealth => m_StatController.Stats[k_Health].Value;
         public event Action OnHealthChanged;
         public event Action OnMaxHealthChanged;
@@ -81,7 +81,7 @@ namespace MyGame
                 {
                     OnDamaged?.Invoke(modifier.Magnitude, false);
                 }
-                if ((m_StatController.Stats[k_Health] as Attribute).currentValue == 0)
+                if ((m_StatController.Stats[k_Health] as Attribute).CurrentValue == 0)
                     OnDefeated?.Invoke();
             }
         }
