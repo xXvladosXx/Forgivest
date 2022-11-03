@@ -17,7 +17,7 @@ namespace UI.Core
         {
             _panels = GetComponentsInChildren<Panel>().ToList();
             _currentPanel = _panels[0];
-            HideUIElement();
+            HideAllUIElements();
         }
 
         private void Update()
@@ -66,6 +66,14 @@ namespace UI.Core
             _currentPanel.Hide();
             _currentPanel = null;
         }
-
+        
+        public void HideAllUIElements()
+        {
+            foreach (var panel in _panels)
+            {
+                panel.Hide();
+                _currentPanel = null;
+            }
+        }
     }
 }

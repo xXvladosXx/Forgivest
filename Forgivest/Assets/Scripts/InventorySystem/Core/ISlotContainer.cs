@@ -12,7 +12,7 @@ namespace InventorySystem.Core
         Type ItemGetType { get; }
         int Amount { get; set; }
         int Capacity { get; }
-        bool IsEquipped { get; set; }
+        bool Changeable { get; }
         void Clear();
         bool AllRequirementsChecked(Item item, int amount);
         void SetItem(IItem item, int amount);

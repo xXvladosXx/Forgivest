@@ -12,7 +12,7 @@ namespace InventorySystem
     [Serializable]
     public class ItemContainer : IContainer
     {
-        [field: SerializeField] public List<ItemSlot> Slots { get; private set; } = new List<ItemSlot>();
+        [field: SerializeField] public List<ItemSlot> Slots { get; set; } = new List<ItemSlot>();
         public int Capacity { get; set; }
         public bool IsFull => Slots.All(slot => slot.IsFull);
 
@@ -21,6 +21,15 @@ namespace InventorySystem
         public event Action<int, int, ItemContainer> OnItemSwapped;
 
 
+        public void GenerateSlotsByFirstSlot(ItemSlot slot, int capacity)
+        {
+            Slots.Clear();
+            for (int i = 0; i < capacity; i++)
+            {
+                Slots.Add(new ItemSlot(slot.Item, slot.Amount, slot.Changeable, slot.ProhibitedItemTypes, slot.ItemTypes));
+            }
+        }
+        
         public void Init(int capacity)
         {
             Capacity = capacity;
@@ -59,7 +68,7 @@ namespace InventorySystem
             .Where(slot => !slot.IsEmpty && slot.ItemGetType == itemType)
             .Select(slot => slot.Item)).ToArray();
 
-        public Item[] GetEquippedItems() => (Slots.Where(slot => !slot.IsEmpty && slot.IsEquipped)
+        public Item[] GetEquippedItems() => (Slots.Where(slot => !slot.IsEmpty && slot.Changeable)
             .Select(slot => slot.Item)).ToArray();
 
         public int GetItemAmount(Type itemType)
@@ -203,16 +212,23 @@ namespace InventorySystem
         {
             var draggingItem = Slots[source].Item;
             var draggingNumber = Slots[source].Amount;
+            var draggingChangeable = Slots[source].Changeable;
+            
             var destinationSlot = destinationContainer?.Slots[destination] ?? Slots[destination];
 
             var acceptable = destinationSlot.Capacity;
+            var destinationSlotChangeable = destinationSlot.Changeable;
+            if (!destinationSlotChangeable)
+                return false;
+            
             var toTransfer = Mathf.Min(64, draggingNumber);
 
             if (destinationSlot.AllRequirementsChecked(draggingItem, draggingNumber))
             {
                 if (toTransfer > 0)
                 {
-                    Remove(this, source, false, toTransfer);
+                    if(draggingChangeable)
+                        Remove(this, source, false, toTransfer);
 
                     destinationSlot.SetItem(draggingItem, toTransfer);
 
@@ -261,6 +277,10 @@ namespace InventorySystem
 
             var sourceItem = sourceSlot.Item;
             var destinationItem = destinationSlot.Item;
+            var changeableSlot = destinationSlot.Changeable;
+            
+            if(!changeableSlot)
+                return;
 
             int removedSourceNumber = sourceSlot.Amount;
             int removedDestinationNumber = destinationSlot.Amount;
