@@ -77,13 +77,13 @@ namespace Player.States.Skill
 
         protected void TryToActivateSkill(int index)
         {
-            var skill = PlayerStateMachine.AbilityController.AbilitiesIndex[index];
-            bool activated = skill switch
+            var skill = PlayerStateMachine.AbilityController.Hotbar.ItemContainer.Slots[index].Item;
+            var activated = skill switch
             {
-                ProjectileAbility projectileAbility => TryActivateTargetAbility(index, projectileAbility),
-                RadiusDamageAbility radiusDamageAbility => TryToActivateFreeAbility(index, radiusDamageAbility),
-                SingleTargetAbility singleTargetAbility => TryActivateTargetAbility(index, singleTargetAbility),
-                AttackAbility attackAbility => TryToActivateAttackAbility(index, attackAbility),
+                ProjectileAbilityDefinition projectileAbility => TryActivateTargetAbility(index, projectileAbility),
+                RadiusDamageAbilityDefinition radiusDamageAbility => TryToActivateFreeAbility(index, radiusDamageAbility),
+                SingleTargetAbilityDefinition singleTargetAbility => TryActivateTargetAbility(index, singleTargetAbility),
+                AttackAbilityDefinition attackAbility => TryToActivateAttackAbility(index, attackAbility),
                 _ => throw new ArgumentOutOfRangeException(nameof(skill))
             };
             
@@ -91,11 +91,11 @@ namespace Player.States.Skill
                 PlayerStateMachine.ChangeState(PlayerStateMachine.IdlingState);
         }
         
-        protected bool TryActivateTargetAbility(int index, ActiveAbility activeAbility)
+        protected bool TryActivateTargetAbility(int index, ActiveAbilityDefinition activeAbility)
         {
             if (PlayerStateMachine.ReusableData.Raycastable != null)
             {
-                if (!activeAbility.ActiveAbilityDefinition.SelfCasted &&
+                if (!activeAbility.SelfCasted &&
                     PlayerStateMachine.ReusableData.Raycastable.GameObject ==
                     PlayerStateMachine.Movement.Transform.gameObject)
                 {
@@ -112,7 +112,7 @@ namespace Player.States.Skill
                 }
 
                 PrepareForCast();
-                StartAnimating(index);
+                StartAnimating(activeAbility);
                 return true;
             }
 
@@ -120,7 +120,7 @@ namespace Player.States.Skill
             return false;
         }
 
-        protected bool TryToActivateFreeAbility(int index, RadiusDamageAbility radiusDamageAbility)
+        protected bool TryToActivateFreeAbility(int index, RadiusDamageAbilityDefinition radiusDamageAbility)
         {
             bool canActivate = PlayerStateMachine.AbilityController.TryActiveAbility(index);
 
@@ -131,11 +131,11 @@ namespace Player.States.Skill
             }
 
             PrepareForCast();
-            StartAnimating(index);
+            StartAnimating(radiusDamageAbility);
             return true;
         }
 
-        protected bool TryToActivateAttackAbility(int index, AttackAbility attackAbility)
+        protected bool TryToActivateAttackAbility(int index, AttackAbilityDefinition attackAbility)
         {
             bool canActivate =
                 PlayerStateMachine.AbilityController.TryActiveAbility(index);
@@ -147,18 +147,16 @@ namespace Player.States.Skill
             }
 
             PrepareForCast();
-            StartAnimating(index);
+            StartAnimating(attackAbility);
             return true;
         }
 
         protected override void OnInteractableCheck()
         {
         }
-        private void StartAnimating(int index)
+        private void StartAnimating(ActiveAbilityDefinition activeAbilityDefinition)
         {
-            PlayerStateMachine.AnimationChanger.StartAnimation((
-                (ActiveAbilityDefinition) PlayerStateMachine.AbilityController.AbilitiesIndex[index]
-                    .AbilityDefinition).HashAnimation);
+            PlayerStateMachine.AnimationChanger.StartAnimation(activeAbilityDefinition.HashAnimation);
         }
 
         private void PrepareForCast()

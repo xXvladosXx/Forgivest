@@ -14,10 +14,9 @@ namespace InventorySystem
     {
         [field: SerializeField] public Item Item { get; private set; }
         [field: SerializeField] public int Amount { get; set; }
-        [field: SerializeField] public bool IsEquipped { get; set; }
-
-        [field: SerializeField] public List<ItemType> ItemTypes { get; set; }
-
+        [field: SerializeField] public bool Changeable { get; private set; } = true;
+        [field: SerializeField] public List<ItemType> ItemTypes { get; private set; }
+        [field: SerializeField] public List<ItemType> ProhibitedItemTypes { get; private set; }
         public bool IsFull => Amount == Capacity;
 
         public bool IsFullWithMaxStack
@@ -51,6 +50,15 @@ namespace InventorySystem
             Amount = amount;
         }
 
+        public ItemSlot(Item slotItem, int slotAmount, bool changeable, List<ItemType> slotProhibitedItemTypes, List<ItemType> allowedTypes)
+        {
+            Item = slotItem;
+            Amount = slotAmount;
+            Changeable = changeable;
+            ProhibitedItemTypes = slotProhibitedItemTypes;
+            ItemTypes = allowedTypes;
+        }
+
         public void SetItem(IItem item, int amount)
         {
             Item = item as Item;
@@ -64,6 +72,14 @@ namespace InventorySystem
 
         public bool AllRequirementsChecked(Item item, int amount)
         {
+            if (ProhibitedItemTypes.Count != 0)
+            {
+                if (ProhibitedItemTypes.Any(prohibitedType => prohibitedType == item.ItemType))
+                {
+                    return false;
+                }
+            }
+            
             if (ItemTypes.Count != 0)
             {
                 if (ItemTypes.Any(itemType => itemType != item.ItemType))

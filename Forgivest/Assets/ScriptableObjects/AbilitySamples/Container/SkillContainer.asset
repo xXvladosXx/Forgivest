@@ -14,28 +14,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemContainer>k__BackingField:
     <Slots>k__BackingField:
-    - <Item>k__BackingField: {fileID: 0}
-      <Amount>k__BackingField: 0
-      <IsEquipped>k__BackingField: 0
+    - <Item>k__BackingField: {fileID: 11400000, guid: 3aec296a20e5daf40909278c3b5322bd,
+        type: 2}
+      <Amount>k__BackingField: 1
+      <Changeable>k__BackingField: 0
       <ItemTypes>k__BackingField: 0d000000
     - <Item>k__BackingField: {fileID: 11400000, guid: 24dd64d99db33334d9d28783a098845a,
         type: 2}
       <Amount>k__BackingField: 1
-      <IsEquipped>k__BackingField: 0
+      <Changeable>k__BackingField: 0
       <ItemTypes>k__BackingField: 0d000000
     - <Item>k__BackingField: {fileID: 11400000, guid: 14a7925cf7941334bbccb831dddff49a,
         type: 2}
       <Amount>k__BackingField: 1
-      <IsEquipped>k__BackingField: 0
+      <Changeable>k__BackingField: 0
       <ItemTypes>k__BackingField: 0d000000
     - <Item>k__BackingField: {fileID: 11400000, guid: df23ca3859e7a2249bfdf3ad10c7760c,
         type: 2}
       <Amount>k__BackingField: 1
-      <IsEquipped>k__BackingField: 0
+      <Changeable>k__BackingField: 0
       <ItemTypes>k__BackingField: 0d000000
     - <Item>k__BackingField: {fileID: 11400000, guid: 828b1570142042846a3dd859a8ba48cd,
         type: 2}
       <Amount>k__BackingField: 1
-      <IsEquipped>k__BackingField: 0
+      <Changeable>k__BackingField: 0
       <ItemTypes>k__BackingField: 0d000000
   <Capacity>k__BackingField: 5

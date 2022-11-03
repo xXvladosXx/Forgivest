@@ -13,5 +13,125 @@ MonoBehaviour:
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
   <ItemContainer>k__BackingField:
-    <Slots>k__BackingField: []
-  <Capacity>k__BackingField: 52
+    <Slots>k__BackingField:
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 0
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+  <Capacity>k__BackingField: 24

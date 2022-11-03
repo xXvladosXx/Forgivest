@@ -15,6 +15,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
     public class AbilityController : MonoBehaviour
     {
         [field: SerializeField] public Inventory ItemContainer { get; private set; } 
+        [field: SerializeField] public Inventory Hotbar {get ; private set; }
         
         [SerializeField] private List<AbilityDefinition> _abilityDefinitions;
         public Dictionary<string, Ability> Abilities { get; protected set; } = new Dictionary<string, Ability>();
@@ -80,7 +81,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
             if(Abilities.Count <= abilityIndex)
                 return false;
             
-            var abilityDefinition = Abilities.ElementAtOrDefault(abilityIndex).Key;
+            var abilityDefinition = Hotbar.ItemContainer.Slots[abilityIndex].Item.name;
             
             return TryActiveAbility(abilityDefinition);
         }
