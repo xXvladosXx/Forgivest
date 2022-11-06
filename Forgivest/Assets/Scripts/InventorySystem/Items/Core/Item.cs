@@ -1,6 +1,5 @@
 ﻿using System;
 using InventorySystem.Core;
-using InventorySystem.Items.ItemTypes;
 using InventorySystem.Items.ItemTypes.Core;
 using InventorySystem.Items.Optional;
 using Sirenix.OdinInspector;
@@ -13,6 +12,7 @@ namespace InventorySystem.Items.Core
         [field: SerializeField] public Rarity Rarity { get; private set; }
         [field: SerializeField] public string Name { get; private set; }
         [field: SerializeField] public GameObject Prefab { get; private set; }
+        [field: Min(1)]
         [field: SerializeField] public int MaxItemsInStack { get; private set; }
         [field: SerializeField] public Sprite Sprite { get; private set; }
         [field: SerializeField] public ItemID ItemID { get; private set; }
@@ -26,6 +26,14 @@ namespace InventorySystem.Items.Core
         }
         
         public Type Type { get; }
+
+        private void OnValidate()
+        {
+            if (MaxItemsInStack == 0)
+            {
+                MaxItemsInStack = 1;
+            }
+        }
     }
     
     [Serializable]

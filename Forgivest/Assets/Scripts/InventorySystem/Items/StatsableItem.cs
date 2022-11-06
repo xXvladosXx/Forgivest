@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using AbilitySystem.AbilitySystem.Runtime;
 using InventorySystem.Items.Core;
 using StatsSystem.Scripts.Runtime;
-using StatSystem;
-//using StatsSystem.Core.Bonuses;
 using UnityEngine;
 
 namespace InventorySystem.Items
@@ -12,6 +9,7 @@ namespace InventorySystem.Items
     public abstract class StatsableItem : Item, IStatsable
     {
         [field: SerializeField] public List<StatModifier> StatModifier { get; private set; }
+        [SerializeField] private int _requiredLevel;
 
         public override string ItemDescription 
         {
@@ -33,6 +31,11 @@ namespace InventorySystem.Items
             }
 
             protected set => ItemDescription = value;
+        }
+
+        public bool RequirementsChecked(int level)
+        {
+            return level >= _requiredLevel;
         }
     }
 }

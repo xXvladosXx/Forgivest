@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using InventorySystem.Items.Core;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace AbilitySystem.AbilitySystem.Runtime.Abilities
 {
@@ -18,5 +17,13 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
         
         [SerializeField] private int _level = 5;
         public int Level => _level;
+
+        [SerializeField] private int _requiredLevel;
+        [SerializeField] private int _requiredAbilityPoints;
+        
+        public bool RequirementsChecked(int level, int abilityPoints)
+        {
+            return level >= _requiredLevel && abilityPoints >= _requiredAbilityPoints;
+        }
     }
 }

@@ -3,7 +3,8 @@
     "rootNamespace": "",
     "references": [
         "GUID:53fde695a805bd343831eaac2b9819c0",
-        "GUID:783731ba12ec48d4a8043a554e3a78b3"
+        "GUID:783731ba12ec48d4a8043a554e3a78b3",
+        "GUID:93653d6eefbafb642b9582a28403b413"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -15,7 +16,8 @@
         "Sirenix.OdinInspector.Attributes.dll",
         "Sirenix.Serialization.Config.dll",
         "Sirenix.OdinInspector.Editor.dll",
-        "Sirenix.Serialization.dll"
+        "Sirenix.Serialization.dll",
+        "Zenject-usage.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],

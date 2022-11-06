@@ -15,17 +15,19 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
     public class AbilityController : MonoBehaviour
     {
         [field: SerializeField] public Inventory ItemContainer { get; private set; } 
+        [field: SerializeField] public Inventory AllAbilities { get; private set; }
         [field: SerializeField] public Inventory Hotbar {get ; private set; }
         
         [SerializeField] private List<AbilityDefinition> _abilityDefinitions;
         public Dictionary<string, Ability> Abilities { get; protected set; } = new Dictionary<string, Ability>();
         public Dictionary<int, Ability> AbilitiesIndex { get; protected set; } = new Dictionary<int, Ability>();
         public ActiveAbility CurrentAbility { get; private set; }
+        public int SkillPoints { get; private set; }
 
         private GameplayEffectHandler _gameplayEffectHandler;
         private TagRegister _tagRegister;
-        
         public event Action<ActiveAbility> OnAbilityActivated; 
+        public event Action<int> OnPointsChanged;
 
         protected virtual void Awake()
         {
@@ -127,6 +129,23 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
 
             return true;
         }
+
+
+        public float GetCooldownOfAbility(string abilityName)
+        {
+            if (Abilities.TryGetValue(abilityName, out var ability))
+            {
+                if (ability is ActiveAbility activeAbility)
+                {
+                    if (activeAbility.ActiveAbilityDefinition.Cooldown != null)
+                    {
+                        return _tagRegister.GetDurationOfTag(activeAbility.ActiveAbilityDefinition.Cooldown.GrantedTags);
+                    }
+                }
+            }
+
+            return 1;
+        }
         
         private void CommitAbility(ActiveAbility ability)
         {
@@ -134,6 +153,12 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
                 new GameplayEffect(ability.ActiveAbilityDefinition.Cost, ability, gameObject, ability.AttackData));
             _gameplayEffectHandler.ApplyGameplayEffectToSelf(
                 new GameplayPersistentEffect(ability.ActiveAbilityDefinition.Cooldown, ability, gameObject, ability.AttackData));
+        }
+
+        public void AddPoints(int points)
+        {
+            SkillPoints += points;
+            OnPointsChanged?.Invoke(SkillPoints);
         }
     }
 }

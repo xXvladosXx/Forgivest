@@ -6,7 +6,7 @@ namespace UI.Inventory
 {
     public class StaticItemContainerUI : ItemContainerUI
     {
-        [SerializeField] private InventorySlotUI[] _equipmentSlotUIs;
+        [SerializeField] protected InventorySlotUI[] _equipmentSlotUIs;
         
         protected override void CreateSlots(int inventoryCapacity)
         {

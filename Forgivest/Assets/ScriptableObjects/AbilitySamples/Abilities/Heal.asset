@@ -24,8 +24,9 @@ MonoBehaviour:
   <Rarity>k__BackingField: {fileID: 0}
   <Name>k__BackingField: 
   <Prefab>k__BackingField: {fileID: 0}
-  <MaxItemsInStack>k__BackingField: 0
-  <Sprite>k__BackingField: {fileID: 0}
+  <MaxItemsInStack>k__BackingField: 1
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 4ba971915234d26409e33bb8dce11a10,
+    type: 3}
   <ItemID>k__BackingField:
     Id: 7
   <ItemType>k__BackingField: 13

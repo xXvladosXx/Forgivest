@@ -78,12 +78,14 @@ namespace Player.States.Skill
         protected void TryToActivateSkill(int index)
         {
             var skill = PlayerStateMachine.AbilityController.Hotbar.ItemContainer.Slots[index].Item;
+            
             var activated = skill switch
             {
                 ProjectileAbilityDefinition projectileAbility => TryActivateTargetAbility(index, projectileAbility),
                 RadiusDamageAbilityDefinition radiusDamageAbility => TryToActivateFreeAbility(index, radiusDamageAbility),
                 SingleTargetAbilityDefinition singleTargetAbility => TryActivateTargetAbility(index, singleTargetAbility),
                 AttackAbilityDefinition attackAbility => TryToActivateAttackAbility(index, attackAbility),
+                null => false,
                 _ => throw new ArgumentOutOfRangeException(nameof(skill))
             };
             

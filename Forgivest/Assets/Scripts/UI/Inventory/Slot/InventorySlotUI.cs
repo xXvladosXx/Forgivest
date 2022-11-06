@@ -38,6 +38,8 @@ namespace UI.Inventory.Slot
         
         public void TryToSwap(IDragDestination destination, IInventoryHolder inventoryHolder)
         {
+            _currentDraggableObject.OnDestinationFound -= TryToSwap;
+
             OnItemTryToSwap?.Invoke(Index, destination.Index, _itemIcon.GetIcon(), _currentAmount, inventoryHolder);
         }
 
@@ -72,26 +74,28 @@ namespace UI.Inventory.Slot
             
             _currentDraggableObject = draggableObject;
             _currentDraggableObject.DrawObject(eventData);
+            
+            _currentDraggableObject.OnDestinationFound += TryToSwap;
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
             if (_itemIcon.GetIcon() == null) return;
+            if(_currentDraggableObject == null) return;
 
             _currentDraggableObject.DestroyObject(eventData);
-            _currentDraggableObject.OnDestinationFound += TryToSwap;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
             if (_itemIcon.GetIcon() == null) return;
+            if(_currentDraggableObject == null) return;
 
             _currentDraggableObject.UpdateObject(eventData);
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            Debug.Log("Dragged");
             if (GetIcon() == null)
             {
                 _canvasGroup.blocksRaycasts = false;
@@ -100,15 +104,10 @@ namespace UI.Inventory.Slot
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (_itemIcon.GetIcon() == null) return;
-
-            _currentDraggableObject.DestroyObject(eventData);
-            _currentDraggableObject.OnDestinationFound += TryToSwap;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            
         }
 
         public void OnPointerExit(PointerEventData eventData)

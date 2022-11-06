@@ -1,10 +1,9 @@
 ﻿using System;
 using AbilitySystem.AbilitySystem.Runtime;
 using AttackSystem.Core;
-using CombatSystem.Scripts.Runtime.Core;
 using UnityEngine;
 
-namespace StatSystem.Scripts.Runtime
+namespace AttackSystem
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]
@@ -23,9 +22,9 @@ namespace StatSystem.Scripts.Runtime
             Collider = GetComponent<Collider>();
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter(Collider collider)
         {
-            HandleCollision(collision.gameObject);
+            HandleCollision(collider.gameObject);
         }
 
         protected void HandleCollision(GameObject target)
