@@ -17,10 +17,16 @@ namespace InventorySystem.Items.Core
         [field: SerializeField] public Sprite Sprite { get; private set; }
         [field: SerializeField] public ItemID ItemID { get; private set; }
         [field: SerializeField] public ItemType ItemType { get; private set; }
-        public abstract string ItemDescription { get; protected set; }
         
+        [TextArea]
+        [field: SerializeField] protected string _itemDescription; 
+        public abstract string ItemDescription { get; }
+        public abstract string ItemRequirements { get; }
+
         public string ColouredName()
         {
+            if(Rarity == null) return Name;
+            
             string hexColour = ColorUtility.ToHtmlStringRGB(Rarity.Color);
             return $"<color=#{hexColour}>{Name}</color>";
         }

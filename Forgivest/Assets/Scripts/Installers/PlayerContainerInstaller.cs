@@ -13,7 +13,7 @@ namespace Installers
     public class PlayerContainerInstaller : MonoInstaller
     {
         [SerializeField] private ObjectPicker _playerInventory;
-        [SerializeField] private AbilityController _abilityController;
+        [SerializeField] private AbilityHandler abilityHandler;
         [SerializeField] private LevelController _levelController;
         [SerializeField] private PlayerEntity _playerEntity;
 
@@ -22,7 +22,7 @@ namespace Installers
             Container.BindInterfacesAndSelfTo<InventoryController>().AsSingle();
             Container.BindInterfacesTo<PlayerAbilityController>().AsSingle();
             
-            Container.Bind<AbilityController>().FromInstance(_abilityController).AsSingle();
+            Container.Bind<AbilityHandler>().FromInstance(abilityHandler).AsSingle();
             Container.Bind<ObjectPicker>().FromInstance(_playerInventory).AsSingle();
             Container.Bind<LevelController>().FromInstance(_levelController).AsSingle();
             Container.Bind<PlayerEntity>().FromInstance(_playerEntity).AsSingle();

@@ -13,8 +13,8 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active
         private ObjectPool<Projectile> _objectPool;
         private AttackData _attackData;
 
-        public ProjectileAbility(ProjectileAbilityDefinition definition, AbilityController abilityController) : base(
-            definition, abilityController)
+        public ProjectileAbility(ProjectileAbilityDefinition definition, AbilityHandler abilityHandler) : base(
+            definition, abilityHandler)
         {
             _objectPool = new ObjectPool<Projectile>(OnCreate, OnGet, OnRelease);
         }

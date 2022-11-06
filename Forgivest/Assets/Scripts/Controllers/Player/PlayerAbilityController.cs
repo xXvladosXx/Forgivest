@@ -10,24 +10,24 @@ namespace Controllers.Player
 {
     public class PlayerAbilityController : IInitializable, ITickable, IDisposable
     {
-        private readonly AbilityController _abilityController;
+        private readonly AbilityHandler _abilityHandler;
         private readonly IRequirementUser _requirementUser;
         private readonly SkillItemContainerUI _skillItemContainerUI;
 
-        public PlayerAbilityController(AbilityController abilityController, SkillPanel skillPanel, PlayerEntity playerEntity)
+        public PlayerAbilityController(AbilityHandler abilityHandler, SkillPanel skillPanel, PlayerEntity playerEntity)
         {
-            _abilityController = abilityController;
+            _abilityHandler = abilityHandler;
             _requirementUser = playerEntity;
             _skillItemContainerUI = skillPanel.SkillItemContainerUI;
         }
 
         public void Initialize()
         {
-            _skillItemContainerUI.CreateUpgradeButtons(_abilityController.AllAbilities.Capacity);
+            _skillItemContainerUI.CreateUpgradeButtons(_abilityHandler.AllAbilities.Capacity);
             FindLearnedSkills();
 
-            OnPointsChanged(_abilityController.SkillPoints);
-            _abilityController.OnPointsChanged += OnPointsChanged;
+            OnPointsChanged(_abilityHandler.SkillPoints);
+            _abilityHandler.OnPointsChanged += OnPointsChanged;
         }
         
 
@@ -35,12 +35,12 @@ namespace Controllers.Player
         {
             for (int i = 0; i < _skillItemContainerUI.SkillCooldownRefreshers.Count; i++)
             {
-                var ability = _abilityController.Hotbar.ItemContainer.Slots[i].Item as ActiveAbilityDefinition;
+                var ability = _abilityHandler.Hotbar.ItemContainer.Slots[i].Item as ActiveAbilityDefinition;
                 if(ability == null) return;
                 
                 _skillItemContainerUI.SkillCooldownRefreshers[i]
-                    .RefreshImage(_abilityController.GetCooldownOfAbility(ability.name), 
-                        ability.Cooldown.DurationFormula.CalculateValue(_abilityController.gameObject));
+                    .RefreshImage(_abilityHandler.GetCooldownOfAbility(ability.name), 
+                        ability.Cooldown.DurationFormula.CalculateValue(_abilityHandler.gameObject));
             }
         }
 
@@ -54,18 +54,18 @@ namespace Controllers.Player
 
         private void OnUpgradeClicked(int index)
         {
-            var possibleSkill = _abilityController.AllAbilities.ItemContainer.Slots[index].Item as AbilityDefinition;
+            var possibleSkill = _abilityHandler.AllAbilities.ItemContainer.Slots[index].Item as AbilityDefinition;
             
             if (possibleSkill == null) return;
-            if (_abilityController.ItemContainer.ItemContainer.HasItem(possibleSkill)) return;
+            if (_abilityHandler.ItemContainer.ItemContainer.HasItem(possibleSkill)) return;
             
             var skillLearned = possibleSkill.RequirementsChecked(_requirementUser.LevelController.Level,
-                _requirementUser.AbilityController.SkillPoints);
+                _requirementUser.AbilityHandler.SkillPoints);
             
             if(!skillLearned) return;
             
             _skillItemContainerUI.SkillsToLearn[index].SkillLearned();
-            _abilityController.ItemContainer.ItemContainer.TryToAddAtIndex(this, possibleSkill, 1, index);
+            _abilityHandler.ItemContainer.ItemContainer.TryToAddAtIndex(this, possibleSkill, 1, index);
         }
         
         private void OnPointsChanged(int points)
@@ -78,7 +78,7 @@ namespace Controllers.Player
             int index = 0;
             foreach (var abilityLearnButton in _skillItemContainerUI.SkillsToLearn)
             {
-                if (_abilityController.ItemContainer.ItemContainer.Slots[index].Item != null)
+                if (_abilityHandler.ItemContainer.ItemContainer.Slots[index].Item != null)
                 {
                     abilityLearnButton.SkillLearned();
                 }

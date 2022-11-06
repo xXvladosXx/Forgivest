@@ -17,7 +17,8 @@
     "overrideReferences": true,
     "precompiledReferences": [
         "Sirenix.Serialization.dll",
-        "Zenject-usage.dll"
+        "Zenject-usage.dll",
+        "System.Linq.Dynamic.Core.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],

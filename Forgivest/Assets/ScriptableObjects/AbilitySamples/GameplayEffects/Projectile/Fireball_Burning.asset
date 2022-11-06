@@ -28,6 +28,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d857ad9e53c40febcc3995c0f3c4cf6, type: 3}
   m_Name: Fireball_Burning
   m_EditorClassIdentifier: 
+  _description: '{GameplayStackableEffect.Modifiers[0]}loh'
   _modifiers:
   - {fileID: -4432880543987110819}
   _conditionalEffects: []

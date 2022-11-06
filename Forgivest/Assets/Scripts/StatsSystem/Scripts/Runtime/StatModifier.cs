@@ -18,7 +18,10 @@ namespace StatsSystem.Scripts.Runtime
         [field: SerializeField] public object Source { get; set; }
         [field: SerializeField] public float Magnitude { get; set; }
         [field: SerializeField] public ModifierOperationType Type { get; set; }
-        
-        public float StartMagnitude { get; private set; }
+
+        public override string ToString()
+        {
+            return Magnitude.ToString();
+        }
     }
 }

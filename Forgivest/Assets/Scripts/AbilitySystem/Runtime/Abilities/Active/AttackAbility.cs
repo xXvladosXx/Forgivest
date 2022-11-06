@@ -14,7 +14,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active
         private Coroutine _coroutine;
         private Movement _movement;
         
-        public AttackAbility(ActiveAbilityDefinition definition, AbilityController abilityController) : base(definition, abilityController)
+        public AttackAbility(ActiveAbilityDefinition definition, AbilityHandler abilityHandler) : base(definition, abilityHandler)
         {
         }
 

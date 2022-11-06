@@ -11,7 +11,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
         public override float Value => Ability.Level;
         public override float CalculateValue(GameObject source)
         {
-            var abilityController = source.GetComponent<AbilityController>();
+            var abilityController = source.GetComponent<AbilityHandler>();
             return abilityController.Abilities[_abilityName].Level;
         }
     }

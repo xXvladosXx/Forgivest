@@ -33,7 +33,7 @@ namespace Player
         typeof(Animator),
         typeof(ObjectPicker))]
     
-    [RequireComponent(typeof(AbilityController),
+    [RequireComponent(typeof(AbilityHandler),
         typeof(GameplayEffectHandler))]
     public class PlayerEntity : MonoBehaviour, IAnimationEventUser, IDamageReceiver, IDamageApplier, IRaycastable, IRequirementUser
     {
@@ -46,7 +46,7 @@ namespace Player
         [field: SerializeField] public Animator Animator { get; private set; }
         [field: SerializeField] public StatController StatController { get; private set; }
         [field: SerializeField] public StatsFinder StatsFinder { get; private set; }
-        [field: SerializeField] public AbilityController AbilityController { get; private set; }
+        [field: SerializeField] public AbilityHandler AbilityHandler { get; private set; }
         [field: SerializeField] public GameplayEffectHandler GameplayEffectHandler { get; private set; }
         [field: SerializeField] public PlayerRaycastSettings PlayerRaycastSettings { get; private set; }
         [field: SerializeField] public ObjectPicker ObjectPicker { get; private set; }
@@ -89,7 +89,7 @@ namespace Player
             _playerStateMachine = new PlayerStateMachine(AnimationChanger,
                 Movement, Rotator, PlayerInputProvider, StateData,
                 RaycastUser, AliveEntityAnimationData, 
-                this, AbilityController);
+                this, AbilityHandler);
         }
         
         private void OnEnable()
@@ -143,7 +143,7 @@ namespace Player
 
         public void CastedSkill()
         {
-            if (AbilityController.CurrentAbility is SingleTargetAbility singeTargetAbility)
+            if (AbilityHandler.CurrentAbility is SingleTargetAbility singeTargetAbility)
             {
                 var raycastable = _playerStateMachine.ReusableData.Raycastable;
 
@@ -167,7 +167,7 @@ namespace Player
 
         public void CastedProjectile()
         {
-            if (AbilityController.CurrentAbility is ProjectileAbility projectileAbility)
+            if (AbilityHandler.CurrentAbility is ProjectileAbility projectileAbility)
             {
                 var raycastable = _playerStateMachine.ReusableData.Raycastable;
 
@@ -189,7 +189,7 @@ namespace Player
 
         public void CastedSpawn()
         {
-            if (AbilityController.CurrentAbility is RadiusDamageAbility radiusDamageAbility)
+            if (AbilityHandler.CurrentAbility is RadiusDamageAbility radiusDamageAbility)
             {
                 var attackData = new AttackData
                 {
@@ -257,7 +257,7 @@ namespace Player
         
         private void OnLevelChanged()
         {
-            AbilityController.AddPoints(_pointsPerLevel);   
+            AbilityHandler.AddPoints(_pointsPerLevel);   
         }
     }
 }

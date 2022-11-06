@@ -9,6 +9,9 @@ namespace AbilitySystem.AbilitySystem.Runtime
     [CreateAssetMenu(fileName = "GameplayEffect", menuName = "AbilitySystem/Effect/GameplayEffect", order = 0)]
     public class GameplayEffectDefinition : ScriptableObject
     {
+        [SerializeField] private string _description;
+        public string Description => _description;
+        
         [SerializeField] private List<BaseGameplayEffectStatModifier> _modifiers;
         public ReadOnlyCollection<BaseGameplayEffectStatModifier> Modifiers => _modifiers.AsReadOnly();
         

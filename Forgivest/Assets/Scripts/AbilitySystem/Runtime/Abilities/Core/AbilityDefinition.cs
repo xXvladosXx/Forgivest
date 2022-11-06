@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text;
 using InventorySystem.Items.Core;
 using UnityEngine;
 
@@ -7,8 +8,6 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
 {
     public abstract class AbilityDefinition : Item
     {
-        [field: SerializeField] public override string ItemDescription { get; protected set; }
-
         [SerializeField] private List<GameplayEffectDefinition> _gameplayEffectDefinitions;
         public ReadOnlyCollection<GameplayEffectDefinition> GameplayEffectDefinitions => _gameplayEffectDefinitions.AsReadOnly();
 
@@ -24,6 +23,26 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
         public bool RequirementsChecked(int level, int abilityPoints)
         {
             return level >= _requiredLevel && abilityPoints >= _requiredAbilityPoints;
+        }
+
+        public override string ItemDescription
+        {
+            get
+            {
+                return _itemDescription;
+            }
+        }
+
+        public override string ItemRequirements
+        {
+            get
+            {
+                var stringBuilder = new StringBuilder();
+                stringBuilder.Append("Required points: ").Append(_requiredAbilityPoints);
+                stringBuilder.Append("Required level: ").Append(_requiredLevel);
+
+                return stringBuilder.ToString();
+            }
         }
     }
 }

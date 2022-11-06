@@ -7,7 +7,7 @@ namespace Requirements.Core
     public interface IRequirementUser
     {
         LevelController LevelController { get; }
-        AbilityController AbilityController { get; }
+        AbilityHandler AbilityHandler { get; }
         ObjectPicker ObjectPicker { get; }
     }
 }

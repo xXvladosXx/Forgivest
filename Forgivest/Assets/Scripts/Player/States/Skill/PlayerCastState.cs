@@ -22,7 +22,7 @@ namespace Player.States.Skill
 
         public override void OnAnimationEnterEvent()
         {
-            switch (PlayerStateMachine.AbilityController.CurrentAbility)
+            switch (PlayerStateMachine.AbilityHandler.CurrentAbility)
             {
                 case AttackAbility attackAbility:
                     if (PlayerStateMachine.RaycastUser.RaycastHit != null)
@@ -43,7 +43,7 @@ namespace Player.States.Skill
 
         public override void OnAnimationExitEvent()
         {
-            switch (PlayerStateMachine.AbilityController.CurrentAbility)
+            switch (PlayerStateMachine.AbilityHandler.CurrentAbility)
             {
                 case AttackAbility attackAbility:
                     attackAbility.OnExit();
@@ -68,16 +68,19 @@ namespace Player.States.Skill
             PlayerStateMachine.AnimationChanger.StopAnimation(PlayerStateMachine.AnimationData.SkillParameterHash);
             PlayerStateMachine.Movement.EnableRotation(true);
             
-            if(PlayerStateMachine.AbilityController.CurrentAbility == null) return;
+            if(PlayerStateMachine.AbilityHandler.CurrentAbility == null) return;
             
             PlayerStateMachine.AnimationChanger.StopAnimation((
-                (ActiveAbilityDefinition) PlayerStateMachine.AbilityController.CurrentAbility
+                (ActiveAbilityDefinition) PlayerStateMachine.AbilityHandler.CurrentAbility
                     .AbilityDefinition).HashAnimation);
         }
 
         protected void TryToActivateSkill(int index)
         {
-            var skill = PlayerStateMachine.AbilityController.Hotbar.ItemContainer.Slots[index].Item;
+            var skill = PlayerStateMachine.AbilityHandler.Hotbar.ItemContainer.Slots[index].Item;
+            
+            PlayerStateMachine.AbilityHandler.Abilities.TryGetValue("Spikes", out var ability);
+            Debug.Log(ability.ToString());
             
             var activated = skill switch
             {
@@ -105,7 +108,7 @@ namespace Player.States.Skill
                 }
 
                 bool canActivate =
-                    PlayerStateMachine.AbilityController.TryActiveAbility(index);
+                    PlayerStateMachine.AbilityHandler.TryActiveAbility(index);
 
                 if (!canActivate)
                 {
@@ -124,7 +127,7 @@ namespace Player.States.Skill
 
         protected bool TryToActivateFreeAbility(int index, RadiusDamageAbilityDefinition radiusDamageAbility)
         {
-            bool canActivate = PlayerStateMachine.AbilityController.TryActiveAbility(index);
+            bool canActivate = PlayerStateMachine.AbilityHandler.TryActiveAbility(index);
 
             if (!canActivate)
             {
@@ -140,7 +143,7 @@ namespace Player.States.Skill
         protected bool TryToActivateAttackAbility(int index, AttackAbilityDefinition attackAbility)
         {
             bool canActivate =
-                PlayerStateMachine.AbilityController.TryActiveAbility(index);
+                PlayerStateMachine.AbilityHandler.TryActiveAbility(index);
 
             if (!canActivate)
             {

@@ -47,11 +47,12 @@ namespace UI.Inventory
             }
         }
 
-        public void RefreshSlotData(Sprite itemSprite, int itemAmount, int slotIndex, string description)
+        public void RefreshSlotData(Sprite itemSprite, int itemAmount, int slotIndex, string description, string itemName, string requirements)
         {
             if(InventorySlotUis[slotIndex] != null)
             {
-                InventorySlotUis[slotIndex].SetSlotData(itemSprite, itemAmount, slotIndex, description);
+                InventorySlotUis[slotIndex].SetSlotData(itemSprite, itemAmount, slotIndex,
+                    description, itemName, requirements);
             }
         }
 

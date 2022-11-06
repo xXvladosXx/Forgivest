@@ -9,14 +9,14 @@ namespace MyGame
 {
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(StatController))]
-    [RequireComponent(typeof(AbilityController))]
+    [RequireComponent(typeof(AbilityHandler))]
     public class AnimationController : MonoBehaviour
     {
         [SerializeField] private float m_BaseSpeed = 3.5f;
         private Animator m_Animator;
         private NavMeshAgent m_NavMeshAgent;
         private StatController m_StatController;
-        private AbilityController _abilityController;
+        private AbilityHandler _abilityHandler;
         
         private static readonly int MOVEMENT_SPEED = Animator.StringToHash("MovementSpeed");
         private static readonly int VELOCITY = Animator.StringToHash("Velocity");
@@ -27,7 +27,7 @@ namespace MyGame
             m_Animator = GetComponent<Animator>();
             m_NavMeshAgent = GetComponent<NavMeshAgent>();
             m_StatController = GetComponent<StatController>();
-            _abilityController = GetComponent<AbilityController>();
+            _abilityHandler = GetComponent<AbilityHandler>();
         }
 
         private void Update()
@@ -43,7 +43,7 @@ namespace MyGame
                 OnStatControllerOnInitialized();
             }
             
-            _abilityController.OnAbilityActivated += ActivateAbility;
+            _abilityHandler.OnAbilityActivated += ActivateAbility;
         }
 
         private void OnDisable()
@@ -55,12 +55,12 @@ namespace MyGame
                 //m_StatController.Stats["AttackSpeed"].OnValueChanged -= OnAttackSpeedChanged;
             }
 
-            _abilityController.OnAbilityActivated -= ActivateAbility;
+            _abilityHandler.OnAbilityActivated -= ActivateAbility;
         }
 
         public void Cast()
         {
-            if (_abilityController.CurrentAbility is SingleTargetAbility singeTargetAbility)
+            if (_abilityHandler.CurrentAbility is SingleTargetAbility singeTargetAbility)
             {
                 //singeTargetAbility.Cast(_abilityController.Target);
             }
@@ -68,7 +68,7 @@ namespace MyGame
 
         public void Shoot()
         {
-            if (_abilityController.CurrentAbility is ProjectileAbility projectileAbility)
+            if (_abilityHandler.CurrentAbility is ProjectileAbility projectileAbility)
             {
             }
         }

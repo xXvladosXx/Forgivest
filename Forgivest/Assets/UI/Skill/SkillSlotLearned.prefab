@@ -76,7 +76,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4283986568
   m_fontColor: {r: 0.53333336, g: 0.44705883, b: 0.34509805, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 8791034198328263303}
   - component: {fileID: 6004777211946373669}
   - component: {fileID: 9208811861750811873}
+  - component: {fileID: 5577501979693705716}
   m_Layer: 5
   m_Name: SkillSlotLearned
   m_TagString: Untagged
@@ -262,6 +263,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _refreshIcon: {fileID: 6747533049740637431}
+--- !u!114 &5577501979693705716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376168450304034068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc4daf13a8e5d04a9dfefec08811e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipPrefab: {fileID: 6796662661069912602, guid: df03edcbd80645b4da5aa8f88434766b,
+    type: 3}
+  _rectTransform: {fileID: 1376168450304034069}
 --- !u!1 &1376168450308554475
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,7 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.53333336}
+  m_Color: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 0.7019608}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

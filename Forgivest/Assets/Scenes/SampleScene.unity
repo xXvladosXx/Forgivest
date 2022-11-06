@@ -299,7 +299,7 @@ MonoBehaviour:
       Data: 1|AttackSystem.Reward.ExperienceReward, Attack
     - Name: _amount
       Entry: 3
-      Data: 11
+      Data: 1000
     - Name: 
       Entry: 8
       Data: 
@@ -941,7 +941,7 @@ MonoBehaviour:
       Data: 1|AttackSystem.Reward.ExperienceReward, Attack
     - Name: _amount
       Entry: 3
-      Data: 11
+      Data: 1000
     - Name: 
       Entry: 8
       Data: 
@@ -3422,7 +3422,7 @@ MonoBehaviour:
       Data: 1|AttackSystem.Reward.ExperienceReward, Attack
     - Name: _amount
       Entry: 3
-      Data: 11
+      Data: 1000
     - Name: 
       Entry: 8
       Data: 
@@ -5509,7 +5509,7 @@ MonoBehaviour:
       Data: 1|AttackSystem.Reward.ExperienceReward, Attack
     - Name: _amount
       Entry: 3
-      Data: 11
+      Data: 1000
     - Name: 
       Entry: 8
       Data: 
@@ -5952,7 +5952,7 @@ MonoBehaviour:
       Data: 1|AttackSystem.Reward.ExperienceReward, Attack
     - Name: _amount
       Entry: 3
-      Data: 11
+      Data: 1000
     - Name: 
       Entry: 8
       Data: 
@@ -6399,7 +6399,7 @@ MonoBehaviour:
       Data: 1|AttackSystem.Reward.ExperienceReward, Attack
     - Name: _amount
       Entry: 3
-      Data: 11
+      Data: 1000
     - Name: 
       Entry: 8
       Data: 
@@ -8512,7 +8512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInventory: {fileID: 6702610202858371063}
-  _abilityController: {fileID: 6702610202858371069}
+  abilityHandler: {fileID: 6702610202858371069}
   _levelController: {fileID: 6702610202858371067}
   _playerEntity: {fileID: 6702610202858371057}
 --- !u!1001 &1941076606
@@ -34148,6 +34148,11 @@ PrefabInstance:
       propertyPath: m_IgnoreSelfStencil
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1698217438287639361, guid: 3582c9570b5ec474c9cb826be253b89b,
+        type: 3}
+      propertyPath: m_Colors.m_ColorMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2369960116208746772, guid: 3582c9570b5ec474c9cb826be253b89b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -34769,7 +34774,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00012207031, y: -633.9353}
+  m_AnchoredPosition: {x: -0.00012207031, y: -633.9355}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &4124739051537465947
@@ -35185,7 +35190,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4124300434036179511}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999356
+  m_Size: 0.9991564
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -37560,7 +37565,7 @@ MonoBehaviour:
   <Animator>k__BackingField: {fileID: 6702610202858371054}
   <StatController>k__BackingField: {fileID: 6702610202858371065}
   <StatsFinder>k__BackingField: {fileID: 6702610202858371068}
-  <AbilityController>k__BackingField: {fileID: 6702610202858371069}
+  <AbilityHandler>k__BackingField: {fileID: 6702610202858371069}
   <GameplayEffectHandler>k__BackingField: {fileID: 6702610202858371070}
   <PlayerRaycastSettings>k__BackingField: {fileID: 11400000, guid: 7a259cd7e1a3a80468ad847f6b61f14a,
     type: 2}
