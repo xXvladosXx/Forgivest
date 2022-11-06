@@ -19,7 +19,8 @@ namespace UI.Inventory.Slot
             var iconImage = GetComponent<Image>();
             if (item == null)
             {
-                iconImage.sprite = _startIcon;
+                iconImage.sprite = null;
+                iconImage.enabled = false;
             }
             else
             {

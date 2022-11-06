@@ -1,0 +1,18 @@
+{
+    "name": "Requirement",
+    "rootNamespace": "",
+    "references": [
+        "GUID:dc5f18e102d5ad84995be0f5747a8131",
+        "GUID:6927184e88a8ffb4981b0ed699df1351",
+        "GUID:7c8e291869ff18945bd9c5af27a37639"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

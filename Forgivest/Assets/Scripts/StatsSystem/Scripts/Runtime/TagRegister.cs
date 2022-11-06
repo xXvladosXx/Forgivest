@@ -13,8 +13,9 @@ namespace AbilitySystem.AbilitySystem.Runtime
         public ReadOnlyCollection<string> Tags => _tagCount.Keys.ToList().AsReadOnly();
 
         private Dictionary<string, int> _tagCount = new Dictionary<string, int>();
-        
-        public event Action<string> OnTagAdded; 
+        private Dictionary<string, float> _tagDuration = new Dictionary<string, float>();
+
+        public event Action<string> OnTagAdded;
         public event Action<string> OnTagRemoved;
 
         public bool Contains(string tag)
@@ -50,6 +51,14 @@ namespace AbilitySystem.AbilitySystem.Runtime
             }
         }
 
+        public void RefreshDuration(string tag, float value)
+        {
+            if(tag == null)
+                return;
+            
+            _tagDuration[tag] = value;
+        }
+
         public void RemoveTag(string tag)
         {
             if (_tagCount.ContainsKey(tag))
@@ -65,6 +74,13 @@ namespace AbilitySystem.AbilitySystem.Runtime
             {
                 Debug.Log("Does not exist");
             }
+        }
+
+        public float GetDurationOfTag(ReadOnlyCollection<string> cooldownGrantedTags)
+        {
+            if (cooldownGrantedTags.Count == 0) return 0; 
+            _tagDuration.TryGetValue(cooldownGrantedTags[0], out var duration);
+            return duration;
         }
     }
 }

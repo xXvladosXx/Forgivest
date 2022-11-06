@@ -43,3 +43,4 @@ MonoBehaviour:
   <AttackRate>k__BackingField: 0
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: 18c8a88b145119745a307ce1c3dda53a,
     type: 2}
+  <PossibleTags>k__BackingField: []

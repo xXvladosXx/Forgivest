@@ -4838,6 +4838,7 @@ GameObject:
   - component: {fileID: 3466740141194706151}
   - component: {fileID: -5238597190377150636}
   - component: {fileID: 6287700937418676897}
+  - component: {fileID: 8798859464962353213}
   m_Layer: 6
   m_Name: Upg_Sword
   m_TagString: Untagged
@@ -4941,6 +4942,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Collider>k__BackingField: {fileID: -5238597190377150636}
   _spawnPoint: {fileID: 1303125420275956886}
+--- !u!54 &8798859464962353213
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3480261504482581523}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!1 &3481088669354304979
 GameObject:
   m_ObjectHideFlags: 0

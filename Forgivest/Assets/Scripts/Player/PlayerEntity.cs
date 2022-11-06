@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using AbilitySystem;
 using AbilitySystem.AbilitySystem.Runtime.Abilities;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Active;
-using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
 using AnimationSystem;
 using AttackSystem;
 using AttackSystem.Core;
@@ -16,6 +15,7 @@ using LevelSystem;
 using MovementSystem;
 using RaycastSystem;
 using RaycastSystem.Core;
+using Requirements.Core;
 using StateMachine.Player;
 using StatSystem;
 using StatSystem.Scripts.Runtime;
@@ -36,7 +36,7 @@ namespace Player
     
     [RequireComponent(typeof(AbilityController),
         typeof(GameplayEffectHandler))]
-    public class PlayerEntity : MonoBehaviour, IAnimationEventUser, IDamageReceiver, IDamageApplier, IRaycastable
+    public class PlayerEntity : MonoBehaviour, IAnimationEventUser, IDamageReceiver, IDamageApplier, IRaycastable, IRequirementUser
     {
         [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
         [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
@@ -49,11 +49,12 @@ namespace Player
         [field: SerializeField] public StatsFinder StatsFinder { get; private set; }
         [field: SerializeField] public AbilityController AbilityController { get; private set; }
         [field: SerializeField] public GameplayEffectHandler GameplayEffectHandler { get; private set; }
-        [field: SerializeField] public GameObject Target { get; private set; }
         [field: SerializeField] public PlayerRaycastSettings PlayerRaycastSettings { get; private set; }
+        [field: SerializeField] public ObjectPicker ObjectPicker { get; private set; }
         
-        [SerializeField] private ObjectPicker _objectPicker;
-        [SerializeField] private LevelController _levelController;
+        [field: Header("Level System")]
+        [field: SerializeField] public LevelController LevelController { get; private set; }
+        [SerializeField] private int _pointsPerLevel;
         public Camera Camera { get; private set; }
         public AttackApplier AttackApplier { get; private set; }
         public AnimationChanger AnimationChanger { get; private set; }
@@ -64,13 +65,11 @@ namespace Player
         private PlayerStateMachine _playerStateMachine;
         private DamageHandler _damageHandler;
 
-        public GameObject Weapon => _objectPicker.ItemEquipHandler.CurrentColliderWeapon;
-        public Weapon CurrentWeapon => _objectPicker.ItemEquipHandler.CurrentWeapon;
+        public GameObject Weapon => ObjectPicker.ItemEquipHandler.CurrentColliderWeapon;
+        public Weapon CurrentWeapon => ObjectPicker.ItemEquipHandler.CurrentWeapon;
         public List<IRewardable> Rewards { get; }
         public float Health => StatsFinder.FindStat("Health");
         public LayerMask LayerMask => gameObject.layer;
-      
-
         public GameObject GameObject => gameObject;
 
         public event Action<AttackData> OnDamageReceived;
@@ -96,13 +95,14 @@ namespace Player
         
         private void OnEnable()
         {
-            _objectPicker.ItemEquipHandler.OnWeaponEquipped += OnWeaponEquipped;
+            ObjectPicker.ItemEquipHandler.OnWeaponEquipped += OnWeaponEquipped;
+            LevelController.OnLevelChanged += OnLevelChanged;
         }
 
         private void Start()
         {
             _playerStateMachine.ChangeState(_playerStateMachine.IdlingState);
-            _objectPicker.Init();
+            ObjectPicker.Init();
         }
 
         private void Update()
@@ -113,7 +113,8 @@ namespace Player
 
         private void OnDisable()
         {
-            _objectPicker.ItemEquipHandler.OnWeaponEquipped -= OnWeaponEquipped;
+            ObjectPicker.ItemEquipHandler.OnWeaponEquipped -= OnWeaponEquipped;
+            LevelController.OnLevelChanged -= OnLevelChanged;
         }
 
         public CursorType GetCursorType()
@@ -244,15 +245,20 @@ namespace Player
                 switch (rewardable)
                 {
                     case ExperienceReward experienceReward:
-                        _levelController.CurrentExperience += experienceReward.Amount;
+                        LevelController.CurrentExperience += experienceReward.Amount;
                         break;
                     case ItemReward itemReward:
-                        _objectPicker.TryToEquipOrAddToInventory(itemReward.Item, itemReward.Amount);
+                        ObjectPicker.TryToEquipOrAddToInventory(itemReward.Item, itemReward.Amount);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException(nameof(rewardable));
                 }
             }
+        }
+        
+        private void OnLevelChanged()
+        {
+            AbilityController.AddPoints(_pointsPerLevel);   
         }
     }
 }

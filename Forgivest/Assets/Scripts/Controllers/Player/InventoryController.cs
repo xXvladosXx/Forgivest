@@ -15,7 +15,7 @@ using Zenject;
 
 namespace Controllers.Player
 {
-    public class InventoryController : IInitializable, IDisposable
+    public class InventoryController : IInitializable, ITickable, IDisposable
     {
         private readonly InventoryPanel _inventoryPanel;
         private readonly SkillPanel _skillPanel;
@@ -42,12 +42,12 @@ namespace Controllers.Player
         {
             _inventoryPanel.InitializeInventory(_objectPicker.Inventory.Capacity);
             _inventoryPanel.InitializeEquipment(_objectPicker.Equipment.Capacity);
-            _skillPanel.InitializeSkillInventory(_abilityController.ItemContainer.Capacity);
+            _skillPanel.InitializeSkillInventory(_abilityController.AllAbilities.Capacity);
             _staticPanel.InitializeHotbarInventory(_objectPicker.Hotbar.Capacity);
             
             _itemHolders.Add(_objectPicker.Inventory.ItemContainer, _inventoryPanel.DynamicItemContainerUI);
             _itemHolders.Add(_objectPicker.Equipment.ItemContainer, _inventoryPanel.StaticItemContainerUI);
-            _itemHolders.Add(_abilityController.ItemContainer.ItemContainer, _skillPanel.SkillItemContainerUI);
+            _itemHolders.Add(_abilityController.AllAbilities.ItemContainer, _skillPanel.SkillItemContainerUI);
             _itemHolders.Add(_objectPicker.Hotbar.ItemContainer, _staticPanel.HotbarItemContainerUI);
             
             foreach (var itemContainer in _itemHolders.Keys)
@@ -60,6 +60,11 @@ namespace Controllers.Player
             {
                 itemContainer.OnTryToSwapSlots += TryToSwapSlotsInInventory;
             }
+        }
+        
+        public void Tick()
+        {
+            
         }
 
         public void Dispose()

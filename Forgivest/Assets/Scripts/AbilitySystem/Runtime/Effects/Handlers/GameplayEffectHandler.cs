@@ -341,6 +341,7 @@ namespace AbilitySystem
                 if (activeEffect.Definition.IsInfinite) continue;
                 
                 activeEffect.RemainingDuration = Mathf.Max(activeEffect.RemainingDuration - Time.deltaTime, 0f);
+
                 if (Mathf.Approximately(activeEffect.RemainingDuration, 0f))
                 {
                     if (activeEffect is GameplayStackableEffect stackableEffect)
@@ -371,12 +372,20 @@ namespace AbilitySystem
                         effectsToRemove.Add(activeEffect);
                     }
                 }
+                
+                RefreshCooldownTags(activeEffect);
             }
-
+            
             foreach (var effect in effectsToRemove)
             {
                 RemoveActiveGameplayEffect(effect, false);
             }
+        }
+        
+        private void RefreshCooldownTags(GameplayPersistentEffect gameplayPersistentEffect)
+        {
+            TagRegister.RefreshDuration(gameplayPersistentEffect.Definition.GrantedTags.FirstOrDefault(x => x.EndsWith("cooldown")), 
+                gameplayPersistentEffect.RemainingDuration);
         }
 
         public bool CanApplyAttributeModifiers(GameplayEffectDefinition gameplayEffectDefinition)

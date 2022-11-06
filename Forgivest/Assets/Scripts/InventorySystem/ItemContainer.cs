@@ -98,6 +98,16 @@ namespace InventorySystem
             return false;
         }
 
+        public bool TryToAddAtIndex(object sender, IItem item, int amount, int index,
+            ItemContainer destinationContainer = null)
+        {
+            var indexSlot = Slots[index];
+            if (!indexSlot.IsEmpty)
+                return false;
+            
+            return TryToAddToSlot(sender, indexSlot, item, amount, destinationContainer);
+        }
+
         private bool TryToAddToSlot(object sender, ISlotContainer slot, IItem item, int amount,
             ItemContainer destinationContainer)
         {
@@ -178,7 +188,11 @@ namespace InventorySystem
             return containerItem != null;
         }
 
-
+        public bool HasItem(Item item)
+        {
+            return Slots.Any(itemSlot => itemSlot.Item == item && !itemSlot.IsEmpty);
+        }
+        
         public void DropItemIntoContainer(int source, int destination, ItemContainer destinationContainer = null)
         {
             var sourceSlot = Slots[source];
@@ -273,15 +287,22 @@ namespace InventorySystem
         public void AttemptSwap(int source, int destination, ItemContainer destinationContainer = null)
         {
             var sourceSlot = Slots[source];
+            var sourceChangeable = sourceSlot.Changeable;
             var destinationSlot = destinationContainer?.Slots[destination] ?? Slots[destination];
 
             var sourceItem = sourceSlot.Item;
             var destinationItem = destinationSlot.Item;
-            var changeableSlot = destinationSlot.Changeable;
+            var destinationSlotChangeable = destinationSlot.Changeable;
             
-            if(!changeableSlot)
+            if(!destinationSlotChangeable)
                 return;
 
+            if (!sourceChangeable)
+            {
+                AttemptSimpleTransfer(source, destination, destinationContainer);
+                return;
+            }
+            
             int removedSourceNumber = sourceSlot.Amount;
             int removedDestinationNumber = destinationSlot.Amount;
 

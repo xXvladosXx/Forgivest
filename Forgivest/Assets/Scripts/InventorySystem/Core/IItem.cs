@@ -1,8 +1,5 @@
 using System;
-using InventorySystem.Items;
 using InventorySystem.Items.Core;
-using InventorySystem.Items.ItemTypes;
-using InventorySystem.Items.ItemTypes.Core;
 using UnityEngine;
 
 namespace InventorySystem.Core
