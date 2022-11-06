@@ -99,10 +99,20 @@ namespace InventorySystem
             Amount = 0;
             Item = null;
         }
+        
+        public string GetItemName()
+        {
+            return Item == null ? "No name" : Item.ColouredName();
+        }
 
         public string GetDescription()
         {
             return Item == null ? "" : Item.ItemDescription;
+        }
+
+        public string GetRequirements()
+        {
+            return Item == null ? "" : Item.ItemRequirements;
         }
     }
 }

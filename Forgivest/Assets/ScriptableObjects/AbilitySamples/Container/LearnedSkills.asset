@@ -20,23 +20,23 @@ MonoBehaviour:
       <ItemTypes>k__BackingField: 0d000000
       <ProhibitedItemTypes>k__BackingField: 
     - <Item>k__BackingField: {fileID: 0}
-      <Amount>k__BackingField: 1
+      <Amount>k__BackingField: 0
       <Changeable>k__BackingField: 0
       <ItemTypes>k__BackingField: 0d000000
       <ProhibitedItemTypes>k__BackingField: 
     - <Item>k__BackingField: {fileID: 0}
-      <Amount>k__BackingField: 1
+      <Amount>k__BackingField: 0
       <Changeable>k__BackingField: 0
       <ItemTypes>k__BackingField: 0d000000
       <ProhibitedItemTypes>k__BackingField: 
     - <Item>k__BackingField: {fileID: 0}
-      <Amount>k__BackingField: 1
+      <Amount>k__BackingField: 0
       <Changeable>k__BackingField: 0
       <ItemTypes>k__BackingField: 0d000000
       <ProhibitedItemTypes>k__BackingField: 
     - <Item>k__BackingField: {fileID: 11400000, guid: 828b1570142042846a3dd859a8ba48cd,
         type: 2}
-      <Amount>k__BackingField: 1
+      <Amount>k__BackingField: 0
       <Changeable>k__BackingField: 0
       <ItemTypes>k__BackingField: 0d000000
       <ProhibitedItemTypes>k__BackingField: 

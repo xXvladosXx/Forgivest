@@ -8,13 +8,13 @@ using UnityEngine.AI;
 namespace MyGame.Scripts
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(AbilityController))]
+    [RequireComponent(typeof(AbilityHandler))]
     public class Player : CombatableCharacter
     {
         private ILevelable m_Levelable;
         [SerializeField] private Transform m_Target;
         private NavMeshAgent m_NavMeshAgent;
-        private AbilityController _abilityController;
+        private AbilityHandler _abilityHandler;
 
 
         protected override void Awake()
@@ -22,7 +22,7 @@ namespace MyGame.Scripts
             base.Awake();
             m_Levelable = GetComponent<ILevelable>();
             m_NavMeshAgent = GetComponent<NavMeshAgent>();
-            _abilityController = GetComponent<AbilityController>();
+            _abilityHandler = GetComponent<AbilityHandler>();
         }
 
         private void Update()

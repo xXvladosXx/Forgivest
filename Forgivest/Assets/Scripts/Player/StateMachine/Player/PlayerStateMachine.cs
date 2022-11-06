@@ -32,7 +32,7 @@ namespace StateMachine.Player
         public PlayerCombatState PlayerCombatState { get; }
         public PlayerRunningState RunningState { get; }
         public IDamageApplier AttackApplier { get; }
-        public AbilityController AbilityController { get; }
+        public AbilityHandler AbilityHandler { get; }
         public PlayerFirstCastState PlayerFirstCastState { get; }
         public PlayerSecondCastState PlayerSecondCastState { get; }
         public PlayerThirdCastState PlayerThirdCastState { get; }
@@ -45,7 +45,7 @@ namespace StateMachine.Player
             AliveEntityStateData aliveEntityStateData,
             PlayerRaycastUser raycastUser,
             AliveEntityAnimationData animationData,
-            IDamageApplier attackApplier, AbilityController abilityController)
+            IDamageApplier attackApplier, AbilityHandler abilityHandler)
         {
             Rotator = rotator;
             AnimationChanger = animationChanger;
@@ -55,7 +55,7 @@ namespace StateMachine.Player
             RaycastUser = raycastUser;
             AnimationData = animationData;
             AttackApplier = attackApplier;
-            AbilityController = abilityController;
+            AbilityHandler = abilityHandler;
 
             ReusableData = new AliveEntityStateReusableData();
 

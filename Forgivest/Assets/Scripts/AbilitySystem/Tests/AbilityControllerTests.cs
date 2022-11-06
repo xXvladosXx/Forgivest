@@ -45,7 +45,7 @@ namespace AbilitySystem.Tests
         public IEnumerator AbilityController_WhenActivateAbility_ApplyEffects()
         {
             yield return null;
-            var abilityController = _player.GetComponent<AbilityController>();
+            var abilityController = _player.GetComponent<AbilityHandler>();
             var statController = _enemy.GetComponent<StatController>();
             var health = statController.Stats["Health"] as Health;
             health.CurrentValue.Should().Be(100);
@@ -57,7 +57,7 @@ namespace AbilitySystem.Tests
         public IEnumerator AbilityController_WhenActivateAbility_ApplyCostEffect()
         {
             yield return null;
-            var abilityController = _player.GetComponent<AbilityController>();
+            var abilityController = _player.GetComponent<AbilityHandler>();
             var statController = _player.GetComponent<StatController>();
             var mana = statController.Stats["Mana"] as Attribute;
             mana.CurrentValue.Should().Be(100);
@@ -69,7 +69,7 @@ namespace AbilitySystem.Tests
         public IEnumerator AbilityController_WhenCannotSatisfyActivationAbility_BlockActivation()
         {
             yield return null;
-            var abilityController = _player.GetComponent<AbilityController>();
+            var abilityController = _player.GetComponent<AbilityHandler>();
             var statController = _player.GetComponent<StatController>();
             var mana = statController.Stats["Mana"] as Attribute;
             mana.CurrentValue.Should().Be(100);
@@ -85,7 +85,7 @@ namespace AbilitySystem.Tests
         public IEnumerator AbilityController_WhenAbilityOnCooldown_BlockAbilityActivation()
         {
             var tagController = _player.GetComponent<TagRegister>();
-            var abilityController = _player.GetComponent<AbilityController>();
+            var abilityController = _player.GetComponent<AbilityHandler>();
             abilityController.TryActiveAbility("CooldownAbility");
             tagController.Tags.Should().Contain("test_cooldown");
             bool canBeActivated = abilityController.TryActiveAbility("CooldownAbility");

@@ -29,8 +29,17 @@ namespace InventorySystem.Items
 
                 return stringBuilder.ToString();
             }
+        }
 
-            protected set => ItemDescription = value;
+        public override string ItemRequirements
+        {
+            get
+            {
+                var stringBuilder = new StringBuilder();
+                stringBuilder.Append("Required Level: ").Append(_requiredLevel);
+
+                return stringBuilder.ToString();
+            }
         }
 
         public bool RequirementsChecked(int level)

@@ -15,6 +15,11 @@ namespace AbilitySystem
         {
             var root = new VisualElement();
             
+            var styleSheet = AssetDatabase
+                .LoadAssetAtPath<StyleSheet>("Assets/Scripts/AbilitySystem/Editor/GameplayEffectEditor.uss");
+            root.styleSheets.Add(styleSheet);
+            
+            root.Add(CreateCoreFieldsGUI());
             root.Add(CreateApplicationFieldsGUI());
             root.Add(CreateSpecialEffectFieldsGUI());
             root.Add(CreateGameplayEffectFieldsGUI());
@@ -23,6 +28,23 @@ namespace AbilitySystem
             return root;
         }
 
+        protected virtual VisualElement CreateCoreFieldsGUI()
+        {
+            var root = new VisualElement();
+            var description = new TextField
+            {
+                label = "Description",
+                bindingPath = "_description",
+                multiline = true
+            };
+            
+            description.Bind(serializedObject);
+            description.AddToClassList("description");
+            root.Add(description);
+
+            return root;
+        }
+        
         protected virtual VisualElement CreateSpecialEffectFieldsGUI()
         {
             var root = new VisualElement();

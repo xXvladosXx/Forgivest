@@ -6,7 +6,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active
 {
     public class SingleTargetAbility : ActiveAbility
     {
-        public SingleTargetAbility(SingleTargetAbilityDefinition definition, AbilityController abilityController) : base(definition, abilityController)
+        public SingleTargetAbility(SingleTargetAbilityDefinition definition, AbilityHandler abilityHandler) : base(definition, abilityHandler)
         {
         }
 

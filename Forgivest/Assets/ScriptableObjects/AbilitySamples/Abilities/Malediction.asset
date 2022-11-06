@@ -29,11 +29,13 @@ MonoBehaviour:
   <ItemID>k__BackingField:
     Id: 8
   <ItemType>k__BackingField: 13
-  <ItemDescription>k__BackingField: 
+  <ItemDescription>k__BackingField: Desss
   _gameplayEffectDefinitions:
   - {fileID: 11400000, guid: ae42ee4d0faff834b9a832208822e206, type: 2}
   _maxLevel: 0
   _level: 5
+  _requiredLevel: 0
+  _requiredAbilityPoints: 0
   <AnimationName>k__BackingField: FirstSkill
   <Cost>k__BackingField: {fileID: 11400000, guid: b7a57320141e57543a1431725a1c7785,
     type: 2}

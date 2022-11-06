@@ -12,7 +12,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
 {
     [RequireComponent(typeof(GameplayEffectHandler),
         typeof(TagRegister))]
-    public class AbilityController : MonoBehaviour
+    public class AbilityHandler : MonoBehaviour
     {
         [field: SerializeField] public Inventory ItemContainer { get; private set; } 
         [field: SerializeField] public Inventory AllAbilities { get; private set; }

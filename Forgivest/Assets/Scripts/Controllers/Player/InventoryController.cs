@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AbilitySystem.AbilitySystem.Runtime.Abilities;
+using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
 using InventorySystem;
 using InventorySystem.Core;
 using InventorySystem.Interaction;
@@ -21,20 +22,20 @@ namespace Controllers.Player
         private readonly SkillPanel _skillPanel;
         private readonly StaticPanel _staticPanel;
         private readonly ObjectPicker _objectPicker;
-        private readonly AbilityController _abilityController;
+        private readonly AbilityHandler _abilityHandler;
         private readonly UIReusableData _uiReusableData;
 
         private Dictionary<ItemContainer, ItemContainerUI> _itemHolders =
             new Dictionary<ItemContainer, ItemContainerUI>();
 
         public InventoryController(InventoryPanel inventoryPanel, SkillPanel skillPanel, StaticPanel staticPanel,
-            ObjectPicker objectPicker, AbilityController abilityController, UIReusableData uiReusableData)
+            ObjectPicker objectPicker, AbilityHandler abilityHandler, UIReusableData uiReusableData)
         {
             _inventoryPanel = inventoryPanel;
             _skillPanel = skillPanel;
             _staticPanel = staticPanel;
             _objectPicker = objectPicker;
-            _abilityController = abilityController;
+            _abilityHandler = abilityHandler;
             _uiReusableData = uiReusableData;
         }
         
@@ -42,12 +43,12 @@ namespace Controllers.Player
         {
             _inventoryPanel.InitializeInventory(_objectPicker.Inventory.Capacity);
             _inventoryPanel.InitializeEquipment(_objectPicker.Equipment.Capacity);
-            _skillPanel.InitializeSkillInventory(_abilityController.AllAbilities.Capacity);
+            _skillPanel.InitializeSkillInventory(_abilityHandler.AllAbilities.Capacity);
             _staticPanel.InitializeHotbarInventory(_objectPicker.Hotbar.Capacity);
             
             _itemHolders.Add(_objectPicker.Inventory.ItemContainer, _inventoryPanel.DynamicItemContainerUI);
             _itemHolders.Add(_objectPicker.Equipment.ItemContainer, _inventoryPanel.StaticItemContainerUI);
-            _itemHolders.Add(_abilityController.AllAbilities.ItemContainer, _skillPanel.SkillItemContainerUI);
+            _itemHolders.Add(_abilityHandler.AllAbilities.ItemContainer, _skillPanel.SkillItemContainerUI);
             _itemHolders.Add(_objectPicker.Hotbar.ItemContainer, _staticPanel.HotbarItemContainerUI);
             
             foreach (var itemContainer in _itemHolders.Keys)
@@ -128,13 +129,19 @@ namespace Controllers.Player
                 if (slot.Item == null)
                 {
                     _inventoryPanel.CreateSlotsWithItemInInventory(null, 0, index,
-                        _itemHolders[itemContainer], itemContainer.Slots[index].GetDescription());
+                        _itemHolders[itemContainer], itemContainer.Slots[index].GetDescription(),
+                        itemContainer.Slots[index].GetItemName(),
+                        itemContainer.Slots[index].GetRequirements());
+
                     index++;
                     continue;
                 }
 
                 _inventoryPanel.CreateSlotsWithItemInInventory(slot.Item.Sprite, slot.Amount, index,
-                    _itemHolders[itemContainer], itemContainer.Slots[index].GetDescription());
+                    _itemHolders[itemContainer], itemContainer.Slots[index].GetDescription(),
+                    itemContainer.Slots[index].GetItemName(),
+                    itemContainer.Slots[index].GetRequirements());
+
                 index++;
             }
         }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5fd9c363a44de48531770a2bdc4d38, type: 3}
   m_Name: Spikes_Cooldown
   m_EditorClassIdentifier: 
+  _description: '{GameplayPersistentEffect.CurrentDuration} mana'
   _modifiers: []
   _conditionalEffects: []
   _specialEffectDefinition: {fileID: 0}

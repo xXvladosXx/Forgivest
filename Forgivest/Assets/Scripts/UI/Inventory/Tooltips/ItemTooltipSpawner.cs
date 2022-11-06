@@ -19,7 +19,7 @@ namespace UI.Inventory.Tooltips
             var item = GetComponent<InventorySlotUI>();
             if (!itemTooltip) return;
 
-            itemTooltip.Setup(item.ItemDescription);
+            itemTooltip.Setup(item.ItemDescription, item.Name, item.Requirements);
         }
     }
 }

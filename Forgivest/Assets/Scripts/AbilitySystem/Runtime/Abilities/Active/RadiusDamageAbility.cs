@@ -12,7 +12,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active
         private ObjectPool<RadiusDamager> _objectPool;
         private AttackData _attackData;
 
-        public RadiusDamageAbility(ActiveAbilityDefinition definition, AbilityController abilityController) : base(definition, abilityController)
+        public RadiusDamageAbility(ActiveAbilityDefinition definition, AbilityHandler abilityHandler) : base(definition, abilityHandler)
         {
             _objectPool = new ObjectPool<RadiusDamager>(OnCreate, OnGet, OnRelease);
         }

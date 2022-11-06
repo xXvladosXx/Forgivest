@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using AttackSystem.Core;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
     public abstract class Ability
     {
         public AbilityDefinition AbilityDefinition { get; protected set; }
-        protected AbilityController AbilityController;
+        protected AbilityHandler AbilityHandler;
         public AttackData AttackData { get; private set; }
 
         private int _level;
@@ -37,10 +38,29 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
             }
         }
         
-        public Ability(AbilityDefinition definition, AbilityController abilityController)
+        public Ability(AbilityDefinition definition, AbilityHandler abilityHandler)
         {
-            AbilityController = abilityController;
+            AbilityHandler = abilityHandler;
             AbilityDefinition = definition;
+        }
+
+        public override string ToString()
+        {
+            var stringBuilder = new StringBuilder();
+            foreach (var gameplayEffectDefinition in AbilityDefinition.GameplayEffectDefinitions)
+            {
+                var attribute = gameplayEffectDefinition
+                    .GetType()
+                    .GetCustomAttributes(true)
+                    .OfType<EffectTypeAttribute>()
+                    .FirstOrDefault();
+                
+                var effect = Activator.CreateInstance(attribute.Type, gameplayEffectDefinition, this, AbilityHandler.gameObject, null) as GameplayEffect;
+                
+                stringBuilder.Append(effect).AppendLine();
+            }
+            
+            return stringBuilder.ToString();
         }
 
         internal void ApplyEffects(GameObject other, AttackData attackData)
@@ -62,7 +82,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
                         .FirstOrDefault();
 
                     var effect =
-                        Activator.CreateInstance(attribute.Type, effectDefinition, this, AbilityController.gameObject, attackData) as GameplayEffect;
+                        Activator.CreateInstance(attribute.Type, effectDefinition, this, AbilityHandler.gameObject, attackData) as GameplayEffect;
                     
                     gameplayEffectController.ApplyGameplayEffectToSelf(effect);
                 }
