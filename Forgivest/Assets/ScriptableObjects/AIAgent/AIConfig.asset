@@ -17,12 +17,14 @@ MonoBehaviour:
   maxSightDistance: 5
   <DistanceToTarget>k__BackingField: 1
   <DistanceToWaypoint>k__BackingField: 0.5
-  <MovementPatrollingSpeed>k__BackingField: 3
+  <MovementPatrollingSpeed>k__BackingField: 5
   <MovementChasingSpeed>k__BackingField: 7
   <IdleTime>k__BackingField: 2
   <AggroSightDistance>k__BackingField: 3
-  <ChaseDistance>k__BackingField: 5
+  <ChaseDistance>k__BackingField: 15
   <DistanceToAttack>k__BackingField: 2
+  <DistanceToFirstSkill>k__BackingField: 7
+  <DistanceToSecondSkill>k__BackingField: 4
   <TimeDelayBeforeAttack>k__BackingField: 1.5
-  <Skill1CooldownTime>k__BackingField: 6
-  <Skill2CooldownTime>k__BackingField: 3
+  <FirstSkillCooldownTime>k__BackingField: 5
+  <SecondSkillCooldownTime>k__BackingField: 3

@@ -82,8 +82,9 @@ namespace Data.Player
         public int AirAttackParameterHash { get; private set; }
         public int AttackParameterHash { get; private set; }
         
-        public int SkillParameterHash { get; private set; }
-        public int Skill2ParameterHash { get; private set; }
+        public int FirstSkillParameterHash { get; private set; }
+
+        public int SecondSkillParameterHash { get; private set; }
         public int AirAttackDashParameterHash { get; private set; }
         public int AirAttackLandedParameterHash { get; private set; }
 
@@ -125,8 +126,9 @@ namespace Data.Player
             VerticalParameterHash = Animator.StringToHash(VerticalParameterName);
 
             AttackParameterHash = Animator.StringToHash(_attackParameterName);
-            SkillParameterHash = Animator.StringToHash(_skillParameterName);
-            Skill2ParameterHash = Animator.StringToHash(_skill2ParameterName);
+            FirstSkillParameterHash = Animator.StringToHash(_skillParameterName);
+            SecondSkillParameterHash = Animator.StringToHash(_skill2ParameterName);
+           
         }
     }
 }

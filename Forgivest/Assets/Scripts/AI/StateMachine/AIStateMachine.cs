@@ -17,8 +17,9 @@ namespace AI.StateMachine
         
         public AISkillBaseState AISkillBaseState { get; }
         
-        public AISkillExampleState AISkillExampleState { get; }
-        public AISkillExample1State AISkillExample1State { get; }
+        public AISecondSkillState AISecondSkillState { get; }
+        public AIFirstSkillState AIFirstSkillState { get; }
+        
         public AIStateMachine(IAIEnemy aiEnemy)
         {
             AIEnemy = aiEnemy;
@@ -27,8 +28,8 @@ namespace AI.StateMachine
             AIPatrollingEnemyState = new AIPatrollingEnemyState(this);
             AIAttackingEnemyState = new AIAttackingEnemyState(this);
             AISkillBaseState = new AISkillBaseState(this);
-            AISkillExampleState = new AISkillExampleState(this);
-            AISkillExample1State = new AISkillExample1State(this);
+            AISecondSkillState = new AISecondSkillState(this);
+            AIFirstSkillState = new AIFirstSkillState(this);
         }
     }
 }
