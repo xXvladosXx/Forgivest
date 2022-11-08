@@ -10,19 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fed1e3e7198ba542828a07ad83dc641, type: 3}
-  m_Name: AIConfig
+  m_Name: PriestConfig
   m_EditorClassIdentifier: 
-  maxTime: 1
-  maxDistance: 1
-  maxSightDistance: 5
-  <DistanceToTarget>k__BackingField: 1
   <DistanceToWaypoint>k__BackingField: 0.5
-  <MovementPatrollingSpeed>k__BackingField: 5
-  <MovementChasingSpeed>k__BackingField: 7
+  <MovementPatrollingSpeed>k__BackingField: 1
+  <MovementChasingSpeed>k__BackingField: 2
   <IdleTime>k__BackingField: 2
-  <AggroSightDistance>k__BackingField: 3
+  <AggroSightDistance>k__BackingField: 5
   <ChaseDistance>k__BackingField: 15
-  <DistanceToAttack>k__BackingField: 2
+  <DistanceToAttack>k__BackingField: 1
   <DistanceToFirstSkill>k__BackingField: 7
   <DistanceToSecondSkill>k__BackingField: 4
   <TimeDelayBeforeAttack>k__BackingField: 1.5

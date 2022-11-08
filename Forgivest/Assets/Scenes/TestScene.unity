@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571322, b: 0.30692163, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -809,7 +809,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555835720}
-  m_LocalRotation: {x: 0.36514148, y: 0.3389141, z: -0.14475556, w: 0.8549005}
+  m_LocalRotation: {x: 0.36514142, y: 0.33891404, z: -0.14475554, w: 0.85490054}
   m_LocalPosition: {x: -33.20352, y: 10.05, z: -26.771618}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -938,12 +938,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Objects>k__BackingField:
-  - {fileID: 29732395}
-  - {fileID: 1778097984}
   - {fileID: 2072500940}
+  - {fileID: 1778097984}
+  - {fileID: 29732395}
   <AliveEntityAnimationData>k__BackingField: {fileID: 11400000, guid: f73f9d5461814eb4ebd54ad0d21d61b8,
     type: 2}
-  <Config>k__BackingField: {fileID: 11400000, guid: 9733348285134e04797bfadbd9ac1f9b,
+  <Config>k__BackingField: {fileID: 11400000, guid: 0e9d5411b71cc3b4991eceac5451176d,
     type: 2}
   <Cooldown>k__BackingField: {fileID: 745002439}
   <StatsHandler>k__BackingField: {fileID: 745002437}
@@ -969,7 +969,7 @@ NavMeshAgent:
   m_Height: 1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 1
 --- !u!114 &745002436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1085,10 +1085,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!4 &768739270 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2707464181834551502, guid: 4d39bcd57cb95e940b557398ab6043e6,
@@ -1452,7 +1452,7 @@ NavMeshAgent:
   m_Height: 1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 1
 --- !u!114 &1187507830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1467,11 +1467,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Objects>k__BackingField:
   - {fileID: 29732395}
-  - {fileID: 1778097984}
   - {fileID: 2072500940}
+  - {fileID: 1778097984}
   <AliveEntityAnimationData>k__BackingField: {fileID: 11400000, guid: f73f9d5461814eb4ebd54ad0d21d61b8,
     type: 2}
-  <Config>k__BackingField: {fileID: 11400000, guid: 9733348285134e04797bfadbd9ac1f9b,
+  <Config>k__BackingField: {fileID: 11400000, guid: 6a11cc736f96e974da9507106be559c9,
     type: 2}
   <Cooldown>k__BackingField: {fileID: 1187507824}
   <StatsHandler>k__BackingField: {fileID: 1187507826}
@@ -1502,10 +1502,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!1 &1301486876
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,7 +1617,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301486876}
-  m_LocalRotation: {x: 0.36514148, y: 0.3389141, z: -0.14475556, w: 0.8549005}
+  m_LocalRotation: {x: 0.36514142, y: 0.33891404, z: -0.14475554, w: 0.85490054}
   m_LocalPosition: {x: -33.20352, y: 10.05, z: -26.771618}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1856,8 +1856,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Objects>k__BackingField:
-  - {fileID: 29732395}
   - {fileID: 1778097984}
+  - {fileID: 29732395}
   - {fileID: 2072500940}
   <AliveEntityAnimationData>k__BackingField: {fileID: 11400000, guid: f73f9d5461814eb4ebd54ad0d21d61b8,
     type: 2}
@@ -1887,7 +1887,7 @@ NavMeshAgent:
   m_Height: 1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 1
 --- !u!114 &1851438953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2028,10 +2028,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!1001 &1881365277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2048,6 +2048,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Priest
+      objectReference: {fileID: 0}
+    - target: {fileID: 5808996833437370789, guid: 1fb36f7bfff6ec64cad0450009c0761a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6564449572035534714, guid: 1fb36f7bfff6ec64cad0450009c0761a,
         type: 3}

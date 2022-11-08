@@ -5,9 +5,6 @@ namespace AI.StateMachine.States
 {
     public class AIAttackingEnemyState : AIBaseState
     {
-        
-        private float _distanceToTarget = 1;
-        
         public AIAttackingEnemyState(AIStateMachine aiStateMachine) : base(aiStateMachine)
         {
             
@@ -17,6 +14,7 @@ namespace AI.StateMachine.States
         {
             base.Enter();
             AIStateMachine.AIEnemy.Movement.Stop(); 
+            
             AIStateMachine.AIEnemy.AnimationChanger.StartAnimation(
                 AIStateMachine.AIEnemy.AnimationEventUser.AliveEntityAnimationData.AttackParameterHash);
         }
