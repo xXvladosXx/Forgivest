@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using InventorySystem.Items.Core;
 using UnityEngine;
@@ -20,6 +22,8 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
         [SerializeField] private int _requiredLevel;
         [SerializeField] private int _requiredAbilityPoints;
         
+        public GameObject User { get; set; }
+        
         public bool RequirementsChecked(int level, int abilityPoints)
         {
             return level >= _requiredLevel && abilityPoints >= _requiredAbilityPoints;
@@ -29,7 +33,21 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
         {
             get
             {
-                return _itemDescription;
+                var stringBuilder = new StringBuilder();
+                foreach (var gameplayEffectDefinition in GameplayEffectDefinitions)
+                {
+                    var attribute = gameplayEffectDefinition
+                        .GetType()
+                        .GetCustomAttributes(true)
+                        .OfType<EffectTypeAttribute>()
+                        .FirstOrDefault();
+                
+                    var effect = Activator.CreateInstance(attribute.Type, gameplayEffectDefinition, this, User, null) as GameplayEffect;
+
+                    stringBuilder.Append(effect).AppendLine();
+                }
+
+                return stringBuilder.ToString();
             }
         }
 

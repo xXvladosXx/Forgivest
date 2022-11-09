@@ -81,6 +81,7 @@ namespace Player.States.Skill
             
             PlayerStateMachine.AbilityHandler.Abilities.TryGetValue("Spikes", out var ability);
             Debug.Log(ability.ToString());
+            Debug.Log(ability.AbilityDefinition.ItemDescription);
             
             var activated = skill switch
             {

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c24fec08f9f4c66ac5bdd6a1be3db6d, type: 3}
   m_Name: Spikes_Damage
   m_EditorClassIdentifier: 
+  _description: <color=#00FF00>111</color>
   _modifiers:
   - {fileID: 1007513042794795986}
   _conditionalEffects: []

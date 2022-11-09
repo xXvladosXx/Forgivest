@@ -25,7 +25,7 @@ namespace UI.Inventory.Slot
         private Canvas _parentCanvas;
 
         public event Action<int, int, Sprite, int, IInventoryHolder> OnItemTryToSwap;
-        
+
         public int Index { get; private set; }
         public string Name { get; set; }
         public string ItemDescription { get; set; }

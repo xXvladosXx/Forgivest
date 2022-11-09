@@ -9,7 +9,8 @@ namespace UI.Core
     {
         [field: SerializeField] public UIReusableData UIReusalbeData { get; private set; }
         
-        public void CreateSlotsWithItemInInventory(Sprite sprite, int amount, int index, ItemContainerUI itemContainerUI, string description, string itemName, string requirements)
+        public void CreateSlotsWithItemInInventory(Sprite sprite, int amount, int index, ItemContainerUI itemContainerUI,
+            string description, string itemName, string requirements)
         {
             itemContainerUI.RefreshSlotData(sprite, amount, index, description, itemName, requirements);
         }
