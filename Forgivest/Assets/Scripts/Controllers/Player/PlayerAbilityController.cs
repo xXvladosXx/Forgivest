@@ -36,7 +36,11 @@ namespace Controllers.Player
             for (int i = 0; i < _skillItemContainerUI.SkillCooldownRefreshers.Count; i++)
             {
                 var ability = _abilityHandler.Hotbar.ItemContainer.Slots[i].Item as ActiveAbilityDefinition;
-                if(ability == null) return;
+                if (ability == null)
+                {
+                    _skillItemContainerUI.SkillCooldownRefreshers[i].SetFillAmountToZero();
+                    continue;
+                }
                 
                 _skillItemContainerUI.SkillCooldownRefreshers[i]
                     .RefreshImage(_abilityHandler.GetCooldownOfAbility(ability.name), 

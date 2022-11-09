@@ -42,6 +42,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
         {
             AbilityHandler = abilityHandler;
             AbilityDefinition = definition;
+            AbilityDefinition.User = abilityHandler.gameObject;
         }
 
         public override string ToString()

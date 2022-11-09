@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using AttackSystem.Core;
 using UnityEngine;
 
 namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core
@@ -10,5 +12,27 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core
         [field: SerializeField] public GameplayPersistentEffectDefinition Cooldown { get; private set; }
         [field: SerializeField] public bool SelfCasted { get; private set; }
         public int HashAnimation => Animator.StringToHash(AnimationName);
+
+        public override string ItemDescription
+        {
+            get
+            {
+                var stringBuilder = new StringBuilder(base.ItemDescription.ToString());
+                if (Cost != null)
+                {
+                    var cost = new GameplayEffect(Cost, this, User, null);
+
+                    stringBuilder.Append(cost).AppendLine();
+                }
+
+                if (Cooldown != null)
+                {
+                    var cooldown = new GameplayPersistentEffect(Cooldown, this, User, null);
+                    stringBuilder.Append(cooldown);
+                }
+            
+                return stringBuilder.ToString();
+            }
+        }
     }
 }
