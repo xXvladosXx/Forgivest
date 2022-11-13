@@ -54,6 +54,7 @@ namespace Data.Player
         [SerializeField] private string _thirdSkillParameterName = "ThirdSkill";
         [SerializeField] private string _fourthSkillParameterName = "FourthSkill";
         [SerializeField] private string _fifthSkillParameterName = "FifthSkill";
+        [SerializeField] private string _sixthSkillParameterName = "SixthSkill";
 
         public int GroundedParameterHash { get; private set; }
         public int MovingParameterHash { get; private set; }
@@ -94,6 +95,7 @@ namespace Data.Player
         public int ThirdSkillParameterHash { get; private set; }
         public int FourthSkillParameterHash { get; private set; }
         public int FifthSkillParameterHash { get; private set; }
+        public int SixthSkillParameterHash { get; private set; }
         public int SkillParameterHash { get; private set; }
         public void Init()
         {
@@ -140,6 +142,7 @@ namespace Data.Player
             ThirdSkillParameterHash = Animator.StringToHash(_thirdSkillParameterName);
             FourthSkillParameterHash = Animator.StringToHash(_fourthSkillParameterName);
             FifthSkillParameterHash = Animator.StringToHash(_fifthSkillParameterName);
+            SixthSkillParameterHash = Animator.StringToHash(_sixthSkillParameterName);
         }
     }
 }

@@ -54,6 +54,8 @@ namespace Controllers.Player
             {
                 abilityLearnButton.OnUpgradeClicked -= OnUpgradeClicked;
             }
+            
+            _abilityHandler.OnPointsChanged -= OnPointsChanged;
         }
 
         private void OnUpgradeClicked(int index)
@@ -70,6 +72,7 @@ namespace Controllers.Player
             
             _skillItemContainerUI.SkillsToLearn[index].SkillLearned();
             _abilityHandler.ItemContainer.ItemContainer.TryToAddAtIndex(this, possibleSkill, 1, index);
+            _abilityHandler.AddPoints(-possibleSkill.RequiredAbilityPoints);
         }
         
         private void OnPointsChanged(int points)

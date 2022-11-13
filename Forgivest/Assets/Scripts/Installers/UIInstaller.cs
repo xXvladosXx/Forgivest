@@ -17,6 +17,7 @@ namespace Installers
 
         [SerializeField] private HealthBarUI _healthBarUI;
         [SerializeField] private ManaBarUI _manaBarUI;
+        [SerializeField] private ExperienceBarUI _experienceBarUI;
         [SerializeField] private UIReusableData _uiReusableData;
         public override void InstallBindings()
         {
@@ -26,6 +27,7 @@ namespace Installers
             Container.Bind<SkillPanel>().FromInstance(_skillPanel).AsSingle();
             Container.Bind<UIReusableData>().FromInstance(_uiReusableData).AsSingle();
             Container.Bind<StaticPanel>().FromInstance(staticPanel).AsSingle();
+            Container.Bind<ExperienceBarUI>().FromInstance(_experienceBarUI).AsSingle();
         }
     }
 }

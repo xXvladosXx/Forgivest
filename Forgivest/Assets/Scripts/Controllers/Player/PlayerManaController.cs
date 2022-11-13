@@ -7,7 +7,7 @@ using Attribute = StatSystem.Attribute;
 
 namespace Controllers.Player
 {
-    public class PlayerManaController : IInitializable, ITickable, IDisposable
+    public class PlayerManaController : IInitializable, IDisposable
     {
         private readonly StatController _statController;
         private readonly ManaBarUI _manaBarUI;

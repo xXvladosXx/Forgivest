@@ -9,44 +9,43 @@ namespace LevelSystem
 {
     public class LevelController : MonoBehaviour, ILevelable
     {
-        [SerializeField] private int m_Level = 1;
-        [SerializeField] private int m_CurrentExperience;
-        [SerializeField] private NodeGraph m_RequiredExperienceFormula;
+        [SerializeField] private int _level = 1;
+        [SerializeField] private int _currentExperience;
+        [SerializeField] private NodeGraph _requiredExperienceFormula;
 
-        private bool m_IsInitialized;
-
-        public int Level => m_Level;
+        private bool _isInitialized;
+        public int Level => _level;
         public event Action OnLevelChanged;
-        public event Action OnCurrentExperienceChanged;
+        public event Action<int, int> OnCurrentExperienceChanged;
 
         public int CurrentExperience
         {
-            get => m_CurrentExperience;
+            get => _currentExperience;
             set
             {
                 if (value >= RequiredExperience)
                 {
-                    m_CurrentExperience = value - RequiredExperience;
-                    OnCurrentExperienceChanged?.Invoke();
-                    m_Level++;
+                    _currentExperience = value - RequiredExperience;
+                    OnCurrentExperienceChanged?.Invoke(_currentExperience, RequiredExperience);
+                    _level++;
                     OnLevelChanged?.Invoke();
                 }
                 else if (value < RequiredExperience)
                 {
-                    m_CurrentExperience = value;
-                    OnCurrentExperienceChanged?.Invoke();
+                    _currentExperience = value;
+                    OnCurrentExperienceChanged?.Invoke(_currentExperience, RequiredExperience);
                 }
             }
         }
 
-        public int RequiredExperience => Mathf.RoundToInt(m_RequiredExperienceFormula.rootNode.Value);
-        public bool IsInitialized => m_IsInitialized;
+        public int RequiredExperience => Mathf.RoundToInt(_requiredExperienceFormula.rootNode.Value);
+        public bool IsInitialized => _isInitialized;
         public event Action OnInitialized;
         public event Action OnWillUninitialize;
 
         private void Awake()
         {
-            if (!m_IsInitialized)
+            if (!_isInitialized)
             {
                 Initialize();
             }
@@ -54,13 +53,13 @@ namespace LevelSystem
 
         private void Initialize()
         {
-            List<LevelNode> levelNodes = m_RequiredExperienceFormula.FindNodesOfType<LevelNode>();
+            List<LevelNode> levelNodes = _requiredExperienceFormula.FindNodesOfType<LevelNode>();
             foreach (LevelNode levelNode in levelNodes)
             {
                 levelNode.Levelable = this;
             }
 
-            m_IsInitialized = true;
+            _isInitialized = true;
             OnInitialized?.Invoke();
         }
 

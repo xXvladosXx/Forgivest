@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Controllers.Player
 {
-    public class PlayerHealthController : IInitializable, ITickable, IDisposable
+    public class PlayerHealthController : IInitializable, IDisposable
     {
         private readonly StatController _statController;
         private readonly HealthBarUI _healthBarUI;
@@ -26,15 +26,10 @@ namespace Controllers.Player
             RecalculateHealthOnBar(_health.CurrentValue, _health.Value);
         }
 
-        public void Tick()
-        {
-        }
-
         public void Dispose()
         {
             _health.OnCurrentValueChanged -= RecalculateHealthOnBar;
             _health.OnValueChanged -= RecalculateHealthOnBar;
-
         }
         
         private void RecalculateHealthOnBar(float maxHealth)

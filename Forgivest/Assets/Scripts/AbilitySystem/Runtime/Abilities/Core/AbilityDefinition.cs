@@ -21,6 +21,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
 
         [SerializeField] private int _requiredLevel;
         [SerializeField] private int _requiredAbilityPoints;
+        public int RequiredAbilityPoints => _requiredAbilityPoints;
         
         public GameObject User { get; set; }
         
