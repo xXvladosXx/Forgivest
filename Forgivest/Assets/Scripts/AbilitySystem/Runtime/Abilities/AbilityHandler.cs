@@ -155,6 +155,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
                 new GameplayPersistentEffect(ability.ActiveAbilityDefinition.Cooldown, ability, gameObject, ability.AttackData));
         }
 
+
         public void AddPoints(int points)
         {
             SkillPoints += points;
