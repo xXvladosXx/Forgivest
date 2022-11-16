@@ -6,14 +6,12 @@ namespace AI.StateMachine.States
     public class AIPatrollingEnemyState : AIBaseState
     {
         private Transform _currentWaypoint;
-        
+
         public AIPatrollingEnemyState(AIStateMachine aiStateMachine) : base(aiStateMachine)
         {
-            
         }
-        
-        
- 
+
+
         public override void Enter()
         {
             base.Enter();
@@ -26,9 +24,11 @@ namespace AI.StateMachine.States
                 var range = Random.Range(0, ((ICollection)AIStateMachine.AIEnemy.Objects).Count);
                 _currentWaypoint = AIStateMachine.AIEnemy.Objects[range].transform;
             }
-            AIStateMachine.AIEnemy.Movement.MoveTo(_currentWaypoint.position, AIStateMachine.AIEnemy.Config.MovementPatrollingSpeed);
+
+            AIStateMachine.AIEnemy.Movement.MoveTo(_currentWaypoint.position,
+                AIStateMachine.AIEnemy.Config.MovementPatrollingSpeed);
         }
-        
+
         public override void Update()
         {
             base.Update();
@@ -37,8 +37,8 @@ namespace AI.StateMachine.States
                 AIStateMachine.ChangeState(AIStateMachine.AIChasingEnemyState);
                 return;
             }
-            
-            if(GetDistanceToWaypoint() < AIStateMachine.AIEnemy.Config.DistanceToWaypoint)
+
+            if (GetDistanceToWaypoint() < AIStateMachine.AIEnemy.Config.DistanceToWaypoint)
             {
                 AIStateMachine.ChangeState(AIStateMachine.AIIdleEnemyState);
             }

@@ -20,6 +20,7 @@ namespace StateMachine
         public void Update()
         {
             _currentState?.Update();
+            Debug.Log(_currentState);
         }
 
         public void PhysicsUpdate()

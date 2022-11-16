@@ -32,14 +32,21 @@ namespace AI.StateMachine
         
         public AttackApplier AttackApplier { get; private set; }
         
+        [field: SerializeField] public CooldownSystem Cooldown { get; private set; }
+
+
         [field: SerializeField] public StatsHandler StatsHandler { get; private set; }
         
         public Animator Animator { get; private set; }
         public AnimationChanger AnimationChanger { get; private set; }
         
+        
+        
         [field: SerializeField] private ObjectPicker _objectPicker;
         
         public IAnimationEventUser AnimationEventUser => this; 
+        
+        
         
         public LayerMask LayerMask => gameObject.layer;
 
@@ -52,6 +59,8 @@ namespace AI.StateMachine
             NavMeshAgent = GetComponent<NavMeshAgent>();
             Movement = new Movement(NavMeshAgent, _rb, transform);
             AnimationChanger = new AnimationChanger(Animator);
+            
+            
 
             AttackApplier = new AttackApplier(_objectPicker.ItemEquipHandler);
         }
@@ -85,14 +94,14 @@ namespace AI.StateMachine
 
         public void ApplyAttack(float timeOfActiveCollider)
         {
-            Debug.Log(StatsHandler.CalculateStat(StatsEnum.Health) + " Health ");
-            Debug.Log(StatsHandler.CalculateStat(StatsEnum.Damage) + " Dam ");
-            
             AttackApplier.ApplyDamage(new AttackData
             {
                 Damage = StatsHandler.CalculateStat(StatsEnum.Damage),
                 DamageApplierLayerMask = LayerMask
             }, timeOfActiveCollider);
         }
+
+
+       
     }
 }

@@ -31,6 +31,8 @@ namespace AI.StateMachine.Core
         StatsHandler StatsHandler { get; }
 
         AttackApplier AttackApplier { get; }
+        
+        CooldownSystem Cooldown { get; }
 
     }
 }

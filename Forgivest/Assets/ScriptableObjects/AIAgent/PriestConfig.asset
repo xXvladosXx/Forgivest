@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fed1e3e7198ba542828a07ad83dc641, type: 3}
+  m_Name: PriestConfig
+  m_EditorClassIdentifier: 
+  <DistanceToWaypoint>k__BackingField: 0.5
+  <MovementPatrollingSpeed>k__BackingField: 1
+  <MovementChasingSpeed>k__BackingField: 2
+  <IdleTime>k__BackingField: 2
+  <AggroSightDistance>k__BackingField: 5
+  <ChaseDistance>k__BackingField: 15
+  <DistanceToAttack>k__BackingField: 1
+  <DistanceToFirstSkill>k__BackingField: 7
+  <DistanceToSecondSkill>k__BackingField: 4
+  <TimeDelayBeforeAttack>k__BackingField: 1.5
+  <FirstSkillCooldownTime>k__BackingField: 5
+  <SecondSkillCooldownTime>k__BackingField: 3
