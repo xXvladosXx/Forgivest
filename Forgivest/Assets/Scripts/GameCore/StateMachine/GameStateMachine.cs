@@ -4,6 +4,7 @@ using GameCore.StateMachine.States;
 using UI.Loading;
 using UI.Menu;
 using UI.Menu.Core;
+using UnityEngine;
 
 namespace GameCore.StateMachine
 {
@@ -12,11 +13,12 @@ namespace GameCore.StateMachine
         private readonly Dictionary<Type, IExitableState> _gameStates;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, LoadingScreen loadingScreen, MenuSwitcher mainMenuSwitcher)
+        public GameStateMachine(SceneLoader sceneLoader, LoadingScreen loadingScreen,
+            MenuSwitcher mainMenuSwitcher, Canvas mainMenuCanvas)
         {
             _gameStates = new Dictionary<Type, IExitableState>()
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, mainMenuSwitcher),
+                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, mainMenuSwitcher, mainMenuCanvas),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingScreen),
                 [typeof(GameLoopState)] = new GameLoopState(this),
             };

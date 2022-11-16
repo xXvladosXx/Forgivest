@@ -17,6 +17,7 @@ namespace UI.Loading
         private void Awake()
         {
             DontDestroyOnLoad(this);
+            HideLoadingScreen();
         }
 
         private void OnEnable()

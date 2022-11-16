@@ -75,8 +75,19 @@ namespace UI.Menu.Core
                 Show(Instance._history.Pop(), false);
             }
         }
-        
-        public Menu Find<T>() where T : Menu => Instance._menus.OfType<T>().FirstOrDefault();
+
+        public Menu Find<T>() where T : Menu
+        {
+            foreach (var menu in _menus)
+            {
+                if (menu is T)
+                {
+                    return menu;
+                }
+            }
+
+            return null;
+        }
 
         private void OnDisable()
         {
