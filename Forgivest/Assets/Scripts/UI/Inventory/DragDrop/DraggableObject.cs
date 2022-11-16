@@ -1,7 +1,6 @@
 ﻿using System;
 using TMPro;
 using UI.Inventory.Core;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;

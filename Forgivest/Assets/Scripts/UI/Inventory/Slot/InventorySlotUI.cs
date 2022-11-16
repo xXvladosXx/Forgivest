@@ -4,7 +4,6 @@ using UI.Inventory.Core;
 using UI.Inventory.DragDrop;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Zenject;
 
 namespace UI.Inventory.Slot
 {
