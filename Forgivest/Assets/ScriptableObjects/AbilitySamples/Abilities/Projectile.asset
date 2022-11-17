@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261b6b51df6a4703bc9b03ef2ecb8d0b, type: 3}
+  m_Name: Projectile
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  <Rarity>k__BackingField: {fileID: 0}
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+  <MaxItemsInStack>k__BackingField: 1
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 4993b272241968e49b2080d63ff96d45,
+    type: 3}
+  <ItemID>k__BackingField:
+    Id: 10
+  <ItemType>k__BackingField: 13
+  <ItemDescription>k__BackingField: 
+  _gameplayEffectDefinitions:
+  - {fileID: 11400000, guid: c148608e5c7bd7d41815344dd0d11729, type: 2}
+  - {fileID: 11400000, guid: 3ea4443d5d135874892b169c2bfe57dc, type: 2}
+  _maxLevel: 0
+  _level: 5
+  <AnimationName>k__BackingField: FirstSkill
+  <Cost>k__BackingField: {fileID: 11400000, guid: 27cc41d2bf9dcd34493cbeea4381fabb,
+    type: 2}
+  <Cooldown>k__BackingField: {fileID: 11400000, guid: 8666cabac30e46543b3cc81fa64798c3,
+    type: 2}
+  <SelfCasted>k__BackingField: 0
+  _speed: 10
+  _shotType: 2
+  _isSpin: 0
+  _projectile: {fileID: -774963381665283954, guid: 811f6c8f2650eab418fb1801741e7dca,
+    type: 3}
+  _weaponID: RangedWeapon

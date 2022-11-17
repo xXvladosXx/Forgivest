@@ -17,6 +17,16 @@ namespace MovementSystem
             _navMeshAgent = navMeshAgent;
             _rigidbody = rigidbody;
         }
+        
+        public bool CanMoveTo(Vector3 destination)
+        {
+            NavMeshPath path = new NavMeshPath();
+            bool hasPath = NavMesh.CalculatePath(Transform.position, destination, NavMesh.AllAreas, path);
+            if (!hasPath) return false;
+            if (path.status != NavMeshPathStatus.PathComplete) return false;
+
+            return true;
+        }
 
         public void SetStoppingDistance(float distance)
         {
@@ -42,5 +52,7 @@ namespace MovementSystem
 
         public Vector3 GetRigidbodyVelocity() => _rigidbody.velocity;
         public Vector3 GetNavMeshVelocity() => _navMeshAgent.velocity;
+
+        public void EnableRotation(bool enable) => _navMeshAgent.updateRotation = enable;
     }
 }

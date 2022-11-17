@@ -1,18 +1,26 @@
 using System;
+using System.Collections.Generic;
+using AbilitySystem;
+using AbilitySystem.AbilitySystem.Runtime.Abilities;
+using AbilitySystem.AbilitySystem.Runtime.Abilities.Active;
 using AnimationSystem;
 using AttackSystem;
 using AttackSystem.Core;
+using AttackSystem.Reward;
+using AttackSystem.Reward.Core;
 using Data.Player;
 using InventorySystem.Interaction;
+using InventorySystem.Items.Weapon;
+using LevelSystem;
 using MovementSystem;
 using RaycastSystem;
 using RaycastSystem.Core;
+using Requirements.Core;
 using StateMachine.Player;
-using StatsSystem;
-using StatsSystem.Core;
+using StatSystem;
+using StatSystem.Scripts.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem;
 using Utilities;
 
 
@@ -22,10 +30,13 @@ namespace Player
         typeof(Rigidbody),
         typeof(Collider))]
     
-    [RequireComponent(typeof(StatsHandler),
+    [RequireComponent(typeof(StatController),
         typeof(Animator),
         typeof(ObjectPicker))]
-    public class PlayerEntity : MonoBehaviour, IAnimationEventUser, IDamageReceiver
+    
+    [RequireComponent(typeof(AbilityHandler),
+        typeof(GameplayEffectHandler))]
+    public class PlayerEntity : MonoBehaviour, IAnimationEventUser, IDamageReceiver, IDamageApplier, IRaycastable, IRequirementUser
     {
         [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
         [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
@@ -34,29 +45,36 @@ namespace Player
         [field: SerializeField] public AliveEntityAnimationData AliveEntityAnimationData { get; private set; }
         [field: SerializeField] public AliveEntityStateData StateData { get; set; }
         [field: SerializeField] public Animator Animator { get; private set; }
-        [field: SerializeField] public StatsHandler StatsHandler { get; private set; }
-
-        [SerializeField] private ObjectPicker _objectPicker;
-
-        public Camera Camera { get; private set; }
+        [field: SerializeField] public StatController StatController { get; private set; }
+        [field: SerializeField] public StatsFinder StatsFinder { get; private set; }
+        [field: SerializeField] public AbilityHandler AbilityHandler { get; private set; }
+        [field: SerializeField] public GameplayEffectHandler GameplayEffectHandler { get; private set; }
+        [field: SerializeField] public PlayerRaycastSettings PlayerRaycastSettings { get; private set; }
+        [field: SerializeField] public ObjectPicker ObjectPicker { get; private set; }
         
+        [field: Header("Level System")]
+        [field: SerializeField] public LevelController LevelController { get; private set; }
+        [SerializeField] private int _pointsPerLevel;
+        public Camera Camera { get; private set; }
+        public AttackApplier AttackApplier { get; private set; }
         public AnimationChanger AnimationChanger { get; private set; }
         public Movement Movement { get; private set; }
         public Rotator Rotator { get; private set; }
-        public RaycastUser RaycastUser { get; private set; }
-        
-        public AttackApplier AttackApplier { get; private set; }
+        public PlayerRaycastUser RaycastUser { get; private set; }
         
         private PlayerStateMachine _playerStateMachine;
-        
-        public event Action<AttackData> OnDamageReceived;
-        public LayerMask LayerMask => gameObject.layer;
+        private DamageHandler _damageHandler;
 
-        public void ReceiverDamage(AttackData attackData)
-        {
-            Debug.Log("Player recieved damage");
-        }
-        
+        public GameObject Weapon => ObjectPicker.ItemEquipHandler.CurrentColliderWeapon;
+        public Weapon CurrentWeapon => ObjectPicker.ItemEquipHandler.CurrentWeapon;
+        public List<IRewardable> Rewards { get; }
+        public float Health => StatsFinder.FindStat("Health");
+        public LayerMask LayerMask => gameObject.layer;
+        public GameObject GameObject => gameObject;
+
+        public event Action<AttackData> OnDamageReceived;
+        public event Action<AttackData> OnDamageApplied;
+
         private void Awake()
         {
             Camera = Camera.main;
@@ -65,28 +83,50 @@ namespace Player
             AnimationChanger = new AnimationChanger(Animator);
             Movement = new Movement(NavMeshAgent, Rigidbody, transform);
             Rotator = new Rotator(Rigidbody);
-            RaycastUser = new PlayerRaycastUser(Camera);
-
-            _objectPicker.Init(RaycastUser);
-            
-            AttackApplier = new AttackApplier(_objectPicker.ItemEquipHandler);
+            RaycastUser = new PlayerRaycastUser(Camera, PlayerInputProvider, PlayerRaycastSettings);
+            AttackApplier = new AttackApplier();
+            _damageHandler = new DamageHandler(StatController);
             
             _playerStateMachine = new PlayerStateMachine(AnimationChanger,
                 Movement, Rotator, PlayerInputProvider, StateData,
                 RaycastUser, AliveEntityAnimationData, 
-                AttackApplier);
+                this, AbilityHandler);
+        }
+        
+        private void OnEnable()
+        {
+            ObjectPicker.ItemEquipHandler.OnWeaponEquipped += OnWeaponEquipped;
+            LevelController.OnLevelChanged += OnLevelChanged;
         }
 
         private void Start()
         {
             _playerStateMachine.ChangeState(_playerStateMachine.IdlingState);
+            ObjectPicker.Init();
         }
 
         private void Update()
         {
+            RaycastUser.Tick();
             _playerStateMachine.Update();
         }
 
+        private void OnDisable()
+        {
+            ObjectPicker.ItemEquipHandler.OnWeaponEquipped -= OnWeaponEquipped;
+            LevelController.OnLevelChanged -= OnLevelChanged;
+        }
+
+        public CursorType GetCursorType()
+        {
+            return CursorType.Movement;
+        }
+
+        public bool HandleRaycast(RaycastUser raycastUser)
+        {
+            return true;
+        }
+        
         public void OnAnimationStarted()
         {
             _playerStateMachine.OnAnimationEnterEvent();
@@ -102,18 +142,123 @@ namespace Player
             _playerStateMachine.OnAnimationExitEvent();
         }
 
-        public void ApplyAttack(float timeOfActiveCollider)
+        public void CastedSkill()
         {
-            Debug.Log(StatsHandler.CalculateStat(StatsEnum.Health) + " Health ");
-            Debug.Log(StatsHandler.CalculateStat(StatsEnum.Damage) + " Dam ");
-            
-            AttackApplier.ApplyDamage(new AttackData
+            if (AbilityHandler.CurrentAbility is SingleTargetAbility singeTargetAbility)
             {
-                Damage = StatsHandler.CalculateStat(StatsEnum.Damage),
-                DamageApplierLayerMask = LayerMask
-            }, timeOfActiveCollider);
+                var raycastable = _playerStateMachine.ReusableData.Raycastable;
+
+                switch (raycastable)
+                {
+                    case IDamageReceiver damageReceiver:
+                        var attackData = new AttackData
+                        {
+                            DamageApplierLayerMask = LayerMask,
+                            DamageApplier = this,
+                            DamageReceiver = damageReceiver,
+                        };
+
+                        singeTargetAbility.Cast(singeTargetAbility.ActiveAbilityDefinition.SelfCasted
+                            ? gameObject
+                            : _playerStateMachine.ReusableData.Raycastable.GameObject, attackData);
+                        break;
+                }
+            }
         }
 
+        public void CastedProjectile()
+        {
+            if (AbilityHandler.CurrentAbility is ProjectileAbility projectileAbility)
+            {
+                var raycastable = _playerStateMachine.ReusableData.Raycastable;
+
+                switch (raycastable)
+                {
+                    case IDamageReceiver damageReceiver:
+                        var attackData = new AttackData
+                        {
+                            DamageApplierLayerMask = LayerMask,
+                            DamageApplier = this,
+                            DamageReceiver = damageReceiver,
+                        };
+                        
+                        projectileAbility.Shoot(attackData);
+                        break;
+                }
+            }
+        }
+
+        public void CastedSpawn()
+        {
+            if (AbilityHandler.CurrentAbility is RadiusDamageAbility radiusDamageAbility)
+            {
+                var attackData = new AttackData
+                {
+                    DamageApplier = this,
+                    DamageApplierLayerMask = gameObject.layer,
+                    Source = gameObject
+                };
+                
+                radiusDamageAbility.Spawn(_playerStateMachine.ReusableData.HoveredPoint, attackData);
+            }
+        }
+
+        private void OnWeaponEquipped(Weapon weapon)
+        {
+            AnimationChanger.ChangeRuntimeAnimatorController(weapon.AnimatorController);
+        }
+
+        public void ReceiveDamage(AttackData attackData)
+        {
+            Debug.Log("Player recieved damage");
+            _damageHandler.TakeDamage(attackData);
+        }
         
+        public void ApplyShoot(Projectile projectile, Transform targetTransform,
+            float definitionSpeed, ShotType definitionShotType,
+            bool definitionIsSpin)
+        {
+            if (Weapon.TryGetComponent(out RangedWeapon rangedWeapon))
+            {
+                rangedWeapon.Shoot(projectile, targetTransform, definitionSpeed,
+                    gameObject.layer, definitionShotType, definitionIsSpin);
+            }
+        }
+
+        public void ApplyAttack(float timeOfActiveCollider)
+        {
+            var attackData = new AttackData
+            {
+                Damage = StatsFinder.FindStat("PhysicalAttack"),
+                DamageApplierLayerMask = LayerMask,
+                Weapon = CurrentWeapon,
+                DamageApplier = this
+            };
+                
+            AttackApplier.ApplyAttack(attackData, timeOfActiveCollider, Weapon);
+        }
+        
+        public void TakeRewards(List<IRewardable> damageReceiverRewards)
+        {
+            foreach (var rewardable in damageReceiverRewards)
+            {
+                switch (rewardable)
+                {
+                    case ExperienceReward experienceReward:
+                        LevelController.CurrentExperience += experienceReward.Amount;
+                        break;
+                    case ItemReward itemReward:
+                        ObjectPicker.TryToEquipOrAddToInventory(itemReward.Item, itemReward.Amount);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(rewardable));
+                }
+            }
+        }
+        
+        private void OnLevelChanged()
+        {
+            AbilityHandler.AddPoints(_pointsPerLevel);   
+        }
     }
 }

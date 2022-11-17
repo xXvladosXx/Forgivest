@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7479554045016251138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948efed252f9405ebd2a79810e363b44, type: 3}
+  m_Name: Multiply
+  m_EditorClassIdentifier: 
+  position: {x: 113, y: 174}
+  guid: 19dbc1350d1b83248b3e740cd867c7a1
+  factorA: {fileID: 8221581579946258271}
+  factorB: {fileID: 8975535372388516875}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96dedc780d9e481ea58ff91b36bc723b, type: 3}
+  m_Name: Shock_Health_Modifier
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 3269455957007873421}
+  nodes:
+  - {fileID: 3269455957007873421}
+  - {fileID: 8975535372388516875}
+  - {fileID: -7479554045016251138}
+  - {fileID: 8221581579946258271}
+--- !u!114 &3269455957007873421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19ffb4285114742bc03537d53b2b4f2, type: 3}
+  m_Name: ResultNode
+  m_EditorClassIdentifier: 
+  position: {x: 318.84, y: 261.64}
+  guid: 8ba03c74840190e41a5dd10696dc49bf
+  child: {fileID: -7479554045016251138}
+--- !u!114 &8221581579946258271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7279430ed6041e5958864c488734beb, type: 3}
+  m_Name: Level
+  m_EditorClassIdentifier: 
+  position: {x: -155.52, y: 135.5}
+  guid: 618062604612af1438585d3223067ad6
+  _abilityName: Shock
+--- !u!114 &8975535372388516875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc85815fbb647f6ad4f2ac539232d6a, type: 3}
+  m_Name: Scalar
+  m_EditorClassIdentifier: 
+  position: {x: -117.92001, y: 300.5}
+  guid: 5831af12ca96a4d4485afca1e9e4d20f
+  m_Value: -10

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace InventorySystem
 {
@@ -7,10 +8,31 @@ namespace InventorySystem
     {
         [field: SerializeField] public ItemContainer ItemContainer { get; private set; }
         [field: SerializeField] public int Capacity { get; private set; }
+
+        [ContextMenu("Swap item")]
+        public void SwapItem()
+        {
+            ItemContainer.InitSlots();
+
+            ItemContainer.DropItemIntoContainer(1, 0);
+        }
+
+        [ContextMenu("Generate slots")]
+        public void GenerateSlot()
+        {
+            Init();
+        }
+
+        [ContextMenu("Generate slots by first slot example")]
+        public void GenerateSlotsByFirstSlotExample()
+        {
+            var firstSlot = ItemContainer.Slots[0];
+            ItemContainer.GenerateSlotsByFirstSlot(firstSlot, Capacity);
+        }
         
         public void Init()
         {
-            ItemContainer.Capacity = Capacity;
+            ItemContainer.Init(Capacity);;
         }
     }
 }

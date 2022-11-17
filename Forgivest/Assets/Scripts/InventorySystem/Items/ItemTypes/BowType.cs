@@ -1,4 +1,5 @@
 ﻿using System;
+using InventorySystem.Items.ItemTypes.Core;
 
 namespace InventorySystem.Items.ItemTypes
 {

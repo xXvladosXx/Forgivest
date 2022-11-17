@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d27560776543e98610f77408707042, type: 3}
+  m_Name: Shock
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  <Rarity>k__BackingField: {fileID: 0}
+  <Name>k__BackingField: 
+  <Prefab>k__BackingField: {fileID: 0}
+  <MaxItemsInStack>k__BackingField: 1
+  <Sprite>k__BackingField: {fileID: 0}
+  <ItemID>k__BackingField:
+    Id: 13
+  <ItemType>k__BackingField: 13
+  <ItemDescription>k__BackingField: Desss
+  _gameplayEffectDefinitions:
+  - {fileID: 11400000, guid: 78e86dd6d2e0d5d4295070606c64eff3, type: 2}
+  _maxLevel: 5
+  _level: 2
+  _requiredLevel: 0
+  _requiredAbilityPoints: 0
+  <AnimationName>k__BackingField: FirstSkill
+  <Cost>k__BackingField: {fileID: 11400000, guid: 74d19faa2ec925d45ab9446a431b7294,
+    type: 2}
+  <Cooldown>k__BackingField: {fileID: 11400000, guid: bdcc0a39ff6f9f048a4f24c4fcae36a9,
+    type: 2}
+  <SelfCasted>k__BackingField: 0

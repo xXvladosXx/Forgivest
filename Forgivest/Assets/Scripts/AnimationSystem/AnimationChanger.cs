@@ -15,17 +15,25 @@ namespace AnimationSystem
         {
             _animator.SetBool(animationHash, true);
         }
-
+        
         public void UpdateBlendAnimation(int animationHash, float speed, float dampTime)
         {
             _animator.SetFloat(animationHash, speed, dampTime, Time.deltaTime);
         }
         
-        
-        
         public void StopAnimation(int animationHash)
         {
             _animator.SetBool(animationHash, false);
+        }
+
+        public void ChangeRuntimeAnimatorController(RuntimeAnimatorController weaponAnimatorController)
+        {
+            _animator.runtimeAnimatorController = weaponAnimatorController;
+        }
+
+        public void StartAnimation(string animationName)
+        {
+            _animator.SetBool(animationName, true);
         }
     }
 }

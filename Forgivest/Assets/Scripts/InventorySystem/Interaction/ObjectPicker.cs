@@ -1,32 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
+using InventorySystem.Core;
 using InventorySystem.Items;
-using RaycastSystem.Core;
+using InventorySystem.Items.Core;
+using InventorySystem.Items.ItemTypes.Core;
+using InventorySystem.Items.Weapon;
 using Sirenix.OdinInspector;
-using StatsSystem.Core;
-using StatsSystem.Core.Bonuses.Core;
+using StatsSystem.Scripts.Runtime;
+using StatSystem;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace InventorySystem.Interaction
 {
-    public class ObjectPicker : SerializedMonoBehaviour, IModifier
+    public class ObjectPicker : SerializedMonoBehaviour, IStatsChangeable
     {
         [field: SerializeField] public Inventory Inventory { get; private set; }
+        [field: SerializeField] public Inventory Equipment { get; private set; }
+        [field: SerializeField] public Inventory Hotbar { get; private set; }
+
         [field: SerializeField] public ItemEquipHandler ItemEquipHandler { get; private set; }
         [field: SerializeField] public PickableItem PickableItem { get; private set; }
         [field: SerializeField] public PickableItem PickableItem1 { get; private set; }
-        
-        private RaycastUser _raycastUser;
 
-        public void Init(RaycastUser raycastUser)
-        {
-            _raycastUser = raycastUser;
-        }
+        public event Action<List<StatModifier>> OnStatAdded;
+        public event Action<List<StatModifier>> OnStatRemoved;
 
-        private void Awake()
+        public void Init()
         {
             Inventory.Init();
+            Equipment.Init();
+            Hotbar.Init();
+            
+            ItemEquipHandler.Init();
+        }
+
+        private void Start()
+        { 
+            IItem weapon = null;
+            foreach (var itemSlot in Equipment.ItemContainer.Slots)
+            {
+                if(itemSlot == null) continue;
+                if(itemSlot.Item == null) continue;
+                if(itemSlot.Item.ItemType != ItemType.Sword) continue;
+
+                weapon = itemSlot.Item;
+                break;
+            }
+            
+            if (weapon != null)
+            {
+                ItemEquipHandler.TryToEquip(weapon as StatsableItem);
+            }
+        }
+
+        private void OnEnable()
+        {
+            ItemEquipHandler.OnItemEquipped += RecalculateStats;
+            ItemEquipHandler.OnItemUnquipped += RecalculateStats;
+            if (Equipment != null)
+            {
+                Equipment.ItemContainer.OnItemAdded += OnItemEquipped;
+                Equipment.ItemContainer.OnItemRemoved += OnItemRemoved;
+            }
+        }
+
+        private void OnDisable()
+        {
+            ItemEquipHandler.OnItemEquipped -= RecalculateStats;
+            ItemEquipHandler.OnItemUnquipped -= RecalculateStats;
+
+            if (Equipment != null)
+            {
+                Equipment.ItemContainer.OnItemAdded -= OnItemEquipped;
+                Equipment.ItemContainer.OnItemRemoved -= OnItemRemoved;
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -37,37 +84,49 @@ namespace InventorySystem.Interaction
             }
         }
 
-        public void CollectObject(IPickable pickable)
+        private void CollectObject(IPickable pickable)
         {
             switch (pickable)
             {
                 case PickableItem pickableItem:
-                    Inventory.ItemContainer.TryToAdd(this, pickableItem.Item, pickableItem.Amount);
-                    ItemEquipHandler.TryToEquip(pickableItem.Item as StatsableItem);
+                    TryToEquipOrAddToInventory(pickableItem.Item, pickableItem.Amount);
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(pickable));
             }
         }
 
-        public event Action<List<IBonus>> OnBonusAdded;
-        public event Action<List<IBonus>> OnBonusRemoved;
-        public List<IBonus> GetBonus()
+        public bool TryToEquipOrAddToInventory(Item item, int amount)
         {
-            var bonuses = new List<IBonus>();
-
-            foreach (var weapon in Inventory.ItemContainer.GetAllItems())
+            var equipped = Equipment.ItemContainer.TryToAdd(this, item, amount) &&
+                ItemEquipHandler.CurrentWeapon != ItemEquipHandler.StartWeapon;
+            if (!equipped)
             {
-                if (weapon is IStatsable statsable)
-                {
-                    bonuses.AddRange(statsable.StatsBonuses);
-                    bonuses.AddRange(statsable.CharacteristicBonuses);
-                }
+                return Inventory.ItemContainer.TryToAdd(this, item, amount);
             }
 
-            return bonuses;
+            return true;
         }
 
+        private void RecalculateStats(StatsableItem statsableItem, bool adding)
+        {
+            if (adding)
+            {
+                OnStatAdded?.Invoke(statsableItem.StatModifier);
+            }
+            else
+            {
+                OnStatRemoved?.Invoke(statsableItem.StatModifier);
+            }
+        }
         
+        
+        private void OnItemRemoved(object sender, IItem item, int amount, ItemContainer itemContainer)
+        {
+            ItemEquipHandler.Unequip((StatsableItem)item);
+        }
+
+        private void OnItemEquipped(object sender, IItem item, int amount, ItemContainer itemContainer)
+        {
+            ItemEquipHandler.TryToEquip((StatsableItem)item);
+        }
     }
 }

@@ -10,7 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 220415a71b374399b187115024987e5a, type: 3}
+<<<<<<<< HEAD:Forgivest/Assets/ScriptableObjects/AIAgent/EnemyAnimationData.asset
   m_Name: EnemyAnimationData
+========
+  m_Name: PlayerAnimSettings
+>>>>>>>> c686a74df6281645702e4377382f0951c4c59f4c:Forgivest/Assets/ScriptableObjects/Data/Player/PlayerAnimSettings.asset
   m_EditorClassIdentifier: 
   HorizontalParameterName: Horizontal
   VerticalParameterName: Vertical
@@ -41,3 +45,9 @@ MonoBehaviour:
   _attackParameterName: Attack
   _speedParameterName: Speed
   _fallParameterName: isFalling
+  _skillParameterName: SkillCast
+  _firstSkillParameterName: FirstSkill
+  _secondSkillParameterName: SecondSkill
+  _thirdSkillParameterName: ThirdSkill
+  _fourthSkillParameterName: FourthSkill
+  _fifthSkillParameterName: FifthSkill

@@ -1,13 +1,22 @@
 ﻿using System;
-using ModestTree.Util;
+using System.Collections.Generic;
+using AttackSystem.Reward.Core;
+using ColliderSystem;
+using CombatSystem.Scripts.Runtime;
+using StatSystem.Scripts.Runtime;
 using UnityEngine;
+using Weapon = InventorySystem.Items.Weapon.Weapon;
 
 namespace AttackSystem.Core
 {
     public interface IDamageApplier
     {
-        event Action<AttackData> OnDamageApplied; 
-
-        void ApplyDamage(AttackData attackData, float timeOfActivation);
+        GameObject Weapon { get; }
+        Weapon CurrentWeapon { get; }
+        void ApplyAttack(float timeOfActivation);
+        void ApplyShoot(Projectile projectile, Transform targetTransform, float definitionSpeed,
+            ShotType definitionShotType, bool definitionIsSpin);
+        void TakeRewards(List<IRewardable> damageReceiverRewards);
+        event Action<AttackData> OnDamageApplied;
     }
 }

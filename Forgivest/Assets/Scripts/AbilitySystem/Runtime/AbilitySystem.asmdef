@@ -1,0 +1,27 @@
+{
+    "name": "AbilitySystem",
+    "rootNamespace": "AbilitySystem",
+    "references": [
+        "GUID:783731ba12ec48d4a8043a554e3a78b3",
+        "GUID:53fde695a805bd343831eaac2b9819c0",
+        "GUID:6b346e52d321453438a4676f2cf60532",
+        "GUID:313a288508e809d499f46c6706f167ee",
+        "GUID:225975f181968a141b48a5364df1813d",
+        "GUID:fcbe2b79f800e324aa3cf5ab7f1abb35",
+        "GUID:7c8e291869ff18945bd9c5af27a37639",
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Sirenix.Serialization.dll",
+        "Zenject-usage.dll",
+        "System.Linq.Dynamic.Core.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

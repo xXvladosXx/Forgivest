@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220415a71b374399b187115024987e5a, type: 3}
+  m_Name: PlayerAnimSettings
+  m_EditorClassIdentifier: 
+  HorizontalParameterName: Horizontal
+  VerticalParameterName: Vertical
+  _groundedParameterName: Grounded
+  _movingParameterName: Moving
+  _stoppingParameterName: Stopping
+  _landingParameterName: Landing
+  _airborneParameterName: Airborne
+  _idleParameterName: isIdling
+  _dashParameterName: isDashing
+  _walkParameterName: isWalking
+  _runParameterName: isRunning
+  _sprintParameterName: isSprinting
+  _mediumStopParameterName: isMediumStopping
+  _hardStopParameterName: isHardStopping
+  _rollParameterName: isRolling
+  _hardLandParameterName: isHardLanding
+  _aimingParameterName: isAiming
+  _firingParameterName: isFiring
+  _equippingParameterName: isEquipping
+  _reloadingParameterName: isReloading
+  _comboParameterName: Combo
+  _airAttackParameterName: AirAttack
+  _airAttackLandedParameterName: AirAttackLanded
+  _airAttackDashParameterName: AirAttackDash
+  _dashAttackParameterName: DashAttack
+  _sprintAttackParameterName: SprintAttack
+  _attackParameterName: Attack
+  _speedParameterName: Speed
+  _fallParameterName: isFalling
+  _skillParameterName: SkillCast
+  _firstSkillParameterName: FirstSkill
+  _secondSkillParameterName: SecondSkill
+  _thirdSkillParameterName: ThirdSkill
+  _fourthSkillParameterName: FourthSkill
+  _fifthSkillParameterName: FifthSkill

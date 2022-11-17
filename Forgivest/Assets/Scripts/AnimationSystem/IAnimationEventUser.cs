@@ -9,5 +9,8 @@ namespace AnimationSystem
         void OnAnimationTransitioned();
         void OnAnimationEnded();
         void ApplyAttack(float timeOfActiveCollider);
+        void CastedSkill();
+        void CastedProjectile();
+        void CastedSpawn();
     }
 }

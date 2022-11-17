@@ -26,5 +26,20 @@ namespace AnimationSystem
         {
             AnimationEventUser.ApplyAttack(colliderActivationTime);
         }
+
+        public void Cast()
+        {
+            AnimationEventUser.CastedSkill();
+        }
+        
+        public void Shoot()
+        {
+            AnimationEventUser.CastedProjectile();
+        }
+
+        public void Spawn()
+        {
+            AnimationEventUser.CastedSpawn();
+        }
     }
 }

@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d27560776543e98610f77408707042, type: 3}
+  m_Name: DeathMeteor
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  <Rarity>k__BackingField: {fileID: 11400000, guid: 3721210cfbc75d340842b6bb87a8e1e1,
+    type: 2}
+  <Name>k__BackingField: Death Meteor
+  <Prefab>k__BackingField: {fileID: 0}
+  <MaxItemsInStack>k__BackingField: 1
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 12c28f7828b9dac429b215fda81958ad,
+    type: 3}
+  <ItemID>k__BackingField:
+    Id: 15
+  <ItemType>k__BackingField: 13
+  _itemDescription: Applies Death Meteor
+  _gameplayEffectDefinitions:
+  - {fileID: 11400000, guid: ec4fd24a2330d2a499c57da15ed70d70, type: 2}
+  _maxLevel: 0
+  _level: 5
+  _requiredLevel: 0
+  _requiredAbilityPoints: 0
+  <AnimationName>k__BackingField: SixthSkill
+  <Cost>k__BackingField: {fileID: 11400000, guid: 5d95464ed30a77045adf86209afe0694,
+    type: 2}
+  <Cooldown>k__BackingField: {fileID: 11400000, guid: de24d071e9ddd2445ae1b6963db86b9a,
+    type: 2}
+  <SelfCasted>k__BackingField: 0

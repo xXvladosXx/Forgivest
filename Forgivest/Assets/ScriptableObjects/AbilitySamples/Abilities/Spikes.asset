@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7074707a9ef4d688006326db42188eb, type: 3}
+  m_Name: Spikes
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  <Rarity>k__BackingField: {fileID: 11400000, guid: 3721210cfbc75d340842b6bb87a8e1e1,
+    type: 2}
+  <Name>k__BackingField: Spikes
+  <Prefab>k__BackingField: {fileID: 0}
+  <MaxItemsInStack>k__BackingField: 1
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 2c958c9b804623e419640f74165a4e37,
+    type: 3}
+  <ItemID>k__BackingField:
+    Id: 14
+  <ItemType>k__BackingField: 13
+  _itemDescription: Spikes skill
+  _gameplayEffectDefinitions:
+  - {fileID: 11400000, guid: 7596c85687f850044aa3a959d4997a48, type: 2}
+  _maxLevel: 0
+  _level: 5
+  _requiredLevel: 0
+  _requiredAbilityPoints: 0
+  <AnimationName>k__BackingField: SecondSkill
+  <Cost>k__BackingField: {fileID: 11400000, guid: 0b9711d42aa39ae44909ee55e2015593,
+    type: 2}
+  <Cooldown>k__BackingField: {fileID: 11400000, guid: 5f131bbeb258f224ab00aea1fba7faea,
+    type: 2}
+  <SelfCasted>k__BackingField: 0
+  _offset: {x: 0, y: 0, z: 0}
+  _facingPointCast: 0
+  _radiusDamager: {fileID: 990221070492235616, guid: 61e6d5616eaf8c34097ab1368063059e,
+    type: 3}
+  _playerPosition: {x: 0, y: 0, z: 3}
+  _spawnOnPlayerPosition: 1
