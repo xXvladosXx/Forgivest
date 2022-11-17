@@ -3,6 +3,7 @@ using AnimationSystem;
 using AttackSystem;
 using MovementSystem;
 using StatsSystem;
+using StatSystem;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -28,7 +29,7 @@ namespace AI.StateMachine.Core
         
         IAnimationEventUser AnimationEventUser { get; }
         
-        StatsHandler StatsHandler { get; }
+        StatController StatController { get; }
 
         AttackApplier AttackApplier { get; }
         

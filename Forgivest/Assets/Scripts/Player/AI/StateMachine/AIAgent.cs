@@ -1,52 +1,48 @@
+using System;
+using System.Collections.Generic;
 using AI.StateMachine.Config;
 using AI.StateMachine.Core;
 using AnimationSystem;
 using AttackSystem;
 using AttackSystem.Core;
+using AttackSystem.Reward.Core;
 using Data.Player;
 using InventorySystem.Interaction;
+using InventorySystem.Items.Weapon;
 using MovementSystem;
-using StatsSystem;
-using StatsSystem.Core;
-using Unity.VisualScripting;
+using StatSystem;
+using StatSystem.Scripts.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace AI.StateMachine
 {
-    public class AIAgent : MonoBehaviour, IAIEnemy, IAnimationEventUser
+    public class AIAgent : MonoBehaviour, IAIEnemy, IAnimationEventUser, IDamageApplier
     {
         [field: SerializeField] public GameObject[] Objects { get; private set; }
-        
         [field: SerializeField] public AliveEntityAnimationData AliveEntityAnimationData { get; private set; }
-
-        public GameObject Enemy => gameObject; 
         [field: SerializeField] public AIAgentConfig Config { get; private set; }
-        
+        [field: SerializeField] public StatsFinder StatsFinder { get; private set; }
+        [field: SerializeField] public CooldownSystem Cooldown { get; private set; }
+        [field: SerializeField] public StatController StatController { get; private set; }
+        [field: SerializeField] private ObjectPicker _objectPicker;
+
         private Rigidbody _rb;
         
         public Movement Movement { get; private set; }
         public NavMeshAgent NavMeshAgent { get; private set; }
         public Transform Target { get; private set; }
         public AIStateMachine StateMachine { get; private set; }
-        
         public AttackApplier AttackApplier { get; private set; }
-        
-        [field: SerializeField] public CooldownSystem Cooldown { get; private set; }
-
-
-        [field: SerializeField] public StatsHandler StatsHandler { get; private set; }
         
         public Animator Animator { get; private set; }
         public AnimationChanger AnimationChanger { get; private set; }
         
         
         
-        [field: SerializeField] private ObjectPicker _objectPicker;
         
         public IAnimationEventUser AnimationEventUser => this; 
-        
-        
+        public GameObject Enemy => gameObject; 
         
         public LayerMask LayerMask => gameObject.layer;
 
@@ -60,9 +56,7 @@ namespace AI.StateMachine
             Movement = new Movement(NavMeshAgent, _rb, transform);
             AnimationChanger = new AnimationChanger(Animator);
             
-            
-
-            AttackApplier = new AttackApplier(_objectPicker.ItemEquipHandler);
+            AttackApplier = new AttackApplier();
         }
 
         private void Start()
@@ -92,16 +86,46 @@ namespace AI.StateMachine
            StateMachine.OnAnimationExitEvent();
         }
 
+        public GameObject Weapon { get; }
+        public Weapon CurrentWeapon { get; }
+
         public void ApplyAttack(float timeOfActiveCollider)
         {
-            AttackApplier.ApplyDamage(new AttackData
+            var attackData = new AttackData
             {
-                Damage = StatsHandler.CalculateStat(StatsEnum.Damage),
-                DamageApplierLayerMask = LayerMask
-            }, timeOfActiveCollider);
+                Damage = StatsFinder.FindStat("PhysicalAttack"),
+                DamageApplierLayerMask = LayerMask,
+                Weapon = CurrentWeapon,
+                DamageApplier = this
+            };
+                
+            AttackApplier.ApplyAttack(attackData, timeOfActiveCollider, Weapon);
         }
 
+        public void ApplyShoot(Projectile projectile, Transform targetTransform, float definitionSpeed, ShotType definitionShotType,
+            bool definitionIsSpin)
+        {
+            
+        }
 
-       
+        public void TakeRewards(List<IRewardable> damageReceiverRewards)
+        {
+            
+        }
+
+        public event Action<AttackData> OnDamageApplied;
+
+        public void CastedSkill()
+        {
+            
+        }
+
+        public void CastedProjectile()
+        {
+        }
+
+        public void CastedSpawn()
+        {
+        }
     }
 }
