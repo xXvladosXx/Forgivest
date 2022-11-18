@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core;
-using LevelSystem.Nodes;
-using SaveSystem.Scripts.Runtime;
+using LevelSystem.Scripts.Runtime.Nodes;
 using UnityEngine;
 
-namespace LevelSystem
+namespace LevelSystem.Scripts.Runtime
 {
     public class LevelController : MonoBehaviour, ILevelable
     {

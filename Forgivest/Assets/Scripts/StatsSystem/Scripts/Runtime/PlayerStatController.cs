@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using LevelSystem;
-using LevelSystem.Nodes;
+using LevelSystem.Scripts.Runtime;
+using LevelSystem.Scripts.Runtime.Nodes;
 using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 

@@ -1,18 +1,17 @@
 ﻿using System;
 using UI.Core;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.InputSystem.LowLevel;
 
-namespace UI.Menu
+namespace UI.InputChecker
 {
     public class InputChecker : UIElement
     {
-        [SerializeField] private GameObject _menu;
-        [SerializeField] private GameObject _gameHeader;
-
         private event Action <InputEventPtr, InputDevice> OnInputEvent;
+
+        public event Action OnHidden;
+        
         private void Awake()
         {
             OnInputEvent = (eventPtr, device) =>
@@ -28,26 +27,26 @@ namespace UI.Menu
                         continue;
                     if (control.ReadValueFromEvent(eventPtr, out var value) && value >= buttonPressPoint)
                     {
-                        HideHeader();
+                        Hide();
                         break;
                     }
                 }
             };
+        }
 
+        private void OnEnable()
+        {
             InputSystem.onEvent += OnInputEvent;
         }
 
-        private void HideHeader()
+        private void OnDisable()
         {
             InputSystem.onEvent -= OnInputEvent;
-                
-            _gameHeader.SetActive(false);
-            ShowMenu();
         }
 
-        private void ShowMenu()
+        public override void Hide()
         {
-            _menu.SetActive(true);
+            OnHidden?.Invoke();
         }
     }
 }

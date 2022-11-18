@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace AI
+namespace Player.AI
 {
     public class PSelector : Node
     {

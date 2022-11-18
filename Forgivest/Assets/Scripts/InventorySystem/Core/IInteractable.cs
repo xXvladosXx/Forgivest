@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Interaction.Core
+namespace InventorySystem.Core
 {
     public interface IInteractable
     {

@@ -1,7 +1,6 @@
-using Data.Player;
 using UnityEngine;
 
-namespace AI.StateMachine.Config
+namespace Player.AI.StateMachine.Core.Config
 {
     [CreateAssetMenu( fileName = "AIConfig", menuName = "AI/State" )]
     public class AIAgentConfig : ScriptableObject

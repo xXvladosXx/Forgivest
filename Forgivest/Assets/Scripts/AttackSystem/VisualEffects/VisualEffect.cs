@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace AbilitySystem.AbilitySystem.Runtime
+namespace AttackSystem.VisualEffects
 {
     public class VisualEffect : MonoBehaviour
     {

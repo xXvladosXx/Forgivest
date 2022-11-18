@@ -1,5 +1,4 @@
-﻿using StateMachine.Player;
-using StateMachine.Player.States;
+﻿using Player.StateMachine.Player;
 using UnityEngine;
 
 namespace Player.States.Attack

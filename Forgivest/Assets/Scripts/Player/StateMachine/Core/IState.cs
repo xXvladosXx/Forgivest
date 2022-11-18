@@ -1,8 +1,4 @@
-using System.Collections.Generic;
-using StateMachine.Player;
-using UnityEngine;
-
-namespace AnimatorStateMachine.StateMachine
+namespace Player.StateMachine.Core
 {
     public interface IState
     {

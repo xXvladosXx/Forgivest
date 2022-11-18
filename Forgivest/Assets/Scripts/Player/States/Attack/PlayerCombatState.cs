@@ -1,6 +1,6 @@
-﻿using Player.States.Attack;
+﻿using Player.StateMachine.Player;
 
-namespace StateMachine.Player.States.Attack
+namespace Player.States.Attack
 {
     public class PlayerCombatState : PlayerAttackState
     {

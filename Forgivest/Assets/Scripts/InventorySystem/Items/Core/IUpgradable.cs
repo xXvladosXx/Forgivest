@@ -1,6 +1,4 @@
-﻿using InventorySystem.Items.Core;
-
-namespace InventorySystem.Items
+﻿namespace InventorySystem.Items.Core
 {
     public interface IUpgradable
     {

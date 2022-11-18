@@ -1,4 +1,4 @@
-using StateMachine.Player;
+using Player.StateMachine.Player;
 
 namespace Player.States.Moving
 {

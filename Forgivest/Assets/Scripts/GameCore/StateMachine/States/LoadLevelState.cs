@@ -1,5 +1,7 @@
-﻿using UI.Loading;
+﻿using System;
+using UI.Loading;
 using UnityEngine;
+using Utilities;
 
 namespace GameCore.StateMachine.States
 {
@@ -12,6 +14,8 @@ namespace GameCore.StateMachine.States
         private const string PLAYER = "Player";
         private const string PLAYER_INITIAL_POINT = "PlayerInitialPoint";
 
+        public event Action OnGameStarted;
+        
         public LoadLevelState(GameStateMachine gameStateMachine,
             SceneLoader sceneLoader, LoadingScreen loadingScreen)
         {
@@ -30,23 +34,25 @@ namespace GameCore.StateMachine.States
         public void Exit()
         {
             _loadingScreen.HideLoadingScreen();
-            _loadingScreen.OnStartGame -= StartGame;
+            _loadingScreen.OnStartGame -= OnGameStarted;
         }
         
         private void OnLoaded()
         {
             var initialPoint = GameObject.FindWithTag(PLAYER_INITIAL_POINT);
             var player = GameObject.FindWithTag(PLAYER);
+            player.GetComponent<PlayerInputProvider>().enabled = false;
 
             player.transform.position = initialPoint.transform.position;
             _loadingScreen.LoadProgress(1);
 
-            _loadingScreen.OnStartGame += StartGame;
-        }
-
-        private void StartGame()
-        {
-            _gameStateMachine.Enter<GameLoopState>();
+            OnGameStarted += () =>
+            {
+                player.GetComponent<PlayerInputProvider>().enabled = true;
+                _gameStateMachine.Enter<GameLoopState>();
+            };
+            
+            _loadingScreen.OnStartGame += OnGameStarted;
         }
     }
 }

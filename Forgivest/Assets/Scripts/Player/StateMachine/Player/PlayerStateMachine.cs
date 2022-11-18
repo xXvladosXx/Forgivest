@@ -1,22 +1,19 @@
 ﻿using AbilitySystem.AbilitySystem.Runtime.Abilities;
 using AnimationSystem;
-using AnimatorStateMachine.StateMachine;
-using AttackSystem;
+using AnimationSystem.Data;
 using AttackSystem.Core;
 using Data.Player;
 using MovementSystem;
+using Player.States;
+using Player.States.Attack;
 using Player.States.Moving;
 using Player.States.Skill.Skills;
 using RaycastSystem;
-using RaycastSystem.Core;
-using StateMachine.Player.States;
-using StateMachine.Player.States.Attack;
 using Utilities;
 
-
-namespace StateMachine.Player
+namespace Player.StateMachine.Player
 {
-    public class PlayerStateMachine : StateMachine
+    public class PlayerStateMachine : Core.StateMachine
     {
         public Rotator Rotator { get; }
         public AnimationChanger AnimationChanger { get; }

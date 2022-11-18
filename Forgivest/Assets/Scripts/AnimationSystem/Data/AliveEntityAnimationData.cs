@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Data.Player
+namespace AnimationSystem.Data
 {
     [CreateAssetMenu(menuName = "StateMachine/AnimationData")]
     public class AliveEntityAnimationData : ScriptableObject

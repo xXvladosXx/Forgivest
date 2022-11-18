@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using StatsSystem.Scripts.Runtime;
-using StatSystem;
 
 //using StatsSystem.Core.Bonuses;
 
-namespace InventorySystem.Items
+namespace InventorySystem.Items.Core
 {
     public interface IStatsable
     {

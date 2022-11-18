@@ -1,5 +1,5 @@
 ﻿using System;
-using Interaction.Core;
+using InventorySystem.Core;
 using RaycastSystem.Core;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,7 +8,7 @@ using Utilities;
 
 namespace RaycastSystem
 {
-    public class PlayerRaycastUser : RaycastUser
+    public class PlayerRaycastUser : IRaycastUser
     {
         private readonly PlayerInputProvider _playerInputProvider;
         private readonly PlayerRaycastSettings _playerRaycastSettings;
@@ -40,7 +40,7 @@ namespace RaycastSystem
             if (InteractWithComponent()) return;
             if (InteractWithMovement()) return;
             
-            SetCursor(CursorType.UI);
+            (this as IRaycastUser).SetCursor(CursorType.UI);
         }
 
         private bool InteractWithMovement()
@@ -52,7 +52,7 @@ namespace RaycastSystem
                 Interactable = null;
                 Raycastable = null;
                 
-                SetCursor(CursorType.Movement);
+                (this as IRaycastUser).SetCursor(CursorType.Movement);
                 return true;
             }
             return false;
@@ -70,7 +70,7 @@ namespace RaycastSystem
                     {
                         Interactable = raycastable as IInteractable;
                         Raycastable = raycastable;
-                        SetCursor(raycastable.GetCursorType());
+                        (this as IRaycastUser).SetCursor(raycastable.GetCursorType());
                         return true;
                     }
                 }
@@ -98,19 +98,14 @@ namespace RaycastSystem
                 Interactable = null;
                 Raycastable = null;
 
-                SetCursor(CursorType.UI);
+                (this as IRaycastUser).SetCursor(CursorType.UI);
                 return true;
             }
+            
             return false;
         }
 
-        private void SetCursor(CursorType cursorType)
-        {
-            var mapping = GetCursorMapping(cursorType);
-            Cursor.SetCursor(mapping.Texture, mapping.Hotspot, CursorMode.Auto);
-        }
-        
-        private PlayerRaycastSettings.CursorMapping GetCursorMapping(CursorType type)
+        public PlayerRaycastSettings.CursorMapping GetCursorMapping(CursorType type)
         {
             foreach (PlayerRaycastSettings.CursorMapping mapping in _playerRaycastSettings.CursorMappings)
             {
@@ -121,7 +116,7 @@ namespace RaycastSystem
             }
             return _playerRaycastSettings.CursorMappings[0];
         }
-        
+
         private bool RaycastNavMesh(out Vector3 target)
         {
             target = new Vector3();
@@ -142,7 +137,7 @@ namespace RaycastSystem
             return true;
         }
 
-        public override RaycastHit? Raycast(Vector2 pointFrom)
+        public  RaycastHit? Raycast(Vector2 pointFrom)
         {
             var ray = _camera.ScreenPointToRay(pointFrom);
             var hasHit = Physics.Raycast(ray, out var raycastHit, Mathf.Infinity);
@@ -153,7 +148,7 @@ namespace RaycastSystem
             return null;
         }
 
-        public override RaycastHit? RaycastExcept(Vector2 pointFrom, LayerMask layerMask)
+        public  RaycastHit? RaycastExcept(Vector2 pointFrom, LayerMask layerMask)
         {
             if (EventSystem.current.IsPointerOverGameObject())
             {

@@ -1,8 +1,7 @@
 ﻿using InventorySystem.Items.Core;
-using InventorySystem.Items.Weapon.SwordItem;
 using UnityEngine;
 
-namespace InventorySystem.Items.Weapon
+namespace InventorySystem.Items.Weapon.SwordItem
 {
     [CreateAssetMenu (menuName = "InventorySystem/Item/UpgradableSword")]
     public class UpgradableSword : Sword, IUpgradable

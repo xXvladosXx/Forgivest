@@ -1,4 +1,4 @@
-﻿using Interaction.Core;
+﻿using InventorySystem.Core;
 using RaycastSystem.Core;
 using UnityEngine;
 

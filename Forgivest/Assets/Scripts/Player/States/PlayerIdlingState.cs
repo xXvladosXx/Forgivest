@@ -1,6 +1,6 @@
-using Player.States;
+using Player.StateMachine.Player;
 
-namespace StateMachine.Player.States
+namespace Player.States
 {
     public class PlayerIdlingState : PlayerAliveState
     {

@@ -1,13 +1,12 @@
-﻿using AnimatorStateMachine.StateMachine;
-using Data.Player;
+﻿using Data.Player;
 using Enemy;
-using Interaction.Core;
-using RaycastSystem.Core;
+using Player.StateMachine.Core;
+using Player.StateMachine.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utilities;
 
-namespace StateMachine.Player.States
+namespace Player.States
 {
     public class PlayerBaseState : IState
     {

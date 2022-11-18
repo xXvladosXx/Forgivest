@@ -40,7 +40,7 @@ namespace GameCore.StateMachine.States
 
         private void EnterLoadLevel()
         {
-            _gameStateMachine.Enter<LoadLevelState, string>("SampleScene");
+            _gameStateMachine.Enter<LoadLevelState, string>("Gameplay");
         }
 
         public void Exit()

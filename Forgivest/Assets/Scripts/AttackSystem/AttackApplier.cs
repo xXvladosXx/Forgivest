@@ -1,6 +1,6 @@
 ﻿using System;
+using AttackSystem.ColliderSystem;
 using AttackSystem.Core;
-using ColliderSystem;
 using InventorySystem;
 using InventorySystem.Interaction;
 using InventorySystem.Items.Weapon;

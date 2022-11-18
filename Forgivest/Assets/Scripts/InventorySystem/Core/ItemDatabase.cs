@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using InventorySystem.Items;
+﻿using System.Collections.Generic;
 using InventorySystem.Items.Core;
-using UnityEditor;
 using UnityEngine;
 
-namespace InventorySystem
+namespace InventorySystem.Core
 {
     [CreateAssetMenu(menuName = "InventorySystem/ItemDatabase")]
     public class ItemDatabase : ScriptableObject, ISerializationCallbackReceiver

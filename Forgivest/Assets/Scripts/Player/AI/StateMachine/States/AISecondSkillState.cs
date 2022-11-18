@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AI.StateMachine.States
+namespace Player.AI.StateMachine.States
 {
     public class AISecondSkillState : AISkillBaseState
     {

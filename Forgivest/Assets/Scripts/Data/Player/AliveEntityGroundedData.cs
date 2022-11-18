@@ -1,6 +1,4 @@
 ﻿using System;
-using Characters.Player.Data.States.Grounded;
-using Characters.Player.Data.States.Grounded.Moving;
 using Data.Player.Moving;
 using UnityEngine;
 

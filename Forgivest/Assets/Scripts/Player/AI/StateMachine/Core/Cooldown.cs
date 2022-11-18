@@ -1,4 +1,4 @@
-namespace AI.StateMachine.Core
+namespace Player.AI.StateMachine.Core
 {
     public interface IHasCooldown
     {

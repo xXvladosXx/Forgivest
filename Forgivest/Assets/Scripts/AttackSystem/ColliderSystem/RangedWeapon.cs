@@ -1,11 +1,8 @@
-﻿using AbilitySystem.AbilitySystem.Runtime;
-using AttackSystem.Core;
-using ColliderSystem;
-using InventorySystem.Items.Weapon;
-using StatSystem.Scripts.Runtime;
+﻿using AttackSystem.Core;
+using CombatSystem.Scripts.Runtime;
 using UnityEngine;
 
-namespace AttackSystem
+namespace AttackSystem.ColliderSystem
 {
     public class RangedWeapon : AttackColliderActivator
     {

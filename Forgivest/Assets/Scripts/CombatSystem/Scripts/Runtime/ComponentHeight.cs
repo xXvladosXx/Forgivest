@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-namespace AbilitySystem.AbilitySystem.Runtime
+namespace CombatSystem.Scripts.Runtime
 {
     public class ComponentHeight
     {

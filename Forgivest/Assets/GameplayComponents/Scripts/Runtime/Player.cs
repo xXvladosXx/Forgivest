@@ -1,6 +1,7 @@
 ﻿using AbilitySystem.AbilitySystem.Runtime.Abilities;
 using CombatSystem.Scripts.Runtime;
 using LevelSystem;
+using LevelSystem.Scripts.Runtime;
 using StatSystem;
 using UnityEngine;
 using UnityEngine.AI;

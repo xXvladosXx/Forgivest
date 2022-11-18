@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Characters.Player.Data.States.Grounded.Moving
+namespace Data.Player.Moving
 {
     [Serializable]
     public class AliveEntityWalkData

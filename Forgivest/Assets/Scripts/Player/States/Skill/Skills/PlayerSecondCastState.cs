@@ -2,7 +2,7 @@
 using AbilitySystem.AbilitySystem.Runtime.Abilities;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Active;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
-using StateMachine.Player;
+using Player.StateMachine.Player;
 using UnityEngine;
 
 namespace Player.States.Skill.Skills

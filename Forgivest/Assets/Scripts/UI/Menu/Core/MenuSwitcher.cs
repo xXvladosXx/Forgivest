@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UI.Core;
+using UI.Warning;
 using UnityEngine;
 
 namespace UI.Menu.Core
@@ -12,13 +13,17 @@ namespace UI.Menu.Core
         
         [SerializeField] private Menu _startingMenu;
         [SerializeField] private Menu[] _menus;
+        [SerializeField] private BaseWarning _warning;
         
         private Menu _currentMenu;
         private readonly Stack<Menu> _history = new Stack<Menu>();
         
+        
         private void Awake()
         {
             Instance = this;
+            
+            Hide();
         }
 
         private void Start()

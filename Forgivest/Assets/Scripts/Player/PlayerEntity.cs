@@ -4,7 +4,9 @@ using AbilitySystem;
 using AbilitySystem.AbilitySystem.Runtime.Abilities;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Active;
 using AnimationSystem;
+using AnimationSystem.Data;
 using AttackSystem;
+using AttackSystem.ColliderSystem;
 using AttackSystem.Core;
 using AttackSystem.Reward;
 using AttackSystem.Reward.Core;
@@ -12,11 +14,12 @@ using Data.Player;
 using InventorySystem.Interaction;
 using InventorySystem.Items.Weapon;
 using LevelSystem;
+using LevelSystem.Scripts.Runtime;
 using MovementSystem;
+using Player.StateMachine.Player;
 using RaycastSystem;
 using RaycastSystem.Core;
 using Requirements.Core;
-using StateMachine.Player;
 using StatSystem;
 using StatSystem.Scripts.Runtime;
 using UnityEngine;
@@ -122,7 +125,7 @@ namespace Player
             return CursorType.Movement;
         }
 
-        public bool HandleRaycast(RaycastUser raycastUser)
+        public bool HandleRaycast(IRaycastUser raycastUser)
         {
             return true;
         }

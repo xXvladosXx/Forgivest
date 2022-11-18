@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using AI.StateMachine.Config;
-using AI.StateMachine.Core;
 using AnimationSystem;
+using AnimationSystem.Data;
 using AttackSystem;
 using AttackSystem.Core;
 using AttackSystem.Reward.Core;
@@ -10,12 +9,14 @@ using Data.Player;
 using InventorySystem.Interaction;
 using InventorySystem.Items.Weapon;
 using MovementSystem;
+using Player.AI.StateMachine.Core;
+using Player.AI.StateMachine.Core.Config;
 using StatSystem;
 using StatSystem.Scripts.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace AI.StateMachine
+namespace Player.AI.StateMachine
 {
     public class AIAgent : MonoBehaviour, IAIEnemy, IAnimationEventUser, IDamageApplier
     {

@@ -1,4 +1,4 @@
-namespace AI
+namespace Player.AI
 {
     public class Selector : Node
     {

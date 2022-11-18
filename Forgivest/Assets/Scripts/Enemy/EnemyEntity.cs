@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using AttackSystem.Core;
 using AttackSystem.Reward.Core;
-using Interaction.Core;
+using InventorySystem.Core;
 using RaycastSystem.Core;
 using Sirenix.OdinInspector;
 using StatSystem;
@@ -66,7 +66,7 @@ namespace Enemy
             return CursorType.Combat;
         }
 
-        public bool HandleRaycast(RaycastUser raycastUser)
+        public bool HandleRaycast(IRaycastUser raycastUser)
         {
             return true;
         }

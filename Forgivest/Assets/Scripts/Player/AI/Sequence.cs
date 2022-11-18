@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AI
+namespace Player.AI
 {
     public class Sequence : Node
     {

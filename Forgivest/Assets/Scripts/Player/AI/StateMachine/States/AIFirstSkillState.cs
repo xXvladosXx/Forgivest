@@ -1,8 +1,6 @@
-using AI.StateMachine.Core;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace AI.StateMachine.States
+namespace Player.AI.StateMachine.States
 {
     public class AIFirstSkillState : AISkillBaseState
     {
