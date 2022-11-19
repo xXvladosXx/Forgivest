@@ -27,25 +27,31 @@ namespace SaveSystem.Scripts.Runtime
             }
         }
 
-        public static void LoadFromBinaryFile(string path, out Dictionary<string, object> data)
+        public static Dictionary<string, object> LoadFromBinaryFile(string path)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
+            string saveFile = GetPathFromSaveFile(path);
 
-            FileStream file = File.Open(path, FileMode.Open);
+            var formatter = new BinaryFormatter();
+            var file = File.Open(path, FileMode.Open);
 
             try
             {
-                data = formatter.Deserialize(file) as Dictionary<string, object>;
+                return formatter.Deserialize(file) as Dictionary<string, object>;
             }
             catch (Exception)
             {
-                Debug.LogWarning($"Failed to load file at {path}");
-                data = new Dictionary<string, object>();
+                Debug.LogError($"Failed to load file at {path}");
+                return new Dictionary<string, object>();
             }
             finally
             {
                 file.Close();
             }
+        }
+        
+        public static string GetPathFromSaveFile(string saveFile)
+        {
+            return Path.Combine(Application.persistentDataPath, saveFile + ".sav");
         }
     }
 }

@@ -2,7 +2,8 @@
 {
     public interface ISavable
     {
-        object Data { get; }
-        void Load(object data);
+        SaveDataChannel SaveDataChannel { get; }
+        object CaptureState { get; }
+        void RestoreState(object data);
     }
 }

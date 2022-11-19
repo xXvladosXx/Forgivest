@@ -4,8 +4,7 @@ using UnityEngine;
 
 namespace SaveSystem.Scripts.Runtime
 {
-    [CreateAssetMenu(fileName = "SaveData", menuName = "SaveSystem/SaveData", order = 0)]
-    public class SaveData : ScriptableObject
+    public class SaveData
     {
         [SerializeField] private LoadDataChannel m_LoadDataChannel;
         [SerializeField] private SaveDataChannel m_SaveDataChannel;
@@ -35,7 +34,7 @@ namespace SaveSystem.Scripts.Runtime
 
         public void Load()
         {
-            FileManager.LoadFromBinaryFile(m_Path, out m_Data);
+            //FileManager.LoadFromBinaryFile(m_Path, out m_Data);
             m_LoadDataChannel.Load();
             m_Data.Clear();
         }
@@ -43,7 +42,7 @@ namespace SaveSystem.Scripts.Runtime
         public void Save()
         {
             if (previousSaveExists)
-                FileManager.LoadFromBinaryFile(m_Path, out m_Data);
+               // FileManager.LoadFromBinaryFile(m_Path, out m_Data);
             m_SaveDataChannel.Save();
             FileManager.SaveToBinaryFile(m_Path, m_Data);
             m_Data.Clear();
