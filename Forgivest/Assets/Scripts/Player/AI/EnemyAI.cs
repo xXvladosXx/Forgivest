@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace AI
+namespace Player.AI
 {
     public class EnemyAI : MovementAI
     {

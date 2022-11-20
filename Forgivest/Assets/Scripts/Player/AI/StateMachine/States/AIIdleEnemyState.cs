@@ -1,9 +1,7 @@
-using AI.StateMachine.Core;
-using AI.StateMachine.States;
-using MovementSystem;
+using Player.AI.StateMachine.Core;
 using UnityEngine;
 
-namespace AI.StateMachine
+namespace Player.AI.StateMachine.States
 {
     public class AIIdleEnemyState : AIBaseState
     {

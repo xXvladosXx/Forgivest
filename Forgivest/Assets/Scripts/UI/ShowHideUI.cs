@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace InventoryExample.UI
+namespace UI
 {
     public class ShowHideUI : MonoBehaviour
     {

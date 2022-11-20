@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using AnimatorStateMachine.StateMachine;
 using UnityEngine;
 
-namespace StateMachine
+namespace Player.StateMachine.Core
 {
     public abstract class StateMachine 
     {

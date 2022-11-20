@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LevelSystem
+namespace LevelSystem.Scripts.Runtime
 {
     public interface ILevelable
     {

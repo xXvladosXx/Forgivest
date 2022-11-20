@@ -1,9 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AI.StateMachine.Core
+namespace Player.AI.StateMachine.Core
 {
     public class CooldownSystem : MonoBehaviour
     {

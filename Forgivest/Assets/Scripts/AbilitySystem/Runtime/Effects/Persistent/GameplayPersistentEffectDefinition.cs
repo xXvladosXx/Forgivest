@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using AbilitySystem.AbilitySystem.Runtime.VisualEffects;
+using AttackSystem.VisualEffects;
 using Core;
 using UnityEngine;
 

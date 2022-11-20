@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using GameCore.Data;
+using GameCore.Data.Types;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MovementSystem
 {
-    public class Rotator
+    public class Rotator 
     {
         private readonly Rigidbody _rigidbody;
 

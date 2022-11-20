@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using GameCore.Data;
+using GameCore.Data.SaveLoad;
+using GameCore.Factory;
 using GameCore.StateMachine.States;
 using UI.Loading;
 using UI.Menu;
 using UI.Menu.Core;
 using UnityEngine;
+using Zenject;
 
 namespace GameCore.StateMachine
 {
@@ -14,13 +18,18 @@ namespace GameCore.StateMachine
         private IExitableState _activeState;
 
         public GameStateMachine(SceneLoader sceneLoader, LoadingScreen loadingScreen,
-            MenuSwitcher mainMenuSwitcher, Canvas mainMenuCanvas)
+            MenuSwitcher mainMenuSwitcher, DiContainer diContainer)
         {
             _gameStates = new Dictionary<Type, IExitableState>()
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, mainMenuSwitcher, mainMenuCanvas),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingScreen),
-                [typeof(GameLoopState)] = new GameLoopState(this),
+                [typeof(BootstrapState)] = new BootstrapState(this, mainMenuSwitcher, diContainer),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, loadingScreen, 
+                    diContainer.Resolve<IGameFactory>(),
+                    diContainer.Resolve<IPersistentProgressService>()),
+                [typeof(LoadProgressState)] = new LoadProgressState(this, 
+                    diContainer.Resolve<IPersistentProgressService>(),
+                    diContainer.Resolve<ISaveLoadService>()),
+                [typeof(GameLoopState)] = new GameLoopState(this, diContainer),
             };
         }
 

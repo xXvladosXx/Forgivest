@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SaveSystem.Scripts.Runtime
+namespace GameCore.SaveSystem.Scripts.Runtime
 {
     [DefaultExecutionOrder(1)]
     public class SaveManager : MonoBehaviour

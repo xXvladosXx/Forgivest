@@ -1,7 +1,7 @@
-using AnimatorStateMachine.StateMachine;
+using Player.StateMachine.Core;
 using UnityEngine;
 
-namespace AI.StateMachine.States
+namespace Player.AI.StateMachine.States
 {
     public class AIBaseState : IState
     {

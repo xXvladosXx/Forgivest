@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using AbilitySystem.AbilitySystem.Runtime;
-using AbilitySystem.AbilitySystem.Runtime.VisualEffects;
+using AttackSystem.VisualEffects;
+using CombatSystem.Scripts.Runtime;
 using Core;
 using UnityEngine;
 

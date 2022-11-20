@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace ColliderSystem.Core
+namespace AttackSystem.ColliderSystem.Core
 {
     [RequireComponent(typeof(Collider))]
     public class ColliderActivator : MonoBehaviour

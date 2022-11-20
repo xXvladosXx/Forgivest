@@ -1,4 +1,4 @@
-﻿using Data.Player;
+﻿using AnimationSystem.Data;
 
 namespace AnimationSystem
 {

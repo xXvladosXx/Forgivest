@@ -1,9 +1,8 @@
-﻿using System;
+﻿using AttackSystem.ColliderSystem.Core;
 using AttackSystem.Core;
-using ColliderSystem.Core;
 using UnityEngine;
 
-namespace ColliderSystem
+namespace AttackSystem.ColliderSystem
 {
     public class AttackColliderActivator : ColliderActivator
     {

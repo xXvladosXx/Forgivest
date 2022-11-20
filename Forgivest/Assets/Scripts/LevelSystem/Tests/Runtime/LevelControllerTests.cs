@@ -1,11 +1,12 @@
 ﻿using System.Collections;
+using LevelSystem.Scripts.Runtime;
 using NUnit.Framework;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-namespace LevelSystem.Tests
+namespace LevelSystem.Tests.Runtime
 {
     public class LevelControllerTests
     {

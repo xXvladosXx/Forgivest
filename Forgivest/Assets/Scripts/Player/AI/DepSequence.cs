@@ -1,6 +1,6 @@
 using UnityEngine.AI;
 
-namespace AI
+namespace Player.AI
 {
     public class DepSequence : Node
     {

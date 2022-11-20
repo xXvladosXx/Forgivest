@@ -1,13 +1,12 @@
-using AI.StateMachine.Config;
 using AnimationSystem;
 using AttackSystem;
 using MovementSystem;
-using StatsSystem;
+using Player.AI.StateMachine.Core.Config;
 using StatSystem;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace AI.StateMachine.Core
+namespace Player.AI.StateMachine.Core
 {
     public interface IAIEnemy
     {

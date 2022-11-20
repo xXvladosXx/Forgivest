@@ -4,6 +4,7 @@ using UI.Menu;
 using UI.Menu.Core;
 using UnityEngine;
 using Utilities;
+using Zenject;
 
 namespace GameCore
 {
@@ -12,10 +13,11 @@ namespace GameCore
         public static PlayerInputProvider InputProvider;
         public GameStateMachine StateMachine;
 
-        public Game(ICoroutineRunner coroutineRunner, LoadingScreen loadingScreen, 
-            MenuSwitcher mainMenuSwitcher, Canvas mainMenuCanvas)
+        public Game(ICoroutineRunner coroutineRunner, LoadingScreen loadingScreen,
+            MenuSwitcher mainMenuSwitcher, DiContainer diContainer)
         {
-            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), loadingScreen, mainMenuSwitcher, mainMenuCanvas);
+            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), loadingScreen,
+                mainMenuSwitcher, diContainer);
         }
     }
 }

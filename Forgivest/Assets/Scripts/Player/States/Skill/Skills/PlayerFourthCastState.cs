@@ -1,4 +1,4 @@
-﻿using StateMachine.Player;
+﻿using Player.StateMachine.Player;
 using UnityEngine;
 
 namespace Player.States.Skill.Skills

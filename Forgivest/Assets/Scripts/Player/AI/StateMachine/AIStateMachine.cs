@@ -1,9 +1,9 @@
-using AI.StateMachine.Core;
-using AI.StateMachine.States;
+using Player.AI.StateMachine.Core;
+using Player.AI.StateMachine.States;
 
-namespace AI.StateMachine
+namespace Player.AI.StateMachine
 {
-    public class AIStateMachine : global::StateMachine.StateMachine
+    public class AIStateMachine : global::Player.StateMachine.Core.StateMachine
     {
         public IAIEnemy AIEnemy { get; }
         

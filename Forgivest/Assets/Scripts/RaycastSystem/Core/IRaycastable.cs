@@ -5,7 +5,7 @@ namespace RaycastSystem.Core
     public interface IRaycastable
     {
         CursorType GetCursorType();
-        bool HandleRaycast(RaycastUser raycastUser);
+        bool HandleRaycast(IRaycastUser raycastUser);
         GameObject GameObject { get; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Core.Nodes;
 using UnityEngine;
 
-namespace LevelSystem.Nodes
+namespace LevelSystem.Scripts.Runtime.Nodes
 {
     public class LevelNode : CodeFunctionNode
     {

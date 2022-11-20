@@ -1,7 +1,6 @@
-using AI.StateMachine.Core;
-using UnityEngine;
+using Player.AI.StateMachine.Core;
 
-namespace AI.StateMachine.States
+namespace Player.AI.StateMachine.States
 {
     public class AISkillBaseState : AIBaseState, IHasCooldown
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AbilitySystem.AbilitySystem.Runtime.VisualEffects
+namespace AttackSystem.VisualEffects
 {
     public enum PlayLocation
     {

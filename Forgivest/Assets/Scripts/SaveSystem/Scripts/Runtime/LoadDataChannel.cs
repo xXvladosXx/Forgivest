@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace SaveSystem.Scripts.Runtime
+namespace GameCore.SaveSystem.Scripts.Runtime
 {
     [CreateAssetMenu(fileName = "LoadDataChannel", menuName = "SaveSystem/Channels/LoadDataChannel", order = 0)]
     public class LoadDataChannel : ScriptableObject

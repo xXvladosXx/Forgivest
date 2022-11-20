@@ -1,10 +1,10 @@
-using UnityEngine;
 using System;
 using RaycastSystem.Core;
-using UnityEngine.EventSystems;
+using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
-namespace InventoryExample.Control
+namespace Control
 {
     public class PlayerController : MonoBehaviour
     {

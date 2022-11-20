@@ -10,7 +10,7 @@ namespace UI.Loading
         [field: SerializeField] public Image ProgressBarImage { get; private set; }
         [field: SerializeField] public GameObject LoadingBarObject { get; private set; }
         [field: SerializeField] public GameObject LoadingScreenObject { get; private set; }
-        [field: SerializeField] public Button StartButton { get; private set; }
+        [field: SerializeField] public InputChecker.InputChecker InputChecker { get; private set; }
 
         public event Action OnStartGame;
         
@@ -22,12 +22,12 @@ namespace UI.Loading
 
         private void OnEnable()
         {
-            StartButton.onClick.AddListener(OnStartButtonClicked);
+            InputChecker.OnHidden += OnInteracted;
         }
         
         private void OnDisable()
         {
-            StartButton.onClick.RemoveListener(OnStartButtonClicked);
+            InputChecker.OnHidden -= OnInteracted;
         }
 
         public void LoadProgress(float progress)
@@ -36,7 +36,7 @@ namespace UI.Loading
 
             if (ProgressBarImage.fillAmount == 1)
             {
-                StartButton.gameObject.SetActive(true);
+                InputChecker.gameObject.SetActive(true);
                 HideLoadingBar();
             }
         }
@@ -44,11 +44,13 @@ namespace UI.Loading
         public void ShowLoadingScreen()
         {
             LoadingScreenObject.SetActive(true);
+            InputChecker.gameObject.SetActive(false);
         }
         
         public void HideLoadingScreen()
         {
             LoadingScreenObject.SetActive(false);
+            InputChecker.gameObject.SetActive(false);
         }
         
         public void ShowLoadingBar()
@@ -61,10 +63,10 @@ namespace UI.Loading
             LoadingBarObject.SetActive(false);
         }
         
-        public void OnStartButtonClicked()
+        public void OnInteracted()
         {
             OnStartGame?.Invoke();
-            StartButton.gameObject.SetActive(false);
+            InputChecker.gameObject.SetActive(false);
         }
     }
 }

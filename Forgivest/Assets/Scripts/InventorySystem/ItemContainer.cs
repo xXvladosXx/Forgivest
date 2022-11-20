@@ -59,26 +59,11 @@ namespace InventorySystem
         }
 
         public IItem GetItem(Type itemType) => Slots.Find(slot => slot != null && slot.ItemGetType == itemType && slot.Item != null).Item;
-        public IItem GetItem(ItemType itemType) => Slots.Find(slot => slot != null && slot.Item.ItemType == itemType && slot.Item != null).Item;
-
+    
         public Item[] GetAllItems() =>
             (Slots.Where(slot => !slot.IsEmpty).Select(slot => slot.Item)).ToArray();
 
-        public Item[] GetAllItems(Type itemType) => (Slots
-            .Where(slot => !slot.IsEmpty && slot.ItemGetType == itemType)
-            .Select(slot => slot.Item)).ToArray();
-
-        public Item[] GetEquippedItems() => (Slots.Where(slot => !slot.IsEmpty && slot.Changeable)
-            .Select(slot => slot.Item)).ToArray();
-
-        public int GetItemAmount(Type itemType)
-        {
-            var allItemSlots = Slots.FindAll(slot => !slot.IsEmpty && slot.ItemGetType == itemType);
-
-            return allItemSlots.Sum(itemSlot => itemSlot.Amount);
-        }
-
-        public bool TryToAdd(object sender, IItem item, int amount, ItemContainer destinationContainer = null)
+        public bool TryToAdd(object sender, IItem item, int amount, IContainer destinationContainer = null)
         {
             var slotWithSameItemButNotEmpty = Slots
                 .Find(slot => !slot.IsEmpty && slot.Item.ItemID.Id == item.ItemID.Id && !slot.IsFullWithMaxStack
@@ -99,7 +84,7 @@ namespace InventorySystem
         }
 
         public bool TryToAddAtIndex(object sender, IItem item, int amount, int index,
-            ItemContainer destinationContainer = null)
+            IContainer destinationContainer = null)
         {
             var indexSlot = Slots[index];
             if (!indexSlot.IsEmpty)
@@ -109,7 +94,7 @@ namespace InventorySystem
         }
 
         private bool TryToAddToSlot(object sender, ISlotContainer slot, IItem item, int amount,
-            ItemContainer destinationContainer)
+            IContainer destinationContainer)
         {
             if (destinationContainer != null)
             {
@@ -181,13 +166,6 @@ namespace InventorySystem
             return true;
         }
 
-
-        public bool HasItem(Type type)
-        {
-            var containerItem = GetItem(type);
-            return containerItem != null;
-        }
-
         public bool HasItem(Item item)
         {
             return Slots.Any(itemSlot => itemSlot.Item == item && !itemSlot.IsEmpty);
@@ -237,21 +215,16 @@ namespace InventorySystem
             
             var toTransfer = Mathf.Min(64, draggingNumber);
 
-            if (destinationSlot.AllRequirementsChecked(draggingItem, draggingNumber))
-            {
-                if (toTransfer > 0)
-                {
-                    if(draggingChangeable)
-                        Remove(this, source, false, toTransfer);
+            if (!destinationSlot.AllRequirementsChecked(draggingItem, draggingNumber)) return true;
+            if (toTransfer <= 0) return true;
+            
+            if(draggingChangeable)
+                Remove(this, source, false, toTransfer);
 
-                    destinationSlot.SetItem(draggingItem, toTransfer);
+            destinationSlot.SetItem(draggingItem, toTransfer);
 
-                    destinationContainer?.OnItemAdded?.Invoke(this, draggingItem, draggingNumber, destinationContainer);
-                    return false;
-                }
-            }
-
-            return true;
+            destinationContainer?.OnItemAdded?.Invoke(this, draggingItem, draggingNumber, destinationContainer);
+            return false;
         }
 
         private bool AttemptStackTransfer(int source, int destination, ItemContainer destinationContainer)
@@ -384,10 +357,5 @@ namespace InventorySystem
 
             return takeBackValue;
         }
-
-        private ItemSlot[] GetAllSlots(Type itemType) =>
-            Slots.FindAll(slot => !slot.IsEmpty && slot.ItemGetType == itemType).ToArray();
-
-        private ItemSlot[] GetAllSlots() => Slots.ToArray();
     }
 }

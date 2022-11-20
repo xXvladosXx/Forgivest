@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AI
+namespace Player.AI
 {
     public class BehaviourTree : Node
     {

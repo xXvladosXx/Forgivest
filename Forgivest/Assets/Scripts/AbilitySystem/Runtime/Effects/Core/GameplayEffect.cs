@@ -83,6 +83,8 @@ namespace AbilitySystem.AbilitySystem.Runtime
         
         protected string ReplaceMacro(string value, object @object)
         {
+            if(value == null) return "";
+            
             return Regex.Replace(value, @"{(.+?)}", match =>
             {
                 var p = Expression.Parameter(@object.GetType(), @object.GetType().Name);

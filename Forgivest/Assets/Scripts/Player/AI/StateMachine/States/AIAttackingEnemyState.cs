@@ -1,7 +1,4 @@
-using MovementSystem;
-using UnityEngine;
-
-namespace AI.StateMachine.States
+namespace Player.AI.StateMachine.States
 {
     public class AIAttackingEnemyState : AIBaseState
     {

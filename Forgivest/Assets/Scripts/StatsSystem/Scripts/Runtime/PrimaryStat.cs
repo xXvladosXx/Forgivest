@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-using SaveSystem.Scripts.Runtime;
+using GameCore.SaveSystem.Scripts.Runtime;
 using StatsSystem.Scripts.Runtime;
+using UnityEngine;
 
 [assembly: InternalsVisibleTo("StatSystem.Tests")]
 namespace StatSystem
 {
     public class PrimaryStat : Stat, ISavable
     {
+        [field: SerializeField] public SaveDataChannel SaveDataChannel { get; }
+
         private float m_BaseValue;
         public override float baseValue => m_BaseValue;
         
@@ -35,11 +38,12 @@ namespace StatSystem
 
         #region Stat System
 
-        public object Data => new PrimaryStatData
+
+        public object CaptureState => new PrimaryStatData
         {
             baseValue = baseValue
         };
-        public void Load(object data)
+        public void RestoreState(object data)
         {
             PrimaryStatData primaryStatData = (PrimaryStatData)data;
             m_BaseValue = primaryStatData.baseValue;

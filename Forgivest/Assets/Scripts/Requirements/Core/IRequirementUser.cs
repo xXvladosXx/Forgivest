@@ -1,6 +1,7 @@
 ﻿using AbilitySystem.AbilitySystem.Runtime.Abilities;
 using InventorySystem.Interaction;
 using LevelSystem;
+using LevelSystem.Scripts.Runtime;
 
 namespace Requirements.Core
 {

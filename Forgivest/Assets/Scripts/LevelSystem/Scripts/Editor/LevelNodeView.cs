@@ -1,7 +1,7 @@
 ﻿using Core;
 using Core.Editor;
 using Core.Editor.Nodes;
-using LevelSystem.Nodes;
+using LevelSystem.Scripts.Runtime.Nodes;
 using UnityEngine;
 
 namespace LevelSystem.Scripts.Editor

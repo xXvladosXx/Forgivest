@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace AnimationSystem
@@ -6,7 +7,12 @@ namespace AnimationSystem
     public class AnimationEventHandler : SerializedMonoBehaviour
     {
         [field: SerializeField] public IAnimationEventUser AnimationEventUser { get; private set; }
-        
+
+        private void Awake()
+        {
+            AnimationEventUser ??= GetComponent<IAnimationEventUser>();
+        }
+
         public void OnAnimationStart()
         {
             AnimationEventUser.OnAnimationStarted();
