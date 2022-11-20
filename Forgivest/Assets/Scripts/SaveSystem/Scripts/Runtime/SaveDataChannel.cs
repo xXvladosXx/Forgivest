@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
-namespace SaveSystem.Scripts.Runtime
+namespace GameCore.SaveSystem.Scripts.Runtime
 {
     [CreateAssetMenu(fileName = "SaveDataChannel", menuName = "SaveSystem/Channels/SaveDataChannel", order = 0)]
     public class SaveDataChannel : ScriptableObject

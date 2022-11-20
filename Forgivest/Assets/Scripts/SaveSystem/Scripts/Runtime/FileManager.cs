@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-namespace SaveSystem.Scripts.Runtime
+namespace GameCore.SaveSystem.Scripts.Runtime
 {
     public class FileManager
     {

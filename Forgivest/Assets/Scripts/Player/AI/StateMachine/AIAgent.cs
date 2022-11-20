@@ -29,22 +29,20 @@ namespace Player.AI.StateMachine
         [field: SerializeField] private ObjectPicker _objectPicker;
 
         private Rigidbody _rb;
-        
+
         public Movement Movement { get; private set; }
         public NavMeshAgent NavMeshAgent { get; private set; }
         public Transform Target { get; private set; }
         public AIStateMachine StateMachine { get; private set; }
         public AttackApplier AttackApplier { get; private set; }
-        
+
         public Animator Animator { get; private set; }
         public AnimationChanger AnimationChanger { get; private set; }
-        
-        
-        
-        
-        public IAnimationEventUser AnimationEventUser => this; 
-        public GameObject Enemy => gameObject; 
-        
+
+
+        public IAnimationEventUser AnimationEventUser => this;
+        public GameObject Enemy => gameObject;
+
         public LayerMask LayerMask => gameObject.layer;
 
 
@@ -56,7 +54,7 @@ namespace Player.AI.StateMachine
             NavMeshAgent = GetComponent<NavMeshAgent>();
             Movement = new Movement(NavMeshAgent, _rb, transform);
             AnimationChanger = new AnimationChanger(Animator);
-            
+
             AttackApplier = new AttackApplier();
         }
 
@@ -71,7 +69,7 @@ namespace Player.AI.StateMachine
         {
             StateMachine.Update();
         }
-        
+
         public void OnAnimationStarted()
         {
             StateMachine.OnAnimationEnterEvent();
@@ -84,7 +82,7 @@ namespace Player.AI.StateMachine
 
         public void OnAnimationEnded()
         {
-           StateMachine.OnAnimationExitEvent();
+            StateMachine.OnAnimationExitEvent();
         }
 
         public GameObject Weapon { get; }
@@ -99,26 +97,24 @@ namespace Player.AI.StateMachine
                 Weapon = CurrentWeapon,
                 DamageApplier = this
             };
-                
+
             AttackApplier.ApplyAttack(attackData, timeOfActiveCollider, Weapon);
         }
 
-        public void ApplyShoot(Projectile projectile, Transform targetTransform, float definitionSpeed, ShotType definitionShotType,
+        public void ApplyShoot(Projectile projectile, Transform targetTransform, float definitionSpeed,
+            ShotType definitionShotType,
             bool definitionIsSpin)
         {
-            
         }
 
         public void TakeRewards(List<IRewardable> damageReceiverRewards)
         {
-            
         }
 
         public event Action<AttackData> OnDamageApplied;
 
         public void CastedSkill()
         {
-            
         }
 
         public void CastedProjectile()

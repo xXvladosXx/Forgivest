@@ -1,4 +1,4 @@
-﻿namespace SaveSystem.Scripts.Runtime
+﻿namespace GameCore.SaveSystem.Scripts.Runtime
 {
     public interface ISavable
     {

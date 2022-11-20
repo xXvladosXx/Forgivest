@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-using SaveSystem.Scripts.Runtime;
+using GameCore.SaveSystem.Scripts.Runtime;
 using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 

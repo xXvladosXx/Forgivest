@@ -11,6 +11,7 @@ using AttackSystem.Core;
 using AttackSystem.Reward;
 using AttackSystem.Reward.Core;
 using Data.Player;
+using GameCore.Factory;
 using InventorySystem.Interaction;
 using InventorySystem.Items.Weapon;
 using LevelSystem;
@@ -25,6 +26,7 @@ using StatSystem.Scripts.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
 using Utilities;
+using Zenject;
 
 
 namespace Player
@@ -77,18 +79,25 @@ namespace Player
 
         public event Action<AttackData> OnDamageReceived;
         public event Action<AttackData> OnDamageApplied;
+        
+        [Inject]
+        public void Construct(IGameFactory gameFactory)
+        {
+            AnimationChanger = new AnimationChanger(Animator);
+            Movement = new Movement(NavMeshAgent, Rigidbody, transform);
+            Rotator = new Rotator(Rigidbody);
+            AttackApplier = new AttackApplier();
+            _damageHandler = new DamageHandler(StatController);
+
+            gameFactory.Register(Movement);
+        }
 
         private void Awake()
         {
             Camera = Camera.main;
             AliveEntityAnimationData.Init();
-
-            AnimationChanger = new AnimationChanger(Animator);
-            Movement = new Movement(NavMeshAgent, Rigidbody, transform);
-            Rotator = new Rotator(Rigidbody);
+            
             RaycastUser = new PlayerRaycastUser(Camera, PlayerInputProvider, PlayerRaycastSettings);
-            AttackApplier = new AttackApplier();
-            _damageHandler = new DamageHandler(StatController);
             
             _playerStateMachine = new PlayerStateMachine(AnimationChanger,
                 Movement, Rotator, PlayerInputProvider, StateData,

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace SaveSystem.Scripts.Runtime
+namespace GameCore.SaveSystem.Scripts.Runtime
 {
     public class SavableEntity: MonoBehaviour
    {

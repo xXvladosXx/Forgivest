@@ -1,27 +1,26 @@
+using GameCore.Factory;
 using UI.Menu;
 using UI.Menu.Core;
 using UnityEngine;
+using Zenject;
 
 namespace GameCore.StateMachine.States
 {
     public class BootstrapState : IState
     {
         private readonly GameStateMachine _gameStateMachine;
-        private readonly SceneLoader _sceneLoader;
         private readonly MenuSwitcher _mainMenuSwitcher;
-        private readonly Canvas _mainMenuCanvas;
-
+        private readonly DiContainer _diContainer;
+        private readonly IGameFactory _gameFactory;
+        
         private StartMenu _startMenu;
         
-        private const string SAMPLE_SCENE = "MainMenu";
-
-        public BootstrapState(GameStateMachine gameStateMachine, SceneLoader sceneLoader,
-            MenuSwitcher mainMenuSwitcher, Canvas mainMenuCanvas)
+        public BootstrapState(GameStateMachine gameStateMachine,
+            MenuSwitcher mainMenuSwitcher, DiContainer diContainer)
         {
             _gameStateMachine = gameStateMachine;
-            _sceneLoader = sceneLoader;
             _mainMenuSwitcher = mainMenuSwitcher;
-            _mainMenuCanvas = mainMenuCanvas;
+            _diContainer = diContainer;
         }
 
         public void Enter()
@@ -32,6 +31,11 @@ namespace GameCore.StateMachine.States
                 _startMenu.OnStartClicked += LoadScene;
         }
 
+        public void Exit()
+        {
+            
+        }
+
         private void LoadScene()
         {
             _startMenu.OnStartClicked -= LoadScene;
@@ -40,12 +44,7 @@ namespace GameCore.StateMachine.States
 
         private void EnterLoadLevel()
         {
-            _gameStateMachine.Enter<LoadLevelState, string>("Gameplay");
-        }
-
-        public void Exit()
-        {
-            
+            _gameStateMachine.Enter<LoadProgressState>();
         }
     }
 }
