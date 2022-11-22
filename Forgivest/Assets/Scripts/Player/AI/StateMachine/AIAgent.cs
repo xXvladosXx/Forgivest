@@ -26,7 +26,6 @@ namespace Player.AI.StateMachine
         [field: SerializeField] public StatsFinder StatsFinder { get; private set; }
         [field: SerializeField] public CooldownSystem Cooldown { get; private set; }
         [field: SerializeField] public StatController StatController { get; private set; }
-        [field: SerializeField] private ObjectPicker _objectPicker;
 
         private Rigidbody _rb;
 

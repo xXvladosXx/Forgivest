@@ -24,6 +24,7 @@ namespace Enemy
         {
             _mainCamera = Camera.main;
             _maxHealth = _damageReceiver.Health;
+            meshRenderer.enabled = false;
         }
 
         private void OnEnable()
