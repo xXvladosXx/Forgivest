@@ -21,27 +21,19 @@ namespace Player.AI.StateMachine.States
                 AIStateMachine.AIEnemy.Movement.MoveTo(
                     AIStateMachine.AIEnemy.Target.transform.position,
                     AIStateMachine.AIEnemy.Config.MovementChasingSpeed);
-                
+
                 var distanceToAttack = FindDistanceToAttack();
 
-                if (GetPlayerDistance() < distanceToAttack)
-                {
-                    _currentAttackRate -= Time.deltaTime;
-                    AIStateMachine.AIEnemy.Movement.Stop();
+                if (!(GetPlayerDistance() < distanceToAttack)) return;
+                
+                _currentAttackRate -= Time.deltaTime;
+                AIStateMachine.AIEnemy.Movement.Stop();
 
-                    if (!(_currentAttackRate <= 0)) return;
+                if (!(_currentAttackRate <= 0)) return;
+                    
+                _currentAttackRate = _attackRate;
 
-                    if (AIStateMachine.AIEnemy.Cooldown.IsOnCooldown(2) &&
-                        AIStateMachine.AIEnemy.Cooldown.IsOnCooldown(1))
-                    {
-                        _currentAttackRate = _attackRate;
-
-                        AIStateMachine.ChangeState(AIStateMachine.AIAttackingEnemyState);
-                        return;
-                    }
-
-                    CastSkill();
-                }
+                AIStateMachine.ChangeState(AIStateMachine.AIAttackingEnemyState);
             }
             else
             {
@@ -67,19 +59,7 @@ namespace Player.AI.StateMachine.States
 
         private float FindDistanceToAttack()
         {
-            float distanceToAttack;
-            if (AIStateMachine.AIEnemy.Cooldown.IsOnCooldown(2) &&
-                AIStateMachine.AIEnemy.Cooldown.IsOnCooldown(1))
-            {
-                distanceToAttack = AIStateMachine.AIEnemy.Config.DistanceToAttack;
-            }
-            else
-            {
-                SkillSelector = Random.Range(0, 2);
-                distanceToAttack = SkillSelector == 0
-                    ? AIStateMachine.AIEnemy.Config.DistanceToFirstSkill
-                    : AIStateMachine.AIEnemy.Config.DistanceToSecondSkill;
-            }
+            var distanceToAttack = AIStateMachine.AIEnemy.Config.DistanceToAttack;
 
             return distanceToAttack;
         }

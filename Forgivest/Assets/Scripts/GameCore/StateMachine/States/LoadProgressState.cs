@@ -10,6 +10,7 @@ namespace GameCore.StateMachine.States
         private readonly ISaveLoadService _saveLoadService;
 
         private const string GAMEPLAY = "Gameplay";
+        private const string ENVIRONMENT = "FAE_Demo1";
 
         public LoadProgressState(GameStateMachine gameStateMachine, 
             IPersistentProgressService persistentProgressService,
@@ -38,6 +39,6 @@ namespace GameCore.StateMachine.States
             _persistentProgressService.PlayerProgress = _saveLoadService.Load() ?? NewProgress();
         }
 
-        private PlayerProgress NewProgress() => new PlayerProgress(GAMEPLAY);
+        private PlayerProgress NewProgress() => new PlayerProgress(ENVIRONMENT);
     }
 }

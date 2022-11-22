@@ -12,7 +12,6 @@ namespace AttackSystem.Core
         LayerMask LayerMask { get; }
         GameObject GameObject { get; }
         void ReceiveDamage(AttackData attackData);
-        event Action<AttackData> OnDamageReceived; 
-        
+        event Action<AttackData> OnDamageReceived;
     }
 }

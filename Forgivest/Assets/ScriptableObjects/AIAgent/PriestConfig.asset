@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PriestConfig
   m_EditorClassIdentifier: 
   <DistanceToWaypoint>k__BackingField: 0.5
-  <MovementPatrollingSpeed>k__BackingField: 1
-  <MovementChasingSpeed>k__BackingField: 2
-  <IdleTime>k__BackingField: 2
+  <MovementPatrollingSpeed>k__BackingField: 2
+  <MovementChasingSpeed>k__BackingField: 3
+  <IdleTime>k__BackingField: 3
   <AggroSightDistance>k__BackingField: 5
   <ChaseDistance>k__BackingField: 15
   <DistanceToAttack>k__BackingField: 1

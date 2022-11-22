@@ -12,42 +12,40 @@ namespace GameCore.StateMachine.States
     {
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
-        private readonly LoadingScreen _loadingScreen;
+        private readonly PersistentCanvas _persistentCanvas;
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _persistentProgressService;
-
-        private const string PLAYER_INITIAL_POINT = "PlayerInitialPoint";
 
         public event Action OnGameStarted;
         
         public LoadLevelState(GameStateMachine gameStateMachine,
-            SceneLoader sceneLoader, LoadingScreen loadingScreen,
+            SceneLoader sceneLoader, PersistentCanvas persistentCanvas,
             IGameFactory gameFactory, IPersistentProgressService persistentProgressService)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
-            _loadingScreen = loadingScreen;
+            _persistentCanvas = persistentCanvas;
             _gameFactory = gameFactory;
             _persistentProgressService = persistentProgressService;
         }
 
         public void Enter(string sceneName)
         {
-            _loadingScreen.ShowLoadingScreen();
-            _loadingScreen.ShowLoadingBar();
+            _persistentCanvas.ShowLoadingScreen();
+            _persistentCanvas.ShowLoadingBar();
             _gameFactory.CleanUp();
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
         public void Exit()
         {
-            _loadingScreen.HideLoadingScreen();
-            _loadingScreen.OnStartGame -= OnGameStarted;
+            _persistentCanvas.HideLoadingScreen();
+            _persistentCanvas.OnStartGame -= OnGameStarted;
         }
         
         private void OnLoaded()
         {
-            _loadingScreen.LoadProgress(1);
+            _persistentCanvas.LoadProgress(1);
             InformProgressReaders();
 
             OnGameStarted += () =>
@@ -55,7 +53,7 @@ namespace GameCore.StateMachine.States
                 _gameStateMachine.Enter<GameLoopState>();
             };
             
-            _loadingScreen.OnStartGame += OnGameStarted;
+            _persistentCanvas.OnStartGame += OnGameStarted;
         }
 
         private void InformProgressReaders()

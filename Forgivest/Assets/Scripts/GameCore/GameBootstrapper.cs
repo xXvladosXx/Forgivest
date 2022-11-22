@@ -9,7 +9,6 @@ namespace GameCore
 {
     public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
     {
-        [field: SerializeField] public LoadingScreen LoadingScreen { get; private set; }
         [field: SerializeField] public MenuSwitcher MainMenuSwitcher { get; private set; }
         [field: SerializeField] public Canvas MainMenuCanvas { get; private set; }
 
@@ -24,7 +23,7 @@ namespace GameCore
         
         private void Awake()
         {
-            Game = new Game(this, LoadingScreen, MainMenuSwitcher, _container);
+            Game = new Game(this, MainMenuSwitcher, _container);
             Game.StateMachine.Enter<BootstrapState>();
             
             DontDestroyOnLoad(this);

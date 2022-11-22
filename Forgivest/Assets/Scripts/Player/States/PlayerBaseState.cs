@@ -36,21 +36,12 @@ namespace Player.States
             CheckRaycastNonClicked();
             if (PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Action.IsPressed())
             {
-                if (CheckRaycast())
+                if (CheckRaycast() && PlayerStateMachine.RaycastUser.RaycastHit.HasValue)
                 {
-                    if (PlayerStateMachine.RaycastUser.RaycastHit.HasValue)
+                    if (PlayerStateMachine.RaycastUser.RaycastHit.Value.collider.gameObject.layer != LayerUtils.Player)
                     {
-                        if (PlayerStateMachine.RaycastUser.InteractWithUI())
-                        {
-                            Stop();
-                            return;
-                        }
-                        
-                        if(PlayerStateMachine.RaycastUser.RaycastHit.Value.collider.gameObject.layer != LayerUtils.Player)
-                        {
-                            OnInteractableCheck();
-                            OnClickPressed();
-                        }
+                        OnInteractableCheck();
+                        OnClickPressed();
                     }
                 }
             }
@@ -89,7 +80,7 @@ namespace Player.States
 
             return true;
         }
-        
+
         private bool CheckRaycast()
         {
             if (!PlayerStateMachine.RaycastUser.RaycastHit.HasValue) return false;
@@ -99,7 +90,7 @@ namespace Player.States
 
             return true;
         }
-        
+
         public virtual void OnAnimationEnterEvent()
         {
         }
@@ -111,10 +102,9 @@ namespace Player.States
         public virtual void OnAnimationTransitionEvent()
         {
         }
-        
+
         protected virtual void OnClickPressed()
         {
-            
         }
 
         protected float GetMovementSpeed() =>
@@ -125,11 +115,11 @@ namespace Player.States
             switch (PlayerStateMachine.ReusableData.InteractableObject)
             {
                 case EnemyEntity enemyEntity:
-                     PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerChasingState);
+                    PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerChasingState);
                     return;
-            } 
+            }
         }
-        
+
         private void UpdateMovementAnimation()
         {
             Vector3 velocity = PlayerStateMachine.Movement.GetNavMeshVelocity();
@@ -141,10 +131,11 @@ namespace Player.States
                 PlayerStateMachine.AnimationData.SpeedParameterHash,
                 speed, .1f);
         }
-        
+
         protected bool GetDistanceTo(Vector3 target)
         {
-            if (PlayerStateMachine.Movement.GetDistanceToPoint(target) < PlayerStateMachine.ReusableData.StoppingDistance)
+            if (PlayerStateMachine.Movement.GetDistanceToPoint(target) <
+                PlayerStateMachine.ReusableData.StoppingDistance)
             {
                 Stop();
                 return true;
@@ -172,32 +163,28 @@ namespace Player.States
             PlayerStateMachine.AnimationChanger.UpdateBlendAnimation(
                 PlayerStateMachine.AnimationData.SpeedParameterHash,
                 0, .1f);
-            
+
             PlayerStateMachine.Movement.Stop();
         }
-        
+
         protected virtual void OnFifthSkillPerformed(InputAction.CallbackContext obj)
         {
-            
         }
 
         protected virtual void OnFourthSkillPerformed(InputAction.CallbackContext obj)
         {
-            
         }
 
         protected virtual void OnThirdSkillPerformed(InputAction.CallbackContext obj)
         {
-            
         }
 
         protected virtual void OnSecondSkillPerformed(InputAction.CallbackContext obj)
         {
-            
         }
+
         protected virtual void OnFirstSkillPerformed(InputAction.CallbackContext obj)
         {
-            
         }
     }
 }

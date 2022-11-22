@@ -18,7 +18,7 @@ MonoBehaviour:
   <IdleTime>k__BackingField: 1
   <AggroSightDistance>k__BackingField: 12
   <ChaseDistance>k__BackingField: 15
-  <DistanceToAttack>k__BackingField: 5
+  <DistanceToAttack>k__BackingField: 3.5
   <DistanceToFirstSkill>k__BackingField: 7
   <DistanceToSecondSkill>k__BackingField: 4
   <TimeDelayBeforeAttack>k__BackingField: 1.5

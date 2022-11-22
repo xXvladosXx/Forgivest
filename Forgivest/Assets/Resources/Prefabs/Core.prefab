@@ -821,6 +821,7 @@ MonoBehaviour:
   _manaBarUI: {fileID: 2017831721393574697}
   _experienceBarUI: {fileID: 2017831719965688271}
   _uiReusableData: {fileID: 11400000, guid: e0e02b970eceb4d49be037b095d9721d, type: 2}
+  _deathPanel: {fileID: 0}
 --- !u!1 &2017831719550295754
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,7 +1198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2017831719726349342}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5607376, y: -8.6973915, z: 10.711239}
+  m_LocalPosition: {x: -99.23, y: -8.29, z: -102.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4381,7 +4382,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2017831721239071035
 Transform:
   m_ObjectHideFlags: 0
@@ -30102,7 +30103,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2683215357400983421}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999404
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -30218,7 +30219,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00012207031, y: -633.9352}
+  m_AnchoredPosition: {x: -0.00012207031, y: -633.93536}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2861428317099090941

@@ -1,4 +1,5 @@
 ﻿using AbilitySystem.AbilitySystem.Runtime.Abilities;
+using AttackSystem.Core;
 using Controllers;
 using Controllers.Player;
 using InventorySystem;
@@ -26,6 +27,7 @@ namespace Installers
             Container.Bind<ObjectPicker>().FromInstance(mainComponent.ObjectPicker).AsSingle();
             Container.Bind<LevelController>().FromInstance(mainComponent.LevelController).AsSingle();
             Container.Bind<StatController>().FromInstance(mainComponent.StatController).AsSingle();
+            Container.Bind<DamageHandler>().FromInstance(mainComponent.DamageHandler).AsSingle();
             
             Container.BindInterfacesAndSelfTo<InventoryController>().AsSingle();
             Container.BindInterfacesTo<PlayerAbilityController>().AsSingle();

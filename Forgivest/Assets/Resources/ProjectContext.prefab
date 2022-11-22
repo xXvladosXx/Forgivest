@@ -81,6 +81,8 @@ MonoBehaviour:
   _additionalDontDestroyOnLoadObjects:
   - {fileID: 7063438843833603824, guid: 43dba5838a430d146a8d47c61f27bacb, type: 3}
   - {fileID: 7063438843833603824, guid: e07ec77f41f24ad46a6f9f537c0f4093, type: 3}
+  _persistentCanvas: {fileID: 3886625153045423368, guid: 9808c22cb7346254e82a1a1c31082eea,
+    type: 3}
 --- !u!114 &-5468067734082132498
 MonoBehaviour:
   m_ObjectHideFlags: 0

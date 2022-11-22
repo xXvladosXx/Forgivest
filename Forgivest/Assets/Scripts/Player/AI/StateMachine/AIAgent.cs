@@ -18,7 +18,7 @@ using UnityEngine.AI;
 
 namespace Player.AI.StateMachine
 {
-    public class AIAgent : MonoBehaviour, IAIEnemy, IAnimationEventUser, IDamageApplier
+    public class AIAgent : MonoBehaviour, IAIEnemy, IAnimationEventUser, IDamageApplier, IDamageReceiver
     {
         [field: SerializeField] public GameObject[] Objects { get; private set; }
         [field: SerializeField] public AliveEntityAnimationData AliveEntityAnimationData { get; private set; }
@@ -38,11 +38,25 @@ namespace Player.AI.StateMachine
         public Animator Animator { get; private set; }
         public AnimationChanger AnimationChanger { get; private set; }
 
+        private DamageHandler _damageHandler;
 
         public IAnimationEventUser AnimationEventUser => this;
         public GameObject Enemy => gameObject;
 
+        public List<IRewardable> Rewards { get; }
+        public float Health => StatController.Health.CurrentValue;
         public LayerMask LayerMask => gameObject.layer;
+
+        public GameObject GameObject => gameObject == null ? null : gameObject;
+
+        public void ReceiveDamage(AttackData attackData)
+        {
+            attackData.DamageReceiver = this;
+            _damageHandler.TakeDamage(attackData);
+            OnDamageReceived?.Invoke(attackData);
+        }
+
+        public event Action<AttackData> OnDamageReceived;
 
 
         private void Awake()
@@ -53,6 +67,7 @@ namespace Player.AI.StateMachine
             NavMeshAgent = GetComponent<NavMeshAgent>();
             Movement = new Movement(NavMeshAgent, _rb, transform);
             AnimationChanger = new AnimationChanger(Animator);
+            _damageHandler = new DamageHandler(StatController);
 
             AttackApplier = new AttackApplier();
         }
@@ -84,8 +99,8 @@ namespace Player.AI.StateMachine
             StateMachine.OnAnimationExitEvent();
         }
 
-        public GameObject Weapon { get; }
-        public Weapon CurrentWeapon { get; }
+        [field: SerializeField] public GameObject Weapon { get; private set; }
+        [field: SerializeField] public Weapon CurrentWeapon { get; private set; }
 
         public void ApplyAttack(float timeOfActiveCollider)
         {

@@ -79,8 +79,11 @@ namespace MovementSystem
         {
             _navMeshAgent.enabled = false;
             
-            Transform.position = savedPosition.AsUnityVector();
-            Transform.rotation = quaternionData.AsUnityQuaternion();
+            if(savedPosition != null)
+                Transform.position = savedPosition.AsUnityVector();
+            
+            if(quaternionData != null)
+                Transform.rotation = quaternionData.AsUnityQuaternion();
             
             _navMeshAgent.enabled = true;
         }

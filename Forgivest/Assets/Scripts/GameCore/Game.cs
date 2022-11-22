@@ -13,10 +13,10 @@ namespace GameCore
         public static PlayerInputProvider InputProvider;
         public GameStateMachine StateMachine;
 
-        public Game(ICoroutineRunner coroutineRunner, LoadingScreen loadingScreen,
+        public Game(ICoroutineRunner coroutineRunner, 
             MenuSwitcher mainMenuSwitcher, DiContainer diContainer)
         {
-            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), loadingScreen,
+            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner),
                 mainMenuSwitcher, diContainer);
         }
     }

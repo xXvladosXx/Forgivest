@@ -4,6 +4,7 @@ using UI.HUD.Stats;
 using UI.Inventory;
 using UI.Inventory.Core;
 using UI.Skill;
+using UI.Utils;
 using UnityEngine;
 using Zenject;
 
@@ -19,6 +20,7 @@ namespace Installers
         [SerializeField] private ManaBarUI _manaBarUI;
         [SerializeField] private ExperienceBarUI _experienceBarUI;
         [SerializeField] private UIReusableData _uiReusableData;
+        
         public override void InstallBindings()
         {
             Container.Bind<InventoryPanel>().FromInstance(_inventoryPanel).AsSingle();

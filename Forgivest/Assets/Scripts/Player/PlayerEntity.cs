@@ -41,7 +41,8 @@ namespace Player
     
     [RequireComponent(typeof(AbilityHandler),
         typeof(GameplayEffectHandler))]
-    public class PlayerEntity : MonoBehaviour, IAnimationEventUser, IDamageReceiver, IDamageApplier, IRaycastable, IRequirementUser
+    public class PlayerEntity : MonoBehaviour, IAnimationEventUser, IDamageReceiver,
+        IDamageApplier, IRaycastable, IRequirementUser
     {
         [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
         [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
@@ -66,9 +67,9 @@ namespace Player
         public Movement Movement { get; private set; }
         public Rotator Rotator { get; private set; }
         public PlayerRaycastUser RaycastUser { get; private set; }
-        
+        public DamageHandler DamageHandler { get; private set; }
+
         private PlayerStateMachine _playerStateMachine;
-        private DamageHandler _damageHandler;
 
         public GameObject Weapon => ObjectPicker.ItemEquipHandler.CurrentColliderWeapon;
         public Weapon CurrentWeapon => ObjectPicker.ItemEquipHandler.CurrentWeapon;
@@ -87,7 +88,7 @@ namespace Player
             Movement = new Movement(NavMeshAgent, Rigidbody, transform);
             Rotator = new Rotator(Rigidbody);
             AttackApplier = new AttackApplier();
-            _damageHandler = new DamageHandler(StatController);
+            DamageHandler = new DamageHandler(StatController);
 
             gameFactory.Register(Movement);
         }
@@ -102,7 +103,7 @@ namespace Player
             _playerStateMachine = new PlayerStateMachine(AnimationChanger,
                 Movement, Rotator, PlayerInputProvider, StateData,
                 RaycastUser, AliveEntityAnimationData, 
-                this, AbilityHandler);
+                this, AbilityHandler, DamageHandler);
         }
         
         private void OnEnable()
@@ -223,7 +224,9 @@ namespace Player
         public void ReceiveDamage(AttackData attackData)
         {
             Debug.Log("Player recieved damage");
-            _damageHandler.TakeDamage(attackData);
+            attackData.DamageReceiver = this;
+            DamageHandler.TakeDamage(attackData);
+            OnDamageReceived?.Invoke(attackData);
         }
         
         public void ApplyShoot(Projectile projectile, Transform targetTransform,

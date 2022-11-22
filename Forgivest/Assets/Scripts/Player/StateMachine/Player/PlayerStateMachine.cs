@@ -4,6 +4,7 @@ using AnimationSystem.Data;
 using AttackSystem.Core;
 using Data.Player;
 using MovementSystem;
+using Player.StateMachine.Core;
 using Player.States;
 using Player.States.Attack;
 using Player.States.Moving;
@@ -28,6 +29,7 @@ namespace Player.StateMachine.Player
         public PlayerChasingState PlayerChasingState { get; }
         public PlayerCombatState PlayerCombatState { get; }
         public PlayerRunningState RunningState { get; }
+        public DamageHandler DamageHandler { get; }
         public IDamageApplier AttackApplier { get; }
         public AbilityHandler AbilityHandler { get; }
         public PlayerFirstCastState PlayerFirstCastState { get; }
@@ -35,6 +37,7 @@ namespace Player.StateMachine.Player
         public PlayerThirdCastState PlayerThirdCastState { get; }
         public PlayerFourthCastState PlayerFourthCastState { get; }
         public PlayerFifthCastState PlayerFifthCastState { get; }
+        public PlayerDeadState PlayerDeadState { get; }
 
         public PlayerStateMachine(AnimationChanger animationChanger,
             Movement movement, Rotator rotator,
@@ -42,7 +45,9 @@ namespace Player.StateMachine.Player
             AliveEntityStateData aliveEntityStateData,
             PlayerRaycastUser raycastUser,
             AliveEntityAnimationData animationData,
-            IDamageApplier attackApplier, AbilityHandler abilityHandler)
+            IDamageApplier attackApplier, 
+            AbilityHandler abilityHandler,
+            DamageHandler damageHandler)
         {
             Rotator = rotator;
             AnimationChanger = animationChanger;
@@ -53,6 +58,7 @@ namespace Player.StateMachine.Player
             AnimationData = animationData;
             AttackApplier = attackApplier;
             AbilityHandler = abilityHandler;
+            DamageHandler = damageHandler;
 
             ReusableData = new AliveEntityStateReusableData();
 
@@ -66,6 +72,7 @@ namespace Player.StateMachine.Player
             PlayerThirdCastState = new PlayerThirdCastState(this);
             PlayerFourthCastState = new PlayerFourthCastState(this);
             PlayerFifthCastState = new PlayerFifthCastState(this);
+            PlayerDeadState = new PlayerDeadState(this);
         }
     }
 }

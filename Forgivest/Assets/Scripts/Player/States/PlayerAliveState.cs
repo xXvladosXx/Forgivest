@@ -1,4 +1,5 @@
-﻿using Player.StateMachine.Player;
+﻿using AttackSystem.Core;
+using Player.StateMachine.Player;
 using UnityEngine.InputSystem;
 
 namespace Player.States
@@ -7,6 +8,18 @@ namespace Player.States
     {
         public PlayerAliveState(PlayerStateMachine playerPlayerStateMachine) : base(playerPlayerStateMachine)
         {
+        }
+
+        public override void Enter()
+        {
+            base.Enter();
+            PlayerStateMachine.DamageHandler.OnDied += MakePlayerDead;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            PlayerStateMachine.DamageHandler.OnDied -= MakePlayerDead;
         }
 
         protected override void OnFirstSkillPerformed(InputAction.CallbackContext obj)
@@ -32,6 +45,11 @@ namespace Player.States
         protected override void OnFifthSkillPerformed(InputAction.CallbackContext obj)
         {
             PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerFifthCastState);
+        }
+
+        private void MakePlayerDead(AttackData attackData)
+        {
+            PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerDeadState);
         }
     }
 }

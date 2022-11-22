@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1c38672a6b454e8ed0e07b48a4296b, type: 3}
   m_Name: MagicalAttack
   m_EditorClassIdentifier: 
-  m_BaseValue: 0
+  m_BaseValue: 10
   m_Cap: -1
   m_Formula: {fileID: 0}
 --- !u!114 &-1989886357687948607
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1c38672a6b454e8ed0e07b48a4296b, type: 3}
   m_Name: Intelligence
   m_EditorClassIdentifier: 
-  m_BaseValue: 0
+  m_BaseValue: 10
   m_Cap: -1
   m_Formula: {fileID: 0}
 --- !u!114 &-1248605680695438214
