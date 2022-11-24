@@ -36,7 +36,7 @@ namespace GameCore.StateMachine.States
 
         private void LoadProgress()
         {
-            _persistentProgressService.PlayerProgress = _saveLoadService.Load() ?? NewProgress();
+            _persistentProgressService.PlayerProgress = NewProgress();
         }
 
         private PlayerProgress NewProgress() => new PlayerProgress(ENVIRONMENT);

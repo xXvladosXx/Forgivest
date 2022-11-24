@@ -39,8 +39,15 @@ namespace Enemy
             if (!(_currentHealth < _maxHealth)) return;
             
             meshRenderer.enabled = true;
-            AlignCamera();
             UpdateParams();
+        }
+
+        private void Update()
+        {
+            if (meshRenderer.enabled)
+            {
+                AlignCamera();
+            }
         }
 
         private void UpdateParams() {

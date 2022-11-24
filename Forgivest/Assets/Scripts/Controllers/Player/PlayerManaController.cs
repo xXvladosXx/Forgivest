@@ -29,10 +29,6 @@ namespace Controllers.Player
             RecalculateManaOnBar(_mana.CurrentValue, _mana.Value);
         }
 
-        public void Tick()
-        {
-        }
-
         public void Dispose()
         {
             _mana.OnCurrentValueChanged -= RecalculateManaOnBar;
