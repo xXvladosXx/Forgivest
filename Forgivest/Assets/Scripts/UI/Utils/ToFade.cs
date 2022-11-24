@@ -13,7 +13,7 @@ namespace UI.Utils
 
         public void Reset()
         {
-            StartFading(1);
+            StartFading(0);
         }
     }
 }

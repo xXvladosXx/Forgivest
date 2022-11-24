@@ -79,10 +79,6 @@ namespace Player.States.Skill
         {
             var skill = PlayerStateMachine.AbilityHandler.Hotbar.ItemContainer.Slots[index].Item;
             
-            PlayerStateMachine.AbilityHandler.Abilities.TryGetValue("Spikes", out var ability);
-            Debug.Log(ability.ToString());
-            Debug.Log(ability.AbilityDefinition.ItemDescription);
-            
             var activated = skill switch
             {
                 ProjectileAbilityDefinition projectileAbility => TryActivateTargetAbility(index, projectileAbility),
@@ -143,8 +139,7 @@ namespace Player.States.Skill
 
         protected bool TryToActivateAttackAbility(int index, AttackAbilityDefinition attackAbility)
         {
-            bool canActivate =
-                PlayerStateMachine.AbilityHandler.TryActiveAbility(index);
+            bool canActivate = PlayerStateMachine.AbilityHandler.TryActiveAbility(index);
 
             if (!canActivate)
             {

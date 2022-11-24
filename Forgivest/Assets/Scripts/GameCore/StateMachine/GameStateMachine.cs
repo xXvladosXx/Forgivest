@@ -31,8 +31,8 @@ namespace GameCore.StateMachine
                 [typeof(LoadProgressState)] = new LoadProgressState(this, 
                     diContainer.Resolve<IPersistentProgressService>(),
                     diContainer.Resolve<ISaveLoadService>()),
-                [typeof(GameLoopState)] = new GameLoopState(this, diContainer),
-                [typeof(GameEndState)] = new GameEndState(this, diContainer.Resolve<PersistentCanvas>().DeathScreenObject),
+                [typeof(GameLoopState)] = new GameLoopState(this, diContainer.Resolve<IGameFactory>()),
+                [typeof(GameEndState)] = new GameEndState(this, diContainer.Resolve<PersistentCanvas>()),
             };
         }
 

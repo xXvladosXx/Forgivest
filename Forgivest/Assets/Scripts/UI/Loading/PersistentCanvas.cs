@@ -12,6 +12,7 @@ namespace UI.Loading
         [field: SerializeField] public GameObject LoadingBarObject { get; private set; }
         [field: SerializeField] public ToFade DeathScreenObject { get; private set; }
         [field: SerializeField] public GameObject LoadingScreenObject { get; private set; }
+        [field: SerializeField] public GameObject LoadingScreenGameObject { get; private set; }
         [field: SerializeField] public InputChecker.InputChecker InputChecker { get; private set; }
 
         public event Action OnStartGame;
@@ -46,26 +47,26 @@ namespace UI.Loading
 
         public void ShowDeathScreen()
         {
-            LoadingScreenObject.SetActive(true);
             DeathScreenObject.gameObject.SetActive(true);
             DeathScreenObject.TriggeredDeath();
         }
 
         public void HideDeathScreen()
         {
-            LoadingScreenObject.SetActive(false);
             DeathScreenObject.gameObject.SetActive(true);
             DeathScreenObject.Reset();
         }
         
         public void ShowLoadingScreen()
         {
+            LoadingScreenGameObject.gameObject.SetActive(true);
             LoadingScreenObject.SetActive(true);
             InputChecker.gameObject.SetActive(false);
         }
         
         public void HideLoadingScreen()
         {
+            LoadingScreenGameObject.gameObject.SetActive(false);
             LoadingScreenObject.SetActive(false);
             InputChecker.gameObject.SetActive(false);
         }

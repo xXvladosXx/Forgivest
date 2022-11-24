@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GameCore.AssetManagement;
 using GameCore.Data;
+using GameCore.StateMachine;
 using UnityEngine;
 
 namespace GameCore.Factory
@@ -12,9 +13,11 @@ namespace GameCore.Factory
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
+        public IGameObserver PlayerEntity { get; }
         public GameFactory(IAssetProvider assetProvider)
         {
             _assetProvider = assetProvider;
+            PlayerEntity = new GameObserver();
         }
 
         public void CleanUp()

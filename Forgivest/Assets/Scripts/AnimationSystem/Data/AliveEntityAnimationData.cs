@@ -17,7 +17,8 @@ namespace AnimationSystem.Data
         [SerializeField] private string _stoppingParameterName = "Stopping";
         [SerializeField] private string _landingParameterName = "Landing";
         [SerializeField] private string _airborneParameterName = "Airborne";
-
+        [SerializeField] private string _deathParameterName = "Death";
+        
         [Header("Grounded Parameter Names")] 
         [SerializeField] private string _idleParameterName = "isIdling";
         [SerializeField] private string _dashParameterName = "isDashing";
@@ -97,6 +98,8 @@ namespace AnimationSystem.Data
         public int FifthSkillParameterHash { get; private set; }
         public int SixthSkillParameterHash { get; private set; }
         public int SkillParameterHash { get; private set; }
+        public int DeathParameterHash { get; private set; }
+
         public void Init()
         {
             GroundedParameterHash = Animator.StringToHash(_groundedParameterName);
@@ -105,6 +108,7 @@ namespace AnimationSystem.Data
             LandingParameterHash = Animator.StringToHash(_landingParameterName);
             AirborneParameterHash = Animator.StringToHash(_airborneParameterName);
             DashParameterHash = Animator.StringToHash(_dashParameterName);
+            DeathParameterHash = Animator.StringToHash(_deathParameterName);
 
             IdleParameterHash = Animator.StringToHash(_idleParameterName);
             DashParameterHash = Animator.StringToHash(_dashParameterName);

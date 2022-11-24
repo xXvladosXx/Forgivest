@@ -1,4 +1,5 @@
-﻿using UI.Utils;
+﻿using UI.Loading;
+using UI.Utils;
 using Zenject;
 
 namespace GameCore.StateMachine.States
@@ -6,18 +7,18 @@ namespace GameCore.StateMachine.States
     public class GameEndState : IState
     {
         private readonly GameStateMachine _gameStateMachine;
-        private readonly ToFade _deathPanel;
+        private readonly PersistentCanvas _persistentCanvas;
 
-        public GameEndState(GameStateMachine gameStateMachine, ToFade deathPanel)
+        public GameEndState(GameStateMachine gameStateMachine, PersistentCanvas persistentCanvas)
         {
             _gameStateMachine = gameStateMachine;
-            _deathPanel = deathPanel;
+            _persistentCanvas = persistentCanvas;
         }
 
         public void Enter()
         {
-            _deathPanel.gameObject.SetActive(true);
-            _deathPanel.TriggeredDeath();
+            _persistentCanvas.gameObject.SetActive(true);
+            _persistentCanvas.ShowDeathScreen();
         }
 
         public void Exit()

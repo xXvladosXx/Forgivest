@@ -32,8 +32,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3886625154560024112}
   - {fileID: 642426757552106367}
+  - {fileID: 3886625154560024112}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -119,6 +119,7 @@ MonoBehaviour:
   <LoadingBarObject>k__BackingField: {fileID: 3886625154946014875}
   <DeathScreenObject>k__BackingField: {fileID: 642426757552106365}
   <LoadingScreenObject>k__BackingField: {fileID: 3886625153045423370}
+  <LoadingScreenGameObject>k__BackingField: {fileID: 3886625154560024115}
   <InputChecker>k__BackingField: {fileID: 3886625155036676983}
 --- !u!1 &3886625153296404837
 GameObject:
@@ -519,7 +520,7 @@ RectTransform:
   - {fileID: 3886625154906740457}
   - {fileID: 3886625155036676984}
   m_Father: {fileID: 3886625153045423371}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -989,7 +990,7 @@ PrefabInstance:
     - target: {fileID: 7734866480168720368, guid: 4fbe64849e4f88f43811213c704211b4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7734866480168720368, guid: 4fbe64849e4f88f43811213c704211b4,
         type: 3}

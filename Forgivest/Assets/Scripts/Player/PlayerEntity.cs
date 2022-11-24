@@ -12,6 +12,7 @@ using AttackSystem.Reward;
 using AttackSystem.Reward.Core;
 using Data.Player;
 using GameCore.Factory;
+using GameCore.StateMachine;
 using InventorySystem.Interaction;
 using InventorySystem.Items.Weapon;
 using LevelSystem;
@@ -90,6 +91,8 @@ namespace Player
             AttackApplier = new AttackApplier();
             DamageHandler = new DamageHandler(StatController);
 
+            gameFactory.PlayerEntity.Player ??= DamageHandler;
+            
             gameFactory.Register(Movement);
         }
 
