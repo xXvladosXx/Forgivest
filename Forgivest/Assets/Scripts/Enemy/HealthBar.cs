@@ -32,16 +32,6 @@ namespace Enemy
             _damageReceiver.OnDamageReceived += OnDamageReceived;
         }
 
-        private void OnDamageReceived(AttackData attackData)
-        {
-            _currentHealth = _damageReceiver.Health;
-
-            if (!(_currentHealth < _maxHealth)) return;
-            
-            meshRenderer.enabled = true;
-            UpdateParams();
-        }
-
         private void Update()
         {
             if (meshRenderer.enabled)
@@ -57,13 +47,21 @@ namespace Enemy
         }
 
         private void AlignCamera() {
-            if (_mainCamera != null) {
-                var camXform = _mainCamera.transform;
+            var camXform = _mainCamera.transform;
                 var forward = transform.position - camXform.position;
                 forward.Normalize();
                 var up = Vector3.Cross(forward, camXform.right);
                 transform.rotation = Quaternion.LookRotation(forward, up);
-            }
+        }
+
+        private void OnDamageReceived(AttackData attackData)
+        {
+            _currentHealth = _damageReceiver.Health;
+
+            if (!(_currentHealth < _maxHealth)) return;
+            
+            meshRenderer.enabled = true;
+            UpdateParams();
         }
     }
 }

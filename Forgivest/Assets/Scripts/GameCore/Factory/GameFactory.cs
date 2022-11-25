@@ -13,11 +13,11 @@ namespace GameCore.Factory
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
-        public IGameObserver PlayerEntity { get; }
+        public IPlayerObserver PlayerObserver { get; }
         public GameFactory(IAssetProvider assetProvider)
         {
             _assetProvider = assetProvider;
-            PlayerEntity = new GameObserver();
+            PlayerObserver = new PlayerObserver();
         }
 
         public void CleanUp()

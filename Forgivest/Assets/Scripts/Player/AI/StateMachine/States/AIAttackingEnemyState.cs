@@ -10,7 +10,6 @@ namespace Player.AI.StateMachine.States
         public override void Enter()
         {
             base.Enter();
-            AIStateMachine.AIEnemy.Movement.Stop();
             AIStateMachine.AIEnemy.NavMeshAgent.updateRotation = false;
             
             AIStateMachine.AIEnemy.AnimationChanger.StartAnimation(
@@ -39,13 +38,6 @@ namespace Player.AI.StateMachine.States
             targetToFace.y = 0;
             
             AIStateMachine.AIEnemy.Movement.Transform.LookAt(targetToFace);
-            //Debug.Log("Attacked!");
-            if (GetPlayerDistance() > AIStateMachine.AIEnemy.Config.DistanceToAttack)
-            {
-                AIStateMachine.ChangeState(AIStateMachine.AIChasingEnemyState);
-            }
-            
         }
-        
     }
 }

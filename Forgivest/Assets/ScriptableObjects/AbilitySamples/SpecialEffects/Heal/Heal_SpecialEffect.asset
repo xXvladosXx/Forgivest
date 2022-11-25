@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Heal_SpecialEffect
   m_EditorClassIdentifier: 
   <Location>k__BackingField: 2
-  <Prefab>k__BackingField: {fileID: -1317179823584493079, guid: ea6a3585192c2e94c85c09e7a8237ad0,
+  <Prefab>k__BackingField: {fileID: 8891246533534858358, guid: 416ce2c896eed8444a5f9f2eadb4dd8b,
     type: 3}

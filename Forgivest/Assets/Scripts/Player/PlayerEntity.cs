@@ -91,7 +91,8 @@ namespace Player
             AttackApplier = new AttackApplier();
             DamageHandler = new DamageHandler(StatController);
 
-            gameFactory.PlayerEntity.Player ??= DamageHandler;
+            gameFactory.PlayerObserver.DamageHandler ??= DamageHandler;
+            gameFactory.PlayerObserver.PlayerInputProvider ??= PlayerInputProvider;
             
             gameFactory.Register(Movement);
         }
@@ -162,8 +163,8 @@ namespace Player
         {
             if (AbilityHandler.CurrentAbility is SingleTargetAbility singeTargetAbility)
             {
-                var raycastable = _playerStateMachine.ReusableData.Raycastable;
-
+                var raycastable = _playerStateMachine.ReusableData.SkillRaycastable;
+                
                 switch (raycastable)
                 {
                     case IDamageReceiver damageReceiver:
@@ -176,7 +177,11 @@ namespace Player
 
                         singeTargetAbility.Cast(singeTargetAbility.ActiveAbilityDefinition.SelfCasted
                             ? gameObject
-                            : _playerStateMachine.ReusableData.Raycastable.GameObject, attackData);
+                            : _playerStateMachine.ReusableData.SkillRaycastable.GameObject, attackData);
+                        break;
+                    case null:
+                        if(singeTargetAbility.ActiveAbilityDefinition.SelfCasted)
+                            singeTargetAbility.Cast(gameObject, null);
                         break;
                 }
             }
@@ -186,7 +191,7 @@ namespace Player
         {
             if (AbilityHandler.CurrentAbility is ProjectileAbility projectileAbility)
             {
-                var raycastable = _playerStateMachine.ReusableData.Raycastable;
+                var raycastable = _playerStateMachine.ReusableData.SkillRaycastable;
 
                 switch (raycastable)
                 {

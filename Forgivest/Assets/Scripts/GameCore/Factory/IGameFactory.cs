@@ -8,7 +8,7 @@ namespace GameCore.Factory
     public interface IGameFactory
     {
         GameObject CreatePlayer(GameObject at);
-        IGameObserver PlayerEntity { get; }
+        IPlayerObserver PlayerObserver { get; }
         List<ISavedProgressReader> ProgressReaders { get; }
         List<ISavedProgress> ProgressWriters { get; }
         void CleanUp();

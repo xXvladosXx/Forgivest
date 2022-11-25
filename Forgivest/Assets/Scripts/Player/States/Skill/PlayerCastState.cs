@@ -27,8 +27,10 @@ namespace Player.States.Skill
                 case AttackAbility attackAbility:
                     if (PlayerStateMachine.RaycastUser.RaycastHit != null)
                     {
-                        attackAbility.OnEnter(PlayerStateMachine.Movement, PlayerStateMachine.RaycastUser.RaycastHit.Value.point);
+                        attackAbility.OnEnter(PlayerStateMachine.Movement,
+                            PlayerStateMachine.RaycastUser.RaycastHit.Value.point);
                     }
+
                     break;
                 case ProjectileAbility projectileAbility:
                     break;
@@ -67,9 +69,9 @@ namespace Player.States.Skill
 
             PlayerStateMachine.AnimationChanger.StopAnimation(PlayerStateMachine.AnimationData.SkillParameterHash);
             PlayerStateMachine.Movement.EnableRotation(true);
-            
-            if(PlayerStateMachine.AbilityHandler.CurrentAbility == null) return;
-            
+
+            if (PlayerStateMachine.AbilityHandler.CurrentAbility == null) return;
+
             PlayerStateMachine.AnimationChanger.StopAnimation((
                 (ActiveAbilityDefinition) PlayerStateMachine.AbilityHandler.CurrentAbility
                     .AbilityDefinition).HashAnimation);
@@ -78,48 +80,43 @@ namespace Player.States.Skill
         protected void TryToActivateSkill(int index)
         {
             var skill = PlayerStateMachine.AbilityHandler.Hotbar.ItemContainer.Slots[index].Item;
-            
+
             var activated = skill switch
             {
                 ProjectileAbilityDefinition projectileAbility => TryActivateTargetAbility(index, projectileAbility),
-                RadiusDamageAbilityDefinition radiusDamageAbility => TryToActivateFreeAbility(index, radiusDamageAbility),
-                SingleTargetAbilityDefinition singleTargetAbility => TryActivateTargetAbility(index, singleTargetAbility),
+                RadiusDamageAbilityDefinition radiusDamageAbility => TryToActivateFreeAbility(index,
+                    radiusDamageAbility),
+                SingleTargetAbilityDefinition singleTargetAbility => TryActivateTargetAbility(index,
+                    singleTargetAbility),
                 AttackAbilityDefinition attackAbility => TryToActivateAttackAbility(index, attackAbility),
                 null => false,
                 _ => throw new ArgumentOutOfRangeException(nameof(skill))
             };
-            
-            if(!activated)
+
+            if (!activated)
                 PlayerStateMachine.ChangeState(PlayerStateMachine.IdlingState);
         }
-        
+
         protected bool TryActivateTargetAbility(int index, ActiveAbilityDefinition activeAbility)
         {
-            if (PlayerStateMachine.ReusableData.Raycastable != null)
+            if ((!activeAbility.SelfCasted && PlayerStateMachine.ReusableData.Raycastable == null))
             {
-                if (!activeAbility.SelfCasted &&
-                    PlayerStateMachine.ReusableData.Raycastable.GameObject ==
-                    PlayerStateMachine.Movement.Transform.gameObject)
-                {
-                    return false;
-                }
-
-                bool canActivate =
-                    PlayerStateMachine.AbilityHandler.TryActiveAbility(index);
-
-                if (!canActivate)
-                {
-                    PlayerStateMachine.ChangeState(PlayerStateMachine.IdlingState);
-                    return false;
-                }
-
-                PrepareForCast();
-                StartAnimating(activeAbility);
-                return true;
+                PlayerStateMachine.ChangeState(PlayerStateMachine.IdlingState);
+                return false;
             }
 
-            PlayerStateMachine.ChangeState(PlayerStateMachine.IdlingState);
-            return false;
+            bool canActivate =
+                PlayerStateMachine.AbilityHandler.TryActiveAbility(index);
+
+            if (!canActivate)
+            {
+                PlayerStateMachine.ChangeState(PlayerStateMachine.IdlingState);
+                return false;
+            }
+
+            PrepareForCast();
+            StartAnimating(activeAbility);
+            return true;
         }
 
         protected bool TryToActivateFreeAbility(int index, RadiusDamageAbilityDefinition radiusDamageAbility)
@@ -155,6 +152,7 @@ namespace Player.States.Skill
         protected override void OnInteractableCheck()
         {
         }
+
         private void StartAnimating(ActiveAbilityDefinition activeAbilityDefinition)
         {
             PlayerStateMachine.AnimationChanger.StartAnimation(activeAbilityDefinition.HashAnimation);
@@ -162,6 +160,7 @@ namespace Player.States.Skill
 
         private void PrepareForCast()
         {
+            PlayerStateMachine.ReusableData.SkillRaycastable = PlayerStateMachine.RaycastUser.Raycastable;
             PlayerStateMachine.Movement.EnableRotation(false);
             PlayerStateMachine.Movement.Stop();
             PlayerStateMachine.Rotator.RotateToTargetPosition(PlayerStateMachine.ReusableData.HoveredPoint);

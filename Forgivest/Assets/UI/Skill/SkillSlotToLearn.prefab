@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8232895491823534223}
   - component: {fileID: 2684569919743473147}
   - component: {fileID: 6668995349814910403}
+  - component: {fileID: 6296855605907941352}
   m_Layer: 5
   m_Name: SkillSlotToLearn
   m_TagString: Untagged
@@ -147,6 +148,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skillLearnButton: {fileID: 43827677868642799}
   _image: {fileID: 2955808569039940510}
+--- !u!114 &6296855605907941352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376168450304034068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc4daf13a8e5d04a9dfefec08811e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipPrefab: {fileID: 6796662661069912602, guid: df03edcbd80645b4da5aa8f88434766b,
+    type: 3}
+  _rectTransform: {fileID: 1376168450304034069}
 --- !u!1 &1376168450308554475
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,7 +731,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3

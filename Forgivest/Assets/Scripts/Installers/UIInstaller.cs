@@ -1,10 +1,10 @@
-﻿using UI.Data;
+﻿using Controllers.Player;
+using UI.Core;
+using UI.Data;
 using UI.HUD;
 using UI.HUD.Stats;
-using UI.Inventory;
 using UI.Inventory.Core;
 using UI.Skill;
-using UI.Utils;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +12,7 @@ namespace Installers
 {
     public class UIInstaller : MonoInstaller
     {
+        [SerializeField] private PanelSwitcher _panelSwitcher;
         [SerializeField] private InventoryPanel _inventoryPanel;
         [SerializeField] private SkillPanel _skillPanel;
         [SerializeField] private StaticPanel staticPanel;
@@ -30,6 +31,9 @@ namespace Installers
             Container.Bind<UIReusableData>().FromInstance(_uiReusableData).AsSingle();
             Container.Bind<StaticPanel>().FromInstance(staticPanel).AsSingle();
             Container.Bind<ExperienceBarUI>().FromInstance(_experienceBarUI).AsSingle();
+            Container.Bind<PanelSwitcher>().FromInstance(_panelSwitcher).AsSingle();
+            
+            Container.BindInterfacesAndSelfTo<PlayerPanelController>().AsSingle();
         }
     }
 }

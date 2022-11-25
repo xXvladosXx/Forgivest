@@ -64,15 +64,6 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Inventory"",
-                    ""type"": ""Button"",
-                    ""id"": ""c22d2451-9970-4500-82fb-f1e6c299739c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Interaction"",
                     ""type"": ""Button"",
                     ""id"": ""736541b6-2a9b-4985-9355-133e905efd24"",
@@ -245,17 +236,6 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0a94a3e4-100d-41a6-afae-1b638d36939e"",
-                    ""path"": ""<Keyboard>/tab"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Inventory"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""d7ce045a-afd4-4811-9b63-16918753e232"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -354,6 +334,54 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""529eae15-5667-4831-9005-8f8cb6e06238"",
+            ""actions"": [
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa196e5f-9282-43f5-8936-d929abe7292d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkillBar"",
+                    ""type"": ""Button"",
+                    ""id"": ""c8ccef8e-a29a-4093-a740-1d9a950b57a4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""519fc28f-c4a4-42e0-9ed3-71dd11cef670"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkillBar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ec1cdf49-f234-45c7-a187-342f04951098"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -364,7 +392,6 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
         m_Main_Action = m_Main.FindAction("Action", throwIfNotFound: true);
         m_Main_AltAction = m_Main.FindAction("AltAction", throwIfNotFound: true);
         m_Main_Jump = m_Main.FindAction("Jump", throwIfNotFound: true);
-        m_Main_Inventory = m_Main.FindAction("Inventory", throwIfNotFound: true);
         m_Main_Interaction = m_Main.FindAction("Interaction", throwIfNotFound: true);
         m_Main_PauseMenu = m_Main.FindAction("PauseMenu", throwIfNotFound: true);
         m_Main_Look = m_Main.FindAction("Look", throwIfNotFound: true);
@@ -374,6 +401,10 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
         m_Main_ThirdSkill = m_Main.FindAction("ThirdSkill", throwIfNotFound: true);
         m_Main_FourthSkill = m_Main.FindAction("FourthSkill", throwIfNotFound: true);
         m_Main_FifthSkill = m_Main.FindAction("FifthSkill", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
+        m_UI_SkillBar = m_UI.FindAction("SkillBar", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -437,7 +468,6 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Main_Action;
     private readonly InputAction m_Main_AltAction;
     private readonly InputAction m_Main_Jump;
-    private readonly InputAction m_Main_Inventory;
     private readonly InputAction m_Main_Interaction;
     private readonly InputAction m_Main_PauseMenu;
     private readonly InputAction m_Main_Look;
@@ -455,7 +485,6 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
         public InputAction @Action => m_Wrapper.m_Main_Action;
         public InputAction @AltAction => m_Wrapper.m_Main_AltAction;
         public InputAction @Jump => m_Wrapper.m_Main_Jump;
-        public InputAction @Inventory => m_Wrapper.m_Main_Inventory;
         public InputAction @Interaction => m_Wrapper.m_Main_Interaction;
         public InputAction @PauseMenu => m_Wrapper.m_Main_PauseMenu;
         public InputAction @Look => m_Wrapper.m_Main_Look;
@@ -486,9 +515,6 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_MainActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnJump;
-                @Inventory.started -= m_Wrapper.m_MainActionsCallbackInterface.OnInventory;
-                @Inventory.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnInventory;
-                @Inventory.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnInventory;
                 @Interaction.started -= m_Wrapper.m_MainActionsCallbackInterface.OnInteraction;
                 @Interaction.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnInteraction;
                 @Interaction.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnInteraction;
@@ -532,9 +558,6 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @Inventory.started += instance.OnInventory;
-                @Inventory.performed += instance.OnInventory;
-                @Inventory.canceled += instance.OnInventory;
                 @Interaction.started += instance.OnInteraction;
                 @Interaction.performed += instance.OnInteraction;
                 @Interaction.canceled += instance.OnInteraction;
@@ -566,13 +589,53 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
         }
     }
     public MainActions @Main => new MainActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_Inventory;
+    private readonly InputAction m_UI_SkillBar;
+    public struct UIActions
+    {
+        private @PlayerControlls m_Wrapper;
+        public UIActions(@PlayerControlls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Inventory => m_Wrapper.m_UI_Inventory;
+        public InputAction @SkillBar => m_Wrapper.m_UI_SkillBar;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @Inventory.started -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnInventory;
+                @SkillBar.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSkillBar;
+                @SkillBar.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSkillBar;
+                @SkillBar.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSkillBar;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
+                @SkillBar.started += instance.OnSkillBar;
+                @SkillBar.performed += instance.OnSkillBar;
+                @SkillBar.canceled += instance.OnSkillBar;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IMainActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
         void OnAltAction(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnInventory(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
@@ -582,5 +645,10 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
         void OnThirdSkill(InputAction.CallbackContext context);
         void OnFourthSkill(InputAction.CallbackContext context);
         void OnFifthSkill(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnInventory(InputAction.CallbackContext context);
+        void OnSkillBar(InputAction.CallbackContext context);
     }
 }

@@ -30,7 +30,7 @@ MonoBehaviour:
   <ItemID>k__BackingField:
     Id: 7
   <ItemType>k__BackingField: 13
-  <ItemDescription>k__BackingField: Desss
+  _itemDescription: 
   _gameplayEffectDefinitions:
   - {fileID: 11400000, guid: d2886198fe57cff4794bac31b15343c6, type: 2}
   _maxLevel: 0

@@ -12,6 +12,7 @@ namespace Data.Player
         public float AttackRate { get; set; }
         public IInteractable InteractableObject { get; set; }
         public IRaycastable Raycastable { get; set; }
+        public IRaycastable SkillRaycastable { get; set; }
         public float StoppingDistance { get; set; }
         public Vector3 RaycastClickedPoint { get; set; }
         public Vector3 HoveredPoint { get; set; }

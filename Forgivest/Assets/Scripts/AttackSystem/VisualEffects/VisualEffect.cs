@@ -14,6 +14,8 @@ namespace AttackSystem.VisualEffects
         private void Awake()
         {
             _particleSystem = GetComponent<ParticleSystem>();
+            if(_particleSystem == null)
+                _particleSystem = GetComponentInChildren<ParticleSystem>();
         }
 
         public void Play()

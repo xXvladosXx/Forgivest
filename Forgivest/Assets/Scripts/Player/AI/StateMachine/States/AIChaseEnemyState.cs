@@ -23,10 +23,9 @@ namespace Player.AI.StateMachine.States
                     AIStateMachine.AIEnemy.Config.MovementChasingSpeed);
 
                 var distanceToAttack = FindDistanceToAttack();
+                _currentAttackRate -= Time.deltaTime;
 
                 if (!(GetPlayerDistance() < distanceToAttack)) return;
-                
-                _currentAttackRate -= Time.deltaTime;
                 AIStateMachine.AIEnemy.Movement.Stop();
 
                 if (!(_currentAttackRate <= 0)) return;

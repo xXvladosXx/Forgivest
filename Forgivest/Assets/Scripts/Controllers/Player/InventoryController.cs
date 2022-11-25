@@ -12,6 +12,8 @@ using UI.Inventory;
 using UI.Inventory.Core;
 using UI.Skill;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Utilities;
 using Zenject;
 
 namespace Controllers.Player
@@ -24,6 +26,7 @@ namespace Controllers.Player
         private readonly ObjectPicker _objectPicker;
         private readonly AbilityHandler _abilityHandler;
         private readonly UIReusableData _uiReusableData;
+        private readonly PlayerInputProvider _playerInputProvider;
 
         private Dictionary<ItemContainer, ItemContainerUI> _itemHolders =
             new Dictionary<ItemContainer, ItemContainerUI>();
@@ -62,7 +65,7 @@ namespace Controllers.Player
                 itemContainer.OnTryToSwapSlots += TryToSwapSlotsInInventory;
             }
         }
-        
+
         public void Tick()
         {
             

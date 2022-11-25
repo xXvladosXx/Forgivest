@@ -8,7 +8,7 @@ namespace GameCore.StateMachine.States
     {
         private readonly GameStateMachine _gameStateMachine;
         private readonly IGameFactory _gameFactory;
-        private readonly IGameObserver _gameObserver;
+        private readonly IPlayerObserver _playerObserver;
 
         public GameLoopState(GameStateMachine gameStateMachine,
             IGameFactory gameFactory)
@@ -19,11 +19,12 @@ namespace GameCore.StateMachine.States
         
         public void Enter()
         {
-            _gameFactory.PlayerEntity.Player.OnDied += OnPlayerDied;
+            _gameFactory.PlayerObserver.DamageHandler.OnDied += OnPlayerDied;
         }
+
         public void Exit()
         {
-            _gameFactory.PlayerEntity.Player.OnDied -= OnPlayerDied;
+            _gameFactory.PlayerObserver.DamageHandler.OnDied -= OnPlayerDied;
         }
 
         private void OnPlayerDied(AttackData attackData)

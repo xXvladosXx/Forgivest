@@ -19,7 +19,7 @@ namespace Installers
             Container.Bind<IGameFactory>().To<GameFactory>().AsSingle().NonLazy();
             Container.Bind<IPersistentProgressService>().To<PersistentProgressService>().AsSingle();
             Container.Bind<ISaveLoadService>().To<SaveLoadService>().AsSingle();
-            Container.Bind<IGameObserver>().To<GameObserver>().AsSingle();
+            Container.Bind<IPlayerObserver>().To<PlayerObserver>().AsSingle();
         }
     }
 }

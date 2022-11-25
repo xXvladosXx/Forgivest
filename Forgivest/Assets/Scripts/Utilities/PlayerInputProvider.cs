@@ -8,12 +8,14 @@ namespace Utilities
     {
         public PlayerControlls PlayerInput { get; private set; }
         public PlayerControlls.MainActions PlayerMainActions { get; private set; }
+        public PlayerControlls.UIActions PlayerUIActions { get; private set; }
 
         public void Awake()
         {
             PlayerInput = new PlayerControlls();
 
             PlayerMainActions = PlayerInput.Main;
+            PlayerUIActions = PlayerInput.UI;
         }
 
         private void OnEnable()

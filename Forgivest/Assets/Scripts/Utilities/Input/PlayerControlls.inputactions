@@ -42,15 +42,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Inventory",
-                    "type": "Button",
-                    "id": "c22d2451-9970-4500-82fb-f1e6c299739c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Interaction",
                     "type": "Button",
                     "id": "736541b6-2a9b-4985-9355-133e905efd24",
@@ -223,17 +214,6 @@
                 },
                 {
                     "name": "",
-                    "id": "0a94a3e4-100d-41a6-afae-1b638d36939e",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Inventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "d7ce045a-afd4-4811-9b63-16918753e232",
                     "path": "<Keyboard>/e",
                     "interactions": "",
@@ -328,6 +308,54 @@
                     "processors": "",
                     "groups": "",
                     "action": "FifthSkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "529eae15-5667-4831-9005-8f8cb6e06238",
+            "actions": [
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "fa196e5f-9282-43f5-8936-d929abe7292d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SkillBar",
+                    "type": "Button",
+                    "id": "c8ccef8e-a29a-4093-a740-1d9a950b57a4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "519fc28f-c4a4-42e0-9ed3-71dd11cef670",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkillBar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ec1cdf49-f234-45c7-a187-342f04951098",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

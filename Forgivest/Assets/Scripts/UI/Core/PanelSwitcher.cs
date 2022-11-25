@@ -20,33 +20,21 @@ namespace UI.Core
             HideAllUIElements();
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                SwitchUIElement<InventoryPanel>();
-            }
-
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                SwitchUIElement<SkillPanel>();
-            }
-        }
-
-        protected void SwitchUIElement<T>() where T : Panel
+        public bool SwitchUIElement<T>() where T : Panel
         {
             if (_currentPanel != null)
             {
                 if (_currentPanel.GetType() == typeof(T))
                 {
                     HideUIElement();
-                    return;
+                    return true;
                 }
 
                 HideUIElement();
             }
 
             ShowUIElement<T>();
+            return false;
         }
 
         private void ShowUIElement<T>() where T : Panel

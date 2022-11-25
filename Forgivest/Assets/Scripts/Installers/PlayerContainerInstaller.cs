@@ -11,6 +11,7 @@ using Logic;
 using Player;
 using StatSystem;
 using UnityEngine;
+using Utilities;
 using Zenject;
 
 namespace Installers
@@ -29,6 +30,7 @@ namespace Installers
             Container.Bind<ObjectPicker>().FromInstance(mainComponent.ObjectPicker).AsSingle();
             Container.Bind<LevelController>().FromInstance(mainComponent.LevelController).AsSingle();
             Container.Bind<StatController>().FromInstance(mainComponent.StatController).AsSingle();
+            Container.Bind<PlayerInputProvider>().FromInstance(mainComponent.PlayerInputProvider).AsSingle();
 
             Container.BindInterfacesAndSelfTo<InventoryController>().AsSingle();
             Container.BindInterfacesTo<PlayerAbilityController>().AsSingle();
