@@ -40,6 +40,14 @@ namespace UI.Menu
             _backButton.onClick.AddListener(OnBackButtonClicked);
         }
 
+        private void OnDisable()
+        {
+            _startNewGame.onClick.RemoveListener(TryToStartNewGame);
+            _backButton.onClick.RemoveListener(OnBackButtonClicked);
+//            _inputField.text = string.Empty;
+            SaveFile = string.Empty;
+        }
+
         private void OnBackButtonClicked()
         {
             MenuSwitcher.Show<MainMenu>();
@@ -74,14 +82,6 @@ namespace UI.Menu
         public void CreateName(string saveFile)
         {
             SaveFile = saveFile;
-        }
-
-        private void OnDisable()
-        {
-            _startNewGame.onClick.RemoveListener(TryToStartNewGame);
-            _backButton.onClick.RemoveListener(OnBackButtonClicked);
-//            _inputField.text = string.Empty;
-            SaveFile = string.Empty;
         }
 
         private void StartNewGame()

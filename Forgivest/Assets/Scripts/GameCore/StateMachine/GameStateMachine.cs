@@ -28,11 +28,13 @@ namespace GameCore.StateMachine
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, diContainer.Resolve<PersistentCanvas>(), 
                     diContainer.Resolve<IGameFactory>(),
                     diContainer.Resolve<IPersistentProgressService>()),
-                [typeof(LoadProgressState)] = new LoadProgressState(this, 
+                [typeof(LoadExistingGameState)] = new LoadExistingGameState(this, 
                     diContainer.Resolve<IPersistentProgressService>(),
                     diContainer.Resolve<ISaveLoadService>()),
                 [typeof(GameLoopState)] = new GameLoopState(this, diContainer.Resolve<IGameFactory>()),
                 [typeof(GameEndState)] = new GameEndState(this, diContainer.Resolve<PersistentCanvas>()),
+                [typeof(StartNewGameState)] = new StartNewGameState(this, diContainer.Resolve<IPersistentProgressService>(),
+                    diContainer.Resolve<ISaveLoadService>())
             };
         }
 

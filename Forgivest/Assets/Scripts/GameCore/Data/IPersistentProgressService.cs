@@ -1,7 +1,10 @@
-﻿namespace GameCore.Data
+﻿using System.Collections.Generic;
+
+namespace GameCore.Data
 {
     public interface IPersistentProgressService
     {
-        PlayerProgress PlayerProgress { get; set; }
+        public Dictionary<string, PlayerProgress> PlayerProgresses { get; set; }
+        public string Scene { get; set; }
     }
 }

@@ -10,25 +10,25 @@ namespace GameCore.StateMachine.States
     {
         private readonly GameStateMachine _gameStateMachine;
         private readonly MenuSwitcher _mainMenuSwitcher;
-        private readonly DiContainer _diContainer;
         private readonly IGameFactory _gameFactory;
         
         private StartMenu _startMenu;
+        private LoadMenu _loadMenu;
         
         public BootstrapState(GameStateMachine gameStateMachine,
             MenuSwitcher mainMenuSwitcher, DiContainer diContainer)
         {
             _gameStateMachine = gameStateMachine;
             _mainMenuSwitcher = mainMenuSwitcher;
-            _diContainer = diContainer;
         }
 
         public void Enter()
         {
             _startMenu = _mainMenuSwitcher.Find<StartMenu>() as StartMenu;
-            
-            if (_startMenu != null) 
-                _startMenu.OnStartClicked += LoadScene;
+            _loadMenu = _mainMenuSwitcher.Find<LoadMenu>() as LoadMenu;
+
+            _startMenu.OnStartClicked += LoadStartScene;
+            _loadMenu.OnLoadClicked += LoadScene;
         }
 
         public void Exit()
@@ -36,15 +36,26 @@ namespace GameCore.StateMachine.States
             
         }
 
-        private void LoadScene()
+        private void LoadStartScene()
         {
             _startMenu.OnStartClicked -= LoadScene;
+            EnterStartLevel();
+        }
+
+        private void LoadScene()
+        {
+            _loadMenu.OnLoadClicked -= LoadStartScene;
             EnterLoadLevel();
+        }
+
+        private void EnterStartLevel()
+        {
+            _gameStateMachine.Enter<StartNewGameState, string>("NewGame");
         }
 
         private void EnterLoadLevel()
         {
-            _gameStateMachine.Enter<LoadProgressState>();
+            _gameStateMachine.Enter<LoadExistingGameState, string>("LoadGame");
         }
     }
 }

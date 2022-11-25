@@ -2,7 +2,7 @@
 {
     public interface ISaveLoadService
     {
-        void SaveProgress();
-        PlayerProgress Load();
+        void SaveProgress(string saveFile);
+        PlayerProgress Load(string saveFile);
     }
 }

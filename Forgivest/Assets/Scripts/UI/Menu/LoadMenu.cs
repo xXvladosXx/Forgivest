@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using UI.Menu.Core;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,32 @@ namespace UI.Menu
         [SerializeField] private Button _backButton;
         [SerializeField] private Button _loadButton;
         [SerializeField] private Transform _content;
+        
+        public event Action OnLoadClicked;
+
+
+        private void OnEnable()
+        {
+            _loadButton.onClick.AddListener(TryToLoadGame);
+            _backButton.onClick.AddListener(OnBackButtonClicked);
+        }
+
+        private void OnDisable()
+        {
+            _loadButton.onClick.RemoveListener(TryToLoadGame);
+            _backButton.onClick.RemoveListener(OnBackButtonClicked);
+        }
+
+        private void OnBackButtonClicked()
+        {
+            
+        }
+
+        private void TryToLoadGame()
+        {
+            OnLoadClicked?.Invoke();
+        }
+
         public override void Initialize()
         {
             

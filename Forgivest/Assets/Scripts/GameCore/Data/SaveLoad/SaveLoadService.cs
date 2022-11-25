@@ -1,6 +1,8 @@
-﻿using GameCore.Data.Types;
+﻿using System.Collections.Generic;
+using GameCore.Data.Types;
 using GameCore.Factory;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GameCore.Data.SaveLoad
 {
@@ -17,18 +19,23 @@ namespace GameCore.Data.SaveLoad
             _gameFactory = gameFactory;
         }
         
-        public void SaveProgress()
+        public void SaveProgress(string saveFile)
         {
+            var capturedStates = FileManager.LoadFromBinaryFile(saveFile);
+            
             foreach (var progressWriter in _gameFactory.ProgressWriters)
             {
-                progressWriter.UpdateProgress(_progressService.PlayerProgress);
+                progressWriter.UpdateProgress(capturedStates[saveFile]);
             }
             
-            PlayerPrefs.SetString(PROGRESS, _progressService.PlayerProgress.ToJson());
+            FileManager.SaveToBinaryFile(saveFile, capturedStates[saveFile]);
         }
 
-        public PlayerProgress Load() => 
-            PlayerPrefs.GetString(PROGRESS)
-                ?.ToDeserializedObject<PlayerProgress>();
+
+        public PlayerProgress Load(string saveFile)
+        {
+            var restoredStates = FileManager.LoadFromBinaryFile(saveFile);
+            return restoredStates[saveFile];
+        }
     }
 }
