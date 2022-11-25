@@ -22,7 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   <Rarity>k__BackingField: {fileID: 0}
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Spinning blade
   <Prefab>k__BackingField: {fileID: 0}
   <MaxItemsInStack>k__BackingField: 1
   <Sprite>k__BackingField: {fileID: 21300000, guid: 4993b272241968e49b2080d63ff96d45,
@@ -30,12 +30,14 @@ MonoBehaviour:
   <ItemID>k__BackingField:
     Id: 10
   <ItemType>k__BackingField: 13
-  <ItemDescription>k__BackingField: 
+  _itemDescription: 
   _gameplayEffectDefinitions:
   - {fileID: 11400000, guid: c148608e5c7bd7d41815344dd0d11729, type: 2}
   - {fileID: 11400000, guid: 3ea4443d5d135874892b169c2bfe57dc, type: 2}
   _maxLevel: 0
   _level: 5
+  _requiredLevel: 0
+  _requiredAbilityPoints: 0
   <AnimationName>k__BackingField: FirstSkill
   <Cost>k__BackingField: {fileID: 11400000, guid: 27cc41d2bf9dcd34493cbeea4381fabb,
     type: 2}

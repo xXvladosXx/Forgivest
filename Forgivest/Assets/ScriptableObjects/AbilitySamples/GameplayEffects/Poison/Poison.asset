@@ -29,13 +29,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d857ad9e53c40febcc3995c0f3c4cf6, type: 3}
   m_Name: Poison
   m_EditorClassIdentifier: 
+  _description: "Damage: {GameplayStackableEffect.Modifiers[0].MagnitudeForDescription}
+    \nStack count: {GameplayStackableEffect.StackCount}\nEffect duration: {GameplayStackableEffect.IsInfinite}"
   _modifiers:
   - {fileID: -4042212387136400691}
+  _conditionalEffects: []
   _specialEffectDefinition: {fileID: 0}
   _tags:
   - status
   - poison
   _removeEffectsWithTags: []
+  _applicationMustBePresentTags: []
+  _applicationMustBeAbsentTags: []
   _isInfinite: 0
   _durationFormula: {fileID: 11400000, guid: 3d0a14dea297b7546a9c1df9a4917c92, type: 2}
   _isPeriodic: 1
@@ -45,6 +50,8 @@ MonoBehaviour:
   _grantedImmunityTags: []
   _specialPersistentEffectDefinition: {fileID: 11400000, guid: a755ffc47ec5ee74a8b70b489bca23f0,
     type: 2}
+  _persistMustBePresentTags: []
+  _persistMustBeAbsentTags: []
   _overflowEffects: []
   _denyOverflowApplication: 0
   _clearStackOnOverflow: 0

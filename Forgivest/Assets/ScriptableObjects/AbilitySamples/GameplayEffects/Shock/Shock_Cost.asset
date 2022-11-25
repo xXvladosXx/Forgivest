@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c24fec08f9f4c66ac5bdd6a1be3db6d, type: 3}
   m_Name: Shock_Cost
   m_EditorClassIdentifier: 
+  _description: Costs {GameplayEffect.Modifiers[0]} mana
   _modifiers:
   - {fileID: 6927833184553031177}
+  _conditionalEffects: []
   _specialEffectDefinition: {fileID: 0}
+  _tags: []
+  _removeEffectsWithTags: []
+  _applicationMustBePresentTags: []
+  _applicationMustBeAbsentTags: []
 --- !u!114 &6927833184553031177
 MonoBehaviour:
   m_ObjectHideFlags: 0

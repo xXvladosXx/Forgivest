@@ -22,6 +22,7 @@ namespace AbilitySystem.AbilitySystem.Runtime
         public AttackData AttackData { get; }
 
         private List<StatModifier> _modifiers = new List<StatModifier>();
+        
         public ReadOnlyCollection<StatModifier> Modifiers => _modifiers.AsReadOnly();
 
         public ReadOnlyCollection<string> Tags => Definition.Tags;

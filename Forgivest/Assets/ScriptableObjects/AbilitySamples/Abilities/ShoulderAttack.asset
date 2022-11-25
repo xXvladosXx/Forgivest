@@ -23,7 +23,7 @@ MonoBehaviour:
     SerializationNodes: []
   <Rarity>k__BackingField: {fileID: 11400000, guid: 3991f70b9396e0446ad4e38d6cd74fbf,
     type: 2}
-  <Name>k__BackingField: 
+  <Name>k__BackingField: Dash
   <Prefab>k__BackingField: {fileID: 0}
   <MaxItemsInStack>k__BackingField: 1
   <Sprite>k__BackingField: {fileID: 21300000, guid: c2abbf8ec6bce54449265337cd374df1,
@@ -31,7 +31,7 @@ MonoBehaviour:
   <ItemID>k__BackingField:
     Id: 3
   <ItemType>k__BackingField: 13
-  <ItemDescription>k__BackingField: Desss
+  _itemDescription: 
   _gameplayEffectDefinitions: []
   _maxLevel: 0
   _level: 5

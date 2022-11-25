@@ -12,10 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5fd9c363a44de48531770a2bdc4d38, type: 3}
   m_Name: Shock_Cooldown
   m_EditorClassIdentifier: 
+  _description: 'Cooldown  {GameplayPersistentEffect.CurrentDuration} '
   _modifiers: []
+  _conditionalEffects: []
   _specialEffectDefinition: {fileID: 0}
+  _tags: []
+  _removeEffectsWithTags: []
+  _applicationMustBePresentTags: []
+  _applicationMustBeAbsentTags: []
   _isInfinite: 0
   _durationFormula: {fileID: 11400000, guid: 3705c5f3ea4344e4cbb94f87a51c121b, type: 2}
+  _isPeriodic: 0
+  _period: 0
+  _isExecutableEffectOnApply: 0
   _grantedTags:
   - shock_cooldown
+  _grantedImmunityTags: []
   _specialPersistentEffectDefinition: {fileID: 0}
+  _persistMustBePresentTags: []
+  _persistMustBeAbsentTags: []

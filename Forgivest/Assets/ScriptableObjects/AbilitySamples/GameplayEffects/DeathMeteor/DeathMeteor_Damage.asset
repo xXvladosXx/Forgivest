@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c24fec08f9f4c66ac5bdd6a1be3db6d, type: 3}
   m_Name: DeathMeteor_Damage
   m_EditorClassIdentifier: 
-  _description: 
+  _description: 'Damage: {GameplayEffect.Modifiers[0].MagnitudeForDescription} '
   _modifiers:
   - {fileID: 46019154419237379}
   _conditionalEffects: []
