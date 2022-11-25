@@ -22,14 +22,14 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   <Rarity>k__BackingField: {fileID: 0}
-  <Name>k__BackingField: 
+  <Name>k__BackingField: c
   <Prefab>k__BackingField: {fileID: 0}
   <MaxItemsInStack>k__BackingField: 1
   <Sprite>k__BackingField: {fileID: 0}
   <ItemID>k__BackingField:
     Id: 13
   <ItemType>k__BackingField: 13
-  <ItemDescription>k__BackingField: Desss
+  _itemDescription: 
   _gameplayEffectDefinitions:
   - {fileID: 11400000, guid: 78e86dd6d2e0d5d4295070606c64eff3, type: 2}
   _maxLevel: 5

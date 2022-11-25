@@ -28,7 +28,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c24fec08f9f4c66ac5bdd6a1be3db6d, type: 3}
   m_Name: Fireball_Cost
   m_EditorClassIdentifier: 
+  _description: Costs {GameplayEffect.Modifiers[0].MagnitudeForDescription} mana
   _modifiers:
   - {fileID: -3945144105559001197}
+  _conditionalEffects: []
   _specialEffectDefinition: {fileID: 0}
   _tags: []
+  _removeEffectsWithTags: []
+  _applicationMustBePresentTags: []
+  _applicationMustBeAbsentTags: []

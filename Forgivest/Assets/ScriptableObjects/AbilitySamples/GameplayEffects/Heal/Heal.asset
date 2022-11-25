@@ -12,12 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c24fec08f9f4c66ac5bdd6a1be3db6d, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
+  _description: 'Health: {GameplayEffect.Modifiers[0].Magnitude} '
   _modifiers:
   - {fileID: 5328612638485777080}
+  _conditionalEffects: []
   _specialEffectDefinition: {fileID: 11400000, guid: 97192f7792bbc584da3a905ddc2e9f7a,
     type: 2}
   _tags:
   - healing
+  _removeEffectsWithTags: []
+  _applicationMustBePresentTags: []
+  _applicationMustBeAbsentTags: []
 --- !u!114 &5328612638485777080
 MonoBehaviour:
   m_ObjectHideFlags: 0
