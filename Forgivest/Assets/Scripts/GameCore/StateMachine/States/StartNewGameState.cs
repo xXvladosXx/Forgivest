@@ -16,7 +16,7 @@ namespace GameCore.StateMachine.States
 
         protected override void StartGame(string saveFile)
         {
-            PersistentProgressService.PlayerProgresses[saveFile] = NewProgress();
+            PersistentProgressService.PlayerProgress = NewProgress();
         }
         
         private PlayerProgress NewProgress() => new PlayerProgress(ENVIRONMENT);

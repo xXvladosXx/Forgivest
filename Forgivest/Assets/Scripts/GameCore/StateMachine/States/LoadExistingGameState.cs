@@ -19,7 +19,7 @@ namespace GameCore.StateMachine.States
 
         private void LoadProgress(string saveFile)
         {
-            PersistentProgressService.PlayerProgresses[saveFile] = SaveLoadService.Load(saveFile);
+            PersistentProgressService.PlayerProgress = SaveLoadService.Load(saveFile);
         }
     }
 }

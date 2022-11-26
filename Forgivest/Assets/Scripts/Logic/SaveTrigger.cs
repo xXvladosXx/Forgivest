@@ -19,7 +19,7 @@ namespace Logic
         {
             if (other.CompareTag("Player"))
             {
-                _saveLoadService.SaveProgress();
+                _saveLoadService.SaveProgress("NoGame");
                 gameObject.SetActive(false);
             }
         }

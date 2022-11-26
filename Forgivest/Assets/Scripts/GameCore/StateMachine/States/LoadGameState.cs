@@ -22,7 +22,7 @@ namespace GameCore.StateMachine.States
         {
             StartGame(saveFile);
             _gameStateMachine.Enter<LoadLevelState, string>(
-                PersistentProgressService.PlayerProgresses[saveFile]
+                PersistentProgressService.PlayerProgress
                     .WorldData.PositionOnLevel.Level);
         }
 

@@ -17,7 +17,13 @@ namespace UI.Menu
         private void OnEnable()
         {
             _settingButton.onClick.AddListener(OnSettingsClicked);
+            _loadButton.onClick.AddListener(OnLoadClicked);
             _startButton.onClick.AddListener(OnStartClicked);
+        }
+
+        private void OnLoadClicked()
+        {
+            MenuSwitcher.Show<LoadMenu>();
         }
 
         private void OnStartClicked()
@@ -34,6 +40,7 @@ namespace UI.Menu
         {
             _settingButton.onClick.RemoveListener(OnSettingsClicked);
             _settingButton.onClick.RemoveListener(OnStartClicked);
+            _settingButton.onClick.RemoveListener(OnLoadClicked);
         }
 
        /* public override void Initialize()

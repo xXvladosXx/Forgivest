@@ -55,7 +55,7 @@ namespace GameCore.StateMachine.States
 
         private void EnterLoadLevel()
         {
-            _gameStateMachine.Enter<LoadExistingGameState, string>("LoadGame");
+            _gameStateMachine.Enter<LoadExistingGameState, string>("NoGame");
         }
     }
 }

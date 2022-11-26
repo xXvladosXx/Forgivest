@@ -34,7 +34,7 @@ namespace GameCore.StateMachine.States
             _persistentCanvas.ShowLoadingScreen();
             _persistentCanvas.ShowLoadingBar();
             _gameFactory.CleanUp();
-            _sceneLoader.Load(saveFile, OnLoaded);
+            _sceneLoader.Load(_persistentProgressService.PlayerProgress.Scene, OnLoaded(saveFile));
         }
 
         public void Exit()
@@ -43,10 +43,10 @@ namespace GameCore.StateMachine.States
             _persistentCanvas.OnStartGame -= OnGameStarted;
         }
         
-        private void OnLoaded()
+        private string OnLoaded(string saveFile)
         {
             _persistentCanvas.LoadProgress(1);
-            InformProgressReaders();
+            InformProgressReaders(saveFile);
 
             OnGameStarted += () =>
             {
@@ -54,13 +54,14 @@ namespace GameCore.StateMachine.States
             };
             
             _persistentCanvas.OnStartGame += OnGameStarted;
+            return null;
         }
 
         private void InformProgressReaders(string saveFile)
         {
             foreach (var progressReader in _gameFactory.ProgressReaders)
             {
-                progressReader.LoadProgress(_persistentProgressService.PlayerProgresses[saveFile]);
+                progressReader.LoadProgress(_persistentProgressService.PlayerProgress);
             }
         }
     }

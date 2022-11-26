@@ -13,16 +13,16 @@ namespace GameCore
             _coroutineRunner = coroutineRunner;
         }
 
-        public void Load(string name, Action onLoaded = null)
+        public void Load(string name, string saveFile, Action<string> onLoaded = null)
         {
-            _coroutineRunner.StartCoroutine(LoadScene(name, onLoaded));
+            _coroutineRunner.StartCoroutine(LoadScene(name, saveFile, onLoaded));
         }
         
-        public IEnumerator LoadScene(string sceneName, Action onLoaded = null)
+        public IEnumerator LoadScene(string sceneName, string saveFile, Action<string> onLoaded = null)
         {
             if (SceneManager.GetActiveScene().name == sceneName)
             {
-                onLoaded?.Invoke();
+                onLoaded?.Invoke(saveFile);
                 yield break;
             }
             
@@ -33,7 +33,7 @@ namespace GameCore
                 yield return null;
             }
                 
-            onLoaded?.Invoke();
+            onLoaded?.Invoke(saveFile);
         }
     }
 }
