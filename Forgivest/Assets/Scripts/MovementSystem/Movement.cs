@@ -1,5 +1,6 @@
-﻿using GameCore.Data;
-using GameCore.Data.Types;
+﻿using GameCore.SaveSystem.Data;
+using GameCore.SaveSystem.Data.Types;
+using GameCore.SaveSystem.Extensions;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;

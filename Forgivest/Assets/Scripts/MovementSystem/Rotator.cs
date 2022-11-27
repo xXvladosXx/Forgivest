@@ -1,6 +1,4 @@
-﻿using GameCore.Data;
-using GameCore.Data.Types;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace MovementSystem

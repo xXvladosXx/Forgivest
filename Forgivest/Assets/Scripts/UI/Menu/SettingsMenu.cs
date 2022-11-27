@@ -35,9 +35,16 @@ namespace UI.Menu
             _backButton.onClick.AddListener(OnBackButton);
         }
 
+        private void OnDisable()
+        {
+            _soundButton.onClick.RemoveListener(ChangeSoundMenu);
+            _backButton.onClick.RemoveListener(OnBackButton);
+        }
+
         private void OnBackButton()
         {
             MenuSwitcher.Show<MainMenu>();
+            MenuSwitcher.Show<GameplayMenu>();
         }
 
         private void ChangeSoundMenu()
@@ -45,17 +52,6 @@ namespace UI.Menu
             MenuSwitcher.Show<SoundMenu>();
         }
 
-        private void OnDisable()
-        {
-            _soundButton.onClick.RemoveListener(ChangeSoundMenu);
-            _backButton.onClick.RemoveListener(OnBackButton);
-        }
-
-        public override void Initialize()
-        {
-            _resolutions = Screen.resolutions;
-            //LoadLastSettings();
-        }
 
         public void SetResolution(int resolutionIndex)
         {

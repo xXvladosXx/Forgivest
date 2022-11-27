@@ -1,4 +1,5 @@
 using GameCore.Factory;
+using GameCore.SaveSystem.Reader;
 using UI.Menu;
 using UI.Menu.Core;
 using UnityEngine;
@@ -14,7 +15,8 @@ namespace GameCore.StateMachine.States
         
         private StartMenu _startMenu;
         private LoadMenu _loadMenu;
-        
+        private MainMenu _mainMenu;
+
         public BootstrapState(GameStateMachine gameStateMachine,
             MenuSwitcher mainMenuSwitcher, DiContainer diContainer)
         {
@@ -26,9 +28,11 @@ namespace GameCore.StateMachine.States
         {
             _startMenu = _mainMenuSwitcher.Find<StartMenu>() as StartMenu;
             _loadMenu = _mainMenuSwitcher.Find<LoadMenu>() as LoadMenu;
+            _mainMenu = _mainMenuSwitcher.Find<MainMenu>() as MainMenu;
 
-            _startMenu.OnStartClicked += LoadStartScene;
-            _loadMenu.OnLoadClicked += LoadScene;
+            _startMenu.OnStartClicked += LoadStartGame;
+            _loadMenu.OnLoadClicked += LoadExistingGame;
+            _mainMenu.OnContinueClick += LoadLastGame;
         }
 
         public void Exit()
@@ -36,26 +40,32 @@ namespace GameCore.StateMachine.States
             
         }
 
-        private void LoadStartScene()
+        private void LoadStartGame(string save)
         {
-            _startMenu.OnStartClicked -= LoadScene;
-            EnterStartLevel();
+            _startMenu.OnStartClicked -= LoadStartGame;
+            EnterStartLevel(save);
         }
 
-        private void LoadScene()
+        private void LoadExistingGame(string save)
         {
-            _loadMenu.OnLoadClicked -= LoadStartScene;
-            EnterLoadLevel();
+            _loadMenu.OnLoadClicked -= LoadExistingGame;
+            EnterLoadLevel(save);
         }
 
-        private void EnterStartLevel()
+        private void LoadLastGame()
         {
-            _gameStateMachine.Enter<StartNewGameState, string>("NewGame");
+            _mainMenu.OnContinueClick -= LoadLastGame;
+            EnterLoadLevel(FileManager.GetLastSave);
         }
 
-        private void EnterLoadLevel()
+        private void EnterStartLevel(string save)
         {
-            _gameStateMachine.Enter<LoadExistingGameState, string>("NoGame");
+            _gameStateMachine.Enter<StartNewGameState, string>(save);
+        }
+
+        private void EnterLoadLevel(string save)
+        {
+            _gameStateMachine.Enter<LoadExistingGameState, string>(save);
         }
     }
 }

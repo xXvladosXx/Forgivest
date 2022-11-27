@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GameCore.AssetManagement;
-using GameCore.Data;
+using GameCore.Crutches;
+using GameCore.SaveSystem.Data;
 using GameCore.StateMachine;
 using UnityEngine;
 
@@ -9,15 +10,18 @@ namespace GameCore.Factory
     public class GameFactory : IGameFactory
     {
         private readonly IAssetProvider _assetProvider;
-        
+
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
         public IPlayerObserver PlayerObserver { get; }
+        public IUIObserver UIObserver { get; }
+
         public GameFactory(IAssetProvider assetProvider)
         {
             _assetProvider = assetProvider;
             PlayerObserver = new PlayerObserver();
+            UIObserver = new UIObserver();
         }
 
         public void CleanUp()

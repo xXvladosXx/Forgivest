@@ -14,11 +14,11 @@ namespace Controllers.Player
         private readonly IRequirementUser _requirementUser;
         private readonly SkillItemContainerUI _skillItemContainerUI;
 
-        public PlayerAbilityController(AbilityHandler abilityHandler, SkillPanel skillPanel, PlayerEntity playerEntity)
+        public PlayerAbilityController(AbilityHandler abilityHandler, SkillInventoryPanel skillInventoryPanel, PlayerEntity playerEntity)
         {
             _abilityHandler = abilityHandler;
             _requirementUser = playerEntity;
-            _skillItemContainerUI = skillPanel.SkillItemContainerUI;
+            _skillItemContainerUI = skillInventoryPanel.SkillItemContainerUI;
         }
 
         public void Initialize()

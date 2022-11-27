@@ -13,12 +13,27 @@ namespace UI.Menu
         [SerializeField] private Button _continueButton;
         [SerializeField] private Button _settingButton;
         [SerializeField] private Button _quitButton;
+        public event Action OnContinueClick;
 
         private void OnEnable()
         {
             _settingButton.onClick.AddListener(OnSettingsClicked);
             _loadButton.onClick.AddListener(OnLoadClicked);
             _startButton.onClick.AddListener(OnStartClicked);
+            _continueButton.onClick.AddListener(OnContinueClicked);
+        }
+
+        private void OnDisable()
+        {
+            _settingButton.onClick.RemoveListener(OnSettingsClicked);
+            _settingButton.onClick.RemoveListener(OnStartClicked);
+            _settingButton.onClick.RemoveListener(OnLoadClicked);
+            _continueButton.onClick.RemoveListener(OnContinueClicked);
+        }
+
+        private void OnContinueClicked()
+        {
+            OnContinueClick?.Invoke();
         }
 
         private void OnLoadClicked()
@@ -36,14 +51,7 @@ namespace UI.Menu
             MenuSwitcher.Show<SettingsMenu>();
         }
 
-        private void OnDisable()
-        {
-            _settingButton.onClick.RemoveListener(OnSettingsClicked);
-            _settingButton.onClick.RemoveListener(OnStartClicked);
-            _settingButton.onClick.RemoveListener(OnLoadClicked);
-        }
-
-       /* public override void Initialize()
+        /* public override void Initialize()
         {
             if (saveInteractor.GetLastSave == null)
             {

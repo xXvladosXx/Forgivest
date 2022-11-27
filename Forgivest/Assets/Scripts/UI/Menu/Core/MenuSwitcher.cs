@@ -4,6 +4,7 @@ using System.Linq;
 using UI.Core;
 using UI.Warning;
 using UnityEngine;
+using Zenject;
 
 namespace UI.Menu.Core
 {
@@ -17,12 +18,12 @@ namespace UI.Menu.Core
         
         private Menu _currentMenu;
         private readonly Stack<Menu> _history = new Stack<Menu>();
-        
-        
+
         private void Awake()
         {
             Instance = this;
             
+            Show(_startingMenu);
             Hide();
         }
 
@@ -49,6 +50,19 @@ namespace UI.Menu.Core
                     
                     menu.ShowMenu();
                     Instance._currentMenu = menu;
+                }
+            }
+        }
+        
+        public static void Hide<T>(bool remember = true) where  T : Menu
+        {
+            foreach (var menu in Instance._menus)
+            {
+                if (menu is T)
+                {
+                    menu.HideMenu();
+                   
+                    Instance._currentMenu = null;
                 }
             }
         }

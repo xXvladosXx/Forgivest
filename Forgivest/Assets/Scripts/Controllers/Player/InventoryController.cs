@@ -21,8 +21,8 @@ namespace Controllers.Player
     public class InventoryController : IInitializable, ITickable, IDisposable
     {
         private readonly InventoryPanel _inventoryPanel;
-        private readonly SkillPanel _skillPanel;
-        private readonly StaticPanel _staticPanel;
+        private readonly SkillInventoryPanel _skillInventoryPanel;
+        private readonly StaticInventoryPanel _staticInventoryPanel;
         private readonly ObjectPicker _objectPicker;
         private readonly AbilityHandler _abilityHandler;
         private readonly UIReusableData _uiReusableData;
@@ -31,12 +31,12 @@ namespace Controllers.Player
         private Dictionary<ItemContainer, ItemContainerUI> _itemHolders =
             new Dictionary<ItemContainer, ItemContainerUI>();
 
-        public InventoryController(InventoryPanel inventoryPanel, SkillPanel skillPanel, StaticPanel staticPanel,
+        public InventoryController(InventoryPanel inventoryPanel, SkillInventoryPanel skillInventoryPanel, StaticInventoryPanel staticInventoryPanel,
             ObjectPicker objectPicker, AbilityHandler abilityHandler, UIReusableData uiReusableData)
         {
             _inventoryPanel = inventoryPanel;
-            _skillPanel = skillPanel;
-            _staticPanel = staticPanel;
+            _skillInventoryPanel = skillInventoryPanel;
+            _staticInventoryPanel = staticInventoryPanel;
             _objectPicker = objectPicker;
             _abilityHandler = abilityHandler;
             _uiReusableData = uiReusableData;
@@ -46,13 +46,13 @@ namespace Controllers.Player
         {
             _inventoryPanel.InitializeInventory(_objectPicker.Inventory.Capacity);
             _inventoryPanel.InitializeEquipment(_objectPicker.Equipment.Capacity);
-            _skillPanel.InitializeSkillInventory(_abilityHandler.AllAbilities.Capacity);
-            _staticPanel.InitializeHotbarInventory(_objectPicker.Hotbar.Capacity);
+            _skillInventoryPanel.InitializeSkillInventory(_abilityHandler.AllAbilities.Capacity);
+            _staticInventoryPanel.InitializeHotbarInventory(_objectPicker.Hotbar.Capacity);
             
             _itemHolders.Add(_objectPicker.Inventory.ItemContainer, _inventoryPanel.DynamicItemContainerUI);
             _itemHolders.Add(_objectPicker.Equipment.ItemContainer, _inventoryPanel.StaticItemContainerUI);
-            _itemHolders.Add(_abilityHandler.AllAbilities.ItemContainer, _skillPanel.SkillItemContainerUI);
-            _itemHolders.Add(_objectPicker.Hotbar.ItemContainer, _staticPanel.HotbarItemContainerUI);
+            _itemHolders.Add(_abilityHandler.AllAbilities.ItemContainer, _skillInventoryPanel.SkillItemContainerUI);
+            _itemHolders.Add(_objectPicker.Hotbar.ItemContainer, _staticInventoryPanel.HotbarItemContainerUI);
             
             foreach (var itemContainer in _itemHolders.Keys)
             {

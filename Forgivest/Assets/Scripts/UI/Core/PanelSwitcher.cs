@@ -11,20 +11,25 @@ namespace UI.Core
     public class PanelSwitcher : UIElement
     {
         [SerializeField] private List<Panel> _panels = new List<Panel>();
-        private Panel _currentPanel;
+        private Panel _currentInventoryPanel;
 
         private void Awake()
         {
-            _panels = GetComponentsInChildren<Panel>().ToList();
-            _currentPanel = _panels[0];
+            _currentInventoryPanel = _panels[0];
             HideAllUIElements();
         }
 
-        public bool SwitchUIElement<T>() where T : Panel
+        public bool SwitchUIElement<T>(bool withoutSwitching = false) where T : Panel
         {
-            if (_currentPanel != null)
+            if (_currentInventoryPanel != null)
             {
-                if (_currentPanel.GetType() == typeof(T))
+                if (withoutSwitching)
+                {
+                    HideUIElement();
+                    return true;
+                }
+                
+                if (_currentInventoryPanel.GetType() == typeof(T))
                 {
                     HideUIElement();
                     return true;
@@ -43,16 +48,16 @@ namespace UI.Core
             if (uiElement != null)
             {
                 uiElement.Show();
-                _currentPanel = uiElement;
-                _currentPanel.OnElementHide += HideUIElement;
+                _currentInventoryPanel = uiElement;
+                _currentInventoryPanel.OnElementHide += HideUIElement;
             }
         }
 
         public void HideUIElement()
         {
-            _currentPanel.OnElementHide -= HideUIElement;
-            _currentPanel.Hide();
-            _currentPanel = null;
+            _currentInventoryPanel.OnElementHide -= HideUIElement;
+            _currentInventoryPanel.Hide();
+            _currentInventoryPanel = null;
         }
         
         public void HideAllUIElements()
@@ -60,7 +65,7 @@ namespace UI.Core
             foreach (var panel in _panels)
             {
                 panel.Hide();
-                _currentPanel = null;
+                _currentInventoryPanel = null;
             }
         }
     }

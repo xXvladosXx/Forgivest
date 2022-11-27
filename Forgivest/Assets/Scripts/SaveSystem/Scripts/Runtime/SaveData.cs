@@ -44,7 +44,7 @@ namespace GameCore.SaveSystem.Scripts.Runtime
             if (previousSaveExists)
                // FileManager.LoadFromBinaryFile(m_Path, out m_Data);
             m_SaveDataChannel.Save();
-            FileManager.SaveToBinaryFile(m_Path, m_Data);
+            //FileManager.SaveToBinaryFile(m_Path, m_Data);
             m_Data.Clear();
         }
 

@@ -1,11 +1,11 @@
-﻿using GameCore.Data;
-using GameCore.Data.SaveLoad;
+﻿using GameCore.SaveSystem.Data;
+using GameCore.SaveSystem.SaveLoad;
 
 namespace GameCore.StateMachine.States
 {
     public class StartNewGameState : LoadGameState
     {
-        private const string ENVIRONMENT = "FAE_Demo1";
+        private const string ENVIRONMENT = "MainScene";
 
         public StartNewGameState(GameStateMachine gameStateMachine, 
             IPersistentProgressService persistentProgressService,

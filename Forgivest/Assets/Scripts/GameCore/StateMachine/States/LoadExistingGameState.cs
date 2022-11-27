@@ -1,5 +1,5 @@
-﻿using GameCore.Data;
-using GameCore.Data.SaveLoad;
+﻿using GameCore.SaveSystem.Data;
+using GameCore.SaveSystem.SaveLoad;
 
 namespace GameCore.StateMachine.States
 {

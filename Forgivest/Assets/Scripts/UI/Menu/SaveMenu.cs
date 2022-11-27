@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using TMPro;
 using UI.Menu.Core;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,19 +16,54 @@ namespace UI.Menu
         [SerializeField] private Button _saveButton;
         [SerializeField] private Button _saveNewGameButton;
         [SerializeField] private Transform _content;
-        public override void Initialize()
-        {
-            
-            OnEnable();
-        }
         
+        private List<Button> _saveList = new List<Button>();
+
+        public event Action<string> OnSaveClicked;
+
         private void OnEnable()
         {
+            _backButton.onClick.AddListener(OnBackButtonClicked);
+        }
+
+        private void OnDisable()
+        {
+            _backButton.onClick.RemoveListener(OnBackButtonClicked);
+            
             foreach (Transform child in _content)
             {
                 Destroy(child.gameObject);
             }
-            
+        }
+        
+        public void Initialize(IEnumerable<string> savesList)
+        {
+            foreach (var save in savesList)
+            {
+                var button = Instantiate(_saveButton, _content);
+                button.GetComponentInChildren<TextMeshProUGUI>().text = save;
+                button.onClick.AddListener(() =>
+                {
+                    TryToSaveGame(save);  
+                });    
+                
+                _saveList.Add(button);
+            }
+        }
+
+        private void TryToSaveGame(string save)
+        {
+            OnSaveClicked?.Invoke(save);
+        }
+
+        private void OnBackButtonClicked()
+        {
+            MenuSwitcher.Show<GameplayMenu>();
+        }
+
+
+        protected void OnWEnable()
+        {
             /*foreach (var save in SaveInteractor.SaveList())
             {
                 Button savePrefab = Instantiate(_saveButton, _content);

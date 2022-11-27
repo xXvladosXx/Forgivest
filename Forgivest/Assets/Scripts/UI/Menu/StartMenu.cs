@@ -23,7 +23,9 @@ namespace UI.Menu
         
         private ChooseWarning _chooseWarning;
         private OneDecisionWarning _oneDecisionWarning;
-        public event Action OnStartClicked;
+        private string _saveFile = " ";
+
+        public event Action<string> OnStartClicked;
 
         [Inject]
         public void Construct(ChooseWarning chooseWarning,
@@ -44,8 +46,9 @@ namespace UI.Menu
         {
             _startNewGame.onClick.RemoveListener(TryToStartNewGame);
             _backButton.onClick.RemoveListener(OnBackButtonClicked);
-//            _inputField.text = string.Empty;
-            SaveFile = string.Empty;
+            _saveFile = string.Empty;
+            _inputField.Select();
+            _inputField.text = "";
         }
 
         private void OnBackButtonClicked()
@@ -64,26 +67,14 @@ namespace UI.Menu
                 return;    
             }
             
-            OnStartClicked?.Invoke();
-            /*foreach (var saving in SaveInteractor.SaveList())
-            {
-                if (saving == SaveFile)
-                {
-                    stringBuilder.Clear();
-                    stringBuilder.Append(_sameGameWarningText).Append("<i>").Append($" {SaveFile}").Append("</i>").Append("?");
-                }
-            }*/
-            
-            //WarningUI.Instance.ShowWarning(stringBuilder.ToString());
-            
-            //WarningUI.Instance.OnAccepted += StartNewGame;
+            OnStartClicked?.Invoke(_saveFile);
         }
 
         public void CreateName(string saveFile)
         {
-            SaveFile = saveFile;
+            _saveFile = saveFile;
         }
-
+        
         private void StartNewGame()
         {
             //WarningUI.Instance.OnAccepted -= StartNewGame;

@@ -356,6 +356,15 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ESC"",
+                    ""type"": ""Button"",
+                    ""id"": ""794ccf14-b938-468b-8f8a-7314c93f971c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -378,6 +387,17 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9ab7516c-c2da-40dc-bfb6-d2378b862549"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ESC"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -405,6 +425,7 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
         m_UI_SkillBar = m_UI.FindAction("SkillBar", throwIfNotFound: true);
+        m_UI_ESC = m_UI.FindAction("ESC", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -595,12 +616,14 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
     private IUIActions m_UIActionsCallbackInterface;
     private readonly InputAction m_UI_Inventory;
     private readonly InputAction m_UI_SkillBar;
+    private readonly InputAction m_UI_ESC;
     public struct UIActions
     {
         private @PlayerControlls m_Wrapper;
         public UIActions(@PlayerControlls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Inventory => m_Wrapper.m_UI_Inventory;
         public InputAction @SkillBar => m_Wrapper.m_UI_SkillBar;
+        public InputAction @ESC => m_Wrapper.m_UI_ESC;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -616,6 +639,9 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                 @SkillBar.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSkillBar;
                 @SkillBar.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSkillBar;
                 @SkillBar.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSkillBar;
+                @ESC.started -= m_Wrapper.m_UIActionsCallbackInterface.OnESC;
+                @ESC.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnESC;
+                @ESC.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnESC;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -626,6 +652,9 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                 @SkillBar.started += instance.OnSkillBar;
                 @SkillBar.performed += instance.OnSkillBar;
                 @SkillBar.canceled += instance.OnSkillBar;
+                @ESC.started += instance.OnESC;
+                @ESC.performed += instance.OnESC;
+                @ESC.canceled += instance.OnESC;
             }
         }
     }
@@ -650,5 +679,6 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
     {
         void OnInventory(InputAction.CallbackContext context);
         void OnSkillBar(InputAction.CallbackContext context);
+        void OnESC(InputAction.CallbackContext context);
     }
 }

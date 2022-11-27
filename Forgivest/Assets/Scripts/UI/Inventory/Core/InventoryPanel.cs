@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UI.Inventory.Core
 {
-    public class InventoryPanel : Panel
+    public class InventoryPanel : UI.Core.InventoryPanel
     {
         [SerializeField] private List<UIElement> _uiElements;
         [SerializeField] private DynamicItemContainerUI _dynamicItemContainerUI;

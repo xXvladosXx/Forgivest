@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using GameCore.Data;
-using GameCore.StateMachine;
+using GameCore.Crutches;
+using GameCore.SaveSystem.Data;
 using UnityEngine;
 
 namespace GameCore.Factory
@@ -9,6 +9,7 @@ namespace GameCore.Factory
     {
         GameObject CreatePlayer(GameObject at);
         IPlayerObserver PlayerObserver { get; }
+        IUIObserver UIObserver { get; }
         List<ISavedProgressReader> ProgressReaders { get; }
         List<ISavedProgress> ProgressWriters { get; }
         void CleanUp();

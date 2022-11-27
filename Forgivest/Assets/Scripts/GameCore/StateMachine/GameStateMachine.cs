@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using AttackSystem.Core;
-using GameCore.Data;
-using GameCore.Data.SaveLoad;
 using GameCore.Factory;
+using GameCore.SaveSystem.Data;
+using GameCore.SaveSystem.SaveLoad;
 using GameCore.StateMachine.States;
 using UI.Loading;
 using UI.Menu;
@@ -11,6 +11,7 @@ using UI.Menu.Core;
 using UI.Utils;
 using UnityEngine;
 using Zenject;
+using LoadMainMenuState = GameCore.StateMachine.States.LoadMainMenuState;
 
 namespace GameCore.StateMachine
 {
@@ -34,6 +35,8 @@ namespace GameCore.StateMachine
                 [typeof(GameLoopState)] = new GameLoopState(this, diContainer.Resolve<IGameFactory>()),
                 [typeof(GameEndState)] = new GameEndState(this, diContainer.Resolve<PersistentCanvas>()),
                 [typeof(StartNewGameState)] = new StartNewGameState(this, diContainer.Resolve<IPersistentProgressService>(),
+                    diContainer.Resolve<ISaveLoadService>()),
+                [typeof(LoadMainMenuState)] = new LoadMainMenuState(this, diContainer.Resolve<IPersistentProgressService>(),
                     diContainer.Resolve<ISaveLoadService>())
             };
         }

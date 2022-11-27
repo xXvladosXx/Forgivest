@@ -1,11 +1,11 @@
-﻿using GameCore.Data;
-using GameCore.Data.SaveLoad;
+﻿using GameCore.SaveSystem.Data;
+using GameCore.SaveSystem.SaveLoad;
 
 namespace GameCore.StateMachine.States
 {
     public abstract class LoadGameState : ILoadState<string>
     {
-        private readonly GameStateMachine _gameStateMachine;
+        protected readonly GameStateMachine _gameStateMachine;
         protected readonly IPersistentProgressService PersistentProgressService;
         protected readonly ISaveLoadService SaveLoadService;
         
@@ -18,7 +18,7 @@ namespace GameCore.StateMachine.States
             SaveLoadService = saveLoadService;
         }
         
-        public void Enter(string saveFile)
+        public virtual void Enter(string saveFile)
         {
             StartGame(saveFile);
             _gameStateMachine.Enter<LoadLevelState, string>(

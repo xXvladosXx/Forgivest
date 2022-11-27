@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
+using TMPro;
 using UI.Menu.Core;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,44 +16,54 @@ namespace UI.Menu
         [SerializeField] private Button _loadButton;
         [SerializeField] private Transform _content;
         
-        public event Action OnLoadClicked;
+        private List<Button> _saveList = new List<Button>();
 
+        public event Action<string> OnLoadClicked;
 
         private void OnEnable()
         {
-            _loadButton.onClick.AddListener(TryToLoadGame);
             _backButton.onClick.AddListener(OnBackButtonClicked);
         }
 
         private void OnDisable()
         {
-            _loadButton.onClick.RemoveListener(TryToLoadGame);
             _backButton.onClick.RemoveListener(OnBackButtonClicked);
+        }
+
+        public void Initialize(IEnumerable<string> savesList)
+        {
+            foreach (var save in savesList)
+            {
+                var button = Instantiate(_loadButton, _content);
+                button.GetComponentInChildren<TextMeshProUGUI>().text = save;
+                button.onClick.AddListener(() =>
+                {
+                    TryToLoadGame(save);  
+                });    
+                _saveList.Add(button);
+            }
+        }
+
+        public void Dispose()
+        {
+            foreach (var button in _saveList)
+            {
+                button.onClick.RemoveAllListeners();
+                Destroy(button.gameObject);
+            }
+            
+            _saveList.Clear();
         }
 
         private void OnBackButtonClicked()
         {
-            
+            MenuSwitcher.Show<MainMenu>();
+            MenuSwitcher.Show<GameplayMenu>();
         }
 
-        private void TryToLoadGame()
+        private void TryToLoadGame(string save)
         {
-            OnLoadClicked?.Invoke();
-        }
-
-        public override void Initialize()
-        {
-            
-            /*foreach (var save in SaveInteractor.SaveList())
-            {
-                Button loadPrefab = Instantiate(_loadButton, _content);
-                loadPrefab.GetComponentInChildren<TextMeshProUGUI>().text = save;
-            
-                loadPrefab.onClick.AddListener((() =>
-                {
-                    TryToLoad(save);
-                }));
-            }*/
+            OnLoadClicked?.Invoke(save);
         }
 
         private void TryToLoad(string save)
@@ -61,11 +73,6 @@ namespace UI.Menu
             
             /*WarningUI.Instance.ShowWarning(stringBuilder.ToString());
             WarningUI.Instance.OnAccepted += () => LoadGame(save);*/
-        }
-
-        private void LoadGame(string save)
-        {
-            //SaveInteractor.LoadGame(save);
         }
     }
 }

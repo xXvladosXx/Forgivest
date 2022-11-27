@@ -1,6 +1,6 @@
 ﻿using System;
-using GameCore.Data;
 using GameCore.Factory;
+using GameCore.SaveSystem.Data;
 using UI.Loading;
 using UnityEngine;
 using Utilities;
@@ -34,7 +34,7 @@ namespace GameCore.StateMachine.States
             _persistentCanvas.ShowLoadingScreen();
             _persistentCanvas.ShowLoadingBar();
             _gameFactory.CleanUp();
-            _sceneLoader.Load(_persistentProgressService.PlayerProgress.Scene, OnLoaded(saveFile));
+            _sceneLoader.Load(saveFile, OnLoaded);
         }
 
         public void Exit()
@@ -43,10 +43,10 @@ namespace GameCore.StateMachine.States
             _persistentCanvas.OnStartGame -= OnGameStarted;
         }
         
-        private string OnLoaded(string saveFile)
+        private void OnLoaded()
         {
             _persistentCanvas.LoadProgress(1);
-            InformProgressReaders(saveFile);
+            InformProgressReaders();
 
             OnGameStarted += () =>
             {
@@ -54,10 +54,9 @@ namespace GameCore.StateMachine.States
             };
             
             _persistentCanvas.OnStartGame += OnGameStarted;
-            return null;
         }
 
-        private void InformProgressReaders(string saveFile)
+        private void InformProgressReaders()
         {
             foreach (var progressReader in _gameFactory.ProgressReaders)
             {
