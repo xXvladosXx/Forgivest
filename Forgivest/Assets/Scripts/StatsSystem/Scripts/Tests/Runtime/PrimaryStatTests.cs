@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using NUnit.Framework;
+using StatsSystem.Scripts.Runtime;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-namespace StatSystem.Tests
+namespace StatsSystem.Scripts.Tests.Runtime
 {
     public class PrimaryStatTests
     {

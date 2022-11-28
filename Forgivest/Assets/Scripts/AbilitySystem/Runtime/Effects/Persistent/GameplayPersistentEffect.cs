@@ -1,8 +1,8 @@
-﻿using System;
+﻿using AbilitySystem.AbilitySystem.Runtime.Effects.Core;
 using AttackSystem.Core;
 using UnityEngine;
 
-namespace AbilitySystem.AbilitySystem.Runtime
+namespace AbilitySystem.AbilitySystem.Runtime.Effects.Persistent
 {
     public class GameplayPersistentEffect : GameplayEffect
     {

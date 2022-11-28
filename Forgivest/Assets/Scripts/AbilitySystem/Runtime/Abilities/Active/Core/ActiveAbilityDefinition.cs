@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Text;
+using AbilitySystem.AbilitySystem.Runtime.Abilities.Core;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Core;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Persistent;
 using AttackSystem.Core;
 using UnityEngine;
 

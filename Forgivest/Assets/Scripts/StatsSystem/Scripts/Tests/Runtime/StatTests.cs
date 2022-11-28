@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-namespace StatSystem.Tests
+namespace StatsSystem.Scripts.Tests.Runtime
 {
     public class StatTests
     {

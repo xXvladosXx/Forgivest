@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Core;
 using AttackSystem.VisualEffects;
 using Core;
 using UnityEngine;
 
-namespace AbilitySystem.AbilitySystem.Runtime
+namespace AbilitySystem.AbilitySystem.Runtime.Effects.Persistent
 {
     [EffectType(typeof(GameplayPersistentEffect))]
     [CreateAssetMenu(fileName = "GameplayPersistentEffect", menuName = "AbilitySystem/Effect/GameplayPersistentEffect", order = 0)]

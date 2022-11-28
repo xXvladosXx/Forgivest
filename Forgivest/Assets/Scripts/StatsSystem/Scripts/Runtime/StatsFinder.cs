@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using InventorySystem;
 using Sirenix.OdinInspector;
-using StatsSystem.Scripts.Runtime;
-using UnityEngine;
 
-namespace StatSystem.Scripts.Runtime
+namespace StatsSystem.Scripts.Runtime
 {
     public class StatsFinder : SerializedMonoBehaviour
     {

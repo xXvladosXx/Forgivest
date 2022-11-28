@@ -3,7 +3,7 @@ using AbilitySystem.AbilitySystem.Runtime;
 using AbilitySystem.AbilitySystem.Runtime.Abilities;
 using FluentAssertions;
 using NUnit.Framework;
-using StatSystem;
+using StatsSystem.Scripts.Runtime;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;

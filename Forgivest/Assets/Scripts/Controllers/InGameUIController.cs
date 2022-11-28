@@ -3,7 +3,6 @@ using System.Linq;
 using GameCore.Factory;
 using GameCore.SaveSystem.Reader;
 using UI.Core;
-using UI.Inventory.Core;
 using UI.Menu;
 using UI.Skill;
 using UnityEngine.InputSystem;
@@ -11,7 +10,7 @@ using Utilities;
 using Zenject;
 using InventoryPanel = UI.Inventory.Core.InventoryPanel;
 
-namespace Controllers.Player
+namespace Controllers
 {
     public class PlayerPanelController : IInitializable, IDisposable
     {

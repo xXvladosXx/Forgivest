@@ -1,8 +1,7 @@
 ﻿using System;
 using Core;
 using StatsSystem.Scripts.Runtime;
-using StatSystem;
-using Attribute = StatSystem.Attribute;
+using Attribute = StatsSystem.Scripts.Runtime.Attribute;
 
 namespace AttackSystem.Core
 {

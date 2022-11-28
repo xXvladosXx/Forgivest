@@ -1,7 +1,6 @@
 ﻿using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
 using AttackSystem;
 using AttackSystem.Core;
-using StatSystem.Scripts.Runtime;
 using UnityEngine;
 using UnityEngine.Pool;
 

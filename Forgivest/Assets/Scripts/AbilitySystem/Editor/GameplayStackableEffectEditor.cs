@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
-namespace AbilitySystem
+namespace AbilitySystem.Editor
 {
     [CustomEditor(typeof(GameplayStackableEffectDefinition))]
     public class GameplayStackableEffectEditor : GameplayPersistentEffectEditor

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-using GameCore.SaveSystem.Scripts.Runtime;
-using StatsSystem.Scripts.Runtime;
+using SaveSystem.Scripts.Runtime;
 using UnityEngine;
 
 [assembly: InternalsVisibleTo("StatSystem.Tests")]
-namespace StatSystem
+namespace StatsSystem.Scripts.Runtime
 {
     public class PrimaryStat : Stat, ISavable
     {

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Core;
 using InventorySystem.Items.Core;
 using UnityEngine;
 
-namespace AbilitySystem.AbilitySystem.Runtime.Abilities
+namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
 {
     public abstract class AbilityDefinition : Item
     {

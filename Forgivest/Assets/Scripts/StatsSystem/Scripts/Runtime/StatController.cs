@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using AbilitySystem.AbilitySystem.Runtime;
-using StatsSystem.Scripts.Runtime;
-using StatSystem.Nodes;
+using StatsSystem.Scripts.Runtime.Nodes;
 using UnityEngine;
 
-namespace StatSystem
+namespace StatsSystem.Scripts.Runtime
 {
     [RequireComponent(typeof(TagRegister))]
     public class StatController : MonoBehaviour

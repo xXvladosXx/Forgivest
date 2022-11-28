@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Core;
-using JetBrains.Annotations;
 using NUnit.Framework;
 using StatsSystem.Scripts.Runtime;
 using UnityEditor.SceneManagement;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-namespace StatSystem.Tests
+namespace StatsSystem.Scripts.Tests.Runtime
 {
     public class AttributeTests
     {

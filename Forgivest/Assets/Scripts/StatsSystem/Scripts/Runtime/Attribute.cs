@@ -1,8 +1,7 @@
 ﻿using System;
-using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 
-namespace StatSystem
+namespace StatsSystem.Scripts.Runtime
 {
     public class Attribute : Stat
     {

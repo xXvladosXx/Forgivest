@@ -9,7 +9,7 @@ using LevelSystem;
 using LevelSystem.Scripts.Runtime;
 using Logic;
 using Player;
-using StatSystem;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 using Utilities;
 using Zenject;

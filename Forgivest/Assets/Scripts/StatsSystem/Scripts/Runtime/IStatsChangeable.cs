@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using StatsSystem.Scripts.Runtime;
-using StatSystem;
 
-namespace InventorySystem
+namespace StatsSystem.Scripts.Runtime
 {
     public interface IStatsChangeable
     {

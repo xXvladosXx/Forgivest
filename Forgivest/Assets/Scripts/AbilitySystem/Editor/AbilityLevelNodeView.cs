@@ -4,7 +4,7 @@ using Core.Editor;
 using Core.Editor.Nodes;
 using UnityEngine;
 
-namespace AbilitySystem
+namespace AbilitySystem.Editor
 {
     [NodeType(typeof(AbilityLevelNode))]
     [Title("Ability System", "Ability", "Level")]

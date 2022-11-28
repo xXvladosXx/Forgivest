@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace GameCore.SaveSystem.Scripts.Runtime
+namespace SaveSystem.Scripts.Runtime
 {
     public class SaveController : MonoBehaviour
     {

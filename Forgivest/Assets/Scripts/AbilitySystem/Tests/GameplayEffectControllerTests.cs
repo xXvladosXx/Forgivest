@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Linq;
 using AbilitySystem.AbilitySystem.Runtime;
+using AbilitySystem.AbilitySystem.Runtime.Effects;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Core;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Persistent;
 using AbilitySystem.AbilitySystem.Runtime.Effects.Stackable;
 using FluentAssertions;
 using NUnit.Framework;
-using StatSystem;
+using StatsSystem.Scripts.Runtime;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;

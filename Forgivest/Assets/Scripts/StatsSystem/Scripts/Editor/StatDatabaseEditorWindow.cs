@@ -1,9 +1,10 @@
+using StatsSystem.Scripts.Runtime;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace StatSystem.Editor
+namespace StatsSystem.Scripts.Editor
 {
     public class StatDatabaseEditorWindow : EditorWindow
     {

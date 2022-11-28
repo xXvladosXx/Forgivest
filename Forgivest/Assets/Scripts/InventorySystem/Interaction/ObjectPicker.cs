@@ -7,7 +7,6 @@ using InventorySystem.Items.ItemTypes.Core;
 using InventorySystem.Items.Weapon;
 using Sirenix.OdinInspector;
 using StatsSystem.Scripts.Runtime;
-using StatSystem;
 using UnityEngine;
 
 namespace InventorySystem.Interaction

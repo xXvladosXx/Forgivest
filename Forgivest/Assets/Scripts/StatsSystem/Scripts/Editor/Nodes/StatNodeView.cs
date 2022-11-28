@@ -1,10 +1,10 @@
 ﻿using Core;
 using Core.Editor;
 using Core.Editor.Nodes;
-using StatSystem.Nodes;
+using StatsSystem.Scripts.Runtime.Nodes;
 using UnityEngine;
 
-namespace StatSystem.Editor.Nodes
+namespace StatsSystem.Scripts.Editor.Nodes
 {
     [NodeType(typeof(StatNode))]
     [Title("Stat System", "Stat")]

@@ -2,7 +2,6 @@ using System;
 using InventorySystem.Items;
 using InventorySystem.Items.Armor;
 using InventorySystem.Items.Weapon;
-using StatSystem;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

@@ -1,9 +1,9 @@
-﻿using AbilitySystem.AbilitySystem.Runtime;
+﻿using AbilitySystem.AbilitySystem.Runtime.Effects.Persistent;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
-namespace AbilitySystem
+namespace AbilitySystem.Editor
 {
     [CustomEditor(typeof(GameplayPersistentEffectDefinition))]
     public class GameplayPersistentEffectEditor : GameplayEffectEditor

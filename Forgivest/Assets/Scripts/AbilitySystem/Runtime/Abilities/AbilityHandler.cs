@@ -5,7 +5,12 @@ using System.Reflection;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Active;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Core;
+using AbilitySystem.AbilitySystem.Runtime.Abilities.Passive;
+using AbilitySystem.AbilitySystem.Runtime.Effects;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Core;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Persistent;
 using InventorySystem;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 
 namespace AbilitySystem.AbilitySystem.Runtime.Abilities

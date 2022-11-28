@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace GameCore.SaveSystem.Scripts.Runtime
+namespace SaveSystem.Scripts.Runtime
 {
     public class SaveData
     {

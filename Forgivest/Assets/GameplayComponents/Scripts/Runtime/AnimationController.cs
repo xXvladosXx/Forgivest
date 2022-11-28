@@ -1,7 +1,7 @@
 ﻿using AbilitySystem.AbilitySystem.Runtime.Abilities;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Active;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
-using StatSystem;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
 

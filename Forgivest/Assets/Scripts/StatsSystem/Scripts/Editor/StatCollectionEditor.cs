@@ -1,7 +1,8 @@
 ﻿using Core.Editor;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine.UIElements;
 
-namespace StatSystem.Editor
+namespace StatsSystem.Scripts.Editor
 {
     public class StatCollectionEditor : ScriptableObjectCollectionEditor<StatDefinition>
     {

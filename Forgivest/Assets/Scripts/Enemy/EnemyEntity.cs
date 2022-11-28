@@ -5,7 +5,7 @@ using AttackSystem.Reward.Core;
 using InventorySystem.Core;
 using RaycastSystem.Core;
 using Sirenix.OdinInspector;
-using StatSystem;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 
 namespace Enemy

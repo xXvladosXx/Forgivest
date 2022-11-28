@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Core;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Persistent;
 using UnityEngine;
 
 namespace AbilitySystem.AbilitySystem.Runtime.Effects.Stackable

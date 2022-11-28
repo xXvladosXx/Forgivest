@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace AbilitySystem.AbilitySystem.Runtime
+namespace AbilitySystem.AbilitySystem.Runtime.Effects.Core
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class EffectTypeAttribute : Attribute

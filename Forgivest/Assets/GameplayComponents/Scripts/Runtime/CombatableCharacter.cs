@@ -2,9 +2,8 @@
 using CombatSystem.Scripts.Runtime.Core;
 using Core;
 using StatsSystem.Scripts.Runtime;
-using StatSystem;
 using UnityEngine;
-using Attribute = StatSystem.Attribute;
+using Attribute = StatsSystem.Scripts.Runtime.Attribute;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 

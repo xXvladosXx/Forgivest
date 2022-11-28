@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using AttackSystem.VisualEffects;
 using UnityEngine;
 
-namespace AbilitySystem.AbilitySystem.Runtime
+namespace AbilitySystem.AbilitySystem.Runtime.Effects.Core
 {
     [EffectType(typeof(GameplayEffect))]
     [CreateAssetMenu(fileName = "GameplayEffect", menuName = "AbilitySystem/Effect/GameplayEffect", order = 0)]

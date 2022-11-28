@@ -1,9 +1,8 @@
 ﻿using Core;
 using StatsSystem.Scripts.Runtime;
-using StatSystem;
 using UnityEngine;
 
-namespace AbilitySystem.AbilitySystem.Runtime
+namespace AbilitySystem.AbilitySystem.Runtime.Effects.Core
 {
     public abstract class BaseGameplayEffectStatModifier : ScriptableObject
     {

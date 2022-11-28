@@ -2,7 +2,7 @@ using AnimationSystem;
 using AttackSystem;
 using MovementSystem;
 using Player.AI.StateMachine.Core.Config;
-using StatSystem;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
 

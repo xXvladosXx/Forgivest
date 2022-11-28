@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using AttackSystem.Core;
 using Core;
 using StatsSystem.Scripts.Runtime;
-using StatSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace AbilitySystem.AbilitySystem.Runtime
+namespace AbilitySystem.AbilitySystem.Runtime.Effects.Core
 {
     public class GameplayEffect : ITaggable
     {

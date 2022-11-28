@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reflection;
-using AbilitySystem.AbilitySystem.Runtime;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Core;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Persistent;
 using AbilitySystem.AbilitySystem.Runtime.Effects.Stackable;
-using AttackSystem.Core;
 using StatsSystem.Scripts.Runtime;
-using StatSystem;
 using UnityEngine;
-using Attribute = StatSystem.Attribute;
+using Attribute = StatsSystem.Scripts.Runtime.Attribute;
 
-namespace AbilitySystem
+namespace AbilitySystem.AbilitySystem.Runtime.Effects
 {
     [RequireComponent(typeof(StatController),
         typeof(TagRegister))]

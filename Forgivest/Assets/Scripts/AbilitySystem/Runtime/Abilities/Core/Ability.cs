@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using AbilitySystem.AbilitySystem.Runtime.Effects;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Core;
 using AttackSystem.Core;
 using UnityEngine;
 

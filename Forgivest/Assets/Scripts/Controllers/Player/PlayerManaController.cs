@@ -1,9 +1,8 @@
 ﻿using System;
 using StatsSystem.Scripts.Runtime;
-using StatSystem;
 using UI.HUD.Stats;
 using Zenject;
-using Attribute = StatSystem.Attribute;
+using Attribute = StatsSystem.Scripts.Runtime.Attribute;
 
 namespace Controllers.Player
 {

@@ -1,8 +1,7 @@
 ﻿using Core.Nodes;
-using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 
-namespace StatSystem.Nodes
+namespace StatsSystem.Scripts.Runtime.Nodes
 {
     public class StatNode : CodeFunctionNode
     {

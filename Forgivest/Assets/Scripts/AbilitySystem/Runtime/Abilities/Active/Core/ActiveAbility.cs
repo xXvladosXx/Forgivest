@@ -1,5 +1,7 @@
 ﻿using System.Text;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Core;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Core;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Persistent;
 using AttackSystem.Core;
 
 namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core

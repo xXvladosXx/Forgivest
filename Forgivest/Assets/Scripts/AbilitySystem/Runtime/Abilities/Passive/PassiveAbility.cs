@@ -1,7 +1,6 @@
 ﻿using AbilitySystem.AbilitySystem.Runtime.Abilities.Core;
-using AttackSystem.Core;
 
-namespace AbilitySystem.AbilitySystem.Runtime.Abilities
+namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Passive
 {
     public class PassiveAbility : Ability
     {

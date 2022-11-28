@@ -3,7 +3,6 @@ using AbilitySystem.AbilitySystem.Runtime.Abilities.Core;
 using AttackSystem;
 using AttackSystem.Core;
 using CombatSystem.Scripts.Runtime;
-using StatSystem.Scripts.Runtime;
 using UnityEngine;
 
 namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active

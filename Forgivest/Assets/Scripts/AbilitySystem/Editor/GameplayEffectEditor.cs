@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Linq;
-using AbilitySystem.AbilitySystem.Runtime;
+using AbilitySystem.AbilitySystem.Runtime.Effects.Core;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace AbilitySystem
+namespace AbilitySystem.Editor
 {
     [CustomEditor(typeof(GameplayEffectDefinition))]
-    public class GameplayEffectEditor : Editor
+    public class GameplayEffectEditor : UnityEditor.Editor
     {
         public override VisualElement CreateInspectorGUI()
         {

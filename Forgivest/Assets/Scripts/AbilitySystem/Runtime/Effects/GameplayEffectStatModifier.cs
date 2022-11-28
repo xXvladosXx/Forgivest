@@ -1,8 +1,8 @@
-﻿using StatsSystem.Scripts.Runtime;
-using StatSystem;
+﻿using AbilitySystem.AbilitySystem.Runtime.Effects.Core;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 
-namespace AbilitySystem.AbilitySystem.Runtime
+namespace AbilitySystem.AbilitySystem.Runtime.Effects
 {
     public class GameplayEffectStatModifier : BaseGameplayEffectStatModifier
     {

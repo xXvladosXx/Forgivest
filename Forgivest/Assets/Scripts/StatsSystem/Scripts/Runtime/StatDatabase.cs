@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace StatSystem
+namespace StatsSystem.Scripts.Runtime
 {
     [CreateAssetMenu(fileName = "StatDatabase", menuName = "StatSystem/StatDatabase", order = 0)]
     public class StatDatabase : ScriptableObject

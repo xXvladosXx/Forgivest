@@ -1,5 +1,5 @@
 ﻿using System;
-using StatSystem;
+using StatsSystem.Scripts.Runtime;
 using UI.HUD.Stats;
 using Zenject;
 
