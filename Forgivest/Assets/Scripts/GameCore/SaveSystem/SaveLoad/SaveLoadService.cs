@@ -2,6 +2,7 @@
 using GameCore.SaveSystem.Data;
 using GameCore.SaveSystem.Reader;
 using SoundSystem;
+using UI.Menu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,6 +15,9 @@ namespace GameCore.SaveSystem.SaveLoad
         
         private const string EFFECTS_VOLUME = "EffectsVolume";
         private const string MUSIC_VOLUME = "MusicVolume";
+        private const string RESOLUTION = "Resolution";
+        private const string IS_FULLSCREEN = "Fullscreen";
+        private const string GRAPHICS = "Graphics";
     
         public SaveLoadService(IPersistentProgressService progressService, 
             IGameFactory gameFactory)
@@ -49,18 +53,28 @@ namespace GameCore.SaveSystem.SaveLoad
             var restoredStates = FileManager.LoadFromBinaryFile(saveFile);
             return restoredStates;
         }
-        
-        public void SaveAudioSettings(AudioSettingsData audioSettingsData)
+
+        public void SaveGraphicsSettings(int resolution, int isFullscreen, int graphics)
         {
-            PlayerPrefs.SetFloat(MUSIC_VOLUME, audioSettingsData.MusicVolume);
-            PlayerPrefs.SetFloat(EFFECTS_VOLUME, audioSettingsData.EffectsVolume);
+            PlayerPrefs.SetInt(RESOLUTION, resolution);
+            PlayerPrefs.SetInt(IS_FULLSCREEN, isFullscreen);
+            PlayerPrefs.SetInt(GRAPHICS, graphics);
         }
         
-        public AudioSettingsData LoadAudioSettings()
+        public void SaveAudioSettings(float musicVolume, float effectsVolume)
         {
-            var settingsSaveData = new AudioSettingsData(
+            PlayerPrefs.SetFloat(MUSIC_VOLUME, musicVolume);
+            PlayerPrefs.SetFloat(EFFECTS_VOLUME, effectsVolume);
+        }
+        
+        public SettingsData LoadSettings()
+        {
+            var settingsSaveData = new SettingsData(
                 PlayerPrefs.GetFloat(MUSIC_VOLUME, 0),
-                PlayerPrefs.GetFloat(EFFECTS_VOLUME, 0));
+                PlayerPrefs.GetFloat(EFFECTS_VOLUME, 0),
+                PlayerPrefs.GetInt(RESOLUTION, 0),
+                PlayerPrefs.GetInt(IS_FULLSCREEN, 0),
+                PlayerPrefs.GetInt(GRAPHICS,0));
 
             return settingsSaveData;
         }
