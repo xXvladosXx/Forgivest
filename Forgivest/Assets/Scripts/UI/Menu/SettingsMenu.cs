@@ -1,4 +1,5 @@
 ﻿using System;
+using SoundSystem;
 using TMPro;
 using UI.Menu.Core;
 using UnityEngine;
@@ -41,6 +42,7 @@ namespace UI.Menu
             _backButton.onClick.RemoveListener(OnBackButton);
         }
 
+        
         private void OnBackButton()
         {
             MenuSwitcher.Show<MainMenu>();
@@ -51,7 +53,6 @@ namespace UI.Menu
         {
             MenuSwitcher.Show<SoundMenu>();
         }
-
 
         public void SetResolution(int resolutionIndex)
         {
@@ -191,7 +192,6 @@ namespace UI.Menu
             _resolutionsDropdown.RefreshShownValue();
             SetResolution(_resolutionsDropdown.value);
         }*/
+        
     }
-
-  
 }

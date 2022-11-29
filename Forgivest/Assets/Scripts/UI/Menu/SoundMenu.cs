@@ -1,4 +1,5 @@
 ﻿using System;
+using SoundSystem;
 using UI.Menu.Core;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,19 +12,37 @@ namespace UI.Menu
         [SerializeField] private Slider _effectsSlider;
         [SerializeField] private Button _backButton;
 
+        public event Action<float, float> OnAudioSettingsChanged; 
+
         private void OnEnable()
         {
             _backButton.onClick.AddListener(OnBackButtonClick);
+            _musicSlider.onValueChanged.AddListener(SaveSettings);
+            _effectsSlider.onValueChanged.AddListener(SaveSettings);
+        }
+
+        private void OnDisable()
+        {
+            _backButton.onClick.RemoveListener(OnBackButtonClick);
+            _musicSlider.onValueChanged.RemoveListener(SaveSettings);
+            _effectsSlider.onValueChanged.RemoveListener(SaveSettings);
+        }
+
+        public void LoadAudioSettings(AudioSettingsData loadAudioSettings)
+        {
+            _musicSlider.value = loadAudioSettings.MusicVolume;
+            _effectsSlider.value = loadAudioSettings.EffectsVolume;
         }
 
         private void OnBackButtonClick()
         {
             MenuSwitcher.Show<SettingsMenu>(false);   
         }
-        
-        private void OnDisable()
+
+        private void SaveSettings(float value)
         {
-            _backButton.onClick.RemoveListener(OnBackButtonClick);
+            OnAudioSettingsChanged?.Invoke(_musicSlider.value, _effectsSlider.value);
+
         }
     }
 }

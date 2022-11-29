@@ -1,4 +1,6 @@
 ﻿using GameCore.SaveSystem.Data;
+using SoundSystem;
+
 
 namespace GameCore.SaveSystem.SaveLoad
 {
@@ -6,5 +8,7 @@ namespace GameCore.SaveSystem.SaveLoad
     {
         void SaveProgress(string saveFile);
         PlayerProgress Load(string saveFile);
+        AudioSettingsData LoadAudioSettings();
+        void SaveAudioSettings(AudioSettingsData audioSettingsData);
     }
 }

@@ -171,6 +171,7 @@ MonoBehaviour:
   _startMenu: {fileID: 1480900686}
   _loadMenu: {fileID: 1020382847}
   _settingsMenu: {fileID: 50934474}
+  _soundMenu: {fileID: 859778189}
 --- !u!1 &39826859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1480,7 +1481,7 @@ PrefabInstance:
     - target: {fileID: 3160941945617743755, guid: 2c743e510d15143408148941cca97399,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -320.26703
+      value: -192.16022
       objectReference: {fileID: 0}
     - target: {fileID: 3160941945617743755, guid: 2c743e510d15143408148941cca97399,
         type: 3}
@@ -2246,7 +2247,7 @@ PrefabInstance:
     - target: {fileID: 5518796766309003611, guid: bb37c5b8fb5ef754eb97d97ed8650fbc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5518796766309003611, guid: bb37c5b8fb5ef754eb97d97ed8650fbc,
         type: 3}
@@ -2559,8 +2560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9765a5c0064226a3979ab0f37e7e0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _musicSlider: {fileID: 0}
-  _effectsSlider: {fileID: 0}
+  _musicSlider: {fileID: 2012176497}
+  _effectsSlider: {fileID: 1029624952}
   _backButton: {fileID: 1142400257}
 --- !u!114 &859778190
 MonoBehaviour:
@@ -2832,7 +2833,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5921,7 +5922,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 299.25766, y: -448.37384}
+  m_AnchoredPosition: {x: 299.25766, y: -320.26703}
   m_SizeDelta: {x: 598.5153, y: 128.10681}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1971651522
@@ -6278,7 +6279,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6772,7 +6773,7 @@ PrefabInstance:
     - target: {fileID: 3160941945617743755, guid: 2c743e510d15143408148941cca97399,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -320.26703
+      value: -448.37384
       objectReference: {fileID: 0}
     - target: {fileID: 3160941945617743755, guid: 2c743e510d15143408148941cca97399,
         type: 3}
