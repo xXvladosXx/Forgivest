@@ -44,16 +44,16 @@ namespace Controllers
             _soundManger.PlayMusicSound(_soundManger.GameMusicClips[0]);
         }
 
+        public void Dispose()
+        {
+            _soundMenu.OnAudioSettingsChanged -= SaveSettings;
+        }
+
         private void SaveSettings(float music, float effects)
         {
             _saveLoadService.SaveAudioSettings(new AudioSettingsData(music, effects));
             _soundManger.SetMusicSound(music);
             _soundManger.SetEffectsSound(effects);
-        }
-
-        public void Dispose()
-        {
-            _soundMenu.OnAudioSettingsChanged -= SaveSettings;
         }
     }
 }
