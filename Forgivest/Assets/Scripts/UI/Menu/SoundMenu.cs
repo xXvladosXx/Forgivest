@@ -28,10 +28,10 @@ namespace UI.Menu
             _effectsSlider.onValueChanged.RemoveListener(SaveSettings);
         }
 
-        public void LoadAudioSettings(AudioSettingsData loadAudioSettings)
+        public void LoadAudioSettings(SettingsData loadSettings)
         {
-            _musicSlider.value = loadAudioSettings.MusicVolume;
-            _effectsSlider.value = loadAudioSettings.EffectsVolume;
+            _musicSlider.value = loadSettings.MusicVolume;
+            _effectsSlider.value = loadSettings.EffectsVolume;
         }
 
         private void OnBackButtonClick()
@@ -42,7 +42,6 @@ namespace UI.Menu
         private void SaveSettings(float value)
         {
             OnAudioSettingsChanged?.Invoke(_musicSlider.value, _effectsSlider.value);
-
         }
     }
 }
