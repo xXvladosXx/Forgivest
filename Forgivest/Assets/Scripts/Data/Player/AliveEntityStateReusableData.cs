@@ -11,6 +11,7 @@ namespace Data.Player
         public float MovementSpeedModifier { get; set; } = 1f;
         public float AttackRate { get; set; }
         public IInteractable InteractableObject { get; set; }
+        public IInteractable LastInteractableObject { get; set; }
         public IRaycastable Raycastable { get; set; }
         public IRaycastable SkillRaycastable { get; set; }
         public float StoppingDistance { get; set; }

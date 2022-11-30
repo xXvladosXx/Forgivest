@@ -99,7 +99,8 @@ namespace Player.States.Skill
 
         protected bool TryActivateTargetAbility(int index, ActiveAbilityDefinition activeAbility)
         {
-            if ((!activeAbility.SelfCasted && PlayerStateMachine.ReusableData.Raycastable == null))
+            if ((!activeAbility.SelfCasted && PlayerStateMachine.ReusableData.Raycastable == null) ||
+                (!activeAbility.SelfCasted && PlayerStateMachine.ReusableData.Raycastable.GameObject.transform == PlayerStateMachine.Movement.Transform))
             {
                 PlayerStateMachine.ChangeState(PlayerStateMachine.IdlingState);
                 return false;

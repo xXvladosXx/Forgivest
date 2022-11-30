@@ -32,7 +32,7 @@ namespace Installers
             Container.Bind<StatController>().FromInstance(mainComponent.StatController).AsSingle();
             Container.Bind<PlayerInputProvider>().FromInstance(mainComponent.PlayerInputProvider).AsSingle();
 
-            Container.BindInterfacesAndSelfTo<InventoryController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<DragDropController>().AsSingle();
             Container.BindInterfacesTo<PlayerAbilityController>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerExperienceController>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerHealthController>().AsSingle();

@@ -24,6 +24,7 @@ namespace UI.Inventory.Slot
         private Canvas _parentCanvas;
 
         public event Action<int, int, Sprite, int, IInventoryHolder> OnItemTryToSwap;
+        public event Action<int, Sprite, int, IInventoryHolder> OnItemTryToDrop;
 
         public int Index { get; private set; }
         public string Name { get; set; }
@@ -34,12 +35,17 @@ namespace UI.Inventory.Slot
         {
             _parentCanvas = GetComponentInParent<Canvas>();
         }
-        
+
         public void TryToSwap(IDragDestination destination, IInventoryHolder inventoryHolder)
         {
             _currentDraggableObject.OnDestinationFound -= TryToSwap;
-
             OnItemTryToSwap?.Invoke(Index, destination.Index, _itemIcon.GetIcon(), _currentAmount, inventoryHolder);
+        }
+
+        private void TryToDrop(IInventoryHolder inventoryHolder)
+        {
+            _currentDraggableObject.OnDestinationEmpty -= TryToDrop;
+            OnItemTryToDrop?.Invoke(Index, _itemIcon.GetIcon(), _currentAmount, inventoryHolder);
         }
 
         public Sprite GetIcon()
@@ -78,6 +84,7 @@ namespace UI.Inventory.Slot
             _currentDraggableObject.DrawObject(eventData);
             
             _currentDraggableObject.OnDestinationFound += TryToSwap;
+            _currentDraggableObject.OnDestinationEmpty += TryToDrop;
         }
 
         public void OnPointerUp(PointerEventData eventData)

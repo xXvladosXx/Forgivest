@@ -83,11 +83,19 @@ namespace Player.States
 
         private bool CheckRaycast()
         {
-            if (!PlayerStateMachine.RaycastUser.RaycastHit.HasValue) return false;
+            if (!PlayerStateMachine.RaycastUser.RaycastHit.HasValue)
+            {
+                return false;
+            }
 
             PlayerStateMachine.ReusableData.RaycastClickedPoint = PlayerStateMachine.RaycastUser.RaycastHit.Value.point;
             PlayerStateMachine.ReusableData.InteractableObject = PlayerStateMachine.RaycastUser.Interactable;
 
+            if (PlayerStateMachine.RaycastUser.Interactable != PlayerStateMachine.ReusableData.LastInteractableObject)
+            {
+                PlayerStateMachine.ReusableData.LastInteractableObject = PlayerStateMachine.RaycastUser.Interactable;
+            }    
+            
             return true;
         }
 

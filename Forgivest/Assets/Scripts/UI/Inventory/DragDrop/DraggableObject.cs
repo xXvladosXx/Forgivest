@@ -30,6 +30,7 @@ namespace UI.Inventory.DragDrop
         private const float SIZE_MODIFIER = .5f;
 
         public event Action<IDragDestination, IInventoryHolder> OnDestinationFound; 
+        public event Action<IInventoryHolder> OnDestinationEmpty; 
 
         public void Init(Sprite sprite, 
             int amount, 
@@ -70,9 +71,15 @@ namespace UI.Inventory.DragDrop
             transform.SetParent(_parent, true);
             
             var destination = GetDestination(eventData);
-          
-            if(destination != null)
+            if (destination == null)
+            {
+                OnDestinationEmpty?.Invoke(_currentInventoryHolder);
+            }
+            else
+            {
                 OnDestinationFound?.Invoke(destination, _currentInventoryHolder);
+            }
+                
             
             Destroy(gameObject);
         }

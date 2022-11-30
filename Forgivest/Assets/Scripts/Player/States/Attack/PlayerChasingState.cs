@@ -46,9 +46,17 @@ namespace Player.States.Attack
 
             if (ShouldStop())
             {
+                if (PlayerStateMachine.ReusableData.InteractableObject ==
+                    PlayerStateMachine.ReusableData.LastInteractableObject)
+                {
+                    return;
+                }
+
                 if (PlayerStateMachine.ReusableData.AttackRate <= 0)
+                {
                     PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerCombatState);
-                return;
+                    return;
+                }
             }
 
             PlayerStateMachine.Movement.MoveTo(PlayerStateMachine.ReusableData.RaycastClickedPoint, GetMovementSpeed());

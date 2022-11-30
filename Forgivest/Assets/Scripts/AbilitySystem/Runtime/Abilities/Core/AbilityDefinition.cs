@@ -26,7 +26,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
         
         public GameObject User { get; set; }
         
-        public bool RequirementsChecked(int level, int abilityPoints)
+        public virtual bool RequirementsChecked(int level, int abilityPoints)
         {
             return level >= _requiredLevel && abilityPoints >= _requiredAbilityPoints;
         }

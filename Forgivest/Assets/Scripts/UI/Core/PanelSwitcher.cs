@@ -19,7 +19,7 @@ namespace UI.Core
             HideAllUIElements();
         }
 
-        public bool SwitchUIElement<T>(bool withoutSwitching = false) where T : Panel
+        public bool ChangeUIElement<T>(bool withoutSwitching = false) where T : Panel
         {
             if (_currentInventoryPanel != null)
             {

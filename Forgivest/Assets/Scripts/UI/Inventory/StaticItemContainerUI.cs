@@ -14,6 +14,7 @@ namespace UI.Inventory
             {
                 InventorySlotUis.Add(inventorySlot);
                 inventorySlot.OnItemTryToSwap += OnItemTryToSwap;
+                inventorySlot.OnItemTryToDrop += OnItemTryToDrop;
             }
         }
 

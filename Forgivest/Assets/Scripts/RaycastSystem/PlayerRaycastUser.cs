@@ -97,6 +97,7 @@ namespace RaycastSystem
             {
                 Interactable = null;
                 Raycastable = null;
+                RaycastHit = null;
 
                 (this as IRaycastUser).SetCursor(CursorType.UI);
                 return true;

@@ -69,19 +69,19 @@ namespace Controllers
 
         private void TryToEnableMenu()
         {
-            var isHidden = _panelSwitcher.SwitchUIElement<GameplayPanel>(true);
+            var isHidden = _panelSwitcher.ChangeUIElement<GameplayPanel>(true);
             ShouldUseInput(isHidden);
         }
 
         private void EnableSkillBar(InputAction.CallbackContext obj)
         {
-            var isHidden = _panelSwitcher.SwitchUIElement<SkillInventoryPanel>();
+            var isHidden = _panelSwitcher.ChangeUIElement<SkillInventoryPanel>();
             ShouldUseInput(isHidden);
         }
 
         private void EnableInventory(InputAction.CallbackContext obj)
         {
-            var isHidden = _panelSwitcher.SwitchUIElement<InventoryPanel>();
+            var isHidden = _panelSwitcher.ChangeUIElement<InventoryPanel>();
             ShouldUseInput(isHidden);
         }
 

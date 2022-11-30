@@ -16,6 +16,7 @@ namespace UI.Inventory
         protected readonly List<InventorySlotUI> InventorySlotUis = new List<InventorySlotUI>();
 
         public event Action<int, int, Sprite, int, IInventoryHolder> OnTryToSwapSlots; 
+        public event Action<int, Sprite, int, IInventoryHolder> OnTryToDropSlot; 
         public event Action<IInventoryHolder> OnInventoryHolderChanged; 
         public void InitializeSlots(int inventoryCapacity)
         {
@@ -30,6 +31,7 @@ namespace UI.Inventory
                 var inventorySlotUI = Instantiate(_inventorySlotUI, _inventorySlotParent);
                 InventorySlotUis.Add(inventorySlotUI);
                 inventorySlotUI.OnItemTryToSwap += OnItemTryToSwap;
+                inventorySlotUI.OnItemTryToDrop += OnItemTryToDrop;
             }
         }
 
@@ -37,6 +39,11 @@ namespace UI.Inventory
         {
             print("Source " + source + " Destination " + destination);
             OnTryToSwapSlots?.Invoke(source, destination, sprite, amount, inventoryHolder);
+        }
+
+        protected void OnItemTryToDrop(int source, Sprite sprite, int amount, IInventoryHolder inventoryHolder)
+        {
+            OnTryToDropSlot?.Invoke(source, sprite, amount, inventoryHolder);
         }
 
         protected virtual void ClearSlots()
@@ -61,6 +68,7 @@ namespace UI.Inventory
             foreach (var inventorySlot in InventorySlotUis)
             {
                  inventorySlot.OnItemTryToSwap -= OnItemTryToSwap;
+                 inventorySlot.OnItemTryToDrop -= OnItemTryToDrop;
             }
         }
 
