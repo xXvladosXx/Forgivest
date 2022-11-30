@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using AttackSystem.Reward.Core;
-using CombatSystem.Scripts.Runtime;
 using UnityEngine;
 using Weapon = InventorySystem.Items.Weapon.Weapon;
 

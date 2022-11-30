@@ -1,6 +1,7 @@
 ﻿using System;
 using GameCore.Factory;
 using GameCore.SaveSystem.Data;
+using SoundSystem;
 using UI.Loading;
 using UnityEngine;
 using Utilities;
@@ -15,18 +16,21 @@ namespace GameCore.StateMachine.States
         private readonly PersistentCanvas _persistentCanvas;
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _persistentProgressService;
+        private readonly SoundManger _soundManger;
 
         public event Action OnGameStarted;
         
         public LoadLevelState(GameStateMachine gameStateMachine,
             SceneLoader sceneLoader, PersistentCanvas persistentCanvas,
-            IGameFactory gameFactory, IPersistentProgressService persistentProgressService)
+            IGameFactory gameFactory, IPersistentProgressService persistentProgressService, 
+            SoundManger soundManger)
         {
             _gameStateMachine = gameStateMachine;
             _sceneLoader = sceneLoader;
             _persistentCanvas = persistentCanvas;
             _gameFactory = gameFactory;
             _persistentProgressService = persistentProgressService;
+            _soundManger = soundManger;
         }
 
         public void Enter(string saveFile)

@@ -1,5 +1,6 @@
 ﻿using GameCore.SaveSystem.Data;
 using GameCore.SaveSystem.SaveLoad;
+using SoundSystem;
 
 namespace GameCore.StateMachine.States
 {
@@ -7,8 +8,8 @@ namespace GameCore.StateMachine.States
     {
         public LoadExistingGameState(GameStateMachine gameStateMachine,
             IPersistentProgressService persistentProgressService,
-            ISaveLoadService saveLoadService)
-            : base(gameStateMachine, persistentProgressService, saveLoadService)
+            ISaveLoadService saveLoadService, SoundManger soundManger)
+            : base(gameStateMachine, persistentProgressService, saveLoadService, soundManger)
         {
         }
 

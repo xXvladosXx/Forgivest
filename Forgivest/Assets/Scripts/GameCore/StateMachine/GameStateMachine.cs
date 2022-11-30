@@ -5,6 +5,7 @@ using GameCore.Factory;
 using GameCore.SaveSystem.Data;
 using GameCore.SaveSystem.SaveLoad;
 using GameCore.StateMachine.States;
+using SoundSystem;
 using UI.Loading;
 using UI.Menu;
 using UI.Menu.Core;
@@ -25,19 +26,20 @@ namespace GameCore.StateMachine
         {
             _gameStates = new Dictionary<Type, IExitableState>()
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, mainMenuSwitcher, diContainer),
+                [typeof(BootstrapState)] = new BootstrapState(this, mainMenuSwitcher, diContainer.Resolve<SoundManger>()),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, diContainer.Resolve<PersistentCanvas>(), 
-                    diContainer.Resolve<IGameFactory>(),
-                    diContainer.Resolve<IPersistentProgressService>()),
+                    diContainer.Resolve<IGameFactory>(), diContainer.Resolve<IPersistentProgressService>(),
+                    diContainer.Resolve<SoundManger>()),
                 [typeof(LoadExistingGameState)] = new LoadExistingGameState(this, 
                     diContainer.Resolve<IPersistentProgressService>(),
-                    diContainer.Resolve<ISaveLoadService>()),
-                [typeof(GameLoopState)] = new GameLoopState(this, diContainer.Resolve<IGameFactory>()),
+                    diContainer.Resolve<ISaveLoadService>(), diContainer.Resolve<SoundManger>()),
+                [typeof(GameLoopState)] = new GameLoopState(this, diContainer.Resolve<IGameFactory>(),
+                    diContainer.Resolve<SoundManger>()),
                 [typeof(GameEndState)] = new GameEndState(this, diContainer.Resolve<PersistentCanvas>()),
                 [typeof(StartNewGameState)] = new StartNewGameState(this, diContainer.Resolve<IPersistentProgressService>(),
-                    diContainer.Resolve<ISaveLoadService>()),
+                    diContainer.Resolve<ISaveLoadService>(), diContainer.Resolve<SoundManger>()),
                 [typeof(LoadMainMenuState)] = new LoadMainMenuState(this, diContainer.Resolve<IPersistentProgressService>(),
-                    diContainer.Resolve<ISaveLoadService>())
+                    diContainer.Resolve<ISaveLoadService>(), diContainer.Resolve<SoundManger>())
             };
         }
 

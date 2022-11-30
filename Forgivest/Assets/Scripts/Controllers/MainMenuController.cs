@@ -49,12 +49,13 @@ namespace Controllers
             
             _soundMenu.OnAudioSettingsChanged += SaveAudioSettings;
             _graphicsMenu.OnGraphicsSettingsChanged += SaveGraphicsSettings;
-            
-            _soundManger.PlayMusicSound(_soundManger.GameMusicClips[0]);
         }
 
-        private void SaveSettings(float music, float effects)
+        private void SaveAudioSettings(float music, float effects)
         {
+            _soundManger.SetMusicSound(music);
+            _soundManger.SetEffectsSound(effects);
+            
             _saveLoadService.SaveAudioSettings(music, effects);
         }
 

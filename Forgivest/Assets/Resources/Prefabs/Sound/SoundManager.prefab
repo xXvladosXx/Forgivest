@@ -54,7 +54,11 @@ MonoBehaviour:
   _effectsClips:
   - {fileID: 8300000, guid: c5a6af7adb029df4ba0967bc4de9e7ac, type: 3}
   <GameMusicClips>k__BackingField:
-  - {fileID: 8300000, guid: c5a6af7adb029df4ba0967bc4de9e7ac, type: 3}
+  - {fileID: 8300000, guid: b2511d06976fa444e905cc5c5874e2d2, type: 3}
+  - {fileID: 8300000, guid: b9d2d20841610904da6dae882e56b075, type: 3}
+  - {fileID: 8300000, guid: 558d1f088990b7d4abac19b07c7002d1, type: 3}
+  - {fileID: 8300000, guid: 737664c1722820542b5eeebfa1829e37, type: 3}
+  - {fileID: 8300000, guid: 0bd3d4f1e5e77324799000137db9bfcf, type: 3}
 --- !u!1001 &22548489051120463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -143,6 +147,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 22548489853615498}
     m_Modifications:
+    - target: {fileID: 8416404515607857042, guid: d62e6a85b4066d947b6d9be5fab3bc19,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b2511d06976fa444e905cc5c5874e2d2, type: 3}
     - target: {fileID: 8416404515607857043, guid: d62e6a85b4066d947b6d9be5fab3bc19,
         type: 3}
       propertyPath: m_Name

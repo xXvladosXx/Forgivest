@@ -1,27 +1,33 @@
 ﻿using GameCore.SaveSystem.Data;
 using GameCore.SaveSystem.SaveLoad;
+using SoundSystem;
 
 namespace GameCore.StateMachine.States
 {
     public abstract class LoadGameState : ILoadState<string>
     {
-        protected readonly GameStateMachine _gameStateMachine;
+        protected readonly GameStateMachine GameStateMachine;
         protected readonly IPersistentProgressService PersistentProgressService;
         protected readonly ISaveLoadService SaveLoadService;
-        
+
+        private readonly SoundManger _soundManger;
+
         public LoadGameState(GameStateMachine gameStateMachine, 
             IPersistentProgressService persistentProgressService,
-            ISaveLoadService saveLoadService)
+            ISaveLoadService saveLoadService, SoundManger soundManger)
         {
-            _gameStateMachine = gameStateMachine;
+            GameStateMachine = gameStateMachine;
             PersistentProgressService = persistentProgressService;
             SaveLoadService = saveLoadService;
+            _soundManger = soundManger;
         }
         
         public virtual void Enter(string saveFile)
         {
+            _soundManger.StopPlayingMusic();
+
             StartGame(saveFile);
-            _gameStateMachine.Enter<LoadLevelState, string>(
+            GameStateMachine.Enter<LoadLevelState, string>(
                 PersistentProgressService.PlayerProgress
                     .WorldData.PositionOnLevel.Level);
         }

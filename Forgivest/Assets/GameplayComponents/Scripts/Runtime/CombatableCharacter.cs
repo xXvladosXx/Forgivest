@@ -1,5 +1,4 @@
 ﻿using System;
-using CombatSystem.Scripts.Runtime.Core;
 using Core;
 using StatsSystem.Scripts.Runtime;
 using UnityEngine;
@@ -10,7 +9,7 @@ using Random = UnityEngine.Random;
 namespace MyGame
 {
     [RequireComponent(typeof(StatController))]
-    public class CombatableCharacter : MonoBehaviour, IDamageable
+    public class CombatableCharacter : MonoBehaviour
     {
         private const string k_Health = "Health";
         private bool m_IsInitialized;
@@ -109,7 +108,7 @@ namespace MyGame
 
         public void ApplyDamage(Object source, GameObject target)
         {
-            IDamageable damageable = target.GetComponent<IDamageable>();
+            //IDamageable damageable = target.GetComponent<IDamageable>();
             HealthModifier rawDamage = new HealthModifier
             {
                 Instigator = gameObject,
@@ -127,7 +126,7 @@ namespace MyGame
                 rawDamage.IsCriticalHit = true;
             }
             
-            damageable.TakeDamage(rawDamage);
+            //damageable.TakeDamage(rawDamage);
         }
     }
 }

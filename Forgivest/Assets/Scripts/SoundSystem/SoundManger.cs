@@ -40,8 +40,9 @@ namespace SoundSystem
         
         public void PlayMusicSound(AudioClip audioClip)
         {
-            MusicSource.PlayOneShot(audioClip);
             MusicSource.loop = true;
+            MusicSource.clip = audioClip;
+            MusicSource.Play();
         }
         
         public void PlayEffectSound(AudioClip audioClip)
@@ -49,12 +50,16 @@ namespace SoundSystem
             _effectsSource.PlayOneShot(audioClip);
         }
 
+        public void StopPlayingMusic()
+        {
+            MusicSource.Stop();
+        }
+
         public void PlayClip(AudioSource audioSource, List<AudioClip> list, int clipID, int nextClipID, bool loop = false)
         {
             PlayClipWithFade(audioSource, list, clipID);
             StartCoroutine(ChangeClipAfter(audioSource, list, nextClipID, list[clipID].length, loop));
         }
-
 
         public IEnumerator ChangeClipAfter(AudioSource _as, List<AudioClip> list, int clipID, float time,
             bool loop = false)
@@ -69,7 +74,7 @@ namespace SoundSystem
             
             PlayClipWithFade(_as, list, clipID);
         }
-        
+
         public void PlayLoop(AudioSource _as, List<AudioClip> list, int clipID = 0)
         {
             if (clipID + 1 < list.Count)

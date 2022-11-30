@@ -1,5 +1,6 @@
 using GameCore.Factory;
 using GameCore.SaveSystem.Reader;
+using SoundSystem;
 using UI.Menu;
 using UI.Menu.Core;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace GameCore.StateMachine.States
     {
         private readonly GameStateMachine _gameStateMachine;
         private readonly MenuSwitcher _mainMenuSwitcher;
+        private readonly SoundManger _soundManger;
         private readonly IGameFactory _gameFactory;
         
         private StartMenu _startMenu;
@@ -18,10 +20,11 @@ namespace GameCore.StateMachine.States
         private MainMenu _mainMenu;
 
         public BootstrapState(GameStateMachine gameStateMachine,
-            MenuSwitcher mainMenuSwitcher, DiContainer diContainer)
+            MenuSwitcher mainMenuSwitcher, SoundManger soundManger)
         {
             _gameStateMachine = gameStateMachine;
             _mainMenuSwitcher = mainMenuSwitcher;
+            _soundManger = soundManger;
         }
 
         public void Enter()
@@ -29,6 +32,8 @@ namespace GameCore.StateMachine.States
             _startMenu = _mainMenuSwitcher.Find<StartMenu>() as StartMenu;
             _loadMenu = _mainMenuSwitcher.Find<LoadMenu>() as LoadMenu;
             _mainMenu = _mainMenuSwitcher.Find<MainMenu>() as MainMenu;
+            
+            _soundManger.PlayMusicSound(_soundManger.GameMusicClips[0]);
 
             _startMenu.OnStartClicked += LoadStartGame;
             _loadMenu.OnLoadClicked += LoadExistingGame;

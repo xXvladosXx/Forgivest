@@ -2,8 +2,8 @@
 using System.Linq;
 using AbilitySystem.AbilitySystem.Runtime.Effects.Core;
 using AbilitySystem.AbilitySystem.Runtime.Effects.Persistent;
+using AttackSystem;
 using AttackSystem.VisualEffects;
-using CombatSystem.Scripts.Runtime;
 using UnityEngine;
 
 namespace AbilitySystem.AbilitySystem.Runtime.Effects
