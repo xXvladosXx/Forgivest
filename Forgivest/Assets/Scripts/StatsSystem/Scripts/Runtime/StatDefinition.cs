@@ -1,7 +1,7 @@
 ﻿using Core;
 using UnityEngine;
 
-namespace StatsSystem.Scripts.Runtime
+namespace StatSystem
 {
     [CreateAssetMenu(fileName = "StatDefinition", menuName = "StatSystem/StatDefinition", order = 0)]
     public class StatDefinition : ScriptableObject

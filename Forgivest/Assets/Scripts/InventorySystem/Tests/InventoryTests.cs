@@ -4,6 +4,8 @@ using InventorySystem.Interaction;
 using InventorySystem.Items;
 using NUnit.Framework;
 using StatsSystem.Scripts.Runtime;
+using StatSystem;
+using StatSystem.Scripts.Runtime;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;

@@ -1,8 +1,10 @@
 ﻿using System;
+using AbilitySystem.AbilitySystem.Runtime;
 using Core;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 
-namespace StatsSystem.Scripts.Runtime
+namespace StatSystem
 {
     public class Health : Attribute
     {

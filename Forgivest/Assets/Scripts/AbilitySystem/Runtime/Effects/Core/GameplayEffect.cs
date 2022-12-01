@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using AttackSystem.Core;
 using Core;
 using StatsSystem.Scripts.Runtime;
+using StatSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

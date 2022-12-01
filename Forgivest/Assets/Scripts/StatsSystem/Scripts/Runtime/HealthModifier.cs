@@ -1,7 +1,8 @@
 ﻿using Core;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 
-namespace StatsSystem.Scripts.Runtime
+namespace StatSystem
 {
     public class HealthModifier : StatModifier, IDamage
     {

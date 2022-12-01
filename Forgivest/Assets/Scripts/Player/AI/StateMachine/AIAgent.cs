@@ -12,6 +12,8 @@ using MovementSystem;
 using Player.AI.StateMachine.Core;
 using Player.AI.StateMachine.Core.Config;
 using StatsSystem.Scripts.Runtime;
+using StatSystem;
+using StatSystem.Scripts.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
 

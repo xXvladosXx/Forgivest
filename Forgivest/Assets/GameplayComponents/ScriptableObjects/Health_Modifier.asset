@@ -30,6 +30,21 @@ MonoBehaviour:
   position: {x: 93, y: 203}
   guid: e7abdf34af0220f4da42206260dc3938
   m_StatName: Strength
+--- !u!114 &-4651900375651971459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8666e6d238c481fa39ecc73ed76d5cb, type: 3}
+  m_Name: Stat
+  m_EditorClassIdentifier: 
+  position: {x: 109, y: 189}
+  guid: d38ccb86dcf95914d82bac92b2e6cb0f
+  m_StatName: Strenght
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,9 +60,6 @@ MonoBehaviour:
   rootNode: {fileID: 3880644824029744903}
   nodes:
   - {fileID: 3880644824029744903}
-  - {fileID: -5423229043874898342}
-  - {fileID: -4928880373979088958}
-  - {fileID: 5405700718659366818}
 --- !u!114 &3880644824029744903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 382.72, y: 202.56}
   guid: 13d04e0c2d0304243a489b9063f8af6c
-  child: {fileID: 5405700718659366818}
+  child: {fileID: 0}
 --- !u!114 &5405700718659366818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,5 +89,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 241, y: 319}
   guid: 2ab3becf2df2c124482c8e5befcba93e
-  factorA: {fileID: -4928880373979088958}
-  factorB: {fileID: -5423229043874898342}
+  factorA: {fileID: 0}
+  factorB: {fileID: 0}
+--- !u!114 &7079210564104190066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948efed252f9405ebd2a79810e363b44, type: 3}
+  m_Name: Multiply
+  m_EditorClassIdentifier: 
+  position: {x: 253, y: 266}
+  guid: c8bc871a220a21242b6266141ea55753
+  factorA: {fileID: 0}
+  factorB: {fileID: 0}
+--- !u!114 &7250996860866892839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc85815fbb647f6ad4f2ac539232d6a, type: 3}
+  m_Name: Scalar
+  m_EditorClassIdentifier: 
+  position: {x: 112, y: 328.5}
+  guid: c26d43bde3a58824db9f13e846432a69
+  m_Value: 6

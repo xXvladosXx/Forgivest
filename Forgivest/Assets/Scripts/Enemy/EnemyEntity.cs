@@ -6,6 +6,7 @@ using InventorySystem.Core;
 using RaycastSystem.Core;
 using Sirenix.OdinInspector;
 using StatsSystem.Scripts.Runtime;
+using StatSystem;
 using UnityEngine;
 
 namespace Enemy

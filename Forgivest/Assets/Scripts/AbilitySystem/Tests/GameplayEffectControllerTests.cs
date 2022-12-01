@@ -8,6 +8,7 @@ using AbilitySystem.AbilitySystem.Runtime.Effects.Stackable;
 using FluentAssertions;
 using NUnit.Framework;
 using StatsSystem.Scripts.Runtime;
+using StatSystem;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;

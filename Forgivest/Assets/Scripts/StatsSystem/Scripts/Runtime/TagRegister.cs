@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Core;
+using StatSystem;
 using UnityEngine;
 
-namespace StatsSystem.Scripts.Runtime
+namespace AbilitySystem.AbilitySystem.Runtime
 {
     public class TagRegister : MonoBehaviour, ITaggable
     {

@@ -24,6 +24,8 @@ using RaycastSystem;
 using RaycastSystem.Core;
 using Requirements.Core;
 using StatsSystem.Scripts.Runtime;
+using StatSystem;
+using StatSystem.Scripts.Runtime;
 using UnityEngine;
 using UnityEngine.AI;
 using Utilities;

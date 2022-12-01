@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-using SaveSystem.Scripts.Runtime;
+using StatsSystem.Scripts.Runtime;
 using UnityEngine;
 
 [assembly: InternalsVisibleTo("StatSystem.Tests")]
-namespace StatsSystem.Scripts.Runtime
+namespace StatSystem
 {
-    public class PrimaryStat : Stat, ISavable
+    public class PrimaryStat : Stat
     {
-        [field: SerializeField] public SaveDataChannel SaveDataChannel { get; }
-
         private float m_BaseValue;
         public override float baseValue => m_BaseValue;
         

@@ -3,6 +3,7 @@ using AttackSystem;
 using MovementSystem;
 using Player.AI.StateMachine.Core.Config;
 using StatsSystem.Scripts.Runtime;
+using StatSystem;
 using UnityEngine;
 using UnityEngine.AI;
 

@@ -6,8 +6,9 @@ using AbilitySystem.AbilitySystem.Runtime.Effects.Core;
 using AbilitySystem.AbilitySystem.Runtime.Effects.Persistent;
 using AbilitySystem.AbilitySystem.Runtime.Effects.Stackable;
 using StatsSystem.Scripts.Runtime;
+using StatSystem;
 using UnityEngine;
-using Attribute = StatsSystem.Scripts.Runtime.Attribute;
+using Attribute = StatsSystem;
 
 namespace AbilitySystem.AbilitySystem.Runtime.Effects
 {
@@ -306,7 +307,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects
                         .TryGetValue(gameplayEffect.Definition.Modifiers[i].StatName,
                             out var stat)) continue;
 
-                if (stat is Attribute attribute)
+                if (stat is StatSystem.Attribute attribute)
                 {
                     attribute.ApplyModifier(gameplayEffect.Modifiers[i]);
                 }
@@ -392,7 +393,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects
             {
                 if (StatController.Stats.TryGetValue(modifier.StatName, out var stat))
                 {
-                    if (stat is Attribute attribute)
+                    if (stat is StatSystem.Attribute attribute)
                     {
                         if (modifier.Type == ModifierOperationType.Additive)
                         {

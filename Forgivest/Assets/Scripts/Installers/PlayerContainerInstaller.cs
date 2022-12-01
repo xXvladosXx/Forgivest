@@ -10,6 +10,7 @@ using LevelSystem.Scripts.Runtime;
 using Logic;
 using Player;
 using StatsSystem.Scripts.Runtime;
+using StatSystem;
 using UnityEngine;
 using Utilities;
 using Zenject;

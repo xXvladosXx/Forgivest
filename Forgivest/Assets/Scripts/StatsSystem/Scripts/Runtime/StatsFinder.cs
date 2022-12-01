@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using InventorySystem;
 using Sirenix.OdinInspector;
+using StatsSystem.Scripts.Runtime;
+using UnityEngine;
 
-namespace StatsSystem.Scripts.Runtime
+namespace StatSystem.Scripts.Runtime
 {
     public class StatsFinder : SerializedMonoBehaviour
     {
@@ -25,11 +28,7 @@ namespace StatsSystem.Scripts.Runtime
             }
         }
 
-        private void Update()
-        {
-            print(FindStat("Health"));
-        }
-
+       
         private void OnDisable()
         {
             foreach (var statsChangeable in _statsChangeables)

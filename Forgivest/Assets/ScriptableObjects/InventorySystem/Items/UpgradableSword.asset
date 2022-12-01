@@ -32,6 +32,7 @@ MonoBehaviour:
   <ItemID>k__BackingField:
     Id: 1
   <ItemType>k__BackingField: 0
+  _itemDescription: 
   <StatModifier>k__BackingField:
   - <Name>k__BackingField: Strength
     <StatName>k__BackingField: Strength
@@ -41,10 +42,7 @@ MonoBehaviour:
     <StatName>k__BackingField: PhysicalAttack
     <Magnitude>k__BackingField: 40
     <Type>k__BackingField: 0
-  - <Name>k__BackingField: Strength
-    <StatName>k__BackingField: Strength
-    <Magnitude>k__BackingField: 12
-    <Type>k__BackingField: 0
+  _requiredLevel: 0
   <RightHanded>k__BackingField: 1
   <AttackRate>k__BackingField: 2
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: 18c8a88b145119745a307ce1c3dda53a,

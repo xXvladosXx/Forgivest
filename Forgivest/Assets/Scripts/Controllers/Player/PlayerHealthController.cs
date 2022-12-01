@@ -1,5 +1,6 @@
 ﻿using System;
 using StatsSystem.Scripts.Runtime;
+using StatSystem;
 using UI.HUD.Stats;
 using Zenject;
 

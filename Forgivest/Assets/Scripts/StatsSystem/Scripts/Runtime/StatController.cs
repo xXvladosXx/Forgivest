@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using StatsSystem.Scripts.Runtime.Nodes;
+using AbilitySystem.AbilitySystem.Runtime;
+using StatsSystem.Scripts.Runtime;
+using StatSystem.Nodes;
 using UnityEngine;
 
-namespace StatsSystem.Scripts.Runtime
+namespace StatSystem
 {
     [RequireComponent(typeof(TagRegister))]
     public class StatController : MonoBehaviour
@@ -95,28 +97,17 @@ namespace StatsSystem.Scripts.Runtime
 
         public void AddStat(StatModifier statModifier)
         {
-            switch (_stats[statModifier.StatName])
+            _stats[statModifier.StatName].AddModifier(new StatModifier
             {
-                case Attribute attribute:
-                    attribute.ApplyModifier(statModifier);
-                    break;
-                case PrimaryStat primaryStat:
-                    primaryStat.AddModifier(statModifier);
-                    break;
-            }
+                Magnitude = statModifier.Magnitude,
+                Type = ModifierOperationType.Additive,
+                Source = this
+            });
         }
 
         public void RemoveStat(StatModifier statModifier)
         {
-            switch (_stats[statModifier.StatName])
-            {
-                case Attribute attribute:
-                    attribute.RemoveModifier(statModifier);
-                    break;
-                case PrimaryStat primaryStat:
-                    primaryStat.RemoveModifier(statModifier);
-                    break;
-            }
+            
         }
         
         protected virtual void InitializeStatFormulas()
