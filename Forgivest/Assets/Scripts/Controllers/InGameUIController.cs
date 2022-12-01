@@ -2,6 +2,10 @@
 using System.Linq;
 using GameCore.Factory;
 using GameCore.SaveSystem.Reader;
+using GameCore.SaveSystem.SaveLoad;
+using Installers;
+using Player;
+using SoundSystem;
 using UI.Core;
 using UI.Menu;
 using UI.Skill;
@@ -21,11 +25,19 @@ namespace Controllers
         private readonly LoadMenu _loadMenu;
         private readonly SaveMenu _saveMenu;
         private readonly SettingsMenu _settingsMenu;
+        private readonly SoundMenu _soundMenu;
+        private readonly IEnemyRadiusChecker _enemyRadiusChecker;
+        private readonly SoundManger _soundManger;
+        private readonly GraphicsMenu _graphicsMenu;
+        private readonly ISaveLoadService _saveLoadService;
 
         public PlayerPanelController(PanelSwitcher panelSwitcher, IGameFactory gameFactory,
             PlayerInputProvider playerInputProvider, GameplayMenu gameplayMenu, 
             LoadMenu loadMenu, SaveMenu saveMenu,
-            SettingsMenu settingsMenu)
+            SettingsMenu settingsMenu, GraphicsMenu graphicsMenu,
+            ISaveLoadService saveLoadService,
+            SoundMenu soundMenu, IEnemyRadiusChecker enemyRadiusChecker,
+            SoundManger soundManger)
         {
             _panelSwitcher = panelSwitcher;
             _gameFactory = gameFactory;
@@ -34,14 +46,15 @@ namespace Controllers
             _loadMenu = loadMenu;
             _saveMenu = saveMenu;
             _settingsMenu = settingsMenu;
+            _graphicsMenu = graphicsMenu;
+            _saveLoadService = saveLoadService;
+            _soundMenu = soundMenu;
+            _enemyRadiusChecker = enemyRadiusChecker;
+            _soundManger = soundManger;
         }
 
         public void Initialize()
         {
-            _playerInputProvider.PlayerUIActions.Inventory.performed += EnableInventory;
-            _playerInputProvider.PlayerUIActions.SkillBar.performed += EnableSkillBar;
-            _playerInputProvider.PlayerUIActions.ESC.performed += TryToEnableMenu;
-
             var savesList = FileManager.SavesList();
             var enumerable = savesList as string[] ?? savesList.ToArray();
             
@@ -49,8 +62,26 @@ namespace Controllers
             _loadMenu.Initialize(enumerable);
 
             _gameFactory.UIObserver.GameplayMenu = _gameplayMenu;
+
+            var settings = _saveLoadService.LoadSettings();
+            
+            _soundMenu.LoadAudioSettings(settings);
+            _soundManger.SetMusicSound(settings.MusicVolume);
+            _soundManger.SetEffectsSound(settings.EffectsVolume);
+
+            _graphicsMenu.Init();
+            _graphicsMenu.FindResolution(settings.ResolutionIndex);
+            _graphicsMenu.SetFullscreen(Convert.ToBoolean(settings.IsFullScreen));
+            _graphicsMenu.SetQualityLevelDropdown(settings.QualityLevel);
+            
+            _playerInputProvider.PlayerUIActions.Inventory.performed += EnableInventory;
+            _playerInputProvider.PlayerUIActions.SkillBar.performed += EnableSkillBar;
+            _playerInputProvider.PlayerUIActions.ESC.performed += TryToEnableMenu;
             
             _gameplayMenu.OnContinueButtonClicked += TryToEnableMenu;
+            _saveMenu.OnSaveClicked += OnSaveButtonClicked;
+            _soundMenu.OnAudioSettingsChanged += SaveAudioSettings;
+            _graphicsMenu.OnGraphicsSettingsChanged += SaveGraphicsSettings;
         }
 
         public void Dispose()
@@ -60,6 +91,33 @@ namespace Controllers
             _playerInputProvider.PlayerUIActions.ESC.performed -= TryToEnableMenu;
             
             _gameplayMenu.OnContinueButtonClicked -= TryToEnableMenu;
+            _saveMenu.OnSaveClicked -= OnSaveButtonClicked;
+            _soundMenu.OnAudioSettingsChanged -= SaveAudioSettings;
+            _graphicsMenu.OnGraphicsSettingsChanged -= SaveGraphicsSettings;
+        }
+
+        private void SaveAudioSettings(float music, float effects)
+        {
+            _soundManger.SetMusicSound(music);
+            _soundManger.SetEffectsSound(effects);
+            
+            _saveLoadService.SaveAudioSettings(music, effects);
+        }
+
+        private void SaveGraphicsSettings(int resolution, int isFullscreen, int graphics)
+        {
+            _saveLoadService.SaveGraphicsSettings(resolution, isFullscreen, graphics);
+        }
+
+        private void OnSaveButtonClicked(string saveFile)
+        {
+            if (_enemyRadiusChecker.IsEnemiesInRadius(
+                    _gameFactory.PlayerObserver.PlayerInputProvider.transform.position, 10))
+            {
+                return;
+            }
+            
+            _saveLoadService.SaveProgress(saveFile);
         }
 
         private void TryToEnableMenu(InputAction.CallbackContext obj)

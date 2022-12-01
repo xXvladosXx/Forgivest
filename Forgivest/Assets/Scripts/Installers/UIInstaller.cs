@@ -28,6 +28,8 @@ namespace Installers
         [SerializeField] private LoadMenu _loadMenu;
         [SerializeField] private SaveMenu _saveMenu;
         [SerializeField] private SettingsMenu _settingsMenu;
+        [SerializeField] private SoundMenu _soundMenu;
+        [SerializeField] private GraphicsMenu _graphicsMenu;
         
         [SerializeField] private UIReusableData _uiReusableData;
         
@@ -46,6 +48,8 @@ namespace Installers
             Container.Bind<LoadMenu>().FromInstance(_loadMenu).AsSingle();
             Container.Bind<SaveMenu>().FromInstance(_saveMenu).AsSingle();
             Container.Bind<SettingsMenu>().FromInstance(_settingsMenu).AsSingle();
+            Container.Bind<SoundMenu>().FromInstance(_soundMenu).AsSingle();
+            Container.Bind<GraphicsMenu>().FromInstance(_graphicsMenu).AsSingle();
             
             Container.BindInterfacesAndSelfTo<PlayerPanelController>().AsSingle();
         }

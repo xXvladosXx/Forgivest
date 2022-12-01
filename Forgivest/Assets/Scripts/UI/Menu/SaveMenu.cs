@@ -29,11 +29,6 @@ namespace UI.Menu
         private void OnDisable()
         {
             _backButton.onClick.RemoveListener(OnBackButtonClicked);
-            
-            foreach (Transform child in _content)
-            {
-                Destroy(child.gameObject);
-            }
         }
         
         public void Initialize(IEnumerable<string> savesList)

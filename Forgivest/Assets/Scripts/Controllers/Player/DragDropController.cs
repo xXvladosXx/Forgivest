@@ -88,6 +88,8 @@ namespace Controllers.Player
 
         private void TryToDropSlotFromInventory(int source, Sprite sprite, int amount, IInventoryHolder sourceInventoryHolder)
         {
+            if(_uiReusableData.LastRaycastedInventoryHolder != null) return;
+            
             foreach (var itemHolder in _itemHolders)
             {
                 if (itemHolder.Value == (ItemContainerUI)sourceInventoryHolder)

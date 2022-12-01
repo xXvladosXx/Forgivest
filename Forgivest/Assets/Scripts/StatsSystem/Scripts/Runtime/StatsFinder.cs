@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 
@@ -24,7 +25,11 @@ namespace StatsSystem.Scripts.Runtime
             }
         }
 
-       
+        private void Update()
+        {
+            print(FindStat("Health"));
+        }
+
         private void OnDisable()
         {
             foreach (var statsChangeable in _statsChangeables)

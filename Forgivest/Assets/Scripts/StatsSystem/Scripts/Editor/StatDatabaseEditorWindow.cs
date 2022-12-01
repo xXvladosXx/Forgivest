@@ -4,7 +4,7 @@ using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace StatsSystem.Scripts.Editor
+namespace StatsSystem.Editor
 {
     public class StatDatabaseEditorWindow : EditorWindow
     {

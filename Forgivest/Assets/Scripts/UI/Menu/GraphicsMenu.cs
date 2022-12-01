@@ -73,6 +73,7 @@ namespace UI.Menu
         private void OnBackButton()
         {
             MenuSwitcher.Show<MainMenu>();
+            MenuSwitcher.Show<GameplayMenu>();
         }
 
         public void FindResolution(int resolution)

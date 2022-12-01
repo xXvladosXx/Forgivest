@@ -6,6 +6,7 @@ using GameCore.SaveSystem.Data;
 using GameCore.SaveSystem.SaveLoad;
 using GameCore.StateMachine;
 using Logic;
+using Player;
 using SoundSystem;
 using UnityEngine;
 using Zenject;
@@ -28,6 +29,8 @@ namespace Installers
             Container.BindInstance(Container
                     .InstantiatePrefabForComponent<SoundManger>(_soundManger, Vector3.zero, Quaternion.identity, null))
                     .AsSingle();
+            
+            Container.Bind<IEnemyRadiusChecker>().To<EnemyRadiusChecker>().AsSingle();
         }
     }
 }

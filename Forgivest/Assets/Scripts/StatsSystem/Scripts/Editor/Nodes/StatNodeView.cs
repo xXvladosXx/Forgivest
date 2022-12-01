@@ -4,7 +4,7 @@ using Core.Editor.Nodes;
 using StatsSystem.Scripts.Runtime.Nodes;
 using UnityEngine;
 
-namespace StatsSystem.Scripts.Editor.Nodes
+namespace StatsSystem.Editor.Nodes
 {
     [NodeType(typeof(StatNode))]
     [Title("Stat System", "Stat")]
