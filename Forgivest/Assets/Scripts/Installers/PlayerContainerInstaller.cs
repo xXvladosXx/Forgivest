@@ -38,6 +38,7 @@ namespace Installers
             Container.BindInterfacesAndSelfTo<PlayerExperienceController>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerHealthController>().AsSingle();
             Container.BindInterfacesAndSelfTo<PlayerManaController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<StatsViewController>().AsSingle();
         }
     }
 }

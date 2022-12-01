@@ -30,21 +30,6 @@ MonoBehaviour:
   m_BaseValue: 1
   m_Cap: -1
   m_Formula: {fileID: 11400000, guid: 74ceec139ad082941b20b1882a19ae4d, type: 2}
---- !u!114 &-7292162842635481269
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e1c38672a6b454e8ed0e07b48a4296b, type: 3}
-  m_Name: ManaRegeneration
-  m_EditorClassIdentifier: 
-  m_BaseValue: 0
-  m_Cap: -1
-  m_Formula: {fileID: 0}
 --- !u!114 &-6591833141603881016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -174,8 +159,6 @@ MonoBehaviour:
   attributes:
   - {fileID: -4364046602682949830}
   - {fileID: 1577381951802224476}
-  - {fileID: 3544192781566824416}
-  - {fileID: -7292162842635481269}
   primaryStats:
   - {fileID: -6591833141603881016}
   - {fileID: 7436698787339830115}
@@ -224,21 +207,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e1c38672a6b454e8ed0e07b48a4296b, type: 3}
   m_Name: New Item
-  m_EditorClassIdentifier: 
-  m_BaseValue: 0
-  m_Cap: -1
-  m_Formula: {fileID: 0}
---- !u!114 &3544192781566824416
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e1c38672a6b454e8ed0e07b48a4296b, type: 3}
-  m_Name: HealthRegeneration
   m_EditorClassIdentifier: 
   m_BaseValue: 0
   m_Cap: -1

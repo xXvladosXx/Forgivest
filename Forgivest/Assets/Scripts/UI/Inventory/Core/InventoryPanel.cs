@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using UI.Core;
+using UI.Stats;
 using UnityEngine;
 
 namespace UI.Inventory.Core
 {
     public class InventoryPanel : UI.Core.InventoryPanel
     {
+        [field: SerializeField] public StatsView StatsView { get; private set; }
+
         [SerializeField] private List<UIElement> _uiElements;
         [SerializeField] private DynamicItemContainerUI _dynamicItemContainerUI;
         [SerializeField] private StaticItemContainerUI _staticItemContainerUI;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AbilitySystem.AbilitySystem.Runtime;
+using SaveSystem.Scripts.Runtime;
 using StatsSystem.Scripts.Runtime;
 using StatSystem.Nodes;
 using UnityEngine;
@@ -10,16 +11,18 @@ namespace StatSystem
     [RequireComponent(typeof(TagRegister))]
     public class StatController : MonoBehaviour
     {
+        [field: SerializeField] public bool IsInitialized { get; private set; }
+
         [SerializeField] private StatDatabase _statDatabase;
+
         protected Dictionary<string, Stat> _stats = new Dictionary<string, Stat>(StringComparer.OrdinalIgnoreCase);
         public Dictionary<string, Stat> Stats => _stats;
         private TagRegister _tagRegister;
         public Health Health { get; private set; }
-        public bool IsInitialized { get; private set; }
         public event Action OnInitialized;
         public event Action WillUninitialize;
 
-        public event Action<Attribute> OnStatChanged;
+        public event Action OnStatsChanged;
 
         protected virtual void Awake()
         {
@@ -70,6 +73,7 @@ namespace StatSystem
             
             IsInitialized = true;
             OnInitialized?.Invoke();
+            OnStatsChanged?.Invoke();
         }
 
         private void Update()
@@ -97,17 +101,32 @@ namespace StatSystem
 
         public void AddStat(StatModifier statModifier)
         {
-            _stats[statModifier.StatName].AddModifier(new StatModifier
+            switch (_stats[statModifier.StatName])
             {
-                Magnitude = statModifier.Magnitude,
-                Type = ModifierOperationType.Additive,
-                Source = this
-            });
+                case Attribute attribute:
+                    attribute.ApplyModifier(statModifier);
+                    break;
+                case PrimaryStat primaryStat:
+                    primaryStat.AddModifier(statModifier);
+                    break;
+            }
+            
+            OnStatsChanged?.Invoke();
         }
 
         public void RemoveStat(StatModifier statModifier)
         {
+            switch (_stats[statModifier.StatName])
+            {
+                case Attribute attribute:
+                    attribute.RemoveModifier(statModifier);
+                    break;
+                case PrimaryStat primaryStat:
+                    primaryStat.RemoveModifier(statModifier);
+                    break;
+            }
             
+            OnStatsChanged?.Invoke();
         }
         
         protected virtual void InitializeStatFormulas()

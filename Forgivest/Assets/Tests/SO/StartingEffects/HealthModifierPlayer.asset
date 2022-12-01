@@ -17,7 +17,7 @@ MonoBehaviour:
   - {fileID: 879076516851373186}
   - {fileID: 4944206970636626474}
   - {fileID: 4990574042989955613}
-  - {fileID: 1569726042712497974}
+  - {fileID: 6036656573402291580}
 --- !u!114 &879076516851373186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32,7 +32,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 258, y: 155}
   guid: 766b9c82be0d3b24584d8eb9a4080593
-  child: {fileID: 1569726042712497974}
+  child: {fileID: 6036656573402291580}
 --- !u!114 &1569726042712497974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,8 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 120, y: 155}
   guid: 885666d36ae2173489c8b66b55b9897b
-  addendA: {fileID: 4990574042989955613}
-  addendB: {fileID: 4944206970636626474}
+  addendA: {fileID: 0}
+  addendB: {fileID: 0}
 --- !u!114 &4944206970636626474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,9 +61,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc85815fbb647f6ad4f2ac539232d6a, type: 3}
   m_Name: Scalar
   m_EditorClassIdentifier: 
-  position: {x: -53, y: 386.52}
+  position: {x: -53, y: 391}
   guid: 2599df4406d2c124f9b8ef23f5a27957
-  m_Value: -10
+  m_Value: 10
 --- !u!114 &4990574042989955613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,3 +79,19 @@ MonoBehaviour:
   position: {x: -53, y: 193.5}
   guid: 9f77eda451a533e4a88c87e5c83ec796
   m_StatName: Strength
+--- !u!114 &6036656573402291580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948efed252f9405ebd2a79810e363b44, type: 3}
+  m_Name: Multiply
+  m_EditorClassIdentifier: 
+  position: {x: 101, y: 225}
+  guid: 76a38576e2f63b64ca2feee38ec3ae8d
+  factorA: {fileID: 4990574042989955613}
+  factorB: {fileID: 4944206970636626474}
