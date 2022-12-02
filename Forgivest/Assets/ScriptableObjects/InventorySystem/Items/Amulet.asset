@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e57e1e2f779489d8a5ba1362744558c, type: 3}
+  m_Name: Amulet
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  <Rarity>k__BackingField: {fileID: 11400000, guid: 3991f70b9396e0446ad4e38d6cd74fbf,
+    type: 2}
+  <Name>k__BackingField: Amulet
+  <Prefab>k__BackingField: {fileID: 1445918223798424, guid: c1325fa2bd1c15245a71ba8ebc3659f3,
+    type: 3}
+  <MaxItemsInStack>k__BackingField: 1
+  <Sprite>k__BackingField: {fileID: 21300000, guid: f6e9d21533a74c146afe2cb80ea6eeac,
+    type: 3}
+  <ItemID>k__BackingField:
+    Id: 1
+  <ItemType>k__BackingField: 6
+  _itemDescription: 
+  <StatModifier>k__BackingField:
+  - <Name>k__BackingField: Constitution
+    <StatName>k__BackingField: Constitution
+    <Magnitude>k__BackingField: 8
+    <Type>k__BackingField: 0
+  - <Name>k__BackingField: Magical defense
+    <StatName>k__BackingField: MagicalDefense
+    <Magnitude>k__BackingField: 7
+    <Type>k__BackingField: 0
+  _requiredLevel: 0
+  <RightHanded>k__BackingField: 1
+  <AttackRate>k__BackingField: 2
+  <AnimatorController>k__BackingField: {fileID: 9100000, guid: 18c8a88b145119745a307ce1c3dda53a,
+    type: 2}
+  <PossibleTags>k__BackingField:
+  - physical
+  <NextLevel>k__BackingField: {fileID: 11400000, guid: 4e1c5ec5b1493d34f9398c383dd5882c,
+    type: 2}
