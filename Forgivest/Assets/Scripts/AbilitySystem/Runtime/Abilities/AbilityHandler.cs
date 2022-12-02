@@ -19,7 +19,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities
         typeof(TagRegister))]
     public class AbilityHandler : MonoBehaviour
     {
-        [field: SerializeField] public Inventory ItemContainer { get; private set; } 
+        [field: SerializeField] public Inventory LearnedAbilities { get; private set; } 
         [field: SerializeField] public Inventory AllAbilities { get; private set; }
         [field: SerializeField] public Inventory Hotbar {get ; private set; }
         

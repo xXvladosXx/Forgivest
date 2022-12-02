@@ -41,10 +41,5 @@ namespace InventorySystem.Items
                 return stringBuilder.ToString();
             }
         }
-
-        public bool RequirementsChecked(int level)
-        {
-            return level >= _requiredLevel;
-        }
     }
 }

@@ -16,7 +16,7 @@ namespace InventorySystem.Interaction
         [field: SerializeField] public Inventory Inventory { get; private set; }
         [field: SerializeField] public Inventory Equipment { get; private set; }
         [field: SerializeField] public Inventory Hotbar { get; private set; }
-
+        [field: SerializeField] public Collider ColliderToSpawnObject { get; private set; }
         [field: SerializeField] public ItemEquipHandler ItemEquipHandler { get; private set; }
         [field: SerializeField] public PickableItem PickableItem { get; private set; }
         [field: SerializeField] public PickableItem PickableItem1 { get; private set; }
@@ -83,6 +83,8 @@ namespace InventorySystem.Interaction
             }
         }
 
+        public Vector3 PossiblePointToSpawn() => transform.position + (Vector3.forward);
+
         private void CollectObject(IPickable pickable)
         {
             switch (pickable)
@@ -91,6 +93,8 @@ namespace InventorySystem.Interaction
                     TryToEquipOrAddToInventory(pickableItem.Item, pickableItem.Amount);
                     break;
             }
+            
+            Destroy(pickable.Prefab);
         }
 
         public bool TryToEquipOrAddToInventory(Item item, int amount)
@@ -116,8 +120,8 @@ namespace InventorySystem.Interaction
                 OnStatRemoved?.Invoke(statsableItem.StatModifier);
             }
         }
-        
-        
+
+
         private void OnItemRemoved(object sender, IItem item, int amount, ItemContainer itemContainer)
         {
             ItemEquipHandler.Unequip((StatsableItem)item);

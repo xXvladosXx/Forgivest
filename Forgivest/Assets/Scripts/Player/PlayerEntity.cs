@@ -15,6 +15,7 @@ using Data.Player;
 using GameCore.Factory;
 using GameCore.StateMachine;
 using InventorySystem.Interaction;
+using InventorySystem.Items;
 using InventorySystem.Items.Weapon;
 using LevelSystem;
 using LevelSystem.Scripts.Runtime;
@@ -22,7 +23,6 @@ using MovementSystem;
 using Player.StateMachine.Player;
 using RaycastSystem;
 using RaycastSystem.Core;
-using Requirements.Core;
 using StatsSystem.Scripts.Runtime;
 using StatSystem;
 using StatSystem.Scripts.Runtime;
@@ -45,7 +45,7 @@ namespace Player
     [RequireComponent(typeof(AbilityHandler),
         typeof(GameplayEffectHandler))]
     public class PlayerEntity : MonoBehaviour, IAnimationEventUser, IDamageReceiver,
-        IDamageApplier, IRaycastable, IRequirementUser
+        IDamageApplier, IRaycastable
     {
         [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
         [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
@@ -60,7 +60,7 @@ namespace Player
         [field: SerializeField] public GameplayEffectHandler GameplayEffectHandler { get; private set; }
         [field: SerializeField] public PlayerRaycastSettings PlayerRaycastSettings { get; private set; }
         [field: SerializeField] public ObjectPicker ObjectPicker { get; private set; }
-        
+
         [field: Header("Level System")]
         [field: SerializeField] public LevelController LevelController { get; private set; }
         [SerializeField] private int _pointsPerLevel;
@@ -71,9 +71,10 @@ namespace Player
         public Rotator Rotator { get; private set; }
         public PlayerRaycastUser RaycastUser { get; private set; }
         public DamageHandler DamageHandler { get; private set; }
+        public RequirementsChecker RequirementsChecker { get; private set; }
 
         private PlayerStateMachine _playerStateMachine;
-
+        
         public GameObject Weapon => ObjectPicker.ItemEquipHandler.CurrentColliderWeapon;
         public Weapon CurrentWeapon => ObjectPicker.ItemEquipHandler.CurrentWeapon;
         public List<IRewardable> Rewards { get; }
@@ -92,6 +93,9 @@ namespace Player
             Rotator = new Rotator(Rigidbody);
             AttackApplier = new AttackApplier();
             DamageHandler = new DamageHandler(StatController);
+            RequirementsChecker = new RequirementsChecker(ObjectPicker.Inventory.ItemContainer,
+                ObjectPicker.Equipment.ItemContainer,
+                AbilityHandler.LearnedAbilities.ItemContainer, LevelController);
 
             gameFactory.PlayerObserver.DamageHandler ??= DamageHandler;
             gameFactory.PlayerObserver.PlayerInputProvider ??= PlayerInputProvider;

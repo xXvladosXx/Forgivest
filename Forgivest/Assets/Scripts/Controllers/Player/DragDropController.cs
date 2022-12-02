@@ -15,6 +15,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Utilities;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace Controllers.Player
 {
@@ -98,7 +99,13 @@ namespace Controllers.Player
                     {
                         return;
                     }
-                    
+
+                    var prefab = itemHolder.Key.GetItemAtIndex(source).ObjectToSpawn;
+                    if (prefab)
+                    {
+                        Object.Instantiate(prefab, _objectPicker.PossiblePointToSpawn(), Quaternion.Euler(60, 0, 75));
+                    }
+                        
                     itemHolder.Key.Remove(this, source, true, amount);
                     RefreshSlotsData(itemHolder.Key);
                 }

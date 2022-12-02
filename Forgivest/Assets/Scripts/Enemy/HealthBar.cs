@@ -32,6 +32,10 @@ namespace Enemy
             _damageReceiver.OnDamageReceived += OnDamageReceived;
         }
 
+        private void OnDisable()
+        {
+            _damageReceiver.OnDamageReceived += OnDamageReceived;
+        }
         private void Update()
         {
             if (meshRenderer.enabled)

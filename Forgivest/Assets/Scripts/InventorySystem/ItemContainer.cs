@@ -58,10 +58,10 @@ namespace InventorySystem
             }
         }
 
-        public IItem GetItem(Type itemType) => Slots.Find(slot => slot != null && slot.ItemGetType == itemType && slot.Item != null).Item;
-    
         public Item[] GetAllItems() =>
             (Slots.Where(slot => !slot.IsEmpty).Select(slot => slot.Item)).ToArray();
+
+        public Item GetItemAtIndex(int index) => Slots[index].Item;
 
         public bool TryToAdd(object sender, IItem item, int amount, IContainer destinationContainer = null)
         {

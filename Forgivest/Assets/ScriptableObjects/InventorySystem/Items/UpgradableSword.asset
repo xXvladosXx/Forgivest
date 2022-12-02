@@ -20,10 +20,34 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Requirements
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[InventorySystem.Items.IRequirement,
+        Inventory]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|InventorySystem.Items.LevelRequirement, Inventory
+    - Name: <NecessaryLevel>k__BackingField
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   <Rarity>k__BackingField: {fileID: 11400000, guid: 3721210cfbc75d340842b6bb87a8e1e1,
     type: 2}
   <Name>k__BackingField: Powerful sword
+  <ObjectToSpawn>k__BackingField: {fileID: 2273222291112976311, guid: 77ff219db092d80428b1de621c567e2d,
+    type: 3}
   <Prefab>k__BackingField: {fileID: 3480261504482581523, guid: 07c0e4883cf5f7542897b81ebdb96b35,
     type: 3}
   <MaxItemsInStack>k__BackingField: 1

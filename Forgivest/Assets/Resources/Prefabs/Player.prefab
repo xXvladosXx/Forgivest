@@ -557,7 +557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3690300433237641937}
   - component: {fileID: 3690300433237641938}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FollowCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3179,6 +3179,7 @@ MonoBehaviour:
     type: 2}
   <Hotbar>k__BackingField: {fileID: 11400000, guid: 0ca39a7eb35bc894ba02709194c99c4b,
     type: 2}
+  <ColliderToSpawnObject>k__BackingField: {fileID: 0}
   <ItemEquipHandler>k__BackingField:
     <RightHand>k__BackingField: {fileID: 6783857815947501806}
     <LeftHand>k__BackingField: {fileID: 6783857814933134227}
@@ -3210,6 +3211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0591b16440744ab9943d5c70726204b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <IsInitialized>k__BackingField: 0
   _statDatabase: {fileID: 11400000, guid: 0150d0194a4ca3e4c8903e4aeb7857c3, type: 2}
 --- !u!114 &6783857815696129969
 MonoBehaviour:
@@ -3273,7 +3275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e370cd927db14adf8baf611f009109ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ItemContainer>k__BackingField: {fileID: 11400000, guid: 2329b89b1ab384b4daa9d83b78608f32,
+  <LearnedAbilities>k__BackingField: {fileID: 11400000, guid: 2329b89b1ab384b4daa9d83b78608f32,
     type: 2}
   <AllAbilities>k__BackingField: {fileID: 11400000, guid: 36841b0eb2207414ca4e25dfbb5b241a,
     type: 2}

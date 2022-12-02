@@ -20,16 +20,8 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
         [SerializeField] private int _level = 5;
         public int Level => _level;
 
-        [SerializeField] private int _requiredLevel;
-        [SerializeField] private int _requiredAbilityPoints;
-        public int RequiredAbilityPoints => _requiredAbilityPoints;
-        
         public GameObject User { get; set; }
         
-        public virtual bool RequirementsChecked(int level, int abilityPoints)
-        {
-            return level >= _requiredLevel && abilityPoints >= _requiredAbilityPoints;
-        }
 
         public override string ItemDescription
         {
@@ -58,8 +50,8 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Core
             get
             {
                 var stringBuilder = new StringBuilder();
-                stringBuilder.Append("Required points: ").Append(_requiredAbilityPoints);
-                stringBuilder.Append("Required level: ").Append(_requiredLevel);
+                //stringBuilder.Append("Required points: ").Append(_requiredAbilityPoints);
+                //stringBuilder.Append("Required level: ").Append(_requiredLevel);
 
                 return stringBuilder.ToString();
             }

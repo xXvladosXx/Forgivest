@@ -2,8 +2,8 @@
 using AbilitySystem.AbilitySystem.Runtime.Abilities;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Core;
+using InventorySystem.Items;
 using Player;
-using Requirements.Core;
 using UI.Skill;
 using Zenject;
 
@@ -12,13 +12,13 @@ namespace Controllers.Player
     public class PlayerAbilityController : IInitializable, ITickable, IDisposable
     {
         private readonly AbilityHandler _abilityHandler;
-        private readonly IRequirementUser _requirementUser;
+        private readonly RequirementsChecker _requirementsChecker;
         private readonly SkillItemContainerUI _skillItemContainerUI;
 
         public PlayerAbilityController(AbilityHandler abilityHandler, SkillInventoryPanel skillInventoryPanel, PlayerEntity playerEntity)
         {
             _abilityHandler = abilityHandler;
-            _requirementUser = playerEntity;
+            _requirementsChecker = playerEntity.RequirementsChecker;
             _skillItemContainerUI = skillInventoryPanel.SkillItemContainerUI;
         }
 
@@ -64,16 +64,22 @@ namespace Controllers.Player
             var possibleSkill = _abilityHandler.AllAbilities.ItemContainer.Slots[index].Item as AbilityDefinition;
             
             if (possibleSkill == null) return;
-            if (_abilityHandler.ItemContainer.ItemContainer.HasItem(possibleSkill)) return;
-            
-            var skillLearned = possibleSkill.RequirementsChecked(_requirementUser.LevelController.Level,
-                _requirementUser.AbilityHandler.SkillPoints);
-            
+            if (_abilityHandler.LearnedAbilities.ItemContainer.HasItem(possibleSkill)) return;
+
+            var skillLearned = _requirementsChecker.CheckRequirements(possibleSkill.Requirements);
+                
             if(!skillLearned) return;
             
             _skillItemContainerUI.SkillsToLearn[index].SkillLearned();
-            _abilityHandler.ItemContainer.ItemContainer.TryToAddAtIndex(this, possibleSkill, 1, index);
-            _abilityHandler.AddPoints(-possibleSkill.RequiredAbilityPoints);
+            _abilityHandler.LearnedAbilities.ItemContainer.TryToAddAtIndex(this, possibleSkill, 1, index);
+            foreach (var requirement in possibleSkill.Requirements)
+            {
+                if (requirement is PointsRequirement pointsRequirement)
+                {
+                    _abilityHandler.AddPoints(-pointsRequirement.NecessaryPoints);
+                    break;
+                }
+            }
         }
         
         private void OnPointsChanged(int points)
@@ -86,7 +92,7 @@ namespace Controllers.Player
             int index = 0;
             foreach (var abilityLearnButton in _skillItemContainerUI.SkillsToLearn)
             {
-                if (_abilityHandler.ItemContainer.ItemContainer.Slots[index].Item != null)
+                if (_abilityHandler.LearnedAbilities.ItemContainer.Slots[index].Item != null)
                 {
                     abilityLearnButton.SkillLearned();
                 }

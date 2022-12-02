@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using InventorySystem.Core;
 using InventorySystem.Items.ItemTypes.Core;
 using InventorySystem.Items.Optional;
@@ -11,13 +12,15 @@ namespace InventorySystem.Items.Core
     {
         [field: SerializeField] public Rarity Rarity { get; private set; }
         [field: SerializeField] public string Name { get; private set; }
+        [field: SerializeField] public GameObject ObjectToSpawn { get; private set; }
         [field: SerializeField] public GameObject Prefab { get; private set; }
         [field: Min(1)]
         [field: SerializeField] public int MaxItemsInStack { get; private set; }
         [field: SerializeField] public Sprite Sprite { get; private set; }
         [field: SerializeField] public ItemID ItemID { get; private set; }
         [field: SerializeField] public ItemType ItemType { get; private set; }
-        
+        [field: SerializeField] public List<IRequirement> Requirements;
+
         [TextArea]
         [field: SerializeField] protected string _itemDescription; 
         public abstract string ItemDescription { get; }
