@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e57e1e2f779489d8a5ba1362744558c, type: 3}
+  m_Script: {fileID: 11500000, guid: ea0f41af9836442f86a50cd415adce45, type: 3}
   m_Name: Shield
   m_EditorClassIdentifier: 
   serializationData:
@@ -30,7 +30,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: cb711b64e1f43f149932352f4fa00f96,
     type: 3}
   <ItemID>k__BackingField:
-    Id: 1
+    Id: -1
   <ItemType>k__BackingField: 4
   _itemDescription: 
   <StatModifier>k__BackingField:
@@ -43,11 +43,3 @@ MonoBehaviour:
     <Magnitude>k__BackingField: 20
     <Type>k__BackingField: 0
   _requiredLevel: 0
-  <RightHanded>k__BackingField: 1
-  <AttackRate>k__BackingField: 2
-  <AnimatorController>k__BackingField: {fileID: 9100000, guid: 18c8a88b145119745a307ce1c3dda53a,
-    type: 2}
-  <PossibleTags>k__BackingField:
-  - physical
-  <NextLevel>k__BackingField: {fileID: 11400000, guid: 4e1c5ec5b1493d34f9398c383dd5882c,
-    type: 2}
