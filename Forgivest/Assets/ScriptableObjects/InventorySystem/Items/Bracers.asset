@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e57e1e2f779489d8a5ba1362744558c, type: 3}
+  m_Script: {fileID: 11500000, guid: 555189862f3e4a8ca053c882aa196a5b, type: 3}
   m_Name: Bracers
   m_EditorClassIdentifier: 
   serializationData:
@@ -30,7 +30,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: e991eb9f590bcea46a2c01c21d07df30,
     type: 3}
   <ItemID>k__BackingField:
-    Id: 1
+    Id: -1
   <ItemType>k__BackingField: 10
   _itemDescription: 
   <StatModifier>k__BackingField:
@@ -43,11 +43,3 @@ MonoBehaviour:
     <Magnitude>k__BackingField: 12
     <Type>k__BackingField: 0
   _requiredLevel: 0
-  <RightHanded>k__BackingField: 1
-  <AttackRate>k__BackingField: 2
-  <AnimatorController>k__BackingField: {fileID: 9100000, guid: 18c8a88b145119745a307ce1c3dda53a,
-    type: 2}
-  <PossibleTags>k__BackingField:
-  - physical
-  <NextLevel>k__BackingField: {fileID: 11400000, guid: 4e1c5ec5b1493d34f9398c383dd5882c,
-    type: 2}
