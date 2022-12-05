@@ -471,8 +471,8 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
+    m_Top: 100
+    m_Bottom: 100
   m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
@@ -1401,7 +1401,7 @@ PrefabInstance:
     - target: {fileID: 3160941945617743755, guid: 2c743e510d15143408148941cca97399,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3160941945617743755, guid: 2c743e510d15143408148941cca97399,
         type: 3}
@@ -6495,7 +6495,7 @@ PrefabInstance:
     - target: {fileID: 3160941945617743755, guid: 2c743e510d15143408148941cca97399,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3160941945617743755, guid: 2c743e510d15143408148941cca97399,
         type: 3}
