@@ -1,5 +1,64 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2064099908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2064099911}
+  - component: {fileID: 2064099910}
+  - component: {fileID: 2064099909}
+  m_Layer: 0
+  m_Name: AttackCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2064099911
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064099908}
+  m_LocalRotation: {x: -0.50000006, y: 0.5, z: 0.5, w: -0.49999994}
+  m_LocalPosition: {x: 0, y: 1.098, z: 1.858}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6012652989752392345}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2064099910
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064099908}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2064099909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064099908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d166d5ba71124d0d8f6d174cbe448b55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Collider>k__BackingField: {fileID: 2064099910}
 --- !u!1 &6012652989039965536
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +571,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6012652989752392336}
-  m_LocalRotation: {x: -0, y: -0.97865236, z: -0, w: -0.20552275}
+  m_LocalRotation: {x: -0, y: -0.9786528, z: 0, w: -0.2055208}
   m_LocalPosition: {x: -80.59, y: -0.0000009536743, z: -132.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -520,6 +579,7 @@ Transform:
   - {fileID: 6012652989934781657}
   - {fileID: 6012652990384134838}
   - {fileID: 6012652989691912904}
+  - {fileID: 2064099911}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -203.71999, z: 0}
@@ -621,7 +681,7 @@ MonoBehaviour:
   <StatsFinder>k__BackingField: {fileID: 6012652989752392349}
   <Cooldown>k__BackingField: {fileID: 6012652989752392337}
   <StatController>k__BackingField: {fileID: 6012652989752392347}
-  <Weapon>k__BackingField: {fileID: 6012652991082986854}
+  <Weapon>k__BackingField: {fileID: 2064099908}
   <CurrentWeapon>k__BackingField: {fileID: 0}
 --- !u!195 &6012652989752392339
 NavMeshAgent:
@@ -2431,8 +2491,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6012652991082986855}
-  - component: {fileID: 6012652991082986857}
-  - component: {fileID: 6012652991082986856}
   m_Layer: 0
   m_Name: Scapula_R
   m_TagString: Untagged
@@ -2456,32 +2514,6 @@ Transform:
   m_Father: {fileID: 6012652991153312393}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &6012652991082986857
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6012652991082986854}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.248744
-  m_Center: {x: 0.6216998, y: -0.32004443, z: 0.94582343}
---- !u!114 &6012652991082986856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6012652991082986854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d166d5ba71124d0d8f6d174cbe448b55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Collider>k__BackingField: {fileID: 6012652991082986857}
 --- !u!1 &6012652991119773784
 GameObject:
   m_ObjectHideFlags: 0
