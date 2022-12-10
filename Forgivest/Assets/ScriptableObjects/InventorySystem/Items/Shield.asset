@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0f41af9836442f86a50cd415adce45, type: 3}
+  m_Name: Shield
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  <Rarity>k__BackingField: {fileID: 11400000, guid: 3991f70b9396e0446ad4e38d6cd74fbf,
+    type: 2}
+  <Name>k__BackingField: Shield
+  <Prefab>k__BackingField: {fileID: 919132149155446097, guid: 025ae4554eb92254989e33b389d97bb5,
+    type: 3}
+  <MaxItemsInStack>k__BackingField: 1
+  <Sprite>k__BackingField: {fileID: 21300000, guid: cb711b64e1f43f149932352f4fa00f96,
+    type: 3}
+  <ItemID>k__BackingField:
+    Id: -1
+  <ItemType>k__BackingField: 4
+  _itemDescription: 
+  <StatModifier>k__BackingField:
+  - <Name>k__BackingField: Constitution
+    <StatName>k__BackingField: Constitution
+    <Magnitude>k__BackingField: 15
+    <Type>k__BackingField: 0
+  - <Name>k__BackingField: Physical defense
+    <StatName>k__BackingField: PhysicalDefense
+    <Magnitude>k__BackingField: 20
+    <Type>k__BackingField: 0
+  _requiredLevel: 0

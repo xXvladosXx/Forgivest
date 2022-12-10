@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 555189862f3e4a8ca053c882aa196a5b, type: 3}
+  m_Name: Bracers
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  <Rarity>k__BackingField: {fileID: 11400000, guid: 3991f70b9396e0446ad4e38d6cd74fbf,
+    type: 2}
+  <Name>k__BackingField: Bracers
+  <Prefab>k__BackingField: {fileID: 2312746286987824011, guid: 55a0a4207242de241881ba5b25ed38d5,
+    type: 3}
+  <MaxItemsInStack>k__BackingField: 1
+  <Sprite>k__BackingField: {fileID: 21300000, guid: e991eb9f590bcea46a2c01c21d07df30,
+    type: 3}
+  <ItemID>k__BackingField:
+    Id: -1
+  <ItemType>k__BackingField: 10
+  _itemDescription: 
+  <StatModifier>k__BackingField:
+  - <Name>k__BackingField: Constitution
+    <StatName>k__BackingField: Constitution
+    <Magnitude>k__BackingField: 7
+    <Type>k__BackingField: 0
+  - <Name>k__BackingField: Physical defense
+    <StatName>k__BackingField: PhysicalDefense
+    <Magnitude>k__BackingField: 12
+    <Type>k__BackingField: 0
+  _requiredLevel: 0

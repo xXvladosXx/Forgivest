@@ -4,14 +4,13 @@ namespace Player.AI.StateMachine.States
     {
         public AIAttackingEnemyState(AIStateMachine aiStateMachine) : base(aiStateMachine)
         {
-            
         }
-        
+
         public override void Enter()
         {
             base.Enter();
             AIStateMachine.AIEnemy.NavMeshAgent.updateRotation = false;
-            
+
             AIStateMachine.AIEnemy.AnimationChanger.StartAnimation(
                 AIStateMachine.AIEnemy.AnimationEventUser.AliveEntityAnimationData.AttackParameterHash);
         }
@@ -26,7 +25,7 @@ namespace Player.AI.StateMachine.States
             base.Exit();
             AIStateMachine.AIEnemy.AnimationChanger.StopAnimation(
                 AIStateMachine.AIEnemy.AnimationEventUser.AliveEntityAnimationData.AttackParameterHash);
-                
+
             AIStateMachine.AIEnemy.NavMeshAgent.updateRotation = true;
         }
 
@@ -36,7 +35,7 @@ namespace Player.AI.StateMachine.States
 
             var targetToFace = AIStateMachine.AIEnemy.Target.transform.position;
             targetToFace.y = 0;
-            
+
             AIStateMachine.AIEnemy.Movement.Transform.LookAt(targetToFace);
         }
     }
