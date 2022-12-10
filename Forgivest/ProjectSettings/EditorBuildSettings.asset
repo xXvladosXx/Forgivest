@@ -5,16 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/MainMenu.unity
     guid: cae38e654f5595247ab0f925e624b38d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Gameplay.unity
     guid: 114490326839fa74d83f0e1e203d2ed1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Resources/Scenes/Environment.unity
     guid: dd101b8be72e2534eb913085892478e2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Assets/Fantasy Adventure Environment/_DemoScenes/MainScene.unity
     guid: 8df6c78b22878164e8cd1bf5e9c0a1ed
   m_configObjects: {}

@@ -27,10 +27,10 @@ MonoBehaviour:
   <Prefab>k__BackingField: {fileID: 919132149155446097, guid: 025ae4554eb92254989e33b389d97bb5,
     type: 3}
   <MaxItemsInStack>k__BackingField: 1
-  <Sprite>k__BackingField: {fileID: 21300000, guid: cb711b64e1f43f149932352f4fa00f96,
+  <Sprite>k__BackingField: {fileID: -246899759, guid: 9dd450889f5b4c74b9f07c1fcc48a0e1,
     type: 3}
   <ItemID>k__BackingField:
-    Id: -1
+    Id: 30
   <ItemType>k__BackingField: 4
   _itemDescription: 
   <StatModifier>k__BackingField:

@@ -30,7 +30,7 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 21300000, guid: fd5f6b25703e1ed4cb2419fc04a91869,
     type: 3}
   <ItemID>k__BackingField:
-    Id: -1
+    Id: 22
   <ItemType>k__BackingField: 11
   _itemDescription: 
   <StatModifier>k__BackingField:
