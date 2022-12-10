@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e57e1e2f779489d8a5ba1362744558c, type: 3}
+  m_Name: Sting
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  <Rarity>k__BackingField: {fileID: 11400000, guid: fbcd8690d06f5e34fbdd4dff914ba919,
+    type: 2}
+  <Name>k__BackingField: Sting
+  <Prefab>k__BackingField: {fileID: 7676615874565401376, guid: aee29ca4814728040bdb4976c5135b43,
+    type: 3}
+  <MaxItemsInStack>k__BackingField: 1
+  <Sprite>k__BackingField: {fileID: 619527192, guid: 9dd450889f5b4c74b9f07c1fcc48a0e1,
+    type: 3}
+  <ItemID>k__BackingField:
+    Id: 1
+  <ItemType>k__BackingField: 0
+  _itemDescription: 
+  <StatModifier>k__BackingField:
+  - <Name>k__BackingField: Strength
+    <StatName>k__BackingField: Strength
+    <Magnitude>k__BackingField: 12
+    <Type>k__BackingField: 0
+  - <Name>k__BackingField: Physical attack
+    <StatName>k__BackingField: PhysicalAttack
+    <Magnitude>k__BackingField: 14
+    <Type>k__BackingField: 0
+  - <Name>k__BackingField: Dexterity
+    <StatName>k__BackingField: Dexterity
+    <Magnitude>k__BackingField: 5
+    <Type>k__BackingField: 0
+  _requiredLevel: 0
+  <RightHanded>k__BackingField: 1
+  <AttackRate>k__BackingField: 2
+  <AnimatorController>k__BackingField: {fileID: 9100000, guid: 18c8a88b145119745a307ce1c3dda53a,
+    type: 2}
+  <PossibleTags>k__BackingField:
+  - physical
+  <NextLevel>k__BackingField: {fileID: 11400000, guid: 4e1c5ec5b1493d34f9398c383dd5882c,
+    type: 2}
