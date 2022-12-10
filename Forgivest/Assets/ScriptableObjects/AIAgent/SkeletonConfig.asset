@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fed1e3e7198ba542828a07ad83dc641, type: 3}
-  m_Name: TrollConfig
+  m_Name: SkeletonConfig
   m_EditorClassIdentifier: 
   <DistanceToWaypoint>k__BackingField: 0.5
   <MovementPatrollingSpeed>k__BackingField: 2
@@ -18,7 +18,7 @@ MonoBehaviour:
   <IdleTime>k__BackingField: 3
   <AggroSightDistance>k__BackingField: 12
   <ChaseDistance>k__BackingField: 15
-  <DistanceToAttack>k__BackingField: 3.5
+  <DistanceToAttack>k__BackingField: 1.5
   <DistanceToFirstSkill>k__BackingField: 7
   <DistanceToSecondSkill>k__BackingField: 4
   <TimeDelayBeforeAttack>k__BackingField: 1.5
