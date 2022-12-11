@@ -20,9 +20,23 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Requirements
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[InventorySystem.Items.IRequirement,
+        Inventory]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   <Rarity>k__BackingField: {fileID: 0}
   <Name>k__BackingField: Malediction
+  <ObjectToSpawn>k__BackingField: {fileID: 0}
   <Prefab>k__BackingField: {fileID: 0}
   <MaxItemsInStack>k__BackingField: 1
   <Sprite>k__BackingField: {fileID: 0}
@@ -34,8 +48,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ae42ee4d0faff834b9a832208822e206, type: 2}
   _maxLevel: 0
   _level: 5
-  _requiredLevel: 0
-  _requiredAbilityPoints: 0
   <AnimationName>k__BackingField: FirstSkill
   <Cost>k__BackingField: {fileID: 11400000, guid: b7a57320141e57543a1431725a1c7785,
     type: 2}

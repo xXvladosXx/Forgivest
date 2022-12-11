@@ -1,6 +1,6 @@
 ﻿namespace InventorySystem.Items.Armor
 {
-    public abstract class Armor : StatsableItem
+    public class Armor : StatsableItem
     {
         
     }

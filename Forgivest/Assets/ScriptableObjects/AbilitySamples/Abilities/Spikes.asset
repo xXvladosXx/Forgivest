@@ -20,10 +20,24 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Requirements
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[InventorySystem.Items.IRequirement,
+        Inventory]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   <Rarity>k__BackingField: {fileID: 11400000, guid: 3721210cfbc75d340842b6bb87a8e1e1,
     type: 2}
   <Name>k__BackingField: Spikes
+  <ObjectToSpawn>k__BackingField: {fileID: 0}
   <Prefab>k__BackingField: {fileID: 0}
   <MaxItemsInStack>k__BackingField: 1
   <Sprite>k__BackingField: {fileID: 21300000, guid: 2c958c9b804623e419640f74165a4e37,
@@ -36,8 +50,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7596c85687f850044aa3a959d4997a48, type: 2}
   _maxLevel: 0
   _level: 5
-  _requiredLevel: 0
-  _requiredAbilityPoints: 0
   <AnimationName>k__BackingField: SecondSkill
   <Cost>k__BackingField: {fileID: 11400000, guid: 0b9711d42aa39ae44909ee55e2015593,
     type: 2}

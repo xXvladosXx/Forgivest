@@ -17,6 +17,17 @@ namespace InventorySystem
 
         public GameObject CurrentColliderWeapon { get; private set; }
         public Weapon CurrentWeapon { get; private set; }
+        public Amulet CurrentAmulet { get; private set; }
+        public Back CurrentBack { get; private set; }
+        public Boots CurrentBoots { get; private set; }
+        public Chest CurrentChest { get; private set; }
+        public Gloves CurrentGloves { get; private set; }
+        public Bracer CurrentBracer { get; private set; }
+        public Helmet CurrentHelmet { get; private set; }
+        public Pants CurrentPants { get; private set; }
+        public Ring CurrentRing { get; private set; }
+        public Shoulder CurrentShoulder { get; private set; }
+        
         public event Action<StatsableItem, bool> OnItemEquipped;
         public event Action<StatsableItem, bool> OnItemUnquipped;
         
@@ -30,15 +41,12 @@ namespace InventorySystem
 
         public bool TryToEquip(StatsableItem statsableItem)
         {
-            switch (statsableItem)
+            return statsableItem switch
             {
-                case Armor armor:
-                    return true;
-                case Weapon weapon:
-                    return TryToEquipWeapon(weapon);
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(statsableItem));
-            }
+                Armor armor => TryToEquipArmor(armor),
+                Weapon weapon => TryToEquipWeapon(weapon),
+                _ => throw new ArgumentOutOfRangeException(nameof(statsableItem))
+            };
         }
 
         public void Unequip(StatsableItem statsableItem)
@@ -46,13 +54,95 @@ namespace InventorySystem
             switch (statsableItem)
             {
                 case Armor armor:
-                    return;
+                    UnequipArmor(armor);
+                    break;
                 case Weapon weapon:
                     UnequipWeapon(weapon);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(statsableItem));
             }
+        }
+        
+        private bool TryToEquipArmor(Armor armor)
+        {
+            switch (armor)
+            {
+                case Amulet amulet:
+                    CurrentAmulet = amulet;
+                    break;
+                case Back back:
+                    CurrentBack = back;
+                    break;
+                case Boots boots:
+                    CurrentBoots = boots;
+                    break;
+                case Bracer bracer:
+                    CurrentBracer = bracer;
+                    break;
+                case Chest chest:
+                    CurrentChest = chest;
+                    break;
+                case Gloves gloves:
+                    CurrentGloves = gloves;
+                    break;
+                case Helmet helmet:
+                    CurrentHelmet = helmet;
+                    break;
+                case Pants pants:
+                    CurrentPants = pants;
+                    break;
+                case Ring ring:
+                    CurrentRing = ring;
+                    break;
+                case Shoulder shoulder:
+                    CurrentShoulder = shoulder;
+                    break;
+            }
+            
+            OnItemEquipped?.Invoke(armor, true);
+
+            return true;
+        }
+        private bool UnequipArmor(Armor armor)
+        {
+            switch (armor)
+            {
+                case Amulet amulet:
+                    CurrentAmulet = null;
+                    break;
+                case Back back:
+                    CurrentBack = null;
+                    break;
+                case Boots boots:
+                    CurrentBoots = null;
+                    break;
+                case Bracer bracer:
+                    CurrentBracer = null;
+                    break;
+                case Chest chest:
+                    CurrentChest = null;
+                    break;
+                case Gloves gloves:
+                    CurrentGloves = null;
+                    break;
+                case Helmet helmet:
+                    CurrentHelmet = null;
+                    break;
+                case Pants pants:
+                    CurrentPants = null;
+                    break;
+                case Ring ring:
+                    CurrentRing = null;
+                    break;
+                case Shoulder shoulder:
+                    CurrentShoulder = null;
+                    break;
+            }
+            
+            OnItemUnquipped?.Invoke(armor, false);
+
+            return true;
         }
 
         private bool TryToEquipWeapon(Weapon weapon)

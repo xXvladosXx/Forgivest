@@ -18,17 +18,18 @@ public class RequirementsChecker
 
     public RequirementsChecker(ItemContainer inventory,
         ItemContainer equipment, ItemContainer abilityContainer, 
-        LevelController levelController)
+        LevelController levelController, AbilityHandler abilityHandler)
     {
         _inventory = inventory;
         _equipment = equipment;
         _abilityContainer = abilityContainer;
         _levelController = levelController;
+        _abilityHandler = abilityHandler;
     }
 
     public bool CheckRequirements(List<IRequirement> possibleSkillRequirements)
     {
-        var isChecked = false;
+        var isChecked = true;
         
         foreach (var possibleSkillRequirement in possibleSkillRequirements)
         {
@@ -36,19 +37,25 @@ public class RequirementsChecker
             {
                 case ItemEquipmentRequirement itemRequirement:
                     isChecked = HasItemInContainer(itemRequirement.Item, ContainerType.Equipment);
+                    if (!isChecked)
+                        return false;
                     break;
                 case LevelRequirement levelRequirement:
-                    isChecked = HasLevel(levelRequirement.NecessaryLevel); 
+                    isChecked = HasLevel(levelRequirement.NecessaryLevel);
+                    if (!isChecked)
+                        return false;
                     break;
                 case PointsRequirement pointsRequirement:
                     isChecked = HasEnoughPointsToLearnSkill(pointsRequirement.NecessaryPoints);
+                    if (!isChecked)
+                        return false;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(possibleSkillRequirement));
             }
         }
 
-        return isChecked;
+        return true;
     }
 
     public bool HasLevel(int level)

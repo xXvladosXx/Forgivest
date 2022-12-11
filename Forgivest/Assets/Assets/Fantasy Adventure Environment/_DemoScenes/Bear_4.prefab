@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2064099908}
   m_LocalRotation: {x: -0.50000006, y: 0.5, z: 0.5, w: -0.49999994}
-  m_LocalPosition: {x: 0, y: 1.098, z: 1.858}
+  m_LocalPosition: {x: 0, y: 1.098, z: 1.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42,7 +42,7 @@ SphereCollider:
   m_GameObject: {fileID: 2064099908}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -551,13 +551,12 @@ GameObject:
   - component: {fileID: 6012652989752392341}
   - component: {fileID: 6012652989752392340}
   - component: {fileID: 6012652989752392339}
-  - component: {fileID: 6012652989752392338}
   - component: {fileID: 6012652989752392337}
   - component: {fileID: 6012652989752392349}
   - component: {fileID: 6012652989752392348}
   - component: {fileID: 6012652989752392347}
   - component: {fileID: 6012652989752392346}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bear_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -629,7 +628,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 1
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -670,13 +669,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc5595cbd4741894fb98685829467c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: <Rewards>k__BackingField
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[AttackSystem.Reward.Core.IRewardable,
+        Attack]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|AttackSystem.Reward.ExperienceReward, Attack
+    - Name: _amount
+      Entry: 3
+      Data: 25
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   <Objects>k__BackingField:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   <AliveEntityAnimationData>k__BackingField: {fileID: 11400000, guid: 68818d475a5b8a442864428d6d46d101,
     type: 2}
-  <Config>k__BackingField: {fileID: 11400000, guid: 6a11cc736f96e974da9507106be559c9,
+  <Config>k__BackingField: {fileID: 11400000, guid: f2cb3b9f895811844a7a38d565ccd1e1,
     type: 2}
   <StatsFinder>k__BackingField: {fileID: 6012652989752392349}
   <Cooldown>k__BackingField: {fileID: 6012652989752392337}
@@ -692,7 +722,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6012652989752392336}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_Speed: 7
   m_Acceleration: 100
   avoidancePriority: 50
@@ -705,49 +735,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
---- !u!114 &6012652989752392338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6012652989752392336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d06780bc2740708293758a62fc6fd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: <Rewardables>k__BackingField
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[AttackSystem.Reward.Core.IRewardable,
-        Attack]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 1|AttackSystem.Reward.ExperienceReward, Attack
-    - Name: _amount
-      Entry: 3
-      Data: 1000
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
 --- !u!114 &6012652989752392337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,7 +1076,7 @@ GameObject:
   - component: {fileID: 6012652989934781660}
   - component: {fileID: 6012652989934781659}
   - component: {fileID: 6012652989934781658}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,11 +6,14 @@ using AttackSystem;
 using AttackSystem.Core;
 using AttackSystem.Reward.Core;
 using Data.Player;
+using InventorySystem.Core;
 using InventorySystem.Interaction;
 using InventorySystem.Items.Weapon;
 using MovementSystem;
 using Player.AI.StateMachine.Core;
 using Player.AI.StateMachine.Core.Config;
+using RaycastSystem.Core;
+using Sirenix.OdinInspector;
 using StatsSystem.Scripts.Runtime;
 using StatSystem;
 using StatSystem.Scripts.Runtime;
@@ -19,7 +22,7 @@ using UnityEngine.AI;
 
 namespace Player.AI.StateMachine
 {
-    public class AIAgent : MonoBehaviour, IAIEnemy, IAnimationEventUser, IDamageApplier, IDamageReceiver
+    public class AIAgent : SerializedMonoBehaviour, IAIEnemy, IAnimationEventUser, IDamageApplier, IDamageReceiver, IRaycastable, IInteractable
     {
         [field: SerializeField] public GameObject[] Objects { get; private set; }
         [field: SerializeField] public AliveEntityAnimationData AliveEntityAnimationData { get; private set; }
@@ -28,7 +31,7 @@ namespace Player.AI.StateMachine
         [field: SerializeField] public CooldownSystem Cooldown { get; private set; }
         [field: SerializeField] public StatController StatController { get; private set; }
 
-        private Rigidbody _rb;
+        [field: SerializeField] public List<IRewardable> Rewards { get; private set; }
 
         public Movement Movement { get; private set; }
         public NavMeshAgent NavMeshAgent { get; private set; }
@@ -39,16 +42,33 @@ namespace Player.AI.StateMachine
         public Animator Animator { get; private set; }
         public AnimationChanger AnimationChanger { get; private set; }
 
+        private Rigidbody _rb;
         private DamageHandler _damageHandler;
 
         public IAnimationEventUser AnimationEventUser => this;
         public GameObject Enemy => gameObject;
 
-        public List<IRewardable> Rewards { get; }
         public float Health => StatController.Health.CurrentValue;
         public LayerMask LayerMask => gameObject.layer;
 
+        
+        public CursorType GetCursorType()
+        {
+            return CursorType.Combat;
+        }
+
+        public bool HandleRaycast(IRaycastUser raycastUser)
+        {
+            return true;
+        }
+
         public GameObject GameObject => gameObject == null ? null : gameObject;
+        public event Action OnDestroyed;
+
+        public void Interact()
+        {
+            
+        }
 
         public void ReceiveDamage(AttackData attackData)
         {
@@ -80,6 +100,22 @@ namespace Player.AI.StateMachine
             StateMachine.ChangeState(StateMachine.AIIdleEnemyState);
         }
 
+        private void OnEnable()
+        {
+            _damageHandler.OnDied += OnDied;
+        }
+
+        private void OnDied(AttackData attackData)
+        {
+            OnDestroyed?.Invoke();
+            Destroy(gameObject);
+        }
+
+        private void OnDisable()
+        {
+            _damageHandler.OnDied -= OnDied;
+        }
+        
         private void Update()
         {
             StateMachine.Update();

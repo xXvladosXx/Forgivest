@@ -20,10 +20,24 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Requirements
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[InventorySystem.Items.IRequirement,
+        Inventory]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   <Rarity>k__BackingField: {fileID: 11400000, guid: 3991f70b9396e0446ad4e38d6cd74fbf,
     type: 2}
   <Name>k__BackingField: Dash
+  <ObjectToSpawn>k__BackingField: {fileID: 0}
   <Prefab>k__BackingField: {fileID: 0}
   <MaxItemsInStack>k__BackingField: 1
   <Sprite>k__BackingField: {fileID: 21300000, guid: c2abbf8ec6bce54449265337cd374df1,
@@ -35,8 +49,6 @@ MonoBehaviour:
   _gameplayEffectDefinitions: []
   _maxLevel: 0
   _level: 5
-  _requiredLevel: 2
-  _requiredAbilityPoints: 3
   <AnimationName>k__BackingField: ThirdSkill
   <Cost>k__BackingField: {fileID: 11400000, guid: 48ef814288e48964e92404f1782e39f2,
     type: 2}

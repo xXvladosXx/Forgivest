@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public class EnemyEntity : SerializedMonoBehaviour, IInteractable, IDamageReceiver, IRaycastable
+    public class EnemyEntity : SerializedMonoBehaviour, IInteractable, IDamageReceiver
     {
         [field: SerializeField] public List<IRewardable> Rewardables { get; private set; }
 

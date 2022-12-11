@@ -95,7 +95,7 @@ namespace Player
             DamageHandler = new DamageHandler(StatController);
             RequirementsChecker = new RequirementsChecker(ObjectPicker.Inventory.ItemContainer,
                 ObjectPicker.Equipment.ItemContainer,
-                AbilityHandler.LearnedAbilities.ItemContainer, LevelController);
+                AbilityHandler.LearnedAbilities.ItemContainer, LevelController, AbilityHandler);
 
             gameFactory.PlayerObserver.DamageHandler ??= DamageHandler;
             gameFactory.PlayerObserver.PlayerInputProvider ??= PlayerInputProvider;
@@ -279,8 +279,6 @@ namespace Player
                     case ItemReward itemReward:
                         ObjectPicker.TryToEquipOrAddToInventory(itemReward.Item, itemReward.Amount);
                         break;
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(rewardable));
                 }
             }
         }

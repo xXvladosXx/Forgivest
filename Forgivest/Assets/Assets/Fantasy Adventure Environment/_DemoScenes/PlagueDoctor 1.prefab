@@ -100,7 +100,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 890301127070571613}
+    - {fileID: 890301127070571615}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -588,7 +588,6 @@ GameObject:
   - component: {fileID: 890301127070571584}
   - component: {fileID: 890301127070571585}
   - component: {fileID: 890301127070571610}
-  - component: {fileID: 890301127070571613}
   - component: {fileID: 890301127070571612}
   - component: {fileID: 890301127070571615}
   - component: {fileID: 890301127070571614}
@@ -596,7 +595,7 @@ GameObject:
   - component: {fileID: 890301127070571586}
   - component: {fileID: 890301127070571589}
   - component: {fileID: 890301127070571588}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlagueDoctor 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -683,49 +682,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3af34500139e3c44794ee79dabc087a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &890301127070571613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1815064301605175318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d06780bc2740708293758a62fc6fd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: <Rewardables>k__BackingField
-      Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[AttackSystem.Reward.Core.IRewardable,
-        Attack]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 1|AttackSystem.Reward.ExperienceReward, Attack
-    - Name: _amount
-      Entry: 3
-      Data: 1000
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
 --- !u!195 &890301127070571612
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -760,6 +716,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc5595cbd4741894fb98685829467c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: <Rewards>k__BackingField
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[AttackSystem.Reward.Core.IRewardable,
+        Attack]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   <Objects>k__BackingField:
   - {fileID: 0}
   - {fileID: 0}
@@ -2662,10 +2640,10 @@ SphereCollider:
   m_GameObject: {fileID: 9177243056487689488}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 1.248744
-  m_Center: {x: 0.6216998, y: -0.32004443, z: 0.94582343}
+  m_Radius: 1.19
+  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!114 &3672165054735810535
 MonoBehaviour:
   m_ObjectHideFlags: 0

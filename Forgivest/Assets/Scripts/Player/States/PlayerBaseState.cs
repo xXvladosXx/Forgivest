@@ -1,5 +1,6 @@
 ﻿using Data.Player;
 using Enemy;
+using Player.AI.StateMachine;
 using Player.StateMachine.Core;
 using Player.StateMachine.Player;
 using UnityEngine;
@@ -122,7 +123,7 @@ namespace Player.States
         {
             switch (PlayerStateMachine.ReusableData.InteractableObject)
             {
-                case EnemyEntity enemyEntity:
+                case AIAgent enemyEntity:
                     PlayerStateMachine.ChangeState(PlayerStateMachine.PlayerChasingState);
                     return;
             }

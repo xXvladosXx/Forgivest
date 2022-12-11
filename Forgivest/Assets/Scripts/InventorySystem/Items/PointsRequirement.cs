@@ -7,5 +7,6 @@ namespace InventorySystem.Items
     public class PointsRequirement : IRequirement
     {
         [field: SerializeField] public int NecessaryPoints { get; private set; }
+        public string Description => $"Requires points: {NecessaryPoints}";
     }
 }

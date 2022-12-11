@@ -26,6 +26,12 @@ namespace AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core
             get
             {
                 var stringBuilder = new StringBuilder(base.ItemDescription.ToString());
+
+                foreach (var requirement in Requirements)
+                {
+                    stringBuilder.Append(requirement.Description).AppendLine();
+                }
+                
                 if (Cost != null)
                 {
                     var cost = new GameplayEffect(Cost, this, User, null);

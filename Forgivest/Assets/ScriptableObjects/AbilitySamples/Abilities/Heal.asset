@@ -20,9 +20,23 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Requirements
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[InventorySystem.Items.IRequirement,
+        Inventory]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   <Rarity>k__BackingField: {fileID: 0}
   <Name>k__BackingField: Heal
+  <ObjectToSpawn>k__BackingField: {fileID: 0}
   <Prefab>k__BackingField: {fileID: 0}
   <MaxItemsInStack>k__BackingField: 1
   <Sprite>k__BackingField: {fileID: 21300000, guid: 4ba971915234d26409e33bb8dce11a10,
@@ -35,8 +49,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d2886198fe57cff4794bac31b15343c6, type: 2}
   _maxLevel: 0
   _level: 5
-  _requiredLevel: 0
-  _requiredAbilityPoints: 0
   <AnimationName>k__BackingField: FourthSkill
   <Cost>k__BackingField: {fileID: 11400000, guid: 1cd723eaa3d334b4a8e6361077a47ea2,
     type: 2}

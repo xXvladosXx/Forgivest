@@ -20,9 +20,23 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Requirements
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[InventorySystem.Items.IRequirement,
+        Inventory]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   <Rarity>k__BackingField: {fileID: 0}
   <Name>k__BackingField: c
+  <ObjectToSpawn>k__BackingField: {fileID: 0}
   <Prefab>k__BackingField: {fileID: 0}
   <MaxItemsInStack>k__BackingField: 1
   <Sprite>k__BackingField: {fileID: 0}
@@ -34,8 +48,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 78e86dd6d2e0d5d4295070606c64eff3, type: 2}
   _maxLevel: 5
   _level: 2
-  _requiredLevel: 0
-  _requiredAbilityPoints: 0
   <AnimationName>k__BackingField: FirstSkill
   <Cost>k__BackingField: {fileID: 11400000, guid: 74d19faa2ec925d45ab9446a431b7294,
     type: 2}

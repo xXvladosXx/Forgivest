@@ -20,9 +20,41 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Requirements
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[InventorySystem.Items.IRequirement,
+        Inventory]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 1|InventorySystem.Items.PointsRequirement, Inventory
+    - Name: <NecessaryPoints>k__BackingField
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|InventorySystem.Items.LevelRequirement, Inventory
+    - Name: <NecessaryLevel>k__BackingField
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   <Rarity>k__BackingField: {fileID: 0}
   <Name>k__BackingField: Spinning blade
+  <ObjectToSpawn>k__BackingField: {fileID: 0}
   <Prefab>k__BackingField: {fileID: 0}
   <MaxItemsInStack>k__BackingField: 1
   <Sprite>k__BackingField: {fileID: 21300000, guid: 4993b272241968e49b2080d63ff96d45,
@@ -36,8 +68,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3ea4443d5d135874892b169c2bfe57dc, type: 2}
   _maxLevel: 0
   _level: 5
-  _requiredLevel: 0
-  _requiredAbilityPoints: 0
   <AnimationName>k__BackingField: FirstSkill
   <Cost>k__BackingField: {fileID: 11400000, guid: 27cc41d2bf9dcd34493cbeea4381fabb,
     type: 2}

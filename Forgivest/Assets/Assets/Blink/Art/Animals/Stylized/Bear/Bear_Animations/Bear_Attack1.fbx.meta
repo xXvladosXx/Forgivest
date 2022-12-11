@@ -92,18 +92,18 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.1737288
-        functionName: NewEvent
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.8481675
+      - time: 0.42157468
         functionName: ApplyDamage
         data: 
         objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0.3
+        floatParameter: 0.2
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8966538
+        functionName: OnAnimationEnd
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
         intParameter: 0
         messageOptions: 0
       transformMask: []

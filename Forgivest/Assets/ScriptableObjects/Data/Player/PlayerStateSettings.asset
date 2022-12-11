@@ -27,4 +27,4 @@ MonoBehaviour:
       <SmoothInputSpeed>k__BackingField: 1
       <StoppingDistance>k__BackingField: 1
     <AttackData>k__BackingField:
-      <StoppingDistance>k__BackingField: 1.5
+      <StoppingDistance>k__BackingField: 2

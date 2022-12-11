@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemContainer>k__BackingField:
     <Slots>k__BackingField:
-    - <Item>k__BackingField: {fileID: 0}
-      <Amount>k__BackingField: 0
+    - <Item>k__BackingField: {fileID: 11400000, guid: c23e470e2194305449c98f69e35c35c9,
+        type: 2}
+      <Amount>k__BackingField: 1
       <Changeable>k__BackingField: 1
       <ItemTypes>k__BackingField: 
       <ProhibitedItemTypes>k__BackingField: 0d000000

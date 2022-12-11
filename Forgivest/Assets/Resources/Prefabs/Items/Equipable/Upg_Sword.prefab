@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3478738366123604949}
   - component: {fileID: 3642121679193150935}
   - component: {fileID: 3641856609758601105}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4839,7 +4839,7 @@ GameObject:
   - component: {fileID: -5238597190377150636}
   - component: {fileID: 6287700937418676897}
   - component: {fileID: 8798859464962353213}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Upg_Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4969,7 +4969,7 @@ GameObject:
   - component: {fileID: 3483854550165650137}
   - component: {fileID: 3641372995577720481}
   - component: {fileID: 3642732037849756631}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9801,7 +9801,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1303125420275956886}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

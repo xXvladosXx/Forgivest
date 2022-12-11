@@ -8,5 +8,6 @@ namespace InventorySystem.Items
     public class ItemEquipmentRequirement : IRequirement
     {
         [field: SerializeField] public Item Item { get; private set; }
+        public string Description => $"Requires item: {Item.Name}";
     }
 }
