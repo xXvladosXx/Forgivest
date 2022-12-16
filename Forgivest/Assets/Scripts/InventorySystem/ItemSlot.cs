@@ -5,6 +5,7 @@ using InventorySystem.Core;
 using InventorySystem.Items;
 using InventorySystem.Items.Core;
 using InventorySystem.Items.ItemTypes.Core;
+using InventorySystem.Requirements.Core;
 using UnityEngine;
 
 namespace InventorySystem
@@ -37,6 +38,7 @@ namespace InventorySystem
         public Type ItemGetType => Item == null ? null : Item.Type;
 
         public int Capacity { get; set; }
+        public ItemRequirementsChecker ItemRequirementsChecker { get; set; }
 
         public ItemSlot()
         {
@@ -88,7 +90,13 @@ namespace InventorySystem
                 }
             }
 
-            return true;
+            bool isChecked = true;
+            if (ItemRequirementsChecker != null)
+            {
+                isChecked = ItemRequirementsChecker.CheckRequirements(item.Requirements);
+            }
+            
+            return isChecked;
         }
 
         public void Clear()

@@ -20,10 +20,14 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Requirements
+      Entry: 6
+      Data: 
   <Rarity>k__BackingField: {fileID: 11400000, guid: 3991f70b9396e0446ad4e38d6cd74fbf,
     type: 2}
   <Name>k__BackingField: 
+  <ObjectToSpawn>k__BackingField: {fileID: 0}
   <Prefab>k__BackingField: {fileID: 3480261504482581523, guid: 9d1749904c9112f4fb1aff43a60b5f30,
     type: 3}
   <MaxItemsInStack>k__BackingField: 1
@@ -31,10 +35,12 @@ MonoBehaviour:
     type: 3}
   <ItemID>k__BackingField:
     Id: 2
-  <ItemType>k__BackingField: 0
+  <ItemType>k__BackingField: 14
+  _itemDescription: 
   <StatModifier>k__BackingField: []
-  <RightHanded>k__BackingField: 1
+  <RightHanded>k__BackingField: 0
   <AttackRate>k__BackingField: 2
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: d48fb5afe64668e41a9ad3d85b88b264,
     type: 2}
+  <PossibleTags>k__BackingField: []
   <NextLevel>k__BackingField: {fileID: 0}

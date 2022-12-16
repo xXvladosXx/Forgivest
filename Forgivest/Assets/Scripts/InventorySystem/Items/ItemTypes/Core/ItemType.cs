@@ -15,6 +15,7 @@
         Bracer,
         Back,
         Gloves,
-        Skill
+        Skill,
+        Unarmed
     }
 }

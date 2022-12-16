@@ -33,7 +33,7 @@ MonoBehaviour:
       Data: 1|InventorySystem.Items.LevelRequirement, Inventory
     - Name: <NecessaryLevel>k__BackingField
       Entry: 3
-      Data: 2
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -66,7 +66,6 @@ MonoBehaviour:
     <StatName>k__BackingField: PhysicalAttack
     <Magnitude>k__BackingField: 40
     <Type>k__BackingField: 0
-  _requiredLevel: 0
   <RightHanded>k__BackingField: 1
   <AttackRate>k__BackingField: 2
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: 18c8a88b145119745a307ce1c3dda53a,

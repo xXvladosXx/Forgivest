@@ -51,12 +51,13 @@ namespace StatsSystem.Scripts.Runtime
         internal void CalculateOnValue(float maxValue)
         {
             float newValue = baseValue;
+#if UNITY_EDITOR
 
             if (m_Definition.Formula != null && m_Definition.Formula.rootNode != null)
             {
                 newValue += Mathf.RoundToInt(m_Definition.Formula.rootNode.Value);
             }
-            
+            #endif
             m_Modifiers.Sort((x, y) => x.Type.CompareTo(y.Type));
 
             for (int i = 0; i < m_Modifiers.Count; i++)

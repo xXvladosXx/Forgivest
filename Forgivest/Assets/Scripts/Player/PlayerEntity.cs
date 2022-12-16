@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using AbilitySystem;
+using AbilitySystem.AbilitySystem.Runtime;
 using AbilitySystem.AbilitySystem.Runtime.Abilities;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Active;
 using AbilitySystem.AbilitySystem.Runtime.Effects;
@@ -17,6 +18,7 @@ using GameCore.StateMachine;
 using InventorySystem.Interaction;
 using InventorySystem.Items;
 using InventorySystem.Items.Weapon;
+using InventorySystem.Requirements.Core;
 using LevelSystem;
 using LevelSystem.Scripts.Runtime;
 using MovementSystem;
@@ -71,7 +73,8 @@ namespace Player
         public Rotator Rotator { get; private set; }
         public PlayerRaycastUser RaycastUser { get; private set; }
         public DamageHandler DamageHandler { get; private set; }
-        public RequirementsChecker RequirementsChecker { get; private set; }
+        public ItemRequirementsChecker ItemRequirementsChecker { get; private set; }
+        public AbilitiesRequirementsChecker AbilitiesRequirementsChecker { get; private set; }
 
         private PlayerStateMachine _playerStateMachine;
         
@@ -93,10 +96,12 @@ namespace Player
             Rotator = new Rotator(Rigidbody);
             AttackApplier = new AttackApplier();
             DamageHandler = new DamageHandler(StatController);
-            RequirementsChecker = new RequirementsChecker(ObjectPicker.Inventory.ItemContainer,
-                ObjectPicker.Equipment.ItemContainer,
-                AbilityHandler.LearnedAbilities.ItemContainer, LevelController, AbilityHandler);
+            ItemRequirementsChecker = new ItemRequirementsChecker(ObjectPicker.Inventory.ItemContainer,
+                ObjectPicker.Equipment.ItemContainer, LevelController);
 
+            AbilitiesRequirementsChecker = new AbilitiesRequirementsChecker(AbilityHandler.LearnedAbilities.ItemContainer, 
+                LevelController, AbilityHandler);
+            
             gameFactory.PlayerObserver.DamageHandler ??= DamageHandler;
             gameFactory.PlayerObserver.PlayerInputProvider ??= PlayerInputProvider;
             
@@ -113,7 +118,7 @@ namespace Player
             _playerStateMachine = new PlayerStateMachine(AnimationChanger,
                 Movement, Rotator, PlayerInputProvider, StateData,
                 RaycastUser, AliveEntityAnimationData, 
-                this, AbilityHandler, DamageHandler);
+                this, AbilityHandler, DamageHandler, ItemRequirementsChecker);
         }
         
         private void OnEnable()
@@ -125,7 +130,7 @@ namespace Player
         private void Start()
         {
             _playerStateMachine.ChangeState(_playerStateMachine.IdlingState);
-            ObjectPicker.Init();
+            ObjectPicker.Init(ItemRequirementsChecker);
         }
 
         private void Update()

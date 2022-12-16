@@ -5,6 +5,7 @@ using InventorySystem.Items;
 using InventorySystem.Items.Core;
 using InventorySystem.Items.ItemTypes.Core;
 using InventorySystem.Items.Weapon;
+using InventorySystem.Requirements.Core;
 using Sirenix.OdinInspector;
 using StatsSystem.Scripts.Runtime;
 using UnityEngine;
@@ -24,10 +25,10 @@ namespace InventorySystem.Interaction
         public event Action<List<StatModifier>> OnStatAdded;
         public event Action<List<StatModifier>> OnStatRemoved;
 
-        public void Init()
+        public void Init(ItemRequirementsChecker itemRequirements)
         {
             Inventory.Init();
-            Equipment.Init();
+            Equipment.Init(itemRequirements);
             Hotbar.Init();
             
             ItemEquipHandler.Init();

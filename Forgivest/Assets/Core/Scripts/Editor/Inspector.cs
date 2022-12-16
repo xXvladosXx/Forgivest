@@ -1,4 +1,5 @@
-﻿using UnityEditor.UIElements;
+﻿#if UNITY_EDITOR   
+using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace Core.Editor
@@ -8,3 +9,5 @@ namespace Core.Editor
         public new class UxmlFactory : UxmlFactory<Inspector, UxmlTraits> {}
     }
 }
+
+#endif

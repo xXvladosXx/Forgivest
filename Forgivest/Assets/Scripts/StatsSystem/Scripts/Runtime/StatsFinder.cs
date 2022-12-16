@@ -12,7 +12,6 @@ namespace StatSystem.Scripts.Runtime
     {
         private StatController _statController;
         private List<IStatsChangeable> _statsChangeables = new List<IStatsChangeable>();
-        private List<StatModifier> _statModifiers = new List<StatModifier>();
         private void Awake()
         {
             _statController = GetComponent<StatController>();

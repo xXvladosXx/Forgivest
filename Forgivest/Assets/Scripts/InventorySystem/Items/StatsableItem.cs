@@ -9,7 +9,6 @@ namespace InventorySystem.Items
     public abstract class StatsableItem : Item, IStatsable
     {
         [field: SerializeField] public List<StatModifier> StatModifier { get; private set; }
-        [SerializeField] private int _requiredLevel;
 
         public override string ItemDescription 
         {
@@ -36,7 +35,15 @@ namespace InventorySystem.Items
             get
             {
                 var stringBuilder = new StringBuilder();
-                stringBuilder.Append("Required Level: ").Append(_requiredLevel);
+                if (Requirements == null) return stringBuilder.ToString();
+                
+                foreach (var itemRequirement in Requirements)
+                {
+                    if (itemRequirement is LevelRequirement levelRequirement)
+                    {
+                        stringBuilder.Append("Required Level: ").Append(levelRequirement.NecessaryLevel).AppendLine();
+                    }
+                }
 
                 return stringBuilder.ToString();
             }

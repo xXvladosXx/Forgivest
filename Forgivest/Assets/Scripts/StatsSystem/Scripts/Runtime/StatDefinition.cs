@@ -8,11 +8,14 @@ namespace StatSystem
     {
         [SerializeField] private int m_BaseValue;
         [SerializeField] private int m_Cap = -1;
-        [SerializeField] private NodeGraph m_Formula;
         
+#if UNITY_EDITOR   
+
+        [SerializeField] private NodeGraph m_Formula;
+        public NodeGraph Formula => m_Formula;
+#endif        
         public int BaseValue => m_BaseValue;
         public int Cap => m_Cap;
-        public NodeGraph Formula => m_Formula;
 
     }
 }

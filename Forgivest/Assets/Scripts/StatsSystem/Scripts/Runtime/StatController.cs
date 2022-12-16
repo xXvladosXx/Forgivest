@@ -76,29 +76,6 @@ namespace StatSystem
             OnStatsChanged?.Invoke();
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                (_stats["Health"] as Health).ApplyModifier(new StatModifier
-                {
-                    Magnitude = 10,
-                    Type = ModifierOperationType.Additive,
-                    Source = this
-                });
-            }
-            
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                _stats["Strength"].AddModifier(new StatModifier
-                {
-                    Magnitude = 10,
-                    Type = ModifierOperationType.Additive,
-                    Source = this
-                });
-            }
-        }
-
         public void AddStat(StatModifier statModifier)
         {
             switch (_stats[statModifier.StatName])
@@ -133,6 +110,8 @@ namespace StatSystem
         {
             foreach (Stat currentStat in _stats.Values)
             {
+#if UNITY_EDITOR
+
                 if (currentStat.Definition.Formula != null && currentStat.Definition.Formula.rootNode != null)
                 {
                     List<StatNode> statNodes = currentStat.Definition.Formula.FindNodesOfType<StatNode>();
@@ -150,6 +129,7 @@ namespace StatSystem
                         }
                     }
                 }
+#endif
             }
         }
     }

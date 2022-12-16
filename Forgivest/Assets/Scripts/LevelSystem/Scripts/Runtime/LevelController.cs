@@ -10,8 +10,7 @@ namespace LevelSystem.Scripts.Runtime
     {
         [SerializeField] private int _level = 1;
         [SerializeField] private int _currentExperience;
-        [SerializeField] private NodeGraph _requiredExperienceFormula;
-
+        [SerializeField] private int _requiredExperienceFormula;
         private bool _isInitialized;
         public int Level => _level;
         public event Action OnLevelChanged;
@@ -37,7 +36,7 @@ namespace LevelSystem.Scripts.Runtime
             }
         }
 
-        public int RequiredExperience => Mathf.RoundToInt(_requiredExperienceFormula.rootNode.Value);
+        public int RequiredExperience => Mathf.RoundToInt(_requiredExperienceFormula);
         public bool IsInitialized => _isInitialized;
         public event Action OnInitialized;
         public event Action OnWillUninitialize;
@@ -52,12 +51,6 @@ namespace LevelSystem.Scripts.Runtime
 
         private void Initialize()
         {
-            List<LevelNode> levelNodes = _requiredExperienceFormula.FindNodesOfType<LevelNode>();
-            foreach (LevelNode levelNode in levelNodes)
-            {
-                levelNode.Levelable = this;
-            }
-
             _isInitialized = true;
             OnInitialized?.Invoke();
         }

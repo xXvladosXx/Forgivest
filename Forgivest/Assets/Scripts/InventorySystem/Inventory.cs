@@ -1,4 +1,5 @@
 ﻿using System;
+using InventorySystem.Requirements.Core;
 using UnityEngine;
 
 namespace InventorySystem
@@ -8,6 +9,11 @@ namespace InventorySystem
     {
         [field: SerializeField] public ItemContainer ItemContainer { get; private set; }
         [field: SerializeField] public int Capacity { get; private set; }
+
+        public void Init(ItemRequirementsChecker itemRequirements)
+        {
+            ItemContainer.Init(Capacity, itemRequirements);
+        }
 
         [ContextMenu("Swap item")]
         public void SwapItem()
@@ -29,10 +35,10 @@ namespace InventorySystem
             var firstSlot = ItemContainer.Slots[0];
             ItemContainer.GenerateSlotsByFirstSlot(firstSlot, Capacity);
         }
-        
+
         public void Init()
         {
-            ItemContainer.Init(Capacity);;
+            ItemContainer.Init(Capacity);
         }
     }
 }

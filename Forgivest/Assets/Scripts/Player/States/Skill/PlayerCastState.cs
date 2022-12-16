@@ -80,7 +80,13 @@ namespace Player.States.Skill
         protected void TryToActivateSkill(int index)
         {
             var skill = PlayerStateMachine.AbilityHandler.Hotbar.ItemContainer.Slots[index].Item;
-
+            var isChecked = PlayerStateMachine.ItemRequirementsChecker.CheckRequirements(skill.Requirements);
+            if (!isChecked)
+            {
+                PlayerStateMachine.ChangeState(PlayerStateMachine.IdlingState);
+                return;
+            }
+            
             var activated = skill switch
             {
                 ProjectileAbilityDefinition projectileAbility => TryActivateTargetAbility(index, projectileAbility),

@@ -65,6 +65,8 @@ namespace StatSystem
             base.InitializeStatFormulas();
             foreach (Stat currentStat in _stats.Values)
             {
+#if UNITY_EDITOR
+
                 if (currentStat.Definition.Formula != null && currentStat.Definition.Formula.rootNode != null)
                 {
                     List<LevelNode> levelNodes = currentStat.Definition.Formula.FindNodesOfType<LevelNode>();
@@ -74,6 +76,7 @@ namespace StatSystem
                         m_Levelable.OnLevelChanged += () => currentStat.CalculateOnValue(0);
                     }
                 }
+                #endif
             }
         }
     }

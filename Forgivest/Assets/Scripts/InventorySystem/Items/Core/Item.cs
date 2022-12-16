@@ -19,7 +19,7 @@ namespace InventorySystem.Items.Core
         [field: SerializeField] public Sprite Sprite { get; private set; }
         [field: SerializeField] public ItemID ItemID { get; private set; }
         [field: SerializeField] public ItemType ItemType { get; private set; }
-        [field: SerializeField] public List<IRequirement> Requirements;
+        [field: SerializeField] public List<IRequirement> Requirements = new List<IRequirement>();
 
         [TextArea]
         [field: SerializeField] protected string _itemDescription; 

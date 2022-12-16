@@ -3,6 +3,7 @@ using AnimationSystem;
 using AnimationSystem.Data;
 using AttackSystem.Core;
 using Data.Player;
+using InventorySystem.Requirements.Core;
 using MovementSystem;
 using Player.StateMachine.Core;
 using Player.States;
@@ -30,6 +31,7 @@ namespace Player.StateMachine.Player
         public PlayerCombatState PlayerCombatState { get; }
         public PlayerRunningState RunningState { get; }
         public DamageHandler DamageHandler { get; }
+        public ItemRequirementsChecker ItemRequirementsChecker { get; }
         public IDamageApplier AttackApplier { get; }
         public AbilityHandler AbilityHandler { get; }
         public PlayerFirstCastState PlayerFirstCastState { get; }
@@ -37,6 +39,7 @@ namespace Player.StateMachine.Player
         public PlayerThirdCastState PlayerThirdCastState { get; }
         public PlayerFourthCastState PlayerFourthCastState { get; }
         public PlayerFifthCastState PlayerFifthCastState { get; }
+        
         public PlayerDeadState PlayerDeadState { get; }
 
         public PlayerStateMachine(AnimationChanger animationChanger,
@@ -47,7 +50,8 @@ namespace Player.StateMachine.Player
             AliveEntityAnimationData animationData,
             IDamageApplier attackApplier, 
             AbilityHandler abilityHandler,
-            DamageHandler damageHandler)
+            DamageHandler damageHandler,
+            ItemRequirementsChecker itemRequirementsChecker)
         {
             Rotator = rotator;
             AnimationChanger = animationChanger;
@@ -59,6 +63,7 @@ namespace Player.StateMachine.Player
             AttackApplier = attackApplier;
             AbilityHandler = abilityHandler;
             DamageHandler = damageHandler;
+            ItemRequirementsChecker = itemRequirementsChecker;
 
             ReusableData = new AliveEntityStateReusableData();
 

@@ -5,6 +5,7 @@ using InventorySystem.Core;
 using InventorySystem.Items;
 using InventorySystem.Items.Core;
 using InventorySystem.Items.ItemTypes.Core;
+using InventorySystem.Requirements.Core;
 using UnityEngine;
 
 namespace InventorySystem
@@ -29,7 +30,7 @@ namespace InventorySystem
                 Slots.Add(new ItemSlot(slot.Item, slot.Amount, slot.Changeable, slot.ProhibitedItemTypes, slot.ItemTypes));
             }
         }
-        
+
         public void Init(int capacity)
         {
             Capacity = capacity;
@@ -47,6 +48,15 @@ namespace InventorySystem
                 {
                     Slots.Add(new ItemSlot());
                 }
+            }
+        }
+
+        public void Init(int capacity, ItemRequirementsChecker itemRequirements)
+        {
+            Init(capacity);
+            foreach (var itemSlot in Slots)
+            {
+                itemSlot.ItemRequirementsChecker = itemRequirements;
             }
         }
 
@@ -170,7 +180,7 @@ namespace InventorySystem
         {
             return Slots.Any(itemSlot => itemSlot.Item == item && !itemSlot.IsEmpty);
         }
-        
+
         public void DropItemIntoContainer(int source, int destination, ItemContainer destinationContainer = null)
         {
             var sourceSlot = Slots[source];

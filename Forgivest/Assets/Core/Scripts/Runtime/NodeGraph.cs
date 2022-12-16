@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#if UNITY_EDITOR
+
+using System.Collections.Generic;
 using Core.Nodes;
 using UnityEditor;
 using UnityEngine;
@@ -74,3 +76,4 @@ namespace Core
         }
     }
 }
+#endif

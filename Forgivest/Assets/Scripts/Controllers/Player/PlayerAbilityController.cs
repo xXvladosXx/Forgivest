@@ -1,8 +1,10 @@
 ﻿using System;
+using AbilitySystem.AbilitySystem.Runtime;
 using AbilitySystem.AbilitySystem.Runtime.Abilities;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Active.Core;
 using AbilitySystem.AbilitySystem.Runtime.Abilities.Core;
 using InventorySystem.Items;
+using InventorySystem.Requirements.Core;
 using Player;
 using UI.Skill;
 using Zenject;
@@ -12,13 +14,13 @@ namespace Controllers.Player
     public class PlayerAbilityController : IInitializable, ITickable, IDisposable
     {
         private readonly AbilityHandler _abilityHandler;
-        private readonly RequirementsChecker _requirementsChecker;
+        private readonly AbilitiesRequirementsChecker _abilitiesRequirementsChecker;
         private readonly SkillItemContainerUI _skillItemContainerUI;
 
         public PlayerAbilityController(AbilityHandler abilityHandler, SkillInventoryPanel skillInventoryPanel, PlayerEntity playerEntity)
         {
             _abilityHandler = abilityHandler;
-            _requirementsChecker = playerEntity.RequirementsChecker;
+            _abilitiesRequirementsChecker = playerEntity.AbilitiesRequirementsChecker;
             _skillItemContainerUI = skillInventoryPanel.SkillItemContainerUI;
         }
 
@@ -66,7 +68,7 @@ namespace Controllers.Player
             if (possibleSkill == null) return;
             if (_abilityHandler.LearnedAbilities.ItemContainer.HasItem(possibleSkill)) return;
 
-            var skillLearned = _requirementsChecker.CheckRequirements(possibleSkill.Requirements);
+            var skillLearned = _abilitiesRequirementsChecker.CheckRequirements(possibleSkill.Requirements);
                 
             if(!skillLearned) return;
             

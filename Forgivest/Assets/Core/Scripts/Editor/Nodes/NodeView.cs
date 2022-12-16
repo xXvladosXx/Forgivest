@@ -1,4 +1,7 @@
-﻿using System;
+﻿#if UNITY_EDITOR   
+
+
+using System;
 using System.Collections.Generic;
 using Core.Nodes;
 using UnityEditor;
@@ -47,3 +50,5 @@ namespace Core.Editor.Nodes
         }
     }
 }
+
+#endif

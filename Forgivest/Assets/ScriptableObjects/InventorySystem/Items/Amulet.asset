@@ -20,10 +20,24 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: Requirements
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[InventorySystem.Items.IRequirement,
+        Inventory]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   <Rarity>k__BackingField: {fileID: 11400000, guid: 3991f70b9396e0446ad4e38d6cd74fbf,
     type: 2}
   <Name>k__BackingField: Amulet
+  <ObjectToSpawn>k__BackingField: {fileID: 0}
   <Prefab>k__BackingField: {fileID: 1445918223798424, guid: c1325fa2bd1c15245a71ba8ebc3659f3,
     type: 3}
   <MaxItemsInStack>k__BackingField: 1
@@ -42,4 +56,3 @@ MonoBehaviour:
     <StatName>k__BackingField: MagicalDefense
     <Magnitude>k__BackingField: 7
     <Type>k__BackingField: 0
-  _requiredLevel: 0

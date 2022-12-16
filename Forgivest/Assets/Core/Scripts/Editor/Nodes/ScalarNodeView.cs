@@ -1,4 +1,7 @@
-﻿using Core.Nodes;
+﻿#if UNITY_EDITOR   
+
+
+using Core.Nodes;
 using UnityEngine;
 
 namespace Core.Editor.Nodes
@@ -15,3 +18,5 @@ namespace Core.Editor.Nodes
         }
     }
 }
+
+#endif
