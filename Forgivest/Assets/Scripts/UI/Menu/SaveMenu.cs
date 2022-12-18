@@ -24,11 +24,13 @@ namespace UI.Menu
         private void OnEnable()
         {
             _backButton.onClick.AddListener(OnBackButtonClicked);
+            _saveNewGameButton.onClick.AddListener(OnNewSaveButtonClicked);
         }
 
         private void OnDisable()
         {
             _backButton.onClick.RemoveListener(OnBackButtonClicked);
+            _saveNewGameButton.onClick.RemoveListener(OnNewSaveButtonClicked);
         }
         
         public void Initialize(IEnumerable<string> savesList)
@@ -45,6 +47,16 @@ namespace UI.Menu
                 _saveList.Add(button);
             }
         }
+        
+        public void Clear()
+        {
+            foreach (var save in _saveList)
+            {
+                Destroy(save.gameObject);
+            }
+            
+            _saveList.Clear();
+        }
 
         private void TryToSaveGame(string save)
         {
@@ -57,32 +69,9 @@ namespace UI.Menu
         }
 
 
-        protected void OnWEnable()
+        private void OnNewSaveButtonClicked()
         {
-            /*foreach (var save in SaveInteractor.SaveList())
-            {
-                Button savePrefab = Instantiate(_saveButton, _content);
-                savePrefab.GetComponentInChildren<TextMeshProUGUI>().text = save;
-            
-                savePrefab.onClick.AddListener( ()=>
-                {
-                    TryToSave(save);
-                });
-            }*/
-        }
-
-        private void TryToSave(string save)
-        {
-            var stringBuilder = new StringBuilder();
-            stringBuilder.Append(_warningText).Append("<i>").Append($" {save}").Append("</i>").Append("?");
-            
-            /*WarningUI.Instance.ShowWarning(stringBuilder.ToString());
-            WarningUI.Instance.OnAccepted += () => Save(save);*/
-        }
-
-        private void Save(string save)
-        {
-            //SaveInteractor.Save(save);
+            MenuSwitcher.Show<NewSaveMenu>();
         }
     }
 }

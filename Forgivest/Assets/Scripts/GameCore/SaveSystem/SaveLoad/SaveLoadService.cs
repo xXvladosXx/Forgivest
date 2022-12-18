@@ -72,9 +72,9 @@ namespace GameCore.SaveSystem.SaveLoad
             var settingsSaveData = new SettingsData(
                 PlayerPrefs.GetFloat(MUSIC_VOLUME, 0),
                 PlayerPrefs.GetFloat(EFFECTS_VOLUME, 0),
-                PlayerPrefs.GetInt(RESOLUTION, 0),
+                PlayerPrefs.GetInt(GRAPHICS, 0),
                 PlayerPrefs.GetInt(IS_FULLSCREEN, 0),
-                PlayerPrefs.GetInt(GRAPHICS,0));
+                PlayerPrefs.GetInt(RESOLUTION,0));
 
             return settingsSaveData;
         }

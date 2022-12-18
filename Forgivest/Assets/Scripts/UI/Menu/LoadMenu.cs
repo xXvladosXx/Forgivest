@@ -44,12 +44,12 @@ namespace UI.Menu
             }
         }
 
-        public void Dispose()
+        public void Clear()
         {
-            foreach (var button in _saveList)
+            foreach (var save in _saveList)
             {
-                button.onClick.RemoveAllListeners();
-                Destroy(button.gameObject);
+                save.onClick.RemoveAllListeners();
+                Destroy(save.gameObject);
             }
             
             _saveList.Clear();

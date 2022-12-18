@@ -8,6 +8,7 @@ using Player;
 using SoundSystem;
 using UI.Core;
 using UI.Menu;
+using UI.Menu.Core;
 using UI.Skill;
 using UnityEngine.InputSystem;
 using Utilities;
@@ -77,7 +78,8 @@ namespace Controllers
             _playerInputProvider.PlayerUIActions.Inventory.performed += EnableInventory;
             _playerInputProvider.PlayerUIActions.SkillBar.performed += EnableSkillBar;
             _playerInputProvider.PlayerUIActions.ESC.performed += TryToEnableMenu;
-            
+
+            _panelSwitcher.GetPanel<GameplayPanel>().NewSaveMenu.OnSaveClicked += OnSaveButtonClicked;
             _gameplayMenu.OnContinueButtonClicked += TryToEnableMenu;
             _saveMenu.OnSaveClicked += OnSaveButtonClicked;
             _soundMenu.OnAudioSettingsChanged += SaveAudioSettings;
@@ -94,6 +96,7 @@ namespace Controllers
             _saveMenu.OnSaveClicked -= OnSaveButtonClicked;
             _soundMenu.OnAudioSettingsChanged -= SaveAudioSettings;
             _graphicsMenu.OnGraphicsSettingsChanged -= SaveGraphicsSettings;
+            _panelSwitcher.GetPanel<GameplayPanel>().NewSaveMenu.OnSaveClicked -= OnSaveButtonClicked;
         }
 
         private void SaveAudioSettings(float music, float effects)
@@ -118,6 +121,15 @@ namespace Controllers
             }
             
             _saveLoadService.SaveProgress(saveFile);
+            
+            _saveMenu.Clear();
+            _loadMenu.Clear();
+            
+            var savesList = FileManager.SavesList();
+            var enumerable = savesList as string[] ?? savesList.ToArray();
+            
+            _saveMenu.Initialize(enumerable);
+            _loadMenu.Initialize(enumerable);
         }
 
         private void TryToEnableMenu(InputAction.CallbackContext obj)

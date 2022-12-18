@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UI.Inventory;
 using UI.Inventory.Core;
+using UI.Menu;
 using UI.Skill;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace UI.Core
 {
     public class PanelSwitcher : UIElement
     {
+        [field: SerializeField] public LoadMenu LoadMenu { get; private set; }
         [SerializeField] private List<Panel> _panels = new List<Panel>();
         private Panel _currentInventoryPanel;
 
@@ -42,6 +44,11 @@ namespace UI.Core
             return false;
         }
 
+        public T GetPanel<T>() where T : Panel
+        {
+            return _panels.FirstOrDefault(panel => panel.GetType() == typeof(T)) as T;
+        }
+        
         private void ShowUIElement<T>() where T : Panel
         {
             var uiElement = _panels.FirstOrDefault(e => e.GetType() == typeof(T));

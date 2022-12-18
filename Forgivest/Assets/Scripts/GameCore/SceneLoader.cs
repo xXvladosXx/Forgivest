@@ -20,11 +20,6 @@ namespace GameCore
         
         public IEnumerator LoadScene(string sceneName, Action onLoaded = null)
         {
-            if (SceneManager.GetActiveScene().name == sceneName)
-            {
-                yield break;
-            }
-            
             var waitForSceneLoad = SceneManager.LoadSceneAsync(sceneName);
 
             while (!waitForSceneLoad.isDone)
