@@ -4,6 +4,7 @@ using InventorySystem.Core;
 using InventorySystem.Items.ItemTypes.Core;
 using InventorySystem.Items.Optional;
 using Sirenix.OdinInspector;
+using StatSystem;
 using UnityEngine;
 
 namespace InventorySystem.Items.Core
@@ -25,6 +26,8 @@ namespace InventorySystem.Items.Core
         [field: SerializeField] protected string _itemDescription; 
         public abstract string ItemDescription { get; }
         public abstract string ItemRequirements { get; }
+
+        public virtual bool TryToUseItem(StatController statController) => true;
 
         public string ColouredName()
         {

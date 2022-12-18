@@ -119,7 +119,8 @@ namespace Player
             _playerStateMachine = new PlayerStateMachine(AnimationChanger,
                 Movement, Rotator, PlayerInputProvider, StateData,
                 RaycastUser, AliveEntityAnimationData, 
-                this, AbilityHandler, DamageHandler, ItemRequirementsChecker);
+                this, AbilityHandler, DamageHandler,
+                StatController, ItemRequirementsChecker);
         }
         
         private void OnEnable()

@@ -55,6 +55,7 @@ namespace UI.Core
             if (uiElement != null)
             {
                 uiElement.Show();
+                uiElement.Show();
                 _currentInventoryPanel = uiElement;
                 _currentInventoryPanel.OnElementHide += HideUIElement;
             }

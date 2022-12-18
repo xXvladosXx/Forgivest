@@ -25,7 +25,8 @@ MonoBehaviour:
   _isPeriodic: 0
   _period: 0
   _isExecutableEffectOnApply: 0
-  _grantedTags: []
+  _grantedTags:
+  - Heal.cooldown
   _grantedImmunityTags: []
   _specialPersistentEffectDefinition: {fileID: 0}
   _persistMustBePresentTags: []

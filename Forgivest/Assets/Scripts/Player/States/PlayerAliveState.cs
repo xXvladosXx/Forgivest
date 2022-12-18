@@ -14,12 +14,35 @@ namespace Player.States
         {
             base.Enter();
             PlayerStateMachine.DamageHandler.OnDied += MakePlayerDead;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Z.performed += OnFirstPotionUse;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.X.performed += OnSecondPotionUse;
+        }
+
+        private void OnSecondPotionUse(InputAction.CallbackContext obj)
+        {
+            UsePotion(6);
+        }
+
+        private void OnFirstPotionUse(InputAction.CallbackContext obj)
+        {
+            UsePotion(5);
+        }
+
+        private void UsePotion(int index)
+        {
+            var potion = PlayerStateMachine.AbilityHandler.Hotbar.ItemContainer.Slots[index].Item;
+            if (potion.TryToUseItem(PlayerStateMachine.StatController))
+            {
+                PlayerStateMachine.AbilityHandler.Hotbar.ItemContainer.Remove(this, index);
+            }
         }
 
         public override void Exit()
         {
             base.Exit();
             PlayerStateMachine.DamageHandler.OnDied -= MakePlayerDead;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.Z.performed -= OnFirstPotionUse;
+            PlayerStateMachine.PlayerInputProvider.PlayerMainActions.X.performed -= OnSecondPotionUse;
         }
 
         protected override void OnFirstSkillPerformed(InputAction.CallbackContext obj)

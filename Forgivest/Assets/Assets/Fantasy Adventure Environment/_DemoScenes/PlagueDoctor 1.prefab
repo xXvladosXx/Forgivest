@@ -719,7 +719,9 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: ab36514cc99b6754eb69ecf1e35d78e7, type: 2}
+    - {fileID: 11400000, guid: 2efb748df0e182c4a96f3f046263fe2f, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -731,7 +733,40 @@ MonoBehaviour:
         Attack]], mscorlib
     - Name: 
       Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 1|AttackSystem.Reward.ExperienceReward, Attack
+    - Name: _amount
+      Entry: 3
+      Data: 100
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|AttackSystem.Reward.ItemReward, Attack
+    - Name: _item
+      Entry: 10
       Data: 0
+    - Name: _amount
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|AttackSystem.Reward.ItemReward, Attack
+    - Name: _item
+      Entry: 10
+      Data: 1
+    - Name: _amount
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -2555,7 +2590,7 @@ PrefabInstance:
     - target: {fileID: 5107622844056523971, guid: db2df38f4bc42154e9af77b52ba74f20,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.62377757
+      value: 1.4755458
       objectReference: {fileID: 0}
     - target: {fileID: 5107622844056523971, guid: db2df38f4bc42154e9af77b52ba74f20,
         type: 3}
@@ -2570,7 +2605,7 @@ PrefabInstance:
     - target: {fileID: 5107622844056523971, guid: db2df38f4bc42154e9af77b52ba74f20,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.15
+      value: -0.703
       objectReference: {fileID: 0}
     - target: {fileID: 5107622844056523971, guid: db2df38f4bc42154e9af77b52ba74f20,
         type: 3}
@@ -2642,8 +2677,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 1.19
-  m_Center: {x: 0, y: 1.15, z: 0}
+  m_Radius: 1
+  m_Center: {x: 0, y: 0.85, z: 0}
 --- !u!114 &3672165054735810535
 MonoBehaviour:
   m_ObjectHideFlags: 0

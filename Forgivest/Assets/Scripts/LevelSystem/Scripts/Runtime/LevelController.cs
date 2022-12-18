@@ -10,11 +10,12 @@ namespace LevelSystem.Scripts.Runtime
     {
         [SerializeField] private int _level = 1;
         [SerializeField] private int _currentExperience;
-        [SerializeField] private int _requiredExperienceFormula;
         private bool _isInitialized;
+        
+        private const int _experienceToNextLevel = 100;
         public int Level => _level;
         public event Action OnLevelChanged;
-        public event Action<int, int> OnCurrentExperienceChanged;
+        public event Action<int, int, int> OnCurrentExperienceChanged;
 
         public int CurrentExperience
         {
@@ -24,19 +25,19 @@ namespace LevelSystem.Scripts.Runtime
                 if (value >= RequiredExperience)
                 {
                     _currentExperience = value - RequiredExperience;
-                    OnCurrentExperienceChanged?.Invoke(_currentExperience, RequiredExperience);
                     _level++;
+                    OnCurrentExperienceChanged?.Invoke(_currentExperience, RequiredExperience, _level);
                     OnLevelChanged?.Invoke();
                 }
                 else if (value < RequiredExperience)
                 {
                     _currentExperience = value;
-                    OnCurrentExperienceChanged?.Invoke(_currentExperience, RequiredExperience);
+                    OnCurrentExperienceChanged?.Invoke(_currentExperience, RequiredExperience, _level);
                 }
             }
         }
 
-        public int RequiredExperience => Mathf.RoundToInt(_requiredExperienceFormula);
+        public int RequiredExperience => Mathf.RoundToInt(_experienceToNextLevel * _level);
         public bool IsInitialized => _isInitialized;
         public event Action OnInitialized;
         public event Action OnWillUninitialize;

@@ -6,7 +6,7 @@ namespace LevelSystem.Scripts.Runtime
     {
         int Level { get; }
         event Action OnLevelChanged;
-        event Action<int, int> OnCurrentExperienceChanged;
+        event Action<int, int, int> OnCurrentExperienceChanged;
         int CurrentExperience { get; set; }
         int RequiredExperience { get; }
         bool IsInitialized { get; }

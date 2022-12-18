@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc85815fbb647f6ad4f2ac539232d6a, type: 3}
   m_Name: Scalar
   m_EditorClassIdentifier: 
-  position: {x: 2.7600098, y: 195}
+  position: {x: 85.91998, y: 208}
   guid: a44d2ac267a20164a9f2f2f4b0055932
-  m_Value: -5
+  m_Value: -15
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

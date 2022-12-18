@@ -143,6 +143,24 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Z"",
+                    ""type"": ""Button"",
+                    ""id"": ""a2101dba-0176-4fc2-a2b9-9a1171e6e113"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""X"",
+                    ""type"": ""Button"",
+                    ""id"": ""102f2eff-dd4a-4365-8a11-e872e31ce0bb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -332,6 +350,28 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                     ""action"": ""FifthSkill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d3e15e4a-04c4-41c8-8150-251698cca6d8"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Z"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ce141fd-a6c1-42a0-8d51-6225fb268ee0"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""X"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -421,6 +461,8 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
         m_Main_ThirdSkill = m_Main.FindAction("ThirdSkill", throwIfNotFound: true);
         m_Main_FourthSkill = m_Main.FindAction("FourthSkill", throwIfNotFound: true);
         m_Main_FifthSkill = m_Main.FindAction("FifthSkill", throwIfNotFound: true);
+        m_Main_Z = m_Main.FindAction("Z", throwIfNotFound: true);
+        m_Main_X = m_Main.FindAction("X", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
@@ -498,6 +540,8 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Main_ThirdSkill;
     private readonly InputAction m_Main_FourthSkill;
     private readonly InputAction m_Main_FifthSkill;
+    private readonly InputAction m_Main_Z;
+    private readonly InputAction m_Main_X;
     public struct MainActions
     {
         private @PlayerControlls m_Wrapper;
@@ -515,6 +559,8 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
         public InputAction @ThirdSkill => m_Wrapper.m_Main_ThirdSkill;
         public InputAction @FourthSkill => m_Wrapper.m_Main_FourthSkill;
         public InputAction @FifthSkill => m_Wrapper.m_Main_FifthSkill;
+        public InputAction @Z => m_Wrapper.m_Main_Z;
+        public InputAction @X => m_Wrapper.m_Main_X;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -563,6 +609,12 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                 @FifthSkill.started -= m_Wrapper.m_MainActionsCallbackInterface.OnFifthSkill;
                 @FifthSkill.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnFifthSkill;
                 @FifthSkill.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnFifthSkill;
+                @Z.started -= m_Wrapper.m_MainActionsCallbackInterface.OnZ;
+                @Z.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnZ;
+                @Z.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnZ;
+                @X.started -= m_Wrapper.m_MainActionsCallbackInterface.OnX;
+                @X.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnX;
+                @X.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnX;
             }
             m_Wrapper.m_MainActionsCallbackInterface = instance;
             if (instance != null)
@@ -606,6 +658,12 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
                 @FifthSkill.started += instance.OnFifthSkill;
                 @FifthSkill.performed += instance.OnFifthSkill;
                 @FifthSkill.canceled += instance.OnFifthSkill;
+                @Z.started += instance.OnZ;
+                @Z.performed += instance.OnZ;
+                @Z.canceled += instance.OnZ;
+                @X.started += instance.OnX;
+                @X.performed += instance.OnX;
+                @X.canceled += instance.OnX;
             }
         }
     }
@@ -674,6 +732,8 @@ public partial class @PlayerControlls : IInputActionCollection2, IDisposable
         void OnThirdSkill(InputAction.CallbackContext context);
         void OnFourthSkill(InputAction.CallbackContext context);
         void OnFifthSkill(InputAction.CallbackContext context);
+        void OnZ(InputAction.CallbackContext context);
+        void OnX(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

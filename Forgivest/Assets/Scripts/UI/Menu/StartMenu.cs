@@ -13,13 +13,10 @@ namespace UI.Menu
 {
     public class StartMenu : Core.Menu
     {
-        [SerializeField] private string _sureWarningText;
-        [SerializeField] private string _sameGameWarningText;
         [SerializeField] private string _emptyWarningText;
         
         [SerializeField] private Button _backButton;
         [SerializeField] private Button _startNewGame;
-        [SerializeField] private TMP_InputField _inputField;
         
         private ChooseWarning _chooseWarning;
         private OneDecisionWarning _oneDecisionWarning;
@@ -46,9 +43,6 @@ namespace UI.Menu
         {
             _startNewGame.onClick.RemoveListener(TryToStartNewGame);
             _backButton.onClick.RemoveListener(OnBackButtonClicked);
-            _saveFile = string.Empty;
-            _inputField.Select();
-            _inputField.text = "";
         }
 
         private void OnBackButtonClicked()
@@ -68,17 +62,6 @@ namespace UI.Menu
             }
             
             OnStartClicked?.Invoke(_saveFile);
-        }
-
-        public void CreateName(string saveFile)
-        {
-            _saveFile = saveFile;
-        }
-        
-        private void StartNewGame()
-        {
-            //WarningUI.Instance.OnAccepted -= StartNewGame;
-            //SaveInteractor.StartNewGame(SaveFile);
         }
     }
 }

@@ -12,7 +12,8 @@ namespace Controllers.Player
         private readonly LevelController _levelController;
         
 
-        public PlayerExperienceController(ExperienceBarUI experienceBarUI, LevelController levelController)
+        public PlayerExperienceController(ExperienceBarUI experienceBarUI,
+            LevelController levelController)
         {
             _experienceBarUI = experienceBarUI;
             _levelController = levelController;
@@ -22,12 +23,12 @@ namespace Controllers.Player
         {
             _levelController.OnCurrentExperienceChanged += RecalculateExperienceBar;
             
-            RecalculateExperienceBar(_levelController.CurrentExperience, _levelController.RequiredExperience);
+            RecalculateExperienceBar(_levelController.CurrentExperience, _levelController.RequiredExperience, _levelController.Level);
         }
 
-        private void RecalculateExperienceBar(int experience, int maxExperience)
+        private void RecalculateExperienceBar(int experience, int maxExperience, int level)
         {
-            _experienceBarUI.RecalculateExperience(experience, maxExperience);
+            _experienceBarUI.RecalculateExperience(experience, maxExperience, level);
         }
 
         public void Dispose()

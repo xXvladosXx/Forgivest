@@ -80,6 +80,12 @@ namespace Player.States.Skill
         protected void TryToActivateSkill(int index)
         {
             var skill = PlayerStateMachine.AbilityHandler.Hotbar.ItemContainer.Slots[index].Item;
+            if (skill == null)
+            {
+                PlayerStateMachine.ChangeState(PlayerStateMachine.IdlingState);
+                return;
+            }
+            
             var isChecked = PlayerStateMachine.ItemRequirementsChecker.CheckRequirements(skill.Requirements);
             if (!isChecked)
             {

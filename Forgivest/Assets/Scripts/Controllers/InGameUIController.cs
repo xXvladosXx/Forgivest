@@ -7,6 +7,7 @@ using Installers;
 using Player;
 using SoundSystem;
 using UI.Core;
+using UI.HUD;
 using UI.Menu;
 using UI.Menu.Core;
 using UI.Skill;
@@ -28,6 +29,7 @@ namespace Controllers
         private readonly SettingsMenu _settingsMenu;
         private readonly SoundMenu _soundMenu;
         private readonly IEnemyRadiusChecker _enemyRadiusChecker;
+        private readonly StaticInventoryPanel _staticInventoryPanel;
         private readonly SoundManger _soundManger;
         private readonly GraphicsMenu _graphicsMenu;
         private readonly ISaveLoadService _saveLoadService;
@@ -38,7 +40,7 @@ namespace Controllers
             SettingsMenu settingsMenu, GraphicsMenu graphicsMenu,
             ISaveLoadService saveLoadService,
             SoundMenu soundMenu, IEnemyRadiusChecker enemyRadiusChecker,
-            SoundManger soundManger)
+            StaticInventoryPanel staticInventoryPanel, SoundManger soundManger)
         {
             _panelSwitcher = panelSwitcher;
             _gameFactory = gameFactory;
@@ -51,6 +53,7 @@ namespace Controllers
             _saveLoadService = saveLoadService;
             _soundMenu = soundMenu;
             _enemyRadiusChecker = enemyRadiusChecker;
+            _staticInventoryPanel = staticInventoryPanel;
             _soundManger = soundManger;
         }
 
@@ -117,11 +120,13 @@ namespace Controllers
             if (_enemyRadiusChecker.IsEnemiesInRadius(
                     _gameFactory.PlayerObserver.PlayerInputProvider.transform.position, 10))
             {
+                _staticInventoryPanel.WarningUI.Show("You can't save while enemies are nearby");
                 return;
             }
             
             _saveLoadService.SaveProgress(saveFile);
-            
+            _staticInventoryPanel.WarningUI.Show("Game saved " + saveFile);
+
             _saveMenu.Clear();
             _loadMenu.Clear();
             

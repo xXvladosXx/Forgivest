@@ -21,6 +21,7 @@ namespace UI.Menu
             _loadButton.onClick.AddListener(OnLoadClicked);
             _startButton.onClick.AddListener(OnStartClicked);
             _continueButton.onClick.AddListener(OnContinueClicked);
+            _quitButton.onClick.AddListener(OnQuitClicked);
         }
 
         private void OnDisable()
@@ -29,6 +30,7 @@ namespace UI.Menu
             _settingButton.onClick.RemoveListener(OnStartClicked);
             _settingButton.onClick.RemoveListener(OnLoadClicked);
             _continueButton.onClick.RemoveListener(OnContinueClicked);
+            _quitButton.onClick.RemoveListener(OnQuitClicked);
         }
 
         private void OnContinueClicked()
@@ -51,24 +53,12 @@ namespace UI.Menu
             MenuSwitcher.Show<SettingsMenu>();
         }
 
-        /* public override void Initialize()
+        private void OnQuitClicked()
         {
-            if (saveInteractor.GetLastSave == null)
-            {
-                _continueButton.interactable = false;
-            }
-            
-            _startButton.onClick.AddListener(() => MenuSwitcher.Show<StartMenu>());
-            _loadButton.onClick.AddListener(() => MenuSwitcher.Show<LoadMenu>());
-            _settingButton.onClick.AddListener(() => MenuSwitcher.Show<SettingsMenu>());
-            //_continueButton.onClick.AddListener(() => saveInteractor.ContinueGame(saveInteractor.GetLastSave));
-            _quitButton.onClick.AddListener( () =>
-            {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
-         Application.Quit();
-            });
-        }*/
+#endif
+                Application.Quit();
+        }
     }
-
 }

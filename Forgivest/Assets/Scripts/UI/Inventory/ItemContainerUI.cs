@@ -17,7 +17,7 @@ namespace UI.Inventory
 
         public event Action<int, int, Sprite, int, IInventoryHolder> OnTryToSwapSlots; 
         public event Action<int, Sprite, int, IInventoryHolder> OnTryToDropSlot; 
-        public event Action<IInventoryHolder> OnInventoryHolderChanged; 
+        public event Action<IInventoryHolder> OnInventoryHolderChanged;
         public void InitializeSlots(int inventoryCapacity)
         {
             ClearSlots();

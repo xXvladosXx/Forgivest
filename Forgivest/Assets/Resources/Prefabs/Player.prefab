@@ -3227,8 +3227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _level: 1
   _currentExperience: 0
-  _requiredExperienceFormula: {fileID: 11400000, guid: 41a6a3d4b15316d40891dfd93b6d6416,
-    type: 2}
+  _experienceToNextLevel: 100
 --- !u!114 &6783857815696129974
 MonoBehaviour:
   m_ObjectHideFlags: 0

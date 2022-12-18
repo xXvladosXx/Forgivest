@@ -27,7 +27,7 @@ MonoBehaviour:
         Inventory]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 7
       Data: 1|InventorySystem.Items.PointsRequirement, Inventory
@@ -43,6 +43,15 @@ MonoBehaviour:
     - Name: <NecessaryLevel>k__BackingField
       Entry: 3
       Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|InventorySystem.Requirements.Core.ItemTypeRequirementsChecker, Inventory
+    - Name: <ItemType>k__BackingField
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 

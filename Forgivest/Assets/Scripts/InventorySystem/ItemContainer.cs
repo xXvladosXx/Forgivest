@@ -20,6 +20,7 @@ namespace InventorySystem
         public event Action<object, IItem, int, ItemContainer> OnItemAdded;
         public event Action<object, IItem, int, ItemContainer> OnItemRemoved;
         public event Action<int, int, ItemContainer> OnItemSwapped;
+        public event Action<ItemContainer> OnSlotsChanged; 
 
 
         public void GenerateSlotsByFirstSlot(ItemSlot slot, int capacity)
@@ -165,7 +166,8 @@ namespace InventorySystem
             }
 
             slot.Amount -= amountToRemove;
-
+            OnSlotsChanged?.Invoke(this);
+            
             if (slot.Amount == 0)
             {
                 OnItemRemoved?.Invoke(sender, slot.Item, amountToRemove, this);

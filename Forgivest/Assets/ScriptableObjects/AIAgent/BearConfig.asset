@@ -15,7 +15,7 @@ MonoBehaviour:
   <DistanceToWaypoint>k__BackingField: 0.5
   <MovementPatrollingSpeed>k__BackingField: 1
   <MovementChasingSpeed>k__BackingField: 6
-  <IdleTime>k__BackingField: 3
+  <IdleTime>k__BackingField: 6
   <AggroSightDistance>k__BackingField: 12
   <ChaseDistance>k__BackingField: 15
   <DistanceToAttack>k__BackingField: 2

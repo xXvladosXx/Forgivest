@@ -7,7 +7,7 @@ namespace UI.HUD
     public class StaticInventoryPanel : InventoryPanel
     {
         [field: SerializeField] public StaticItemContainerUI HotbarItemContainerUI { get; private set; }
-        
+        [field: SerializeField] public WarningUI WarningUI { get; private set; }
         private void OnEnable()
         {
             HotbarItemContainerUI.OnInventoryHolderChanged += ChangeHolder;

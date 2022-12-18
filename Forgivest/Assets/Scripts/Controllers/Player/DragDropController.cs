@@ -59,6 +59,7 @@ namespace Controllers.Player
             {
                 RefreshSlotsData(itemContainer);
                 itemContainer.OnItemAdded += OnItemAdded;
+                itemContainer.OnSlotsChanged += RefreshSlotsData;
             }
 
             foreach (var itemContainer in _itemHolders.Values)
@@ -66,6 +67,11 @@ namespace Controllers.Player
                 itemContainer.OnTryToSwapSlots += TryToSwapSlotsInInventory;
                 itemContainer.OnTryToDropSlot += TryToDropSlotFromInventory;
             }
+        }
+
+        private void OnSlotsChanged()
+        {
+            
         }
 
         public void Tick()
@@ -78,6 +84,7 @@ namespace Controllers.Player
             foreach (var itemContainer in _itemHolders.Keys)
             {
                 itemContainer.OnItemAdded -= OnItemAdded;
+                itemContainer.OnSlotsChanged -= RefreshSlotsData;
             }
 
             foreach (var itemContainer in _itemHolders.Values)
@@ -160,7 +167,7 @@ namespace Controllers.Player
             {
                 if (slot.Item == null)
                 {
-                    _inventoryPanel.CreateSlotsWithItemInInventory(null, 0, index,
+                    _inventoryPanel.RefreshSlotsWithItemInInventory(null, 0, index,
                         _itemHolders[itemContainer], itemContainer.Slots[index].GetDescription(),
                         itemContainer.Slots[index].GetItemName(),
                         itemContainer.Slots[index].GetRequirements());
@@ -169,7 +176,7 @@ namespace Controllers.Player
                     continue;
                 }
 
-                _inventoryPanel.CreateSlotsWithItemInInventory(slot.Item.Sprite, slot.Amount, index,
+                _inventoryPanel.RefreshSlotsWithItemInInventory(slot.Item.Sprite, slot.Amount, index,
                     _itemHolders[itemContainer], itemContainer.Slots[index].GetDescription(),
                     itemContainer.Slots[index].GetItemName(),
                     itemContainer.Slots[index].GetRequirements());

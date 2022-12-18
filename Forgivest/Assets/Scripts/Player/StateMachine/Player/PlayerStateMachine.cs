@@ -11,6 +11,7 @@ using Player.States.Attack;
 using Player.States.Moving;
 using Player.States.Skill.Skills;
 using RaycastSystem;
+using StatSystem;
 using Utilities;
 
 namespace Player.StateMachine.Player
@@ -41,6 +42,7 @@ namespace Player.StateMachine.Player
         public PlayerFifthCastState PlayerFifthCastState { get; }
         
         public PlayerDeadState PlayerDeadState { get; }
+        public StatController StatController { get;  }
 
         public PlayerStateMachine(AnimationChanger animationChanger,
             Movement movement, Rotator rotator,
@@ -51,6 +53,7 @@ namespace Player.StateMachine.Player
             IDamageApplier attackApplier, 
             AbilityHandler abilityHandler,
             DamageHandler damageHandler,
+            StatController statController,
             ItemRequirementsChecker itemRequirementsChecker)
         {
             Rotator = rotator;
@@ -63,6 +66,7 @@ namespace Player.StateMachine.Player
             AttackApplier = attackApplier;
             AbilityHandler = abilityHandler;
             DamageHandler = damageHandler;
+            StatController = statController;
             ItemRequirementsChecker = itemRequirementsChecker;
 
             ReusableData = new AliveEntityStateReusableData();
