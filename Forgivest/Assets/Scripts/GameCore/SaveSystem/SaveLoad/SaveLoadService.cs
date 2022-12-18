@@ -10,7 +10,6 @@ namespace GameCore.SaveSystem.SaveLoad
 {
     public class SaveLoadService : ISaveLoadService
     {
-        private readonly IPersistentProgressService _progressService;
         private readonly IGameFactory _gameFactory;
         
         private const string EFFECTS_VOLUME = "EffectsVolume";
@@ -19,10 +18,8 @@ namespace GameCore.SaveSystem.SaveLoad
         private const string IS_FULLSCREEN = "Fullscreen";
         private const string GRAPHICS = "Graphics";
     
-        public SaveLoadService(IPersistentProgressService progressService, 
-            IGameFactory gameFactory)
+        public SaveLoadService(IGameFactory gameFactory)
         {
-            _progressService = progressService;
             _gameFactory = gameFactory;
         }
         
@@ -72,9 +69,9 @@ namespace GameCore.SaveSystem.SaveLoad
             var settingsSaveData = new SettingsData(
                 PlayerPrefs.GetFloat(MUSIC_VOLUME, 0),
                 PlayerPrefs.GetFloat(EFFECTS_VOLUME, 0),
-                PlayerPrefs.GetInt(RESOLUTION, 0),
+                PlayerPrefs.GetInt(GRAPHICS, 0),
                 PlayerPrefs.GetInt(IS_FULLSCREEN, 0),
-                PlayerPrefs.GetInt(GRAPHICS,0));
+                PlayerPrefs.GetInt(RESOLUTION,0));
 
             return settingsSaveData;
         }

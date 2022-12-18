@@ -6,5 +6,6 @@ namespace GameCore.Crutches
     {
         GameplayMenu GameplayMenu { get; set; }
         SaveMenu SaveMenu { get; set; }
+        public LoadMenu LoadMenu { get; set; }
     }
 }

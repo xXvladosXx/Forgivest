@@ -16,7 +16,6 @@ namespace UI.Menu
 
         public event Action OnContinueButtonClicked;
         public event Action OnMainMenuButtonClicked;
-        public event Action OnElementHide;
         
         private void OnEnable()
         {

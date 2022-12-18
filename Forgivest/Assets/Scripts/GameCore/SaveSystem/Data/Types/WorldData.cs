@@ -7,11 +7,13 @@ namespace GameCore.SaveSystem.Data.Types
     {
         public PositionOnLevel PositionOnLevel;
         public RotationOnLevel RotationOnLevel;
-
+        public WasDestroyedOnLevel WasDestroyedOnLevel;
+        
         public WorldData(string level)
         {
             PositionOnLevel = new PositionOnLevel(level);
             RotationOnLevel = new RotationOnLevel(level);
+            WasDestroyedOnLevel = new WasDestroyedOnLevel(level);
         }
 
     }

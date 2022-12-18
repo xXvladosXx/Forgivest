@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -80,3 +82,6 @@ namespace StatSystem.Editor
         }
     }
 }
+
+#endif
+

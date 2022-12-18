@@ -103,8 +103,12 @@ namespace Player
                 LevelController, AbilityHandler);
             
             gameFactory.PlayerObserver.DamageHandler ??= DamageHandler;
-            gameFactory.PlayerObserver.PlayerInputProvider ??= PlayerInputProvider;
             
+            if (gameFactory.PlayerObserver.PlayerInputProvider == null)
+            {
+                gameFactory.PlayerObserver.PlayerInputProvider = PlayerInputProvider;
+            }
+
             gameFactory.Register(Movement);
         }
 

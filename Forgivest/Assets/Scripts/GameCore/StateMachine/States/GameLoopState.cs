@@ -2,6 +2,9 @@
 using GameCore.Crutches;
 using GameCore.Factory;
 using SoundSystem;
+using UI.Core;
+using UI.Menu;
+using UnityEngine;
 using Zenject;
 
 namespace GameCore.StateMachine.States
@@ -11,7 +14,26 @@ namespace GameCore.StateMachine.States
         private readonly GameStateMachine _gameStateMachine;
         private readonly IGameFactory _gameFactory;
         private readonly SoundManger _soundManger;
+
+        private readonly LoadMenu _loadMenu;
+
         private readonly IPlayerObserver _playerObserver;
+
+        public void Enter()
+        { 
+            var findObjectOfType = Object.FindObjectOfType<PanelSwitcher>();
+
+            if(findObjectOfType != null)
+            {
+                _gameFactory.LoadMenu = findObjectOfType.LoadMenu;
+            }
+
+            _gameFactory.PlayerObserver.DamageHandler.OnDied += OnPlayerDied;
+            _gameFactory.UIObserver.GameplayMenu.OnMainMenuButtonClicked += OnMainMenuButtonClicked;
+            _gameFactory.LoadMenu.OnLoadClicked += LoadSave;
+
+            _soundManger.PlayMusicSound(_soundManger.GameMusicClips[4]);
+        }
 
         public GameLoopState(GameStateMachine gameStateMachine,
             IGameFactory gameFactory, SoundManger soundManger)
@@ -20,24 +42,22 @@ namespace GameCore.StateMachine.States
             _gameFactory = gameFactory;
             _soundManger = soundManger;
         }
-        
-        public void Enter()
-        {
-            _gameFactory.PlayerObserver.DamageHandler.OnDied += OnPlayerDied;
-            _gameFactory.UIObserver.GameplayMenu.OnMainMenuButtonClicked += OnMainMenuButtonClicked;
-            
-            _soundManger.PlayMusicSound(_soundManger.GameMusicClips[4]);
-        }
 
         public void Exit()
         {
             _gameFactory.PlayerObserver.DamageHandler.OnDied -= OnPlayerDied;    
+            _gameFactory.LoadMenu.OnLoadClicked -= LoadSave;
             _gameFactory.UIObserver.GameplayMenu.OnMainMenuButtonClicked -= OnMainMenuButtonClicked;
         }
 
         private void OnPlayerDied(AttackData attackData)
         {   
             _gameStateMachine.Enter<GameEndState>();
+        }
+
+        private void LoadSave(string saveFile)
+        {
+            _gameStateMachine.Enter<LoadExistingGameState, string>(saveFile);
         }
 
         private void OnMainMenuButtonClicked()

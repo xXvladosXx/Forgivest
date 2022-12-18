@@ -44,10 +44,13 @@ namespace Controllers.Player
                     _skillItemContainerUI.SkillCooldownRefreshers[i].SetFillAmountToZero();
                     continue;
                 }
-                
+#if UNITY_EDITOR
+
                 _skillItemContainerUI.SkillCooldownRefreshers[i]
                     .RefreshImage(_abilityHandler.GetCooldownOfAbility(ability.name), 
                         ability.Cooldown.DurationFormula.CalculateValue(_abilityHandler.gameObject));
+                
+#endif
             }
         }
 

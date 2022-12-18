@@ -3,6 +3,7 @@ using GameCore.AssetManagement;
 using GameCore.Crutches;
 using GameCore.SaveSystem.Data;
 using GameCore.StateMachine;
+using UI.Menu;
 using UnityEngine;
 
 namespace GameCore.Factory
@@ -17,6 +18,12 @@ namespace GameCore.Factory
         public IPlayerObserver PlayerObserver { get; }
         public IUIObserver UIObserver { get; }
 
+        public LoadMenu LoadMenu
+        {
+            get;
+            set;
+        }
+
         public GameFactory(IAssetProvider assetProvider)
         {
             _assetProvider = assetProvider;
@@ -29,7 +36,7 @@ namespace GameCore.Factory
             ProgressReaders.Clear();
             ProgressWriters.Clear();
         }
-        
+
         public GameObject CreatePlayer(GameObject at) => 
             InstantiateRegistered(AssetPath.PLAYER_PATH, at.transform.position);
 

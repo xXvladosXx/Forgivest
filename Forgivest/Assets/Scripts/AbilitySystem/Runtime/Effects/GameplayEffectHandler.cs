@@ -397,8 +397,11 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects
                     {
                         if (modifier.Type == ModifierOperationType.Additive)
                         {
+#if UNITY_EDITOR
+                            
                             if (!(attribute.CurrentValue < Mathf.Abs(modifier.Formula.CalculateValue(gameObject))))
                                 continue;
+#endif
 
                             Debug.Log("Cannot satisfy costs");
                             return false;

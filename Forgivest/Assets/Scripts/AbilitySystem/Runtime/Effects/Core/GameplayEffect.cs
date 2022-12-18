@@ -19,11 +19,11 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects.Core
         public AttackData AttackData { get; }
 
         private List<StatModifier> _modifiers = new List<StatModifier>();
-        
+
         public ReadOnlyCollection<StatModifier> Modifiers => _modifiers.AsReadOnly();
 
         public ReadOnlyCollection<string> Tags => Definition.Tags;
-        
+
         public GameplayEffect(
             GameplayEffectDefinition definition,
             object source,
@@ -39,9 +39,11 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects.Core
             foreach (var modifier in definition.Modifiers)
             {
                 StatModifier statModifier;
-                
+
                 if (modifier is GameplayEffectDamage effectDamage)
                 {
+#if UNITY_EDITOR
+
                     HealthModifier healthModifier = new HealthModifier
                     {
                         Magnitude = Mathf.RoundToInt(modifier.Formula.CalculateValue(instigator)),
@@ -59,18 +61,26 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects.Core
                     }
 
                     statModifier = healthModifier;
+                    
+#endif
                 }
+#if UNITY_EDITOR
+
                 else
                 {
+
                     statModifier = new StatModifier
                     {
                         Magnitude = Mathf.RoundToInt(modifier.Formula.CalculateValue(instigator))
                     };
+
                 }
 
                 statModifier.Source = this;
                 statModifier.Type = modifier.Type;
                 _modifiers.Add(statModifier);
+#endif
+
             }
         }
 
@@ -78,15 +88,15 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects.Core
         {
             return ReplaceMacro(Definition.Description, this);
         }
-        
+
         protected string ReplaceMacro(string value, object @object)
         {
             //if(value == null) return "";
-            
+
             return Regex.Replace(value, @"{(.+?)}", match =>
             {
                 var p = Expression.Parameter(@object.GetType(), @object.GetType().Name);
-                var e = System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda(new[] { p }, null,
+                var e = System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda(new[] {p}, null,
                     match.Groups[1].Value);
                 return (e.Compile().DynamicInvoke(@object) ?? "").ToString();
             });

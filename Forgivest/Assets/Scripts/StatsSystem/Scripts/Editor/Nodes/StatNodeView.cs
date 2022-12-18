@@ -1,4 +1,6 @@
-﻿using Core;
+﻿#if UNITY_EDITOR
+
+using Core;
 using Core.Editor;
 using Core.Editor.Nodes;
 using StatSystem.Nodes;
@@ -18,3 +20,5 @@ namespace StatSystem.Editor.Nodes
         }
     }
 }
+
+#endif

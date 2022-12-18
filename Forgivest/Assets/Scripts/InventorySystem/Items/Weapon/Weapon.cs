@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Core;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace InventorySystem.Items.Weapon

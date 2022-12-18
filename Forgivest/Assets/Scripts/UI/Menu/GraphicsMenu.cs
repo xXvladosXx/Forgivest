@@ -17,7 +17,6 @@ namespace UI.Menu
 
         private Resolution[] _resolutions;
         private bool _fullScreened;
-        private int _graphicsIndex;
         private int _resolutionIndex;
 
         public event Action<int, int, int> OnGraphicsSettingsChanged;
@@ -50,7 +49,7 @@ namespace UI.Menu
             Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
 
             _resolutionIndex = resolutionIndex;
-            OnGraphicsSettingsChanged?.Invoke(resolutionIndex, Convert.ToInt32(_fullScreened), _graphicsIndex);
+            OnGraphicsSettingsChanged?.Invoke(_resolutionsDropdown.value, Convert.ToInt32(_fullScreened), _quality.value);
         }
 
         public void SetFullscreen(bool isFullscreen)
@@ -58,16 +57,15 @@ namespace UI.Menu
             Screen.fullScreen = isFullscreen;
 
             _fullScreened = isFullscreen;
-            OnGraphicsSettingsChanged?.Invoke(_resolutionIndex, Convert.ToInt32(_fullScreened), _graphicsIndex);
+            OnGraphicsSettingsChanged?.Invoke(_resolutionsDropdown.value, Convert.ToInt32(_fullScreened), _quality.value);
         }
 
         public void SetQualityLevelDropdown(int index)
         {
             QualitySettings.SetQualityLevel(index, false);
             _quality.value = index;
-            _graphicsIndex = index;
             
-            OnGraphicsSettingsChanged?.Invoke(_resolutionIndex, Convert.ToInt32(_fullScreened), _graphicsIndex);
+            OnGraphicsSettingsChanged?.Invoke(_resolutionsDropdown.value, Convert.ToInt32(_fullScreened), _quality.value);
         }
 
         private void OnBackButton()
@@ -99,9 +97,13 @@ namespace UI.Menu
             _resolutionsDropdown.value = currentResolutionIndex;
             _resolutionsDropdown.RefreshShownValue();
 
+            SetResolutionDropdown(resolution);
+        }
+
+        private void SetResolutionDropdown(int resolution)
+        {
             _resolutionsDropdown.value = resolution;
             _resolutionsDropdown.RefreshShownValue();
-            SetResolution(_resolutionsDropdown.value);
         }
     }
 }

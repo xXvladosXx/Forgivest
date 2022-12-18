@@ -1,4 +1,7 @@
-﻿using Core.Editor;
+﻿#if UNITY_EDITOR
+
+
+using Core.Editor;
 using UnityEngine.UIElements;
 
 namespace StatSystem.Editor
@@ -8,3 +11,5 @@ namespace StatSystem.Editor
         public new class UxmlFactory : UxmlFactory<StatCollectionEditor, UxmlTraits> {}
     }
 }
+
+#endif

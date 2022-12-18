@@ -6,10 +6,13 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects.Persistent
 {
     public class GameplayPersistentEffect : GameplayEffect
     {
-        public new GameplayPersistentEffectDefinition Definition => (GameplayPersistentEffectDefinition) base.Definition;
-        
-        public string IsInfinite => Definition.IsInfinite ? $"Infinite" 
+        public new GameplayPersistentEffectDefinition Definition =>
+            (GameplayPersistentEffectDefinition) base.Definition;
+
+        public string IsInfinite => Definition.IsInfinite
+            ? $"Infinite"
             : $"{CurrentDuration} sec.";
+
         public float RemainingDuration;
         public float RemainingPeriod;
         public float CurrentDuration { get; private set; }
@@ -19,10 +22,13 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects.Persistent
             : base(definition, source, instigator, abilityAttackData)
         {
             RemainingPeriod = definition.Period;
-            
+
             if (!definition.IsInfinite)
             {
+#if UNITY_EDITOR
+
                 RemainingDuration = CurrentDuration = definition.DurationFormula.CalculateValue(instigator);
+#endif
             }
         }
     }

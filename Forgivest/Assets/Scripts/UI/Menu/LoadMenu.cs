@@ -5,6 +5,7 @@ using TMPro;
 using UI.Menu.Core;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace UI.Menu
 {
