@@ -41,7 +41,11 @@ namespace InventorySystem.Interaction
             {
                 if(itemSlot == null) continue;
                 if(itemSlot.Item == null) continue;
-                if(itemSlot.Item.ItemType != ItemType.Sword) continue;
+                if (itemSlot.Item.ItemType != ItemType.Sword)
+                {
+                    ItemEquipHandler.TryToEquip(itemSlot.Item as StatsableItem);
+                    continue;
+                }
 
                 weapon = itemSlot.Item;
                 break;

@@ -78,14 +78,12 @@ namespace StatSystem
 
         public void AddStat(StatModifier statModifier)
         {
-            switch (_stats[statModifier.StatName])
+            foreach (var stat in _stats.Keys)
             {
-                case Attribute attribute:
-                    attribute.ApplyModifier(statModifier);
-                    break;
-                case PrimaryStat primaryStat:
-                    primaryStat.AddModifier(statModifier);
-                    break;
+                if(stat == statModifier.StatName)
+                {
+                    _stats[stat].AddModifier(statModifier);
+                }
             }
             
             OnStatsChanged?.Invoke();
@@ -93,14 +91,12 @@ namespace StatSystem
 
         public void RemoveStat(StatModifier statModifier)
         {
-            switch (_stats[statModifier.StatName])
+            foreach (var stat in _stats.Keys)
             {
-                case Attribute attribute:
-                    attribute.RemoveModifier(statModifier);
-                    break;
-                case PrimaryStat primaryStat:
-                    primaryStat.RemoveModifier(statModifier);
-                    break;
+                if(stat == statModifier.StatName)
+                {
+                    _stats[stat].RemoveModifier(statModifier);
+                }
             }
             
             OnStatsChanged?.Invoke();

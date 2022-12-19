@@ -42,7 +42,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e1c38672a6b454e8ed0e07b48a4296b, type: 3}
   m_Name: Strength
   m_EditorClassIdentifier: 
-  m_BaseValue: 25
+  m_BaseValue: 10
   m_Cap: -1
   m_Formula: {fileID: 0}
 --- !u!114 &-5266087675696827512
