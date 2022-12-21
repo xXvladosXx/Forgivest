@@ -15,9 +15,9 @@ MonoBehaviour:
   <ItemContainer>k__BackingField:
     <Slots>k__BackingField:
     - <Item>k__BackingField: {fileID: 0}
-      <Amount>k__BackingField: 0
+      <Amount>k__BackingField: 1
       <Changeable>k__BackingField: 1
-      <ItemTypes>k__BackingField: 00000000
+      <ItemTypes>k__BackingField: 01000000
       <ProhibitedItemTypes>k__BackingField: 
     - <Item>k__BackingField: {fileID: 0}
       <Amount>k__BackingField: 0

@@ -1,5 +1,8 @@
-﻿using UI.Loading;
+﻿using System.Collections;
+using UI.Loading;
 using UI.Utils;
+using UnityEngine;
+using Utilities;
 using Zenject;
 
 namespace GameCore.StateMachine.States
@@ -19,11 +22,19 @@ namespace GameCore.StateMachine.States
         {
             _persistentCanvas.gameObject.SetActive(true);
             _persistentCanvas.ShowDeathScreen();
+
+            Coroutines.StartRoutine(BackToMainMenu());
+        }
+
+        private IEnumerator BackToMainMenu()
+        {
+            yield return new WaitForSeconds(4f);
+            _gameStateMachine.Enter<LoadMainMenuState, string>("MainMenu");
         }
 
         public void Exit()
         {
-            
+            _persistentCanvas.HideDeathScreen();
         }
     }
 }

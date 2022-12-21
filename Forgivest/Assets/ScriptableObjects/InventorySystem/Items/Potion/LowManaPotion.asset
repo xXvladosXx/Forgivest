@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e880e5dad28b4a089781bdb7b637d1cf, type: 3}
-  m_Name: LowHealthPotion
+  m_Name: LowManaPotion
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -36,18 +36,18 @@ MonoBehaviour:
       Data: 
   <Rarity>k__BackingField: {fileID: 11400000, guid: fbcd8690d06f5e34fbdd4dff914ba919,
     type: 2}
-  <Name>k__BackingField: Low health potion
+  <Name>k__BackingField: Low mana potion
   <ObjectToSpawn>k__BackingField: {fileID: 0}
   <Prefab>k__BackingField: {fileID: 0}
   <MaxItemsInStack>k__BackingField: 15
-  <Sprite>k__BackingField: {fileID: 21300000, guid: aba0f700d91d4fc4fa8c724899ab04ab,
+  <Sprite>k__BackingField: {fileID: 21300000, guid: f1dd815974b2d4240a6bc912d6585497,
     type: 3}
   <ItemID>k__BackingField:
-    Id: 32
+    Id: 33
   <ItemType>k__BackingField: 7
-  _itemDescription: Regenerates health
+  _itemDescription: 'Regenerates mana '
   <StatModifier>k__BackingField:
-    <Name>k__BackingField: Health
-    <StatName>k__BackingField: Health
-    <Magnitude>k__BackingField: 50
+    <Name>k__BackingField: Mana
+    <StatName>k__BackingField: Mana
+    <Magnitude>k__BackingField: 25
     <Type>k__BackingField: 0

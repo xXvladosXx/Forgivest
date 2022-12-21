@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ItemContainer>k__BackingField:
     <Slots>k__BackingField:
-    - <Item>k__BackingField: {fileID: 11400000, guid: f83e11c94c3579546b15f10a9ed4c869,
-        type: 2}
-      <Amount>k__BackingField: 5
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 1
+      <Changeable>k__BackingField: 1
+      <ItemTypes>k__BackingField: 
+      <ProhibitedItemTypes>k__BackingField: 0d000000
+    - <Item>k__BackingField: {fileID: 0}
+      <Amount>k__BackingField: 1
       <Changeable>k__BackingField: 1
       <ItemTypes>k__BackingField: 
       <ProhibitedItemTypes>k__BackingField: 0d000000
@@ -31,12 +35,7 @@ MonoBehaviour:
       <ItemTypes>k__BackingField: 
       <ProhibitedItemTypes>k__BackingField: 0d000000
     - <Item>k__BackingField: {fileID: 0}
-      <Amount>k__BackingField: 0
-      <Changeable>k__BackingField: 1
-      <ItemTypes>k__BackingField: 
-      <ProhibitedItemTypes>k__BackingField: 0d000000
-    - <Item>k__BackingField: {fileID: 0}
-      <Amount>k__BackingField: 0
+      <Amount>k__BackingField: 1
       <Changeable>k__BackingField: 1
       <ItemTypes>k__BackingField: 
       <ProhibitedItemTypes>k__BackingField: 0d000000

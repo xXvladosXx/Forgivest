@@ -722,6 +722,7 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: ab36514cc99b6754eb69ecf1e35d78e7, type: 2}
     - {fileID: 11400000, guid: 2efb748df0e182c4a96f3f046263fe2f, type: 2}
+    - {fileID: 11400000, guid: 1bbdb7b07f317e64da05693f42b998c5, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -733,7 +734,7 @@ MonoBehaviour:
         Attack]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 1|AttackSystem.Reward.ExperienceReward, Attack
@@ -764,6 +765,18 @@ MonoBehaviour:
     - Name: _amount
       Entry: 3
       Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|AttackSystem.Reward.ItemReward, Attack
+    - Name: _item
+      Entry: 10
+      Data: 2
+    - Name: _amount
+      Entry: 3
+      Data: 10
     - Name: 
       Entry: 8
       Data: 
