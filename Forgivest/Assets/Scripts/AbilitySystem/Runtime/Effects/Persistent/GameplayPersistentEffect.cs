@@ -22,7 +22,9 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects.Persistent
             
             if (!definition.IsInfinite)
             {
+#if UNITY_EDITOR
                 RemainingDuration = CurrentDuration = definition.DurationFormula.CalculateValue(instigator);
+#endif
             }
         }
     }

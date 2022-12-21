@@ -17,6 +17,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects.Persistent
             get => _isInfinite;
             protected set => _isInfinite = value;
         }
+#if UNITY_EDITOR
 
         [SerializeField] private NodeGraph _durationFormula;
         public NodeGraph DurationFormula
@@ -24,7 +25,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects.Persistent
             get => _durationFormula;
             protected set => _durationFormula = value;
         }
-
+#endif
         [SerializeField] private bool _isPeriodic;
         public bool IsPeriodic
         {

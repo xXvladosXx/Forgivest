@@ -24,8 +24,7 @@ MonoBehaviour:
       <Changeable>k__BackingField: 1
       <ItemTypes>k__BackingField: 08000000
       <ProhibitedItemTypes>k__BackingField: 
-    - <Item>k__BackingField: {fileID: 11400000, guid: ab36514cc99b6754eb69ecf1e35d78e7,
-        type: 2}
+    - <Item>k__BackingField: {fileID: 0}
       <Amount>k__BackingField: 1
       <Changeable>k__BackingField: 1
       <ItemTypes>k__BackingField: 02000000
@@ -65,8 +64,7 @@ MonoBehaviour:
       <Changeable>k__BackingField: 1
       <ItemTypes>k__BackingField: 05000000
       <ProhibitedItemTypes>k__BackingField: 
-    - <Item>k__BackingField: {fileID: 11400000, guid: 2efb748df0e182c4a96f3f046263fe2f,
-        type: 2}
+    - <Item>k__BackingField: {fileID: 0}
       <Amount>k__BackingField: 1
       <Changeable>k__BackingField: 1
       <ItemTypes>k__BackingField: 00000000

@@ -42,6 +42,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects.Core
                 
                 if (modifier is GameplayEffectDamage effectDamage)
                 {
+#if UNITY_EDITOR
                     HealthModifier healthModifier = new HealthModifier
                     {
                         Magnitude = Mathf.RoundToInt(modifier.Formula.CalculateValue(instigator)),
@@ -59,7 +60,10 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects.Core
                     }
 
                     statModifier = healthModifier;
+#endif
                 }
+#if UNITY_EDITOR
+
                 else
                 {
                     statModifier = new StatModifier
@@ -71,6 +75,7 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects.Core
                 statModifier.Source = this;
                 statModifier.Type = modifier.Type;
                 _modifiers.Add(statModifier);
+#endif
             }
         }
 

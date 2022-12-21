@@ -17,7 +17,6 @@ namespace AbilitySystem.AbilitySystem.Runtime.Effects.Core
         
         [SerializeField] private List<GameplayEffectDefinition> _conditionalEffects;
         public ReadOnlyCollection<GameplayEffectDefinition> ConditionalEffects => _conditionalEffects.AsReadOnly();
-
         [SerializeField] private SpecialEffectDefinition _specialEffectDefinition;
         public SpecialEffectDefinition SpecialEffectDefinition => _specialEffectDefinition;
 
